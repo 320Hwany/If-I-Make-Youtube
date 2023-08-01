@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import youtube.domain.BaseTimeEntity;
 import youtube.domain.member.vo.Gender;
+import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
 import youtube.domain.member.vo.RoleType;
 
@@ -20,7 +21,8 @@ public class Member extends BaseTimeEntity {
     @Embedded
     private Nickname nickname;
 
-    private String loginId;
+    @Embedded
+    private LoginId loginId;
 
     private String password;
 

@@ -20,14 +20,14 @@ public class Nickname {
     private String value;
 
     public Nickname(final String nickname) {
-        validateNickname(nickname);
+        validate(nickname);
         this.value = nickname;
     }
 
     protected Nickname() {
     }
 
-    private void validateNickname(final String nickname) {
+    private void validate(final String nickname) {
         if (nickname.length() < MINIMUM_NICKNAME_LENGTH || nickname.length() > MAXIMUM_NICKNAME_LENGTH) {
             throw new NickNameLengthException();
         } else if (!Pattern.matches(REGEX, nickname)) {
