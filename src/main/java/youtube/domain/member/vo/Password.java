@@ -14,13 +14,15 @@ public class Password {
 
     private static final int MINIMUM_PASSWORD_LENGTH = 6;
     private static final int MAXIMUM_PASSWORD_LENGTH = 16;
-    private static final String REGEX =
-            "^(?=.*[가-힣a-zA-Z0-9!@#$%^&*(),.?\":{}|<>])[가-힣a-zA-Z0-9!@#$%^&*(),.?\":{}|<>]+$";
+
+    // 비밀번호는 한글, 영어, 숫자와 최소 1개 이상의 특수문자를 사용해야 한다
+    private static final String REGEX = "^[가-힣a-zA-Z0-9].*[#?!@$%^&*-]+$";
 
     @Column(name = "password", unique = true, nullable = false)
     private String value;
 
     public Password(final String value) {
+        validate(value);
         this.value = value;
     }
 

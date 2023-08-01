@@ -14,12 +14,15 @@ public class LoginId {
 
     private static final int MINIMUM_LOGIN_ID_LENGTH = 6;
     private static final int MAXIMUM_LOGIN_ID_LENGTH = 16;
+
+    // 아이디는 한글, 영어, 숫자로 구성된다 (필수 조건은 없음)
     private static final String REGEX = "^[가-힣a-zA-Z0-9]+$";
 
     @Column(name = "loginId", unique = true, nullable = false)
     private String value;
 
     public LoginId(final String value) {
+        validate(value);
         this.value = value;
     }
 
