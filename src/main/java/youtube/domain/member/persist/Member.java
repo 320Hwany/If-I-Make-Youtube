@@ -3,10 +3,7 @@ package youtube.domain.member.persist;
 import jakarta.persistence.*;
 import lombok.Getter;
 import youtube.domain.BaseTimeEntity;
-import youtube.domain.member.vo.Gender;
-import youtube.domain.member.vo.LoginId;
-import youtube.domain.member.vo.Nickname;
-import youtube.domain.member.vo.RoleType;
+import youtube.domain.member.vo.*;
 
 import java.time.LocalDate;
 
@@ -24,7 +21,8 @@ public class Member extends BaseTimeEntity {
     @Embedded
     private LoginId loginId;
 
-    private String password;
+    @Embedded
+    private Password password;
 
     @Enumerated(EnumType.STRING)
     private RoleType roleType;

@@ -26,7 +26,7 @@ public class LoginId {
     protected LoginId() {
     }
 
-    protected void validate(final String loginId) {
+    private void validate(final String loginId) {
         if (loginId.length() < MINIMUM_LOGIN_ID_LENGTH || loginId.length() > MAXIMUM_LOGIN_ID_LENGTH) {
             throw new LoginIdLengthException();
         } else if (!Pattern.matches(REGEX, loginId)) {
