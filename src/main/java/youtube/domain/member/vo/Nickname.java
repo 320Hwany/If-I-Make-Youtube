@@ -3,8 +3,8 @@ package youtube.domain.member.vo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
-import youtube.domain.member.exception.NickNameLengthException;
-import youtube.domain.member.exception.NickNameRegexException;
+import youtube.exception.member.NickNameLengthException;
+import youtube.exception.member.NickNameRegexException;
 
 import java.util.regex.Pattern;
 

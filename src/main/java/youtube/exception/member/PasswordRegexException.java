@@ -1,4 +1,4 @@
-package youtube.domain.member.exception;
+package youtube.exception.member;
 
 import youtube.global.exception.BadRequestException;
 

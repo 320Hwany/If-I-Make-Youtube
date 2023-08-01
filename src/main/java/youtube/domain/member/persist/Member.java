@@ -1,6 +1,7 @@
 package youtube.domain.member.persist;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import youtube.domain.BaseTimeEntity;
 import youtube.domain.member.vo.*;
@@ -37,5 +38,18 @@ public class Member extends BaseTimeEntity {
     private long watchLaterVideosCount;
 
     protected Member() {
+    }
+
+    @Builder
+    private Member(Nickname nickname, LoginId loginId, Password password, RoleType roleType, Gender gender,
+                  LocalDate birthDate, long likedVideosCount, long watchLaterVideosCount) {
+        this.nickname = nickname;
+        this.loginId = loginId;
+        this.password = password;
+        this.roleType = roleType;
+        this.gender = gender;
+        this.birthDate = birthDate;
+        this.likedVideosCount = likedVideosCount;
+        this.watchLaterVideosCount = watchLaterVideosCount;
     }
 }

@@ -10,4 +10,9 @@ public class MemberRepositoryImpl implements MemberRepository {
     public MemberRepositoryImpl(final MemberJpaRepository memberJpaRepository) {
         this.memberJpaRepository = memberJpaRepository;
     }
+
+    @Override
+    public void save(final Member member) {
+        memberJpaRepository.save(member);
+    }
 }

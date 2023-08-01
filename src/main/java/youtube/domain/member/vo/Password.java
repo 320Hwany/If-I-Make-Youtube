@@ -3,8 +3,8 @@ package youtube.domain.member.vo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
-import youtube.domain.member.exception.PasswordLengthException;
-import youtube.domain.member.exception.PasswordRegexException;
+import youtube.exception.member.PasswordLengthException;
+import youtube.exception.member.PasswordRegexException;
 
 import java.util.regex.Pattern;
 
