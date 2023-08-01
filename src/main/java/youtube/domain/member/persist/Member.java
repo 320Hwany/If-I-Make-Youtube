@@ -1,12 +1,15 @@
 package youtube.domain.member.persist;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import youtube.domain.BaseTimeEntity;
 import youtube.domain.member.vo.Gender;
+import youtube.domain.member.vo.Nickname;
 import youtube.domain.member.vo.RoleType;
 
 import java.time.LocalDate;
 
+@Getter
 @Entity
 public class Member extends BaseTimeEntity {
 
@@ -14,7 +17,8 @@ public class Member extends BaseTimeEntity {
     @Column(name = "member_id")
     private Long id;
 
-    private String nickname;
+    @Embedded
+    private Nickname nickname;
 
     private String loginId;
 
