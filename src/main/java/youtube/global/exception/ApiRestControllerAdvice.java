@@ -15,6 +15,13 @@ public class ApiRestControllerAdvice {
         return new ExceptionResponse(e.getStatusCode(), e.getMessage());
     }
 
+    // 400
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ExceptionForLog.class)
+    public ExceptionResponse handleException(final ExceptionForLog e) {
+        return new ExceptionResponse(e.getStatusCode(), e.getMessage());
+    }
+
     // 401
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(BadRequestException.class)

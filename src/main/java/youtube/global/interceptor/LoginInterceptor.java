@@ -11,6 +11,7 @@ import static youtube.global.constant.SessionConstant.*;
 
 public class LoginInterceptor implements HandlerInterceptor {
 
+    // todo 예외 세분화
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         HttpSession session = request.getSession(false);
