@@ -18,7 +18,7 @@ public class MemberController {
     }
 
     @PostMapping("/member")
-    public void signup(@RequestBody MemberSignupRequest dto) {
+    public void signup(@RequestBody final MemberSignupRequest dto) {
         commandMemberSignup.command(dto);
     }
 }

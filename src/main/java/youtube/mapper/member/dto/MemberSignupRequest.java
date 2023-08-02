@@ -10,7 +10,6 @@ public record MemberSignupRequest(
         Nickname nickname,
         LoginId loginId,
         Password password,
-        RoleType roleType,
         Gender gender,
         LocalDate birthDate
 ) {

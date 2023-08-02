@@ -2,13 +2,12 @@ package youtube.domain.member.vo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.Getter;
+import jakarta.validation.constraints.NotBlank;
 import youtube.exception.member.LoginIdLengthException;
 import youtube.exception.member.LoginIdRegexException;
 
 import java.util.regex.Pattern;
 
-@Getter
 @Embeddable
 public class LoginId {
 

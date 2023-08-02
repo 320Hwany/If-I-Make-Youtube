@@ -10,7 +10,7 @@ public class ApiRestControllerAdvice {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BadRequestException.class)
-    public ExceptionResponse handleException(BadRequestException e) {
+    public ExceptionResponse handleException(final BadRequestException e) {
         return new ExceptionResponse(e.getStatusCode(), e.getMessage());
     }
 }

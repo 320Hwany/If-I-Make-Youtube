@@ -17,7 +17,7 @@ public class CommandMemberSignup {
         this.memberRepository = memberRepository;
     }
 
-    public void command(MemberSignupRequest dto) {
+    public void command(final MemberSignupRequest dto) {
         Member entity = MemberMapper.toEntity(dto);
         memberRepository.save(entity);
     }

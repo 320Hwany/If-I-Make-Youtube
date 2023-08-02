@@ -2,13 +2,11 @@ package youtube.domain.member.vo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.Getter;
 import youtube.exception.member.NickNameLengthException;
 import youtube.exception.member.NickNameRegexException;
 
 import java.util.regex.Pattern;
 
-@Getter
 @Embeddable
 public class Nickname {
 

@@ -2,13 +2,11 @@ package youtube.domain.member.vo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.Getter;
 import youtube.exception.member.PasswordLengthException;
 import youtube.exception.member.PasswordRegexException;
 
 import java.util.regex.Pattern;
 
-@Getter
 @Embeddable
 public class Password {
 
@@ -18,7 +16,7 @@ public class Password {
     // 비밀번호는 한글, 영어, 숫자와 최소 1개 이상의 특수문자를 사용해야 한다
     private static final String REGEX = "^[가-힣a-zA-Z0-9].*[#?!@$%^&*-]+$";
 
-    @Column(name = "password", unique = true, nullable = false)
+    @Column(name = "password", nullable = false)
     private String value;
 
     public Password(final String value) {

@@ -15,4 +15,9 @@ public class MemberRepositoryImpl implements MemberRepository {
     public void save(final Member member) {
         memberJpaRepository.save(member);
     }
+
+    @Override
+    public boolean validateUniqueNickname() {
+        return false;
+    }
 }
