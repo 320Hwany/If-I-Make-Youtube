@@ -1,4 +1,4 @@
-package youtube.global.config;
+package youtube.global.config.data;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;

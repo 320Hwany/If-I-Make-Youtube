@@ -8,9 +8,17 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ApiRestControllerAdvice {
 
+    // 400
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BadRequestException.class)
     public ExceptionResponse handleException(final BadRequestException e) {
+        return new ExceptionResponse(e.getStatusCode(), e.getMessage());
+    }
+
+    // 401
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(BadRequestException.class)
+    public ExceptionResponse handleException(final UnAuthorizedException e) {
         return new ExceptionResponse(e.getStatusCode(), e.getMessage());
     }
 }
