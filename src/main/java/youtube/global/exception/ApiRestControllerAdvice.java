@@ -24,7 +24,7 @@ public class ApiRestControllerAdvice {
 
     // 401
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler(BadRequestException.class)
+    @ExceptionHandler(UnAuthorizedException.class)
     public ExceptionResponse handleException(final UnAuthorizedException e) {
         return new ExceptionResponse(e.getStatusCode(), e.getMessage());
     }

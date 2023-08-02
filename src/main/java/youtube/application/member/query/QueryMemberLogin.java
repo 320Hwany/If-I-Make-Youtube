@@ -13,5 +13,4 @@ public class QueryMemberLogin {
     public QueryMemberLogin(final MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
-
 }

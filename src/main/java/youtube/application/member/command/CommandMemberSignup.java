@@ -1,5 +1,6 @@
 package youtube.application.member.command;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import youtube.domain.member.persist.Member;
@@ -13,9 +14,12 @@ import youtube.mapper.member.dto.MemberSignupRequest;
 public class CommandMemberSignup {
 
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public CommandMemberSignup(final MemberRepository memberRepository) {
+    public CommandMemberSignup(final MemberRepository memberRepository,
+                               final PasswordEncoder passwordEncoder) {
         this.memberRepository = memberRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public void command(final MemberSignupRequest dto) {
@@ -23,7 +27,7 @@ public class CommandMemberSignup {
         if (isPresent) {
             throw new MemberDuplicationException();
         }
-        Member entity = MemberMapper.toEntity(dto);
+        Member entity = MemberMapper.toEntity(dto, passwordEncoder);
         memberRepository.save(entity);
     }
 }

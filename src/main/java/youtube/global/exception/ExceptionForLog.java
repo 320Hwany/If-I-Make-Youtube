@@ -1,8 +1,16 @@
 package youtube.global.exception;
 
-public class ExceptionForLog extends BadRequestException {
+import lombok.Getter;
 
-    public ExceptionForLog(String message) {
-        super(message);
+import static youtube.global.constant.StatusCodeConstant.*;
+
+@Getter
+public class ExceptionForLog extends RuntimeException {
+
+    private final String statusCode = BAD_REQUEST.statusCode;
+    private final String message;
+
+    public ExceptionForLog(final String message) {
+        this.message = message;
     }
 }

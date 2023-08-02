@@ -2,6 +2,7 @@ package youtube.domain.member.vo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import youtube.exception.member.PasswordLengthException;
 import youtube.exception.member.PasswordRegexException;
 
@@ -33,5 +34,10 @@ public class Password {
         } else if (!Pattern.matches(REGEX, password)) {
             throw new PasswordRegexException();
         }
+    }
+
+    public Password encode(final PasswordEncoder passwordEncoder) {
+        this.value = passwordEncoder.encode(this.value);
+        return this;
     }
 }

@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import youtube.application.member.command.CommandMemberSignup;
-import youtube.mapper.member.dto.MemberLoginRequest;
 import youtube.mapper.member.dto.MemberSignupRequest;
 
 @RequestMapping("/api")
@@ -18,7 +17,7 @@ public class MemberController {
         this.commandMemberSignup = commandMemberSignup;
     }
 
-    @PostMapping("/member")
+    @PostMapping("/signup")
     public void signup(@RequestBody final MemberSignupRequest dto) {
         commandMemberSignup.command(dto);
     }
