@@ -7,5 +7,7 @@ public interface MemberRepository {
 
     void save(final Member member);
 
+    Member getByLoginId(final LoginId loginId);
+
     boolean existsByNicknameOrLoginId(final Nickname nickname, final LoginId loginId);
 }

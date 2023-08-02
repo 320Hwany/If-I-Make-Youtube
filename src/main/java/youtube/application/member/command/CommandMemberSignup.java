@@ -1,7 +1,7 @@
 package youtube.application.member.command;
 
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.persist.MemberRepository;
 import youtube.exception.member.MemberDuplicationException;

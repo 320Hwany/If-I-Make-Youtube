@@ -28,4 +28,11 @@ public class ApiRestControllerAdvice {
     public ExceptionResponse handleException(final UnAuthorizedException e) {
         return new ExceptionResponse(e.getStatusCode(), e.getMessage());
     }
+
+    // 404
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public ExceptionResponse handleException(final NotFoundException e) {
+        return new ExceptionResponse(e.getStatusCode(), e.getMessage());
+    }
 }

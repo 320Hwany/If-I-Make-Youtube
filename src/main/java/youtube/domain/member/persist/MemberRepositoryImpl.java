@@ -3,6 +3,7 @@ package youtube.domain.member.persist;
 import org.springframework.stereotype.Repository;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
+import youtube.exception.member.LoginIdNotFoundException;
 
 @Repository
 public class MemberRepositoryImpl implements MemberRepository {
@@ -16,6 +17,12 @@ public class MemberRepositoryImpl implements MemberRepository {
     @Override
     public void save(final Member member) {
         memberJpaRepository.save(member);
+    }
+
+    @Override
+    public Member getByLoginId(final LoginId loginId) {
+        return memberJpaRepository.findByLoginId(loginId)
+                .orElseThrow(LoginIdNotFoundException::new);
     }
 
     @Override
