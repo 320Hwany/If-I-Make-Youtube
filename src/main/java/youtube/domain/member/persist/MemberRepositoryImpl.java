@@ -1,6 +1,8 @@
 package youtube.domain.member.persist;
 
 import org.springframework.stereotype.Repository;
+import youtube.domain.member.vo.LoginId;
+import youtube.domain.member.vo.Nickname;
 
 @Repository
 public class MemberRepositoryImpl implements MemberRepository {
@@ -17,7 +19,7 @@ public class MemberRepositoryImpl implements MemberRepository {
     }
 
     @Override
-    public boolean validateUniqueNickname() {
-        return false;
+    public boolean existsByNicknameOrLoginId(final Nickname nickname, final LoginId loginId) {
+        return memberJpaRepository.existsByNicknameOrLoginId(nickname, loginId);
     }
 }

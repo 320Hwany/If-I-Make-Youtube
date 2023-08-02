@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.persist.MemberRepository;
+import youtube.exception.member.MemberDuplicationException;
 import youtube.mapper.member.MemberMapper;
 import youtube.mapper.member.dto.MemberSignupRequest;
 
@@ -18,6 +19,10 @@ public class CommandMemberSignup {
     }
 
     public void command(final MemberSignupRequest dto) {
+        boolean isPresent = memberRepository.existsByNicknameOrLoginId(dto.nickname(), dto.loginId());
+        if (isPresent) {
+            throw new MemberDuplicationException();
+        }
         Member entity = MemberMapper.toEntity(dto);
         memberRepository.save(entity);
     }
