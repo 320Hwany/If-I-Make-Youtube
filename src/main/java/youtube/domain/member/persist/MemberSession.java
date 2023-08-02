@@ -6,13 +6,18 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import youtube.domain.member.vo.*;
 
 import java.time.LocalDate;
 
 import static youtube.global.constant.SessionConstant.*;
 
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberSession {
 
     private long id;
@@ -51,7 +56,7 @@ public class MemberSession {
         this.watchLaterVideosCount = watchLaterVideosCount;
     }
 
-    public void makeSession(HttpServletRequest request) {
+    public void makeSession(final HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.setAttribute(MEMBER_SESSION.value, this);
     }

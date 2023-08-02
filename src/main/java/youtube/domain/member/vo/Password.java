@@ -2,6 +2,9 @@ package youtube.domain.member.vo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import youtube.exception.member.PasswordLengthException;
 import youtube.exception.member.PasswordNotMatchException;
@@ -9,6 +12,8 @@ import youtube.exception.member.PasswordRegexException;
 
 import java.util.regex.Pattern;
 
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Embeddable
 public class Password {
 
@@ -21,15 +26,12 @@ public class Password {
     @Column(name = "password", nullable = false)
     private String value;
 
-    protected Password() {
-    }
-
-    public Password(final String value) {
-        validate(value);
+    private Password(final String value) {
+        validateCreation(value);
         this.value = value;
     }
 
-    private void validate(final String password) {
+    private void validateCreation(final String password) {
         if (password.length() < MINIMUM_PASSWORD_LENGTH || password.length() > MAXIMUM_PASSWORD_LENGTH) {
             throw new PasswordLengthException();
         } else if (!Pattern.matches(REGEX, password)) {

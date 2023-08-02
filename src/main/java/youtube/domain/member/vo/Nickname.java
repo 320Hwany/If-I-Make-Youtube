@@ -2,11 +2,16 @@ package youtube.domain.member.vo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import youtube.exception.member.NickNameLengthException;
 import youtube.exception.member.NickNameRegexException;
 
 import java.util.regex.Pattern;
 
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Embeddable
 public class Nickname {
 
@@ -19,15 +24,12 @@ public class Nickname {
     @Column(name = "nickname", unique = true, nullable = false)
     private String value;
 
-    public Nickname(final String nickname) {
-        validate(nickname);
-        this.value = nickname;
+    private Nickname(final String value) {
+        validateCreation(value);
+        this.value = value;
     }
 
-    protected Nickname() {
-    }
-
-    private void validate(final String nickname) {
+    private void validateCreation(final String nickname) {
         if (nickname.length() < MINIMUM_NICKNAME_LENGTH || nickname.length() > MAXIMUM_NICKNAME_LENGTH) {
             throw new NickNameLengthException();
         } else if (!Pattern.matches(REGEX, nickname)) {

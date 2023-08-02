@@ -1,4 +1,4 @@
-package youtube.global.exception;
+package youtube.global.exception.dto;
 
 public record ValidExceptionResponse(
         String statusCode,

@@ -2,13 +2,14 @@ package youtube.presentation;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import youtube.application.member.command.CommandMemberLogin;
 import youtube.application.member.command.CommandMemberSignup;
+import youtube.domain.member.persist.MemberSession;
+import youtube.global.argument_resolver.Login;
+import youtube.mapper.member.MemberMapper;
 import youtube.mapper.member.dto.MemberLoginRequest;
+import youtube.mapper.member.dto.MemberResponse;
 import youtube.mapper.member.dto.MemberSignupRequest;
 
 @RequestMapping("/api")
@@ -33,5 +34,10 @@ public class MemberController {
     public void login(@RequestBody @Valid final MemberLoginRequest dto,
                       final HttpServletRequest request) {
         commandMemberLogin.command(dto, request);
+    }
+
+    @GetMapping("/member")
+    public MemberResponse getMember(@Login final MemberSession memberSession) {
+        return MemberMapper.toMemberResponse(memberSession);
     }
 }

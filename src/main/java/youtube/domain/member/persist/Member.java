@@ -1,14 +1,17 @@
 package youtube.domain.member.persist;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import youtube.domain.BaseTimeEntity;
 import youtube.domain.member.vo.*;
 
 import java.time.LocalDate;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Member extends BaseTimeEntity {
 
@@ -36,9 +39,6 @@ public class Member extends BaseTimeEntity {
     private long likedVideosCount;
 
     private long watchLaterVideosCount;
-
-    protected Member() {
-    }
 
     @Builder
     private Member(final Nickname nickname, final LoginId loginId, final Password password,
