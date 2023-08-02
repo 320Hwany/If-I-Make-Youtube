@@ -2,6 +2,7 @@ package youtube.mapper.member;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import youtube.domain.member.persist.Member;
+import youtube.domain.member.persist.MemberSession;
 import youtube.domain.member.vo.Gender;
 import youtube.domain.member.vo.RoleType;
 import youtube.mapper.member.dto.MemberSignupRequest;
@@ -24,6 +25,20 @@ public class MemberMapper {
                 .gender((dto.gender() != null) ? dto.gender() : Gender.UNKNOWN)
                 .birthDate((dto.birthDate() != null) ? dto.birthDate() :
                         LocalDate.of(0,1,4))
+                .build();
+    }
+
+    public static MemberSession toMemberSession(final Member member) {
+        return MemberSession.builder()
+                .id(member.getId())
+                .nickname(member.getNickname())
+                .loginId(member.getLoginId())
+                .password(member.getPassword())
+                .roleType(member.getRoleType())
+                .gender(member.getGender())
+                .birthDate(member.getBirthDate())
+                .likedVideosCount(member.getLikedVideosCount())
+                .watchLaterVideosCount(member.getWatchLaterVideosCount())
                 .build();
     }
 }

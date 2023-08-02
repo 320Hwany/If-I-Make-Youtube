@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import youtube.exception.member.PasswordLengthException;
+import youtube.exception.member.PasswordNotMatchException;
 import youtube.exception.member.PasswordRegexException;
 
 import java.util.regex.Pattern;
@@ -20,12 +21,12 @@ public class Password {
     @Column(name = "password", nullable = false)
     private String value;
 
+    protected Password() {
+    }
+
     public Password(final String value) {
         validate(value);
         this.value = value;
-    }
-
-    protected Password() {
     }
 
     private void validate(final String password) {
@@ -37,7 +38,15 @@ public class Password {
     }
 
     public Password encode(final PasswordEncoder passwordEncoder) {
-        this.value = passwordEncoder.encode(this.value);
+        value = passwordEncoder.encode(value);
         return this;
+    }
+
+    public boolean validateMatchPassword(final PasswordEncoder passwordEncoder,
+                                         final Password inputPassword) {
+        if (passwordEncoder.matches(inputPassword.value, this.value)) {
+            return true;
+        }
+        throw new PasswordNotMatchException();
     }
 }

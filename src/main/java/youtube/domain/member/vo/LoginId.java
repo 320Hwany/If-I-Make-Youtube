@@ -2,7 +2,6 @@ package youtube.domain.member.vo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.validation.constraints.NotBlank;
 import youtube.exception.member.LoginIdLengthException;
 import youtube.exception.member.LoginIdRegexException;
 

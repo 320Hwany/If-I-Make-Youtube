@@ -1,16 +1,19 @@
 package youtube.domain.member.persist;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.Builder;
 import youtube.domain.member.vo.*;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 import static youtube.global.constant.SessionConstant.*;
 
-public class MemberSession implements Serializable {
+public class MemberSession {
 
     private long id;
 
@@ -24,6 +27,8 @@ public class MemberSession implements Serializable {
 
     private Gender gender;
 
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate birthDate;
 
     private long likedVideosCount;

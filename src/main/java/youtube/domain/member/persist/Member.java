@@ -2,11 +2,13 @@ package youtube.domain.member.persist;
 
 import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.Getter;
 import youtube.domain.BaseTimeEntity;
 import youtube.domain.member.vo.*;
 
 import java.time.LocalDate;
 
+@Getter
 @Entity
 public class Member extends BaseTimeEntity {
 

@@ -25,6 +25,13 @@ spring:
       session:
         store-type: redis
 
+    jackson:
+      ObjectMapper:
+        serializationInclusion: non_null
+        dateFormat: yyyy-MM-dd
+        modules:
+          - com.fasterxml.jackson.datatype.jsr310.JSR310Module
+
 logging:
   level:
     org.hibernate.SQL: debug

@@ -10,7 +10,8 @@ public enum ExceptionMessageConstant {
     PASSWORD_REGEX("비밀번호는 한글, 영어, 숫자와 최소 1개 이상의 특수문자를 사용해야 합니다"),
     MEMBER_DUPLICATION("이미 가입된 닉네임/아이디가 있습니다"),
     UNAUTHORIZED("로그인 후 이용해주세요"),
-    LOGIN_ID_NOTFOUND("아이디와 일치하는 회원이 존재하지 않습니다");
+    LOGIN_ID_NOTFOUND("아이디와 일치하는 회원이 존재하지 않습니다"),
+    PASSWORD_NOT_MATCH("비밀번호가 일치하지 않습니다");
 
     public final String message;
 
