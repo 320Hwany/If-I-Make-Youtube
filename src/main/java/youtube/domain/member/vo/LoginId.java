@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import youtube.exception.member.LoginIdLengthException;
 import youtube.exception.member.LoginIdRegexException;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 @Getter
@@ -35,5 +36,18 @@ public class LoginId {
         } else if (!Pattern.matches(REGEX, loginId)) {
             throw new LoginIdRegexException();
         }
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LoginId loginId = (LoginId) o;
+        return Objects.equals(value, loginId.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }
