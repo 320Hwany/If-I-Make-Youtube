@@ -1,10 +1,8 @@
 package youtube.application.member.command;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.persist.MemberRepository;
 import youtube.domain.member.vo.Gender;
@@ -18,6 +16,7 @@ import youtube.util.AcceptanceTest;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.*;
+import static youtube.util.TestConstant.*;
 
 @AcceptanceTest
 class CommandMemberSignupTest {
@@ -33,15 +32,15 @@ class CommandMemberSignupTest {
     void signupFail() {
         // given
         memberRepository.save(Member.builder()
-                .nickname(Nickname.from("닉네임"))
-                .loginId(LoginId.from("로그인아이디"))
-                .password(Password.from("password123!"))
+                .nickname(Nickname.from(TEST_NICKNAME.value))
+                .loginId(LoginId.from(TEST_LOGIN_ID.value))
+                .password(Password.from(TEST_PASSWORD.value))
                 .build());
 
         MemberSignupRequest dto = MemberSignupRequest.builder()
-                .nickname(Nickname.from("닉네임"))
-                .loginId(LoginId.from("로그인아이디"))
-                .password(Password.from("password123!"))
+                .nickname(Nickname.from(TEST_NICKNAME.value))
+                .loginId(LoginId.from(TEST_LOGIN_ID.value))
+                .password(Password.from(TEST_PASSWORD.value))
                 .gender(Gender.MALE)
                 .birthDate(LocalDate.now())
                 .build();
@@ -56,9 +55,9 @@ class CommandMemberSignupTest {
     void signupSuccess() {
         // given
         MemberSignupRequest dto = MemberSignupRequest.builder()
-                .nickname(Nickname.from("닉네임"))
-                .loginId(LoginId.from("로그인아이디"))
-                .password(Password.from("password123!"))
+                .nickname(Nickname.from(TEST_NICKNAME.value))
+                .loginId(LoginId.from(TEST_LOGIN_ID.value))
+                .password(Password.from(TEST_PASSWORD.value))
                 .gender(Gender.MALE)
                 .birthDate(LocalDate.now())
                 .build();
