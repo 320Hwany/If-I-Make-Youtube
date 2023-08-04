@@ -30,6 +30,10 @@ public class LoginId {
         this.value = value;
     }
 
+    public static LoginId from(final String value) {
+        return new LoginId(value);
+    }
+
     private void validateCreation(final String loginId) {
         if (loginId.length() < MINIMUM_LOGIN_ID_LENGTH || loginId.length() > MAXIMUM_LOGIN_ID_LENGTH) {
             throw new LoginIdLengthException();

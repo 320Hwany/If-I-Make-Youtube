@@ -30,6 +30,10 @@ public class Nickname {
         this.value = value;
     }
 
+    public static Nickname from(final String value) {
+        return new Nickname(value);
+    }
+
     private void validateCreation(final String nickname) {
         if (nickname.length() < MINIMUM_NICKNAME_LENGTH || nickname.length() > MAXIMUM_NICKNAME_LENGTH) {
             throw new NickNameLengthException();

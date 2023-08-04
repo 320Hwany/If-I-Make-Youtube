@@ -32,6 +32,10 @@ public class Password {
         this.value = value;
     }
 
+    public static Password from(final String value) {
+        return new Password(value);
+    }
+
     private void validateCreation(final String password) {
         if (password.length() < MINIMUM_PASSWORD_LENGTH || password.length() > MAXIMUM_PASSWORD_LENGTH) {
             throw new PasswordLengthException();
@@ -54,7 +58,7 @@ public class Password {
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Password password = (Password) o;
