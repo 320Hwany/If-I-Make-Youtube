@@ -18,7 +18,7 @@ class PasswordTest {
     @Test
     @DisplayName("비밀번호는 한글, 영어, 숫자와 최소 1개 이상의 특수문자를 사용해야 한다 - 조건에 맞지 않으면 예외 발생")
     void validateCreationFail() {
-        // fail 1 - 글자수 6자리 안됨
+        // fail 1 - 비밀번호 6자리 안됨
         assertThatThrownBy(() -> Password.from("비밀번호!"))
                 .isInstanceOf(PasswordLengthException.class);
 
@@ -26,7 +26,7 @@ class PasswordTest {
         assertThatThrownBy(() -> Password.from("비밀번호123"))
                 .isInstanceOf(PasswordRegexException.class);
 
-        // fail 3 - 글자수 16자리 넘음
+        // fail 3 - 비밀번호 16자리 넘음
         assertThatThrownBy(() -> Password.from("비밀번호가 17자리 예외발생함!"))
                 .isInstanceOf(PasswordLengthException.class);
     }

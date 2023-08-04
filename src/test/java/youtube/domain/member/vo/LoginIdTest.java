@@ -19,6 +19,11 @@ class LoginIdTest {
         // fail 2 - 로그인 아이디 한글, 영어, 숫자로만 구성해야함
         assertThatThrownBy(() -> LoginId.from("아이디12!@"))
                 .isInstanceOf(LoginIdRegexException.class);
+
+        // fail 1 - 로그인 아이디 16자리 넘음
+        assertThatThrownBy(() -> LoginId.from("아이디12345678912345"))
+                .isInstanceOf(LoginIdLengthException.class);
+
     }
 
     @Test

@@ -19,8 +19,8 @@ public class Nickname {
     private static final int MINIMUM_NICKNAME_LENGTH = 2;
     private static final int MAXIMUM_NICKNAME_LENGTH = 20;
 
-    // 닉네임은 한글, 영어, 숫자로 구성된다 (필수 조건은 없음)
-    private static final String REGEX = "^[가-힣a-zA-Z0-9]+$";
+    // 닉네임은 한글, 영어, 숫자로 구성된다 (필수 조건은 없음, 공백 가능)
+    private static final String REGEX = "^[가-힣a-zA-Z0-9\s]+$";
 
     @Column(name = "nickname", unique = true, nullable = false)
     private String value;
