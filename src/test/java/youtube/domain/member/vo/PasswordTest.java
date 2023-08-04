@@ -16,23 +16,27 @@ class PasswordTest {
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Test
-    @DisplayName("Password 생성시 조건에 맞을 경우에만 생성됩니다")
+    @DisplayName("비밀번호는 한글, 영어, 숫자와 최소 1개 이상의 특수문자를 사용해야 한다 - 조건에 맞지 않으면 예외 발생")
+    void validateCreationFail() {
+        // fail 1 - 글자수 6자리 안됨
+        assertThatThrownBy(() -> Password.from("비밀번호!"))
+                .isInstanceOf(PasswordLengthException.class);
+
+        // fail 2 - 특수문자 없음
+        assertThatThrownBy(() -> Password.from("비밀번호123"))
+                .isInstanceOf(PasswordRegexException.class);
+
+        // fail 3 - 글자수 16자리 넘음
+        assertThatThrownBy(() -> Password.from("비밀번호가 17자리 예외발생함!"))
+                .isInstanceOf(PasswordLengthException.class);
+    }
+
+    @Test
+    @DisplayName("비밀번호는 한글, 영어, 숫자와 최소 1개 이상의 특수문자를 사용해야 한다")
     void validateCreationSuccess() {
         // success test
         Password password = Password.from("비밀번호123!");
         assertThat(password).isNotNull();
-    }
-
-    @Test
-    @DisplayName("Password 생성시 조건에 맞지 않으면 예외가 발생합니다")
-    void validateCreationFail() {
-        // fail test 1 - 글자수 6자리 안됨
-        assertThatThrownBy(() -> Password.from("비밀번호!"))
-                .isInstanceOf(PasswordLengthException.class);
-
-        // fail test 2 - 특수문자 없음
-        assertThatThrownBy(() -> Password.from("비밀번호123"))
-                .isInstanceOf(PasswordRegexException.class);
     }
 
     @Test
@@ -50,17 +54,6 @@ class PasswordTest {
     }
 
     @Test
-    @DisplayName("암호화된 비밀번호의 값이 일치하면 메소드를 통과합니다")
-    void validateMatchPasswordSuccess() {
-        // given
-        Password password = Password.from("비밀번호123!");
-        password.encode(passwordEncoder);
-
-        // when
-        password.validateMatchPassword(passwordEncoder, Password.from("비밀번호123!"));
-    }
-
-    @Test
     @DisplayName("암호화된 비밀번호의 값이 일치하지 않으면 예외가 발생합니다")
     void validateMatchPasswordFail() {
         // given
@@ -72,5 +65,16 @@ class PasswordTest {
                 passwordEncoder, Password.from("일치하지 않은 비밀번호!"))
         )
                 .isInstanceOf(PasswordNotMatchException.class);
+    }
+
+    @Test
+    @DisplayName("암호화된 비밀번호의 값이 일치하면 메소드를 통과합니다")
+    void validateMatchPasswordSuccess() {
+        // given
+        Password password = Password.from("비밀번호123!");
+        password.encode(passwordEncoder);
+
+        // when
+        password.validateMatchPassword(passwordEncoder, Password.from("비밀번호123!"));
     }
 }
