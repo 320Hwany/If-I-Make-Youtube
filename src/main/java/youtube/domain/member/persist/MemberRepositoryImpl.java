@@ -29,4 +29,9 @@ public class MemberRepositoryImpl implements MemberRepository {
     public boolean existsByNicknameOrLoginId(final Nickname nickname, final LoginId loginId) {
         return memberJpaRepository.existsByNicknameOrLoginId(nickname, loginId);
     }
+
+    @Override
+    public long count() {
+        return memberJpaRepository.count();
+    }
 }
