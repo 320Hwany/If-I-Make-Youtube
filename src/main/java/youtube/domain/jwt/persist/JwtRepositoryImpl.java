@@ -28,7 +28,7 @@ public class JwtRepositoryImpl implements JwtRepository {
     }
 
     @Override
-    public Optional<JwtRefreshToken> findByMemberId(long memberId) {
+    public Optional<JwtRefreshToken> findByMemberId(final long memberId) {
         return jwtJpaRepository.findByMemberId(memberId);
     }
 }

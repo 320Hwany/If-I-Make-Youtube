@@ -3,10 +3,8 @@ package youtube.application.member.query;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import youtube.application.jwt.JwtFacade;
 import youtube.domain.member.persist.Member;
-import youtube.domain.member.persist.MemberRepository;
 import youtube.domain.member.persist.MemberSession;
 import youtube.domain.member.vo.Password;
 import youtube.mapper.member.MemberMapper;
@@ -14,23 +12,22 @@ import youtube.mapper.member.dto.MemberLoginRequest;
 
 import static youtube.global.constant.TimeConstant.*;
 
-@Transactional(readOnly = true)
 @Service
 public class QueryMemberLogin {
 
-    private final MemberRepository memberRepository;
+    private final QueryMemberByLoginId queryMemberByLoginId;
     private final JwtFacade jwtFacade;
     private final PasswordEncoder passwordEncoder;
 
-    public QueryMemberLogin(final MemberRepository memberRepository, final JwtFacade jwtFacade,
+    public QueryMemberLogin(final QueryMemberByLoginId queryMemberByLoginId, final JwtFacade jwtFacade,
                             final PasswordEncoder passwordEncoder) {
-        this.memberRepository = memberRepository;
+        this.queryMemberByLoginId = queryMemberByLoginId;
         this.jwtFacade = jwtFacade;
         this.passwordEncoder = passwordEncoder;
     }
 
     public Member query(final MemberLoginRequest dto, final HttpServletResponse response) {
-        Member entity = memberRepository.getByLoginId(dto.loginId());
+        Member entity = queryMemberByLoginId.getByLoginId(dto.loginId());
         Password password = entity.getPassword();
 
         if (password.validateMatchPassword(passwordEncoder, dto.password())) {
