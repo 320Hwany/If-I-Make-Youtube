@@ -24,6 +24,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             throw new UnAuthorizedException();
         }
 
+        request.setAttribute(MEMBER_SESSION.value, memberSession);
         return true;
     }
 }

@@ -1,4 +1,4 @@
-package youtube.application.member.command;
+package youtube.application.member.query;
 
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.DisplayName;
@@ -22,10 +22,10 @@ import static youtube.global.constant.SessionConstant.MEMBER_SESSION;
 import static youtube.util.TestConstant.*;
 
 @AcceptanceTest
-class CommandMemberLoginTest {
+class QueryMemberLoginTest {
 
     @Autowired
-    private CommandMemberLogin commandMemberLogin;
+    private QueryMemberLogin queryMemberLogin;
 
     @Autowired
     private MemberRepository memberRepository;
@@ -45,7 +45,7 @@ class CommandMemberLoginTest {
         MockHttpServletRequest request = new MockHttpServletRequest();
 
         // expected
-        assertThatThrownBy(() -> commandMemberLogin.command(dto, request))
+        assertThatThrownBy(() -> queryMemberLogin.query(dto, request))
                 .isInstanceOf(LoginIdNotFoundException.class);
     }
 
@@ -67,7 +67,7 @@ class CommandMemberLoginTest {
         MockHttpServletRequest request = new MockHttpServletRequest();
 
         // expected
-        assertThatThrownBy(() -> commandMemberLogin.command(dto, request))
+        assertThatThrownBy(() -> queryMemberLogin.query(dto, request))
                 .isInstanceOf(PasswordNotMatchException.class);
     }
 
@@ -91,7 +91,7 @@ class CommandMemberLoginTest {
         MockHttpServletRequest request = new MockHttpServletRequest();
 
         // when
-        commandMemberLogin.command(dto, request);
+        queryMemberLogin.query(dto, request);
 
         // then
         HttpSession session = request.getSession(false);

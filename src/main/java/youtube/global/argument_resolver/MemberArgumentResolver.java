@@ -23,24 +23,11 @@ public class MemberArgumentResolver implements HandlerMethodArgumentResolver {
         return hasMemberSessionType && hasLoginMemberAnnotation;
     }
 
-    // todo 예외 세분화
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
-        HttpServletRequest httpServletRequest = webRequest.getNativeRequest(HttpServletRequest.class);
-        if (httpServletRequest == null) {
-            throw new ExceptionForLog(HTTP_SERVLET_REQUEST_NOTFOUND.message);
-        }
-        HttpSession session = httpServletRequest.getSession(false);
-        if (session == null) {
-            throw new UnAuthorizedException();
-        }
-
-        MemberSession memberSession = (MemberSession) session.getAttribute(MEMBER_SESSION.value);
-        if (memberSession == null) {
-            throw new UnAuthorizedException();
-        }
-
-        return memberSession;
+        HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
+        assert request != null;
+        return request.getAttribute(MEMBER_SESSION.value);
     }
 }

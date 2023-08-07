@@ -55,4 +55,17 @@ public class MemberMapper {
                 .watchLaterVideosCount(memberSession.getWatchLaterVideosCount())
                 .build();
     }
+
+    public static MemberResponse toMemberResponse(final Member member) {
+        return MemberResponse.builder()
+                .id(member.getId())
+                .nickname(member.getNickname().getValue())
+                .loginId(member.getLoginId().getValue())
+                .roleType(member.getRoleType())
+                .gender(member.getGender())
+                .birthDate(member.getBirthDate())
+                .likedVideosCount(member.getLikedVideosCount())
+                .watchLaterVideosCount(member.getWatchLaterVideosCount())
+                .build();
+    }
 }

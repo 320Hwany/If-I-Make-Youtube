@@ -1,10 +1,14 @@
 package youtube.presentation;
 
+import io.jsonwebtoken.Jwts;
+
+import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-import youtube.application.member.command.CommandMemberLogin;
+import youtube.application.member.query.QueryMemberLogin;
 import youtube.application.member.command.CommandMemberSignup;
+import youtube.domain.member.persist.Member;
 import youtube.domain.member.persist.MemberSession;
 import youtube.global.argument_resolver.Login;
 import youtube.mapper.member.MemberMapper;
@@ -17,12 +21,12 @@ import youtube.mapper.member.dto.MemberSignupRequest;
 public class MemberController {
 
     private final CommandMemberSignup commandMemberSignup;
-    private final CommandMemberLogin commandMemberLogin;
+    private final QueryMemberLogin queryMemberLogin;
 
     public MemberController(final CommandMemberSignup commandMemberSignup,
-                            final CommandMemberLogin commandMemberLogin) {
+                            final QueryMemberLogin queryMemberLogin) {
         this.commandMemberSignup = commandMemberSignup;
-        this.commandMemberLogin = commandMemberLogin;
+        this.queryMemberLogin = queryMemberLogin;
     }
 
     @PostMapping("/signup")
@@ -31,9 +35,10 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public void login(@RequestBody @Valid final MemberLoginRequest dto,
-                      final HttpServletRequest request) {
-        commandMemberLogin.command(dto, request);
+    public MemberResponse login(@RequestBody @Valid final MemberLoginRequest dto,
+                                final HttpServletRequest request) {
+        Member entity = queryMemberLogin.query(dto, request);
+        return MemberMapper.toMemberResponse(entity);
     }
 
     @GetMapping("/member")

@@ -1,4 +1,4 @@
-package youtube.application.member.command;
+package youtube.application.member.query;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,23 +13,24 @@ import youtube.mapper.member.dto.MemberLoginRequest;
 
 @Transactional(readOnly = true)
 @Service
-public class CommandMemberLogin {
+public class QueryMemberLogin {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public CommandMemberLogin(final MemberRepository memberRepository,
-                              final PasswordEncoder passwordEncoder) {
+    public QueryMemberLogin(final MemberRepository memberRepository,
+                            final PasswordEncoder passwordEncoder) {
         this.memberRepository = memberRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void command(final MemberLoginRequest dto, final HttpServletRequest request) {
+    public Member query(final MemberLoginRequest dto, final HttpServletRequest request) {
         Member entity = memberRepository.getByLoginId(dto.loginId());
         Password password = entity.getPassword();
         if (password.validateMatchPassword(passwordEncoder, dto.password())) {
             MemberSession memberSession = MemberMapper.toMemberSession(entity);
             memberSession.makeSession(request);
         }
+        return entity;
     }
 }
