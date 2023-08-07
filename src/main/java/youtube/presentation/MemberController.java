@@ -1,9 +1,6 @@
 package youtube.presentation;
 
-import io.jsonwebtoken.Jwts;
-
-import io.jsonwebtoken.SignatureAlgorithm;
-import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import youtube.application.member.query.QueryMemberLogin;
@@ -36,8 +33,8 @@ public class MemberController {
 
     @PostMapping("/login")
     public MemberResponse login(@RequestBody @Valid final MemberLoginRequest dto,
-                                final HttpServletRequest request) {
-        Member entity = queryMemberLogin.query(dto, request);
+                                final HttpServletResponse response) {
+        Member entity = queryMemberLogin.query(dto, response);
         return MemberMapper.toMemberResponse(entity);
     }
 

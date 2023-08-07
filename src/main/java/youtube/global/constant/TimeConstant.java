@@ -1,0 +1,13 @@
+package youtube.global.constant;
+
+public enum TimeConstant {
+
+    ONE_HOUR(1000 * 60 * 60),
+    ONE_MONTH(1000L * 60 * 60 * 24 * 30);
+
+    public final long value;
+
+    TimeConstant(long value) {
+        this.value = value;
+    }
+}

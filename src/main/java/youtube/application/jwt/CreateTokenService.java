@@ -13,22 +13,21 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.UUID;
 
-@Service
-public class JwtService {
+import static youtube.global.constant.JwtKey.JWT_KEY;
 
-    @Value("${jwt.key}")
-    private static String JWT_KEY;
+@Service
+public class CreateTokenService {
 
     private final ObjectMapper objectMapper;
 
-    public JwtService(final ObjectMapper objectMapper) {
+    public CreateTokenService(final ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
-    private String createToken(final MemberSession memberSession, final long expired) {
-        SecretKey tokenKey = Keys.hmacShaKeyFor(Base64.getDecoder().decode(JWT_KEY));
+    public String createAccessToken(final MemberSession memberSession, final long expired) {
         Date now = new Date();
         Date expiredDate = new Date(new Date().getTime() + expired);
+        SecretKey tokenKey = Keys.hmacShaKeyFor(Base64.getDecoder().decode(JWT_KEY));
 
         try {
             String memberSessionJson = objectMapper.writeValueAsString(memberSession);
@@ -44,6 +43,19 @@ public class JwtService {
             // todo
             throw new RuntimeException(e);
         }
+    }
 
+    public String createRefreshToken(final long memberId, final long expired) {
+        Date now = new Date();
+        Date expiredDate = new Date(new Date().getTime() + expired);
+        SecretKey tokenKey = Keys.hmacShaKeyFor(Base64.getDecoder().decode(JWT_KEY));
+
+        return Jwts.builder()
+                .setId(UUID.randomUUID().toString())
+                .setSubject(String.valueOf(memberId))
+                .setIssuedAt(now)
+                .setExpiration(expiredDate)
+                .signWith(tokenKey)
+                .compact();
     }
 }

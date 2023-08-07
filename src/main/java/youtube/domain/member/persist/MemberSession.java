@@ -1,14 +1,11 @@
 package youtube.domain.member.persist;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import youtube.domain.member.vo.*;
 
-import static youtube.global.constant.SessionConstant.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -32,10 +29,5 @@ public class MemberSession {
         this.roleType = roleType;
         this.likedVideosCount = likedVideosCount;
         this.watchLaterVideosCount = watchLaterVideosCount;
-    }
-
-    public void makeSession(final HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        session.setAttribute(MEMBER_SESSION.value, this);
     }
 }

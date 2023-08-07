@@ -22,14 +22,12 @@ import java.util.Base64;
 
 import static youtube.global.constant.JwtConstant.MEMBER_SESSION;
 import static youtube.global.constant.JwtConstant.REFRESH_TOKEN;
+import static youtube.global.constant.JwtKey.JWT_KEY;
 
 public class LoginInterceptor implements HandlerInterceptor {
 
-    @Value("${jwt.key}")
-    private static String JWT_KEY;
     private static final String AUTHORIZATION = "Authorization";
     private static final byte[] decodedKey = Base64.getDecoder().decode(JWT_KEY);
-
 
     private final ObjectMapper objectMapper;
     private final MemberRepository memberRepository;
