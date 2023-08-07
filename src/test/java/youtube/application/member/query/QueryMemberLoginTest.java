@@ -1,10 +1,12 @@
 package youtube.application.member.query;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.persist.MemberRepository;
@@ -18,7 +20,8 @@ import youtube.mapper.member.dto.MemberLoginRequest;
 import youtube.util.AcceptanceTest;
 
 import static org.assertj.core.api.Assertions.*;
-import static youtube.global.constant.SessionConstant.MEMBER_SESSION;
+import static youtube.global.constant.JwtConstant.ACCESS_TOKEN;
+import static youtube.global.constant.JwtConstant.REFRESH_TOKEN;
 import static youtube.util.TestConstant.*;
 
 @AcceptanceTest
@@ -42,10 +45,10 @@ class QueryMemberLoginTest {
                 Password.from("비밀번호123!")
         );
 
-        MockHttpServletRequest request = new MockHttpServletRequest();
+        MockHttpServletResponse response = new MockHttpServletResponse();
 
         // expected
-        assertThatThrownBy(() -> queryMemberLogin.query(dto, request))
+        assertThatThrownBy(() -> queryMemberLogin.query(dto, response))
                 .isInstanceOf(LoginIdNotFoundException.class);
     }
 
@@ -64,10 +67,10 @@ class QueryMemberLoginTest {
                 Password.from("일치하지 않는 비밀번호!")
         );
 
-        MockHttpServletRequest request = new MockHttpServletRequest();
+        MockHttpServletResponse response = new MockHttpServletResponse();
 
         // expected
-        assertThatThrownBy(() -> queryMemberLogin.query(dto, request))
+        assertThatThrownBy(() -> queryMemberLogin.query(dto, response))
                 .isInstanceOf(PasswordNotMatchException.class);
     }
 
@@ -88,16 +91,16 @@ class QueryMemberLoginTest {
                 Password.from(TEST_PASSWORD.value)
         );
 
-        MockHttpServletRequest request = new MockHttpServletRequest();
+        MockHttpServletResponse response = new MockHttpServletResponse();
 
         // when
-        queryMemberLogin.query(dto, request);
+        queryMemberLogin.query(dto, response);
 
         // then
-        HttpSession session = request.getSession(false);
-        assertThat(session).isNotNull();
+        Cookie cookie = response.getCookie(REFRESH_TOKEN.value);
+        assertThat(cookie).isNotNull();
 
-        MemberSession sessionAttribute = (MemberSession) session.getAttribute(MEMBER_SESSION.value);
-        assertThat(sessionAttribute).isNotNull();
+        String accessToken = response.getHeader(ACCESS_TOKEN.value);
+        assertThat(accessToken).isNotNull();
     }
 }

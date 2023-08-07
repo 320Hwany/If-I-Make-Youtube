@@ -10,6 +10,7 @@ import youtube.domain.member.persist.MemberSession;
 import youtube.global.argument_resolver.Login;
 import youtube.mapper.member.MemberMapper;
 import youtube.mapper.member.dto.MemberLoginRequest;
+import youtube.mapper.member.dto.MemberDetailedResponse;
 import youtube.mapper.member.dto.MemberResponse;
 import youtube.mapper.member.dto.MemberSignupRequest;
 
@@ -32,10 +33,10 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public MemberResponse login(@RequestBody @Valid final MemberLoginRequest dto,
-                                final HttpServletResponse response) {
+    public MemberDetailedResponse login(@RequestBody @Valid final MemberLoginRequest dto,
+                                        final HttpServletResponse response) {
         Member entity = queryMemberLogin.query(dto, response);
-        return MemberMapper.toMemberResponse(entity);
+        return MemberMapper.toMemberDetailedResponse(entity);
     }
 
     @GetMapping("/member")

@@ -1,6 +1,7 @@
 package youtube.domain.jwt.persist;
 
 import org.springframework.stereotype.Repository;
+import youtube.exception.jwt.RefreshTokenNotFoundException;
 import youtube.exception.jwt.RefreshTokenNotMatchException;
 
 import java.util.Optional;
@@ -22,7 +23,7 @@ public class JwtRepositoryImpl implements JwtRepository {
     @Override
     public JwtRefreshToken getByMemberId(final long memberId) {
         return jwtJpaRepository.findByMemberId(memberId)
-                .orElseThrow(RefreshTokenNotMatchException::new);
+                .orElseThrow(RefreshTokenNotFoundException::new);
     }
 
     @Override

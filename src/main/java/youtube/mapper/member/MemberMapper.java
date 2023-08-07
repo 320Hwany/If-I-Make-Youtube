@@ -5,6 +5,7 @@ import youtube.domain.member.persist.Member;
 import youtube.domain.member.persist.MemberSession;
 import youtube.domain.member.vo.Gender;
 import youtube.domain.member.vo.RoleType;
+import youtube.mapper.member.dto.MemberDetailedResponse;
 import youtube.mapper.member.dto.MemberResponse;
 import youtube.mapper.member.dto.MemberSignupRequest;
 
@@ -43,17 +44,14 @@ public class MemberMapper {
         return MemberResponse.builder()
                 .id(memberSession.getId())
                 .nickname(memberSession.getNickname().getValue())
-//                .loginId(memberSession.getLoginId().getValue())
-//                .roleType(memberSession.getRoleType())
-//                .gender(memberSession.getGender())
-//                .birthDate(memberSession.getBirthDate())
+                .roleType(memberSession.getRoleType())
                 .likedVideosCount(memberSession.getLikedVideosCount())
                 .watchLaterVideosCount(memberSession.getWatchLaterVideosCount())
                 .build();
     }
 
-    public static MemberResponse toMemberResponse(final Member member) {
-        return MemberResponse.builder()
+    public static MemberDetailedResponse toMemberDetailedResponse(final Member member) {
+        return MemberDetailedResponse.builder()
                 .id(member.getId())
                 .nickname(member.getNickname().getValue())
                 .loginId(member.getLoginId().getValue())
