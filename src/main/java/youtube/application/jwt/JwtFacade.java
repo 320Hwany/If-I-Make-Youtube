@@ -33,8 +33,9 @@ public class JwtFacade {
     }
 
     public void setHeader(final HttpServletResponse response, final String accessToken,
-                             final String refreshToken) {
-        setHeaderService.setHeader(response, accessToken, refreshToken);
+                          final String refreshToken) {
+        setHeaderService.setAccessTokenHeader(response, accessToken);
+        setHeaderService.setRefreshTokenCookie(response, refreshToken);
     }
 
     @Transactional

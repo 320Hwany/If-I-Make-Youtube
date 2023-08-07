@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
@@ -13,6 +14,7 @@ import youtube.domain.member.persist.MemberRepository;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
 import youtube.domain.member.vo.Password;
+import youtube.global.constant.JwtConstant;
 import youtube.mapper.member.dto.MemberLoginRequest;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -46,19 +48,19 @@ public class ControllerTest {
         );
     }
 
-    protected MockHttpSession login() throws Exception {
+    protected String login() throws Exception {
         MemberLoginRequest dto = new MemberLoginRequest(
                 LoginId.from(TEST_LOGIN_ID.value),
                 Password.from(TEST_PASSWORD.value)
         );
 
         // expected
-        MockHttpServletRequest request = mockMvc.perform(post("/api/login")
+        MockHttpServletResponse response = mockMvc.perform(post("/api/login")
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
-                .andReturn().getRequest();
+                .andReturn().getResponse();
 
-        HttpSession session = request.getSession();
-        return (MockHttpSession)session;
+        String accessToken = response.getHeader(JwtConstant.ACCESS_TOKEN.value);
+        return accessToken;
     }
 }

@@ -15,9 +15,11 @@ public class SetHeaderService {
 
     private static final int THIRTY = 30;
 
+    public void setAccessTokenHeader(final HttpServletResponse response, final String accessToken) {
+        response.setHeader(ACCESS_TOKEN.value, accessToken);
+    }
 
-    public void setHeader(final HttpServletResponse response, final String accessToken,
-                             final String refreshToken) {
+    public void setRefreshTokenCookie(final HttpServletResponse response, final String refreshToken) {
         ResponseCookie refreshTokenCookie = ResponseCookie.from(REFRESH_TOKEN.value, refreshToken)
                 .maxAge(Duration.ofDays(THIRTY))
                 .httpOnly(true)
@@ -25,7 +27,6 @@ public class SetHeaderService {
                 .path("/")
                 .build();
 
-        response.setHeader(ACCESS_TOKEN.value, accessToken);
         response.setHeader(HttpHeaders.SET_COOKIE, refreshTokenCookie.toString());
     }
 }

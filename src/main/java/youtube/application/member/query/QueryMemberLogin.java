@@ -19,7 +19,6 @@ import static youtube.global.constant.TimeConstant.*;
 public class QueryMemberLogin {
 
     private final MemberRepository memberRepository;
-
     private final JwtFacade jwtFacade;
     private final PasswordEncoder passwordEncoder;
 

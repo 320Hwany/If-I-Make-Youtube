@@ -7,12 +7,14 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import youtube.domain.member.persist.MemberSession;
+import youtube.global.exception.BadRequestException;
 
 import javax.crypto.SecretKey;
 import java.util.Base64;
 import java.util.Date;
 import java.util.UUID;
 
+import static youtube.global.constant.ExceptionMessageConstant.MEMBER_SESSION_JSON_PARSING;
 import static youtube.global.constant.JwtKey.JWT_KEY;
 
 @Service
@@ -24,6 +26,7 @@ public class CreateTokenService {
         this.objectMapper = objectMapper;
     }
 
+    // MemberSession 객체 정보를 AccessToken에 넣습니다
     public String createAccessToken(final MemberSession memberSession, final long expired) {
         Date now = new Date();
         Date expiredDate = new Date(new Date().getTime() + expired);
@@ -40,11 +43,11 @@ public class CreateTokenService {
                     .compact();
 
         } catch (JsonProcessingException e) {
-            // todo
-            throw new RuntimeException(e);
+            throw new BadRequestException(MEMBER_SESSION_JSON_PARSING.message);
         }
     }
 
+    // MemberId를 RefreshToken에 넣습니다
     public String createRefreshToken(final long memberId, final long expired) {
         Date now = new Date();
         Date expiredDate = new Date(new Date().getTime() + expired);
