@@ -15,12 +15,14 @@ import youtube.domain.jwt.persist.JwtRepository;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.persist.MemberRepository;
 import youtube.domain.member.persist.MemberSession;
-import youtube.exception.cookie.CookieNotFoundException;
-import youtube.exception.jwt.*;
+import youtube.global.exception.BadRequestException;
+import youtube.global.exception.NotFoundException;
+import youtube.global.exception.UnAuthorizedException;
 import youtube.mapper.member.MemberMapper;
 
 import java.util.Base64;
 
+import static youtube.global.constant.ExceptionMessageConstant.*;
 import static youtube.global.constant.JwtConstant.*;
 import static youtube.global.constant.JwtKey.JWT_KEY;
 
@@ -49,7 +51,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     }
 
     private MemberSession getMemberSessionFromToken(final String accessToken,
-                                                          final HttpServletRequest request) {
+                                                    final HttpServletRequest request) {
         // AccessToken payload에 MemberSession 객체 정보가 저장되어 있음 -> json 파싱 필요
         try {
             Jws<Claims> claims = getClaims(accessToken);
@@ -57,7 +59,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             try {
                 return objectMapper.readValue(memberSessionJson, MemberSession.class);
             } catch (JsonProcessingException e) {
-                throw new AccessTokenJsonParsingException();
+                throw new UnAuthorizedException(ACCESS_TOKEN_JSON_PARSING.message);
             }
 
         } catch (JwtException e) {
@@ -73,14 +75,14 @@ public class LoginInterceptor implements HandlerInterceptor {
                     .build()
                     .parseClaimsJws(token);
         } catch (IllegalArgumentException e) {
-            throw new ClaimsBadRequestException();
+            throw new UnAuthorizedException(CLAIMS_UNAUTHORIZED.message);
         }
     }
 
     private String getRefreshToken(final HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if (cookies == null) {
-            throw new CookieNotFoundException();
+            throw new UnAuthorizedException(COOKIE_NOT_EXIST.message);
         }
 
         for (Cookie cookie : cookies) {
@@ -89,7 +91,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             }
         }
 
-        throw new RefreshTokenNotFoundException();
+        throw new UnAuthorizedException(REFRESH_TOKEN_NOT_EXIST.message);
     }
 
     private MemberSession getMemberSessionFromRefreshToken(final String refreshToken) {
@@ -102,9 +104,9 @@ public class LoginInterceptor implements HandlerInterceptor {
                 return MemberMapper.toMemberSession(member);
             }
 
-            throw new RefreshTokenNotMatchException();
+            throw new UnAuthorizedException(REFRESH_TOKEN_NOT_MATCH.message);
         } catch (JwtException e) {
-            throw new RefreshTokenNotValidException();
+            throw new UnAuthorizedException(REFRESH_TOKEN_NOT_VALID.message);
         }
     }
 }

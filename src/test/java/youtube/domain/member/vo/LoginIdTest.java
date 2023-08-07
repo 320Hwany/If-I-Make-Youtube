@@ -2,8 +2,7 @@ package youtube.domain.member.vo;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import youtube.exception.member.LoginIdLengthException;
-import youtube.exception.member.LoginIdRegexException;
+import youtube.global.exception.BadRequestException;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -14,15 +13,15 @@ class LoginIdTest {
     void validateCreationFail() {
         // fail 1 - 로그인 아이디 6자리 안됨
         assertThatThrownBy(() -> LoginId.from("아이디12"))
-                .isInstanceOf(LoginIdLengthException.class);
+                .isInstanceOf(BadRequestException.class);
 
         // fail 2 - 로그인 아이디 한글, 영어, 숫자로만 구성해야함
         assertThatThrownBy(() -> LoginId.from("아이디12!@"))
-                .isInstanceOf(LoginIdRegexException.class);
+                .isInstanceOf(BadRequestException.class);
 
         // fail 1 - 로그인 아이디 16자리 넘음
         assertThatThrownBy(() -> LoginId.from("아이디12345678912345"))
-                .isInstanceOf(LoginIdLengthException.class);
+                .isInstanceOf(BadRequestException.class);
 
     }
 

@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.persist.MemberRepository;
-import youtube.exception.member.MemberDuplicationException;
+import youtube.global.exception.BadRequestException;
 import youtube.mapper.member.MemberMapper;
 import youtube.mapper.member.dto.MemberSignupRequest;
+
+import static youtube.global.constant.ExceptionMessageConstant.MEMBER_DUPLICATION;
 
 @Transactional
 @Service
@@ -25,7 +27,7 @@ public class CommandMemberSignup {
     public void command(final MemberSignupRequest dto) {
         boolean isPresent = memberRepository.existsByNicknameOrLoginId(dto.nickname(), dto.loginId());
         if (isPresent) {
-            throw new MemberDuplicationException();
+            throw new BadRequestException(MEMBER_DUPLICATION.message);
         }
         Member entity = MemberMapper.toEntity(dto, passwordEncoder);
         memberRepository.save(entity);

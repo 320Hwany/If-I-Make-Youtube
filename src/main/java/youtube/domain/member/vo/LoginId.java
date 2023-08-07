@@ -5,11 +5,13 @@ import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import youtube.exception.member.LoginIdLengthException;
-import youtube.exception.member.LoginIdRegexException;
+import youtube.global.exception.BadRequestException;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
+
+import static youtube.global.constant.ExceptionMessageConstant.LOGIN_ID_LENGTH;
+import static youtube.global.constant.ExceptionMessageConstant.LOGIN_ID_REGEX;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -36,9 +38,9 @@ public class LoginId {
 
     private void validateCreation(final String loginId) {
         if (loginId.length() < MINIMUM_LOGIN_ID_LENGTH || loginId.length() > MAXIMUM_LOGIN_ID_LENGTH) {
-            throw new LoginIdLengthException();
+            throw new BadRequestException(LOGIN_ID_LENGTH.message);
         } else if (!Pattern.matches(REGEX, loginId)) {
-            throw new LoginIdRegexException();
+            throw new BadRequestException(LOGIN_ID_REGEX.message);
         }
     }
 

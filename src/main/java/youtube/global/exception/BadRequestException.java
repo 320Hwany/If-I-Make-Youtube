@@ -5,7 +5,7 @@ import lombok.Getter;
 import static youtube.global.constant.StatusCodeConstant.*;
 
 @Getter
-public abstract class BadRequestException extends RuntimeException {
+public class BadRequestException extends RuntimeException {
 
     private final String statusCode = BAD_REQUEST.statusCode;
     private final String message;

@@ -1,21 +1,18 @@
 package youtube.application.member.query;
 
 import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.persist.MemberRepository;
-import youtube.domain.member.persist.MemberSession;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
 import youtube.domain.member.vo.Password;
-import youtube.exception.member.LoginIdNotFoundException;
-import youtube.exception.member.PasswordNotMatchException;
+import youtube.global.exception.BadRequestException;
+import youtube.global.exception.NotFoundException;
 import youtube.mapper.member.dto.MemberLoginRequest;
 import youtube.util.AcceptanceTest;
 
@@ -49,7 +46,7 @@ class QueryMemberLoginTest {
 
         // expected
         assertThatThrownBy(() -> queryMemberLogin.query(dto, response))
-                .isInstanceOf(LoginIdNotFoundException.class);
+                .isInstanceOf(NotFoundException.class);
     }
 
     @Test
@@ -71,7 +68,7 @@ class QueryMemberLoginTest {
 
         // expected
         assertThatThrownBy(() -> queryMemberLogin.query(dto, response))
-                .isInstanceOf(PasswordNotMatchException.class);
+                .isInstanceOf(BadRequestException.class);
     }
 
     @Test

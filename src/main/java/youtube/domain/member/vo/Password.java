@@ -6,12 +6,12 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import youtube.exception.member.PasswordLengthException;
-import youtube.exception.member.PasswordNotMatchException;
-import youtube.exception.member.PasswordRegexException;
+import youtube.global.exception.BadRequestException;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
+
+import static youtube.global.constant.ExceptionMessageConstant.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -38,9 +38,9 @@ public class Password {
 
     private void validateCreation(final String password) {
         if (password.length() < MINIMUM_PASSWORD_LENGTH || password.length() > MAXIMUM_PASSWORD_LENGTH) {
-            throw new PasswordLengthException();
+            throw new BadRequestException(PASSWORD_LENGTH.message);
         } else if (!Pattern.matches(REGEX, password)) {
-            throw new PasswordRegexException();
+            throw new BadRequestException(PASSWORD_REGEX.message);
         }
     }
 
@@ -54,7 +54,7 @@ public class Password {
         if (passwordEncoder.matches(inputPassword.value, this.value)) {
             return true;
         }
-        throw new PasswordNotMatchException();
+        throw new BadRequestException(PASSWORD_NOT_MATCH.message);
     }
 
     @Override

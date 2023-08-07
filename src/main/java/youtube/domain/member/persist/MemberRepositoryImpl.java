@@ -3,8 +3,10 @@ package youtube.domain.member.persist;
 import org.springframework.stereotype.Repository;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
-import youtube.exception.member.LoginIdNotFoundException;
-import youtube.exception.member.MemberNotFoundException;
+import youtube.global.exception.NotFoundException;
+
+import static youtube.global.constant.ExceptionMessageConstant.LOGIN_ID_NOTFOUND;
+import static youtube.global.constant.ExceptionMessageConstant.MEMBER_NOT_FOUND;
 
 @Repository
 public class MemberRepositoryImpl implements MemberRepository {
@@ -23,13 +25,13 @@ public class MemberRepositoryImpl implements MemberRepository {
     @Override
     public Member getByLoginId(final LoginId loginId) {
         return memberJpaRepository.findByLoginId(loginId)
-                .orElseThrow(LoginIdNotFoundException::new);
+                .orElseThrow(() -> new NotFoundException(LOGIN_ID_NOTFOUND.message));
     }
 
     @Override
     public Member getById(final long memberId) {
         return memberJpaRepository.findById(memberId)
-                .orElseThrow(MemberNotFoundException::new);
+                .orElseThrow(() -> new NotFoundException(MEMBER_NOT_FOUND.message));
     }
 
     @Override

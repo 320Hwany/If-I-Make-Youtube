@@ -5,11 +5,13 @@ import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import youtube.exception.member.NickNameLengthException;
-import youtube.exception.member.NickNameRegexException;
+import youtube.global.exception.BadRequestException;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
+
+import static youtube.global.constant.ExceptionMessageConstant.NICKNAME_LENGTH;
+import static youtube.global.constant.ExceptionMessageConstant.NICKNAME_REGEX;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -36,9 +38,9 @@ public class Nickname {
 
     private void validateCreation(final String nickname) {
         if (nickname.length() < MINIMUM_NICKNAME_LENGTH || nickname.length() > MAXIMUM_NICKNAME_LENGTH) {
-            throw new NickNameLengthException();
+            throw new BadRequestException(NICKNAME_LENGTH.message);
         } else if (!Pattern.matches(REGEX, nickname)) {
-            throw new NickNameRegexException();
+            throw new BadRequestException(NICKNAME_REGEX.message);
         }
     }
 

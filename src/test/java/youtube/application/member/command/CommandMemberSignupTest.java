@@ -9,7 +9,7 @@ import youtube.domain.member.vo.Gender;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
 import youtube.domain.member.vo.Password;
-import youtube.exception.member.MemberDuplicationException;
+import youtube.global.exception.BadRequestException;
 import youtube.mapper.member.dto.MemberSignupRequest;
 import youtube.util.AcceptanceTest;
 
@@ -47,7 +47,7 @@ class CommandMemberSignupTest {
 
         // expected
         assertThatThrownBy(() -> commandMemberSignup.command(dto))
-                .isInstanceOf(MemberDuplicationException.class);
+                .isInstanceOf(BadRequestException.class);
     }
 
     @Test

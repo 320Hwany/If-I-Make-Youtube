@@ -4,9 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import youtube.exception.member.PasswordLengthException;
-import youtube.exception.member.PasswordNotMatchException;
-import youtube.exception.member.PasswordRegexException;
+import youtube.global.exception.BadRequestException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -20,15 +18,15 @@ class PasswordTest {
     void validateCreationFail() {
         // fail 1 - 비밀번호 6자리 안됨
         assertThatThrownBy(() -> Password.from("비밀번호!"))
-                .isInstanceOf(PasswordLengthException.class);
+                .isInstanceOf(BadRequestException.class);
 
         // fail 2 - 특수문자 없음
         assertThatThrownBy(() -> Password.from("비밀번호123"))
-                .isInstanceOf(PasswordRegexException.class);
+                .isInstanceOf(BadRequestException.class);
 
         // fail 3 - 비밀번호 16자리 넘음
         assertThatThrownBy(() -> Password.from("비밀번호가 17자리 예외발생함!"))
-                .isInstanceOf(PasswordLengthException.class);
+                .isInstanceOf(BadRequestException.class);
     }
 
     @Test
@@ -64,7 +62,7 @@ class PasswordTest {
         assertThatThrownBy(() -> password.validateMatchPassword(
                 passwordEncoder, Password.from("일치하지 않은 비밀번호!"))
         )
-                .isInstanceOf(PasswordNotMatchException.class);
+                .isInstanceOf(BadRequestException.class);
     }
 
     @Test
