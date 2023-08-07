@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
 import youtube.exception.member.LoginIdNotFoundException;
+import youtube.exception.member.MemberNotFoundException;
 
 @Repository
 public class MemberRepositoryImpl implements MemberRepository {
@@ -23,6 +24,12 @@ public class MemberRepositoryImpl implements MemberRepository {
     public Member getByLoginId(final LoginId loginId) {
         return memberJpaRepository.findByLoginId(loginId)
                 .orElseThrow(LoginIdNotFoundException::new);
+    }
+
+    @Override
+    public Member getById(final long memberId) {
+        return memberJpaRepository.findById(memberId)
+                .orElseThrow(MemberNotFoundException::new);
     }
 
     @Override

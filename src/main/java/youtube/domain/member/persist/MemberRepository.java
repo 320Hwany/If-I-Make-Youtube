@@ -9,6 +9,8 @@ public interface MemberRepository {
 
     Member getByLoginId(final LoginId loginId);
 
+    Member getById(final long memberId);
+
     boolean existsByNicknameOrLoginId(final Nickname nickname, final LoginId loginId);
 
     long count();

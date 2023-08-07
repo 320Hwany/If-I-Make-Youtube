@@ -21,8 +21,12 @@ public class JwtRefreshToken {
     private Long memberId;
 
     @Builder
-    private JwtRefreshToken(String refreshToken, Long memberId) {
+    private JwtRefreshToken(final String refreshToken, final Long memberId) {
         this.refreshToken = refreshToken;
         this.memberId = memberId;
+    }
+
+    public void update(final String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }
