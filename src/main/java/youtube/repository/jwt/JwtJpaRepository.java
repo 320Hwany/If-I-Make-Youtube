@@ -1,6 +1,7 @@
-package youtube.domain.jwt;
+package youtube.repository.jwt;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import youtube.domain.jwt.JwtRefreshToken;
 
 import java.util.Optional;
 

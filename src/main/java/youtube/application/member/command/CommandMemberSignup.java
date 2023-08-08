@@ -4,7 +4,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import youtube.domain.member.persist.Member;
-import youtube.domain.member.persist.MemberRepository;
+import youtube.repository.member.MemberRepository;
 import youtube.global.exception.BadRequestException;
 import youtube.mapper.member.MemberMapper;
 import youtube.mapper.member.dto.MemberSignupRequest;

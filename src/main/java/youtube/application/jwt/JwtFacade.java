@@ -4,7 +4,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import youtube.domain.jwt.JwtRefreshToken;
-import youtube.domain.jwt.JwtRepository;
+import youtube.repository.jwt.JwtRepository;
 import youtube.domain.member.vo.MemberSession;
 import youtube.mapper.jwt.JwtRefreshTokenMapper;
 

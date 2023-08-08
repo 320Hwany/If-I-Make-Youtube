@@ -1,6 +1,7 @@
-package youtube.domain.jwt;
+package youtube.repository.jwt;
 
 import org.springframework.stereotype.Repository;
+import youtube.domain.jwt.JwtRefreshToken;
 import youtube.global.exception.NotFoundException;
 
 import java.util.Optional;

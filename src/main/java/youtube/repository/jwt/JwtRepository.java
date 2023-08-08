@@ -1,4 +1,6 @@
-package youtube.domain.jwt;
+package youtube.repository.jwt;
+
+import youtube.domain.jwt.JwtRefreshToken;
 
 import java.util.Optional;
 

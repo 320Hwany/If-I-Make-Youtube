@@ -1,9 +1,9 @@
-package youtube.domain.member.persist;
+package youtube.repository.member;
 
-import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
+import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
 import youtube.global.exception.NotFoundException;

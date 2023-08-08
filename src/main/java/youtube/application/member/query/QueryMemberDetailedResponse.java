@@ -2,7 +2,7 @@ package youtube.application.member.query;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import youtube.domain.member.persist.MemberRepository;
+import youtube.repository.member.MemberRepository;
 import youtube.mapper.member.dto.MemberDetailedResponse;
 
 @Transactional(readOnly = true)

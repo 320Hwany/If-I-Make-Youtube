@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import youtube.domain.jwt.JwtRepository;
-import youtube.domain.member.persist.MemberRepository;
+import youtube.repository.jwt.JwtRepository;
+import youtube.repository.member.MemberRepository;
 import youtube.global.interceptor.LoginInterceptor;
 
 @Configuration

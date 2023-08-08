@@ -1,6 +1,7 @@
-package youtube.domain.member.persist;
+package youtube.repository.member;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
 
