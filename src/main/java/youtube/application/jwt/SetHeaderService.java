@@ -9,11 +9,10 @@ import java.time.Duration;
 
 import static youtube.global.constant.JwtConstant.ACCESS_TOKEN;
 import static youtube.global.constant.JwtConstant.REFRESH_TOKEN;
+import static youtube.global.constant.TimeConstant.*;
 
 @Service
 public class SetHeaderService {
-
-    private static final int THIRTY = 30;
 
     public void setAccessTokenHeader(final HttpServletResponse response, final String accessToken) {
         response.setHeader(ACCESS_TOKEN.value, accessToken);
@@ -21,7 +20,7 @@ public class SetHeaderService {
 
     public void setRefreshTokenCookie(final HttpServletResponse response, final String refreshToken) {
         ResponseCookie refreshTokenCookie = ResponseCookie.from(REFRESH_TOKEN.value, refreshToken)
-                .maxAge(Duration.ofDays(THIRTY))
+                .maxAge(Duration.ofDays(THIRTY_DAY.value))
                 .httpOnly(true)
                 .secure(true)
                 .path("/")
