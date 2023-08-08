@@ -31,4 +31,9 @@ public class JwtRepositoryImpl implements JwtRepository {
     public Optional<JwtRefreshToken> findByMemberId(final long memberId) {
         return jwtJpaRepository.findByMemberId(memberId);
     }
+
+    @Override
+    public long count() {
+        return jwtJpaRepository.count();
+    }
 }

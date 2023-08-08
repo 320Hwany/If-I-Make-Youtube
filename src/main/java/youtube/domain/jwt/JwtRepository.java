@@ -9,4 +9,6 @@ public interface JwtRepository {
     JwtRefreshToken getByMemberId(final long memberId);
 
     Optional<JwtRefreshToken> findByMemberId(final long memberId);
+
+    long count();
 }
