@@ -1,8 +1,9 @@
-package youtube.presentation;
+package youtube.presentation.member;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import youtube.application.member.query.QueryMemberDetailedResponse;
 import youtube.application.member.query.QueryMemberLogin;
 import youtube.application.member.command.CommandMemberSignup;
 import youtube.domain.member.persist.Member;
@@ -20,11 +21,14 @@ public class MemberController {
 
     private final CommandMemberSignup commandMemberSignup;
     private final QueryMemberLogin queryMemberLogin;
+    private final QueryMemberDetailedResponse queryMemberDetailedResponse;
 
     public MemberController(final CommandMemberSignup commandMemberSignup,
-                            final QueryMemberLogin queryMemberLogin) {
+                            final QueryMemberLogin queryMemberLogin,
+                            final QueryMemberDetailedResponse queryMemberDetailedResponse) {
         this.commandMemberSignup = commandMemberSignup;
         this.queryMemberLogin = queryMemberLogin;
+        this.queryMemberDetailedResponse = queryMemberDetailedResponse;
     }
 
     @PostMapping("/signup")
@@ -39,8 +43,15 @@ public class MemberController {
         return MemberMapper.toMemberDetailedResponse(entity);
     }
 
+    // DB 조회 없이 AccessToken 만으로 회원 정보 가져오기
     @GetMapping("/member")
     public MemberResponse getMember(@Login final MemberSession memberSession) {
         return MemberMapper.toMemberResponse(memberSession);
+    }
+
+    // 자세한 회원 정보가 필요할 경우 DB에서 회원 정보 가져오기
+    @GetMapping("/member/detailed")
+    public MemberDetailedResponse getDetailedMember(@Login final MemberSession memberSession) {
+        return queryMemberDetailedResponse.query(memberSession.id());
     }
 }

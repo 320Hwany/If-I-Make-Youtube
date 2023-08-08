@@ -1,5 +1,6 @@
 package youtube.mapper.member.dto;
 
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.Builder;
 import youtube.domain.member.vo.*;
 
@@ -16,4 +17,7 @@ public record MemberDetailedResponse(
         long likedVideosCount,
         long watchLaterVideosCount
 ) {
+    @QueryProjection
+    public MemberDetailedResponse {
+    }
 }

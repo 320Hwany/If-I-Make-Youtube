@@ -60,7 +60,6 @@ public class ControllerTest {
                         .content(objectMapper.writeValueAsString(dto)))
                 .andReturn().getResponse();
 
-        String accessToken = response.getHeader(JwtConstant.ACCESS_TOKEN.value);
-        return accessToken;
+        return response.getHeader(JwtConstant.ACCESS_TOKEN.value);
     }
 }
