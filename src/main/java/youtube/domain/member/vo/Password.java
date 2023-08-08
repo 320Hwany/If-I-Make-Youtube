@@ -57,6 +57,10 @@ public class Password {
         throw new BadRequestException(PASSWORD_NOT_MATCH.message);
     }
 
+    public void update(final Password password) {
+        this.value = password.value;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

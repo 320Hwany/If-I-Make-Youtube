@@ -4,10 +4,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import youtube.domain.member.persist.Member;
 import youtube.global.exception.BadRequestException;
+import youtube.util.TestConstant;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static youtube.util.TestConstant.*;
 
 class PasswordTest {
 
@@ -41,11 +44,11 @@ class PasswordTest {
     @DisplayName("현재 비밀번호를 주입 받은 PasswordEncoder로 암호화합니다")
     void encode() {
         // given
-        Password password = Password.from("비밀번호123!");
+        Password password = Password.from(TEST_PASSWORD.value);
 
         // when
         Password encode = password.encode(passwordEncoder);
-        boolean matches = passwordEncoder.matches("비밀번호123!", encode.getValue());
+        boolean matches = passwordEncoder.matches(TEST_PASSWORD.value, encode.getValue());
 
         // then
         assertThat(matches).isTrue();
@@ -55,7 +58,7 @@ class PasswordTest {
     @DisplayName("암호화된 비밀번호의 값이 일치하지 않으면 예외가 발생합니다")
     void validateMatchPasswordFail() {
         // given
-        Password password = Password.from("비밀번호123!");
+        Password password = Password.from(TEST_PASSWORD.value);
         password.encode(passwordEncoder);
 
         // when
@@ -69,10 +72,23 @@ class PasswordTest {
     @DisplayName("암호화된 비밀번호의 값이 일치하면 메소드를 통과합니다")
     void validateMatchPasswordSuccess() {
         // given
-        Password password = Password.from("비밀번호123!");
+        Password password = Password.from(TEST_PASSWORD.value);
         password.encode(passwordEncoder);
 
         // when
-        password.validateMatchPassword(passwordEncoder, Password.from("비밀번호123!"));
+        password.validateMatchPassword(passwordEncoder, Password.from(TEST_PASSWORD.value));
+    }
+
+    @Test
+    @DisplayName("비밀번호를 수정합니다")
+    void update() {
+        // given
+        Password password = Password.from(TEST_PASSWORD.value);
+
+        // when
+        password.update(Password.from("수정 비밀번호!"));
+
+        // then
+        assertThat(password.getValue()).isEqualTo("수정 비밀번호!");
     }
 }
