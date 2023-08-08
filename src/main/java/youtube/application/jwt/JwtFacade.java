@@ -3,9 +3,9 @@ package youtube.application.jwt;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import youtube.domain.jwt.persist.JwtRefreshToken;
-import youtube.domain.jwt.persist.JwtRepository;
-import youtube.domain.member.persist.MemberSession;
+import youtube.domain.jwt.JwtRefreshToken;
+import youtube.domain.jwt.JwtRepository;
+import youtube.domain.member.vo.MemberSession;
 import youtube.mapper.jwt.JwtRefreshTokenMapper;
 
 import java.util.Optional;

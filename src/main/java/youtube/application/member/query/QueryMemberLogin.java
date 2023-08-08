@@ -5,7 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import youtube.application.jwt.JwtFacade;
 import youtube.domain.member.persist.Member;
-import youtube.domain.member.persist.MemberSession;
+import youtube.domain.member.vo.MemberSession;
 import youtube.domain.member.vo.Password;
 import youtube.mapper.member.MemberMapper;
 import youtube.mapper.member.dto.MemberLoginRequest;
@@ -33,8 +33,8 @@ public class QueryMemberLogin {
         if (password.validateMatchPassword(passwordEncoder, dto.password())) {
             MemberSession memberSession = MemberMapper.toMemberSession(entity);
             String accessToken = jwtFacade.createAccessToken(memberSession, ONE_HOUR.value);
-            String refreshToken = jwtFacade.createRefreshToken(memberSession.getId(), ONE_MONTH.value);
-            jwtFacade.saveJwtRefreshToken(memberSession.getId(), refreshToken);
+            String refreshToken = jwtFacade.createRefreshToken(memberSession.id(), ONE_MONTH.value);
+            jwtFacade.saveJwtRefreshToken(memberSession.id(), refreshToken);
             jwtFacade.setHeader(response, accessToken, refreshToken);
         }
 

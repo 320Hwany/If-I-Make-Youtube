@@ -2,8 +2,8 @@ package youtube.mapper.member;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import youtube.domain.member.persist.Member;
-import youtube.domain.member.persist.MemberSession;
 import youtube.domain.member.vo.Gender;
+import youtube.domain.member.vo.MemberSession;
 import youtube.domain.member.vo.RoleType;
 import youtube.mapper.member.dto.MemberDetailedResponse;
 import youtube.mapper.member.dto.MemberResponse;
@@ -42,11 +42,11 @@ public class MemberMapper {
 
     public static MemberResponse toMemberResponse(final MemberSession memberSession) {
         return MemberResponse.builder()
-                .id(memberSession.getId())
-                .nickname(memberSession.getNickname().getValue())
-                .roleType(memberSession.getRoleType())
-                .likedVideosCount(memberSession.getLikedVideosCount())
-                .watchLaterVideosCount(memberSession.getWatchLaterVideosCount())
+                .id(memberSession.id())
+                .nickname(memberSession.nickname().getValue())
+                .roleType(memberSession.roleType())
+                .likedVideosCount(memberSession.likedVideosCount())
+                .watchLaterVideosCount(memberSession.watchLaterVideosCount())
                 .build();
     }
 

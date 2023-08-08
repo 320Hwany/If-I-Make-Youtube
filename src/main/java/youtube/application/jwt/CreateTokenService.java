@@ -4,9 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import youtube.domain.member.persist.MemberSession;
+import youtube.domain.member.vo.MemberSession;
 import youtube.global.exception.BadRequestException;
 
 import javax.crypto.SecretKey;

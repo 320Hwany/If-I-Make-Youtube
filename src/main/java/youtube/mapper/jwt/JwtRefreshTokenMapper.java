@@ -1,6 +1,6 @@
 package youtube.mapper.jwt;
 
-import youtube.domain.jwt.persist.JwtRefreshToken;
+import youtube.domain.jwt.JwtRefreshToken;
 
 public class JwtRefreshTokenMapper {
 

@@ -1,4 +1,4 @@
-package youtube.domain.jwt.persist;
+package youtube.domain.jwt;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

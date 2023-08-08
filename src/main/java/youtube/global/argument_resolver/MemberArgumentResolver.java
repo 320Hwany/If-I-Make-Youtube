@@ -6,7 +6,7 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-import youtube.domain.member.persist.MemberSession;
+import youtube.domain.member.vo.MemberSession;
 
 import static youtube.global.constant.JwtConstant.MEMBER_SESSION;
 

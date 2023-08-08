@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import youtube.application.member.query.QueryMemberLogin;
 import youtube.application.member.command.CommandMemberSignup;
 import youtube.domain.member.persist.Member;
-import youtube.domain.member.persist.MemberSession;
+import youtube.domain.member.vo.MemberSession;
 import youtube.global.argument_resolver.Login;
 import youtube.mapper.member.MemberMapper;
 import youtube.mapper.member.dto.MemberLoginRequest;

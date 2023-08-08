@@ -10,13 +10,11 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
-import youtube.domain.jwt.persist.JwtRefreshToken;
-import youtube.domain.jwt.persist.JwtRepository;
+import youtube.domain.jwt.JwtRefreshToken;
+import youtube.domain.jwt.JwtRepository;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.persist.MemberRepository;
-import youtube.domain.member.persist.MemberSession;
-import youtube.global.exception.BadRequestException;
-import youtube.global.exception.NotFoundException;
+import youtube.domain.member.vo.MemberSession;
 import youtube.global.exception.UnAuthorizedException;
 import youtube.mapper.member.MemberMapper;
 
