@@ -12,5 +12,7 @@ public interface JwtRepository {
 
     Optional<JwtRefreshToken> findByMemberId(final long memberId);
 
+    void deleteByMemberId(final long memberId);
+
     long count();
 }

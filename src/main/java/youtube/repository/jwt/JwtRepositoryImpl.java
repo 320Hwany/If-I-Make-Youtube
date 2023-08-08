@@ -34,6 +34,11 @@ public class JwtRepositoryImpl implements JwtRepository {
     }
 
     @Override
+    public void deleteByMemberId(final long memberId) {
+        jwtJpaRepository.deleteByMemberId(memberId);
+    }
+
+    @Override
     public long count() {
         return jwtJpaRepository.count();
     }

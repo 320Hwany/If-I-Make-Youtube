@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface JwtJpaRepository extends JpaRepository<JwtRefreshToken, Long> {
 
     Optional<JwtRefreshToken> findByMemberId(final long memberId);
+
+    void deleteByMemberId(final long memberId);
 }

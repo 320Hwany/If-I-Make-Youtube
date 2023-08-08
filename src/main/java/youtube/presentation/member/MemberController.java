@@ -3,6 +3,7 @@ package youtube.presentation.member;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import youtube.application.member.command.CommandMemberLogout;
 import youtube.application.member.query.QueryMemberDetailedResponse;
 import youtube.application.member.query.QueryMemberLogin;
 import youtube.application.member.command.CommandMemberSignup;
@@ -22,13 +23,16 @@ public class MemberController {
     private final CommandMemberSignup commandMemberSignup;
     private final QueryMemberLogin queryMemberLogin;
     private final QueryMemberDetailedResponse queryMemberDetailedResponse;
+    private final CommandMemberLogout commandMemberLogout;
 
     public MemberController(final CommandMemberSignup commandMemberSignup,
                             final QueryMemberLogin queryMemberLogin,
-                            final QueryMemberDetailedResponse queryMemberDetailedResponse) {
+                            final QueryMemberDetailedResponse queryMemberDetailedResponse,
+                            final CommandMemberLogout commandMemberLogout) {
         this.commandMemberSignup = commandMemberSignup;
         this.queryMemberLogin = queryMemberLogin;
         this.queryMemberDetailedResponse = queryMemberDetailedResponse;
+        this.commandMemberLogout = commandMemberLogout;
     }
 
     @PostMapping("/signup")
@@ -41,6 +45,11 @@ public class MemberController {
                                         final HttpServletResponse response) {
         Member entity = queryMemberLogin.query(dto, response);
         return MemberMapper.toMemberDetailedResponse(entity);
+    }
+
+    @PostMapping("/logout")
+    public void logout(@Login final MemberSession memberSession) {
+        commandMemberLogout.command(memberSession.id());
     }
 
     // DB 조회 없이 AccessToken 만으로 회원 정보 가져오기

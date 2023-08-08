@@ -4,29 +4,29 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import youtube.util.ControllerTest;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static youtube.global.constant.JwtConstant.ACCESS_TOKEN;
 
-public class MemberControllerGetTest extends ControllerTest {
+public class MemberControllerLogoutTest extends ControllerTest {
 
     @Test
-    @DisplayName("로그인하지 않은 회원정보를 가져올 수 없습니다")
-    void getMemberFail() throws Exception {
+    @DisplayName("로그인을 하지 않으면 로그아웃을 할 수 없습니다")
+    void logoutFail() throws Exception {
         // expected
-        mockMvc.perform(get("/api/member"))
+        mockMvc.perform(post("/api/logout"))
                 .andExpect(status().isUnauthorized());
     }
 
     @Test
-    @DisplayName("로그인 후 사용자 정보를 가져올 수 있습니다")
-    void getMemberSuccess() throws Exception {
+    @DisplayName("로그인을 한 후 로그아웃을 진행할 수 있습니다")
+    void logoutSuccess() throws Exception {
         // given
         signup();
         String accessToken = login();
 
         // expected
-        mockMvc.perform(get("/api/member")
+        mockMvc.perform(post("/api/logout")
                         .header(ACCESS_TOKEN.value, accessToken)
                 )
                 .andExpect(status().isOk());

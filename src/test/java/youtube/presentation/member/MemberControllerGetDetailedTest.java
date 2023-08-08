@@ -30,7 +30,7 @@ public class MemberControllerGetDetailedTest extends ControllerTest {
         // expected
         mockMvc.perform(get("/api/member/detailed")
                         .header(ACCESS_TOKEN.value, accessToken)
-                        .contentType(APPLICATION_JSON))
+                )
                 .andExpect(status().isOk());
     }
 }
