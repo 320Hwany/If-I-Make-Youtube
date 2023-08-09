@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import youtube.domain.member.persist.Member;
+import youtube.repository.channel.ChannelRepository;
 import youtube.repository.member.MemberRepository;
 import youtube.domain.member.vo.Gender;
 import youtube.domain.member.vo.LoginId;
@@ -26,6 +27,9 @@ class CommandMemberSignupTest {
 
     @Autowired
     private MemberRepository memberRepository;
+
+    @Autowired
+    private ChannelRepository channelRepository;
 
     @Test
     @DisplayName("이미 가입된 회원이면 예외가 발생합니다")
@@ -51,7 +55,7 @@ class CommandMemberSignupTest {
     }
 
     @Test
-    @DisplayName("회원 중복 검사를 체크한 후 이미 가입된 회원이 없으면 회원가입에 성공합니다")
+    @DisplayName("회원 중복 검사를 체크한 후 이미 가입된 회원이 없으면 회원가입에 성공하며 채널이 하나 생성됩니다")
     void signupSuccess() {
         // given
         MemberSignupRequest dto = MemberSignupRequest.builder()
@@ -67,5 +71,6 @@ class CommandMemberSignupTest {
 
         // then
         assertThat(memberRepository.count()).isEqualTo(1);
+        assertThat(channelRepository.count()).isEqualTo(1);
     }
 }

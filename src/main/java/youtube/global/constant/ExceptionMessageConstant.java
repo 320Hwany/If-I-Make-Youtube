@@ -3,7 +3,9 @@ package youtube.global.constant;
 public enum ExceptionMessageConstant {
 
     NICKNAME_LENGTH("2글자 이상 20글자 이하의 닉네임을 작성해주세요"),
-    NICKNAME_REGEX("한글, 영어, 숫자로 이루어진 닉네임을 작성해주세요"),
+    NICKNAME_REGEX("한글, 영어, 숫자, 특수문자로 이루어진 닉네임을 작성해주세요"),
+    CHANNEL_NAME_LENGTH("2글자 이상 20글자 이하의 채널명을 작성해주세요"),
+    CHANNEL_NAME_REGEX("한글, 영어, 숫자, 특수문자로 이루어진 채널명을 작성해주세요"),
     LOGIN_ID_LENGTH("6글자 이상 16글자 이하의 아이디를 작성해주세요"),
     LOGIN_ID_REGEX("한글, 영어, 숫자로 이루어진 아이디를 작성해주세요"),
     PASSWORD_LENGTH("6글자 이상 16글자 이하의 비밀번호를 작성해주세요"),

@@ -16,4 +16,9 @@ public class ChannelRepositoryImpl implements ChannelRepository {
     public void save(final Channel channel) {
         channelJpaRepository.save(channel);
     }
+
+    @Override
+    public long count() {
+        return channelJpaRepository.count();
+    }
 }

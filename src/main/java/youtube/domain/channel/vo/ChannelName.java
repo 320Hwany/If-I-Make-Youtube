@@ -10,8 +10,7 @@ import youtube.global.exception.BadRequestException;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-import static youtube.global.constant.ExceptionMessageConstant.LOGIN_ID_LENGTH;
-import static youtube.global.constant.ExceptionMessageConstant.LOGIN_ID_REGEX;
+import static youtube.global.constant.ExceptionMessageConstant.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -38,9 +37,9 @@ public final class ChannelName {
 
     private void validateCreation(final String loginId) {
         if (loginId.length() < MINIMUM_CHANNEL_NAME_LENGTH || loginId.length() > MAXIMUM_CHANNEL_NAME_LENGTH) {
-            throw new BadRequestException(LOGIN_ID_LENGTH.message);
+            throw new BadRequestException(CHANNEL_NAME_LENGTH.message);
         } else if (!Pattern.matches(REGEX, loginId)) {
-            throw new BadRequestException(LOGIN_ID_REGEX.message);
+            throw new BadRequestException(CHANNEL_NAME_REGEX.message);
         }
     }
 
