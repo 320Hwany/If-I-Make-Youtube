@@ -11,7 +11,7 @@ import youtube.application.member.command.CommandMemberSignup;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.MemberSession;
 import youtube.domain.member.vo.Password;
-import youtube.global.argument_resolver.Login;
+import youtube.global.annotation.Login;
 import youtube.mapper.member.MemberMapper;
 import youtube.mapper.member.dto.MemberLoginRequest;
 import youtube.mapper.member.dto.MemberDetailedResponse;
