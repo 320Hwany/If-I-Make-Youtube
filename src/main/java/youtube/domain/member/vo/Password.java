@@ -16,7 +16,7 @@ import static youtube.global.constant.ExceptionMessageConstant.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Embeddable
-public class Password {
+public final class Password {
 
     private static final int MINIMUM_PASSWORD_LENGTH = 6;
     private static final int MAXIMUM_PASSWORD_LENGTH = 16;

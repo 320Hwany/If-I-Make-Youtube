@@ -16,7 +16,7 @@ import static youtube.global.constant.ExceptionMessageConstant.NICKNAME_REGEX;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Embeddable
-public class Nickname {
+public final class Nickname {
 
     private static final int MINIMUM_NICKNAME_LENGTH = 2;
     private static final int MAXIMUM_NICKNAME_LENGTH = 20;
