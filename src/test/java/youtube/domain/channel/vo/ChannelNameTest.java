@@ -31,4 +31,17 @@ class ChannelNameTest {
         // expected
         assertThat(nickname).isNotNull();
     }
+
+    @Test
+    @DisplayName("채널명을 수정합니다")
+    void update() {
+        // given
+        ChannelName channelName = ChannelName.from("채널명");
+
+        // when
+        channelName.update(ChannelName.from("채널명 수정"));
+
+        // then
+        assertThat(channelName.getValue()).isEqualTo("채널명 수정");
+    }
 }

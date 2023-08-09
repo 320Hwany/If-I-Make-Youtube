@@ -13,6 +13,8 @@ import java.time.LocalDate;
 
 public class MemberMapper {
 
+    private static final LocalDate BASIC_DATE = LocalDate.of(0, 1, 1);
+
     private MemberMapper() {
     }
 
@@ -25,8 +27,7 @@ public class MemberMapper {
                 .password(dto.password().encode(passwordEncoder))
                 .roleType(RoleType.NORMAL)
                 .gender((dto.gender() != null) ? dto.gender() : Gender.UNKNOWN)
-                .birthDate((dto.birthDate() != null) ? dto.birthDate() :
-                        LocalDate.of(0,1,4))
+                .birthDate((dto.birthDate() != null) ? dto.birthDate() : BASIC_DATE)
                 .build();
     }
 

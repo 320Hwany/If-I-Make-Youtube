@@ -43,6 +43,10 @@ public final class ChannelName {
         }
     }
 
+    public void update(final ChannelName channelName) {
+        this.value = channelName.value;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

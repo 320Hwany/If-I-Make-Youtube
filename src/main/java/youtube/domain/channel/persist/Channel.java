@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import youtube.domain.BaseTimeEntity;
 import youtube.domain.channel.vo.Button;
+import youtube.domain.channel.vo.ChannelDescription;
 import youtube.domain.channel.vo.ChannelName;
 import youtube.global.annotation.IndirectReference;
 
@@ -25,24 +26,25 @@ public class Channel extends BaseTimeEntity {
     @Embedded
     private ChannelName channelName;
 
+    @Embedded
+    private ChannelDescription channelDescription;
+
     private int videosCount;
 
     private int subscribersCount;
-
-    @Lob
-    private String channelDescription;
 
     @Enumerated(EnumType.STRING)
     private Button button;
 
     @Builder
-    private Channel(final Long memberId, final ChannelName channelName, final int videosCount,
-                   final int subscribersCount, final String channelDescription, final Button button) {
+    private Channel(final Long memberId, final ChannelName channelName,
+                    final ChannelDescription channelDescription, final int videosCount,
+                    final int subscribersCount, final Button button) {
         this.memberId = memberId;
         this.channelName = channelName;
+        this.channelDescription = channelDescription;
         this.videosCount = videosCount;
         this.subscribersCount = subscribersCount;
-        this.channelDescription = channelDescription;
         this.button = button;
     }
 }
