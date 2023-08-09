@@ -2,5 +2,5 @@ package youtube.domain.channel.vo;
 
 public enum Button {
 
-    SILVER, GOLD, DIAMOND, RED_DIAMOND
+    NORMAL, SILVER, GOLD, DIAMOND, RED_DIAMOND
 }
