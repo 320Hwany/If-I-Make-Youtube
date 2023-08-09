@@ -15,8 +15,7 @@ public class MemberControllerGetDetailedTest extends ControllerTest {
     @DisplayName("로그인하지 않은 회원정보를 가져올 수 없습니다")
     void getMemberDetailedFail() throws Exception {
         // expected
-        mockMvc.perform(get("/api/member/detailed")
-                        .contentType(APPLICATION_JSON))
+        mockMvc.perform(get("/api/member/detailed"))
                 .andExpect(status().isUnauthorized());
     }
 

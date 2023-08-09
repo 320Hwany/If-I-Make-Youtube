@@ -42,6 +42,6 @@ class ChannelNameTest {
         channelName.update(ChannelName.from("채널명 수정"));
 
         // then
-        assertThat(channelName.getValue()).isEqualTo("채널명 수정");
+        assertThat(channelName.getChannelName()).isEqualTo("채널명 수정");
     }
 }

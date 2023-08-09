@@ -23,28 +23,29 @@ public final class ChannelName {
     // 채널명은 한글, 영어, 숫자, 특수문자로 구성된다 (필수 조건은 없음, 공백 가능)
     private static final String REGEX = "^[가-힣a-zA-Z0-9\\s!@#$%^&*()_+{}\\[\\]:;<>,.?~\\-=/]+$";
 
-    @Column(name = "channelName", unique = true, nullable = false)
-    private String value;
+    @Column(unique = true, nullable = false)
+    private String channelName;
 
-    private ChannelName(final String value) {
-        validateCreation(value);
-        this.value = value;
+    private ChannelName(final String channelName) {
+        validateCreation(channelName);
+        this.channelName = channelName;
     }
 
-    public static ChannelName from(final String value) {
-        return new ChannelName(value);
+    public static ChannelName from(final String channelName) {
+        return new ChannelName(channelName);
     }
 
-    private void validateCreation(final String loginId) {
-        if (loginId.length() < MINIMUM_CHANNEL_NAME_LENGTH || loginId.length() > MAXIMUM_CHANNEL_NAME_LENGTH) {
+    private void validateCreation(final String channelName) {
+        if (channelName.length() < MINIMUM_CHANNEL_NAME_LENGTH ||
+                channelName.length() > MAXIMUM_CHANNEL_NAME_LENGTH) {
             throw new BadRequestException(CHANNEL_NAME_LENGTH.message);
-        } else if (!Pattern.matches(REGEX, loginId)) {
+        } else if (!Pattern.matches(REGEX, channelName)) {
             throw new BadRequestException(CHANNEL_NAME_REGEX.message);
         }
     }
 
-    public void update(final ChannelName channelName) {
-        this.value = channelName.value;
+    public void update(final ChannelName channelNameUpdate) {
+        this.channelName = channelNameUpdate.channelName;
     }
 
     @Override
@@ -52,11 +53,11 @@ public final class ChannelName {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ChannelName that = (ChannelName) o;
-        return Objects.equals(value, that.value);
+        return Objects.equals(channelName, that.channelName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(channelName);
     }
 }
