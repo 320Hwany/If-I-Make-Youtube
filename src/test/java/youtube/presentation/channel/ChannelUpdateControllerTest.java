@@ -1,9 +1,8 @@
 package youtube.presentation.channel;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.MediaType;
+import youtube.domain.channel.vo.ChannelDescription;
 import youtube.domain.channel.vo.ChannelName;
 import youtube.util.ControllerTest;
 
@@ -36,6 +35,32 @@ public class ChannelUpdateControllerTest extends ControllerTest {
                         .header(ACCESS_TOKEN.value, accessToken)
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(ChannelName.from("수정 채널명")))
+                )
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("로그인하지 않은 회원은 채널 설명을 수정할 수 없습니다")
+    void channelDescriptionUpdateFail() throws Exception {
+        // expected
+        mockMvc.perform(patch("/api/channel/channelDescription")
+                        .contentType(APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(ChannelName.from("수정 채널 설명"))))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @DisplayName("로그인 후 사용자의 채널 설명을 변경할 수 있습니다")
+    void channelDescriptionUpdateSuccess() throws Exception {
+        // given
+        signup();
+        String accessToken = login();
+
+        // expected
+        mockMvc.perform(patch("/api/channel/channelDescription")
+                        .header(ACCESS_TOKEN.value, accessToken)
+                        .contentType(APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(ChannelDescription.from("수정 채널 설명")))
                 )
                 .andExpect(status().isOk());
     }

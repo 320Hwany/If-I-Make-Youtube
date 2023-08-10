@@ -17,6 +17,6 @@ class ChannelDescriptionTest {
         channelDescription.update(ChannelDescription.from("채널 설명 수정"));
 
         // then
-        assertThat(channelDescription.getValue()).isEqualTo("채널 설명 수정");
+        assertThat(channelDescription.getChannelDescription()).isEqualTo("채널 설명 수정");
     }
 }

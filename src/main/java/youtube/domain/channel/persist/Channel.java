@@ -36,15 +36,17 @@ public class Channel extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Button button;
 
+    private Boolean isInfluencer;
+
     @Builder
-    private Channel(final Long memberId, final ChannelName channelName,
-                    final ChannelDescription channelDescription, final int videosCount,
-                    final int subscribersCount, final Button button) {
+    private Channel(final Long memberId, final ChannelName channelName, final ChannelDescription channelDescription,
+                   final int videosCount, final int subscribersCount, final Button button, final Boolean isInfluencer) {
         this.memberId = memberId;
         this.channelName = channelName;
         this.channelDescription = channelDescription;
         this.videosCount = videosCount;
         this.subscribersCount = subscribersCount;
         this.button = button;
+        this.isInfluencer = isInfluencer;
     }
 }

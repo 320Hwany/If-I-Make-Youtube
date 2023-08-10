@@ -15,19 +15,19 @@ import java.util.Objects;
 public final class ChannelDescription {
 
     @Lob
-    @Column(name = "channelDescription", nullable = false)
-    private String value;
+    @Column(nullable = false)
+    private String channelDescription;
 
-    private ChannelDescription(final String value) {
-        this.value = value;
+    private ChannelDescription(final String channelDescription) {
+        this.channelDescription = channelDescription;
     }
 
     public static ChannelDescription from(final String value) {
         return new ChannelDescription(value);
     }
 
-    public void update(final ChannelDescription channelDescription) {
-        this.value = channelDescription.value;
+    public void update(final ChannelDescription channelDescriptionUpdate) {
+        this.channelDescription = channelDescriptionUpdate.channelDescription;
     }
 
     @Override
@@ -35,11 +35,11 @@ public final class ChannelDescription {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ChannelDescription that = (ChannelDescription) o;
-        return Objects.equals(value, that.value);
+        return Objects.equals(channelDescription, that.channelDescription);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(channelDescription);
     }
 }

@@ -26,6 +26,7 @@ public class ChannelMapper {
                 .videosCount(ZERO)
                 .subscribersCount(ZERO)
                 .button(Button.NORMAL)
+                .isInfluencer(false)
                 .build();
     }
 }
