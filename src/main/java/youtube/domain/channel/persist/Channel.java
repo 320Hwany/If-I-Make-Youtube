@@ -9,7 +9,7 @@ import youtube.domain.BaseTimeEntity;
 import youtube.domain.channel.vo.Button;
 import youtube.domain.channel.vo.ChannelDescription;
 import youtube.domain.channel.vo.ChannelName;
-import youtube.global.annotation.IndirectReference;
+import youtube.global.annotation.Association;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -20,7 +20,7 @@ public class Channel extends BaseTimeEntity {
     @Column(name = "channel_id")
     private Long id;
 
-    @IndirectReference
+    @Association
     private Long memberId;
 
     @Embedded

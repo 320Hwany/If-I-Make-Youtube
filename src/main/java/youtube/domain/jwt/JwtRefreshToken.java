@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import youtube.domain.BaseTimeEntity;
-import youtube.global.annotation.IndirectReference;
+import youtube.global.annotation.Association;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -18,7 +18,7 @@ public class JwtRefreshToken extends BaseTimeEntity {
     @Column(name = "jwt_refresh_token_id")
     private Long id;
 
-    @IndirectReference
+    @Association
     private Long memberId;
 
     private String refreshToken;
