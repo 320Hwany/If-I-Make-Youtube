@@ -4,8 +4,11 @@ import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 import youtube.domain.member.persist.Member;
+import youtube.domain.member.persist.QMember;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
+import youtube.domain.member.vo.QLoginId;
+import youtube.domain.member.vo.QNickname;
 import youtube.global.exception.NotFoundException;
 import youtube.mapper.member.dto.MemberDetailedResponse;
 import youtube.mapper.member.dto.QMemberDetailedResponse;
@@ -44,10 +47,13 @@ public class MemberRepositoryImpl implements MemberRepository {
 
     @Override
     public MemberDetailedResponse getDetailedResponseById(final long memberId) {
+        QNickname nickname = member.nickname;
+        QLoginId loginId = member.loginId;
+
         return queryFactory.select(new QMemberDetailedResponse(
                         Expressions.asNumber(memberId),
-                        member.nickname.value,
-                        member.loginId.value,
+                        nickname.nickname,
+                        loginId.loginId,
                         member.roleType,
                         member.gender,
                         member.birthDate,

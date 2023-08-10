@@ -24,16 +24,16 @@ public final class Nickname {
     // 닉네임은 한글, 영어, 숫자, 특수문자로 구성된다 (필수 조건은 없음, 공백 가능)
     private static final String REGEX = "^[가-힣a-zA-Z0-9\\s!@#$%^&*()_+{}\\[\\]:;<>,.?~\\-=/]+$";
 
-    @Column(name = "nickname", unique = true, nullable = false)
-    private String value;
+    @Column(unique = true, nullable = false)
+    private String nickname;
 
-    private Nickname(final String value) {
-        validateCreation(value);
-        this.value = value;
+    private Nickname(final String nickname) {
+        validateCreation(nickname);
+        this.nickname = nickname;
     }
 
-    public static Nickname from(final String value) {
-        return new Nickname(value);
+    public static Nickname from(final String nickname) {
+        return new Nickname(nickname);
     }
 
     private void validateCreation(final String nickname) {
@@ -48,12 +48,12 @@ public final class Nickname {
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Nickname nickname = (Nickname) o;
-        return Objects.equals(value, nickname.value);
+        Nickname that = (Nickname) o;
+        return Objects.equals(nickname, that.nickname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(nickname);
     }
 }

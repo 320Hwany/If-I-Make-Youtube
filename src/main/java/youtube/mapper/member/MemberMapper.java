@@ -44,7 +44,7 @@ public class MemberMapper {
     public static MemberResponse toMemberResponse(final MemberSession memberSession) {
         return MemberResponse.builder()
                 .id(memberSession.id())
-                .nickname(memberSession.nickname().getValue())
+                .nickname(memberSession.nickname().getNickname())
                 .roleType(memberSession.roleType())
                 .likedVideosCount(memberSession.likedVideosCount())
                 .watchLaterVideosCount(memberSession.watchLaterVideosCount())
@@ -54,8 +54,8 @@ public class MemberMapper {
     public static MemberDetailedResponse toMemberDetailedResponse(final Member member) {
         return MemberDetailedResponse.builder()
                 .id(member.getId())
-                .nickname(member.getNickname().getValue())
-                .loginId(member.getLoginId().getValue())
+                .nickname(member.getNickname().getNickname())
+                .loginId(member.getLoginId().getLoginId())
                 .roleType(member.getRoleType())
                 .gender(member.getGender())
                 .birthDate(member.getBirthDate())

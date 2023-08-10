@@ -58,6 +58,6 @@ class CommandPasswordUpdateTest {
         // then
         Member psEntity = memberRepository.getById(entity.getId());
         Password password = psEntity.getPassword();
-        assertThat(passwordEncoder.matches(updatePassword.getValue(), password.getValue())).isTrue();
+        assertThat(passwordEncoder.matches(updatePassword.getPassword(), password.getPassword())).isTrue();
     }
 }

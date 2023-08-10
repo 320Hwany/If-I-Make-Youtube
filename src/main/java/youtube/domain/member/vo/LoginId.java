@@ -24,16 +24,16 @@ public final class LoginId {
     // 아이디는 한글, 영어, 숫자로 구성된다 (필수 조건은 없음, 공백 안됨)
     private static final String REGEX = "^[가-힣a-zA-Z0-9]+$";
 
-    @Column(name = "loginId", unique = true, nullable = false)
-    private String value;
+    @Column(unique = true, nullable = false)
+    private String loginId;
 
-    private LoginId(final String value) {
-        validateCreation(value);
-        this.value = value;
+    private LoginId(final String loginId) {
+        validateCreation(loginId);
+        this.loginId = loginId;
     }
 
-    public static LoginId from(final String value) {
-        return new LoginId(value);
+    public static LoginId from(final String loginId) {
+        return new LoginId(loginId);
     }
 
     private void validateCreation(final String loginId) {
@@ -48,12 +48,12 @@ public final class LoginId {
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LoginId loginId = (LoginId) o;
-        return Objects.equals(value, loginId.value);
+        LoginId that = (LoginId) o;
+        return Objects.equals(loginId, that.loginId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(loginId);
     }
 }

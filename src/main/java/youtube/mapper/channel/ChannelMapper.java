@@ -21,7 +21,7 @@ public class ChannelMapper {
 
         return Channel.builder()
                 .memberId(member.getId())
-                .channelName(ChannelName.from(nickname.getValue()))
+                .channelName(ChannelName.from(nickname.getNickname()))
                 .channelDescription(ChannelDescription.from(BLANK))
                 .videosCount(ZERO)
                 .subscribersCount(ZERO)

@@ -22,8 +22,8 @@ public final class ChannelDescription {
         this.channelDescription = channelDescription;
     }
 
-    public static ChannelDescription from(final String value) {
-        return new ChannelDescription(value);
+    public static ChannelDescription from(final String channelDescription) {
+        return new ChannelDescription(channelDescription);
     }
 
     public void update(final ChannelDescription channelDescriptionUpdate) {

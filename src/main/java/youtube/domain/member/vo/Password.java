@@ -24,16 +24,16 @@ public final class Password {
     // 비밀번호는 한글, 영어, 숫자와 최소 1개 이상의 특수문자를 사용해야 한다
     private static final String REGEX = "^[가-힣a-zA-Z0-9].*[#?!@$%^&*-]+$";
 
-    @Column(name = "password", nullable = false)
-    private String value;
+    @Column(nullable = false)
+    private String password;
 
-    private Password(final String value) {
-        validateCreation(value);
-        this.value = value;
+    private Password(final String password) {
+        validateCreation(password);
+        this.password = password;
     }
 
-    public static Password from(final String value) {
-        return new Password(value);
+    public static Password from(final String password) {
+        return new Password(password);
     }
 
     private void validateCreation(final String password) {
@@ -45,32 +45,32 @@ public final class Password {
     }
 
     public Password encode(final PasswordEncoder passwordEncoder) {
-        value = passwordEncoder.encode(value);
+        password = passwordEncoder.encode(password);
         return this;
     }
 
     public boolean validateMatchPassword(final PasswordEncoder passwordEncoder,
                                          final Password inputPassword) {
-        if (passwordEncoder.matches(inputPassword.value, this.value)) {
+        if (passwordEncoder.matches(inputPassword.password, this.password)) {
             return true;
         }
         throw new BadRequestException(PASSWORD_NOT_MATCH.message);
     }
 
     public void update(final Password password) {
-        this.value = password.value;
+        this.password = password.password;
     }
 
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Password password = (Password) o;
-        return Objects.equals(value, password.value);
+        Password that = (Password) o;
+        return Objects.equals(password, that.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(password);
     }
 }

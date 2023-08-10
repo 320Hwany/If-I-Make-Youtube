@@ -48,7 +48,7 @@ class PasswordTest {
 
         // when
         Password encode = password.encode(passwordEncoder);
-        boolean matches = passwordEncoder.matches(TEST_PASSWORD.value, encode.getValue());
+        boolean matches = passwordEncoder.matches(TEST_PASSWORD.value, encode.getPassword());
 
         // then
         assertThat(matches).isTrue();
@@ -89,6 +89,6 @@ class PasswordTest {
         password.update(Password.from("수정 비밀번호!"));
 
         // then
-        assertThat(password.getValue()).isEqualTo("수정 비밀번호!");
+        assertThat(password.getPassword()).isEqualTo("수정 비밀번호!");
     }
 }
