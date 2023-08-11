@@ -12,7 +12,7 @@ public class JwtKey {
     public static String JWT_KEY;
 
     @Value("${jwt.key}")
-    public void setJwtKey(String jwtKey) {
+    public void setJwtKey(final String jwtKey) {
         JWT_KEY = jwtKey;
     }
 }

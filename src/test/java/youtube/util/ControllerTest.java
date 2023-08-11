@@ -54,6 +54,21 @@ public class ControllerTest {
         channelRepository.save(channel);
     }
 
+    protected long signupChannelId() {
+        Password password = Password.from(TEST_PASSWORD.value);
+
+        Member member = Member.builder()
+                .nickname(Nickname.from(TEST_NICKNAME.value))
+                .loginId(LoginId.from(TEST_LOGIN_ID.value))
+                .password(password.encode(passwordEncoder))
+                .build();
+
+        memberRepository.save(member);
+        Channel channel = ChannelMapper.toEntity(member);
+        channelRepository.save(channel);
+        return channel.getId();
+    }
+
     protected String login() throws Exception {
         MemberLoginRequest dto = new MemberLoginRequest(
                 LoginId.from(TEST_LOGIN_ID.value),

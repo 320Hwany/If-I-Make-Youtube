@@ -12,7 +12,7 @@ class SubscriptionControllerTest extends ControllerTest {
 
     @Test
     @DisplayName("로그인을 하지 않으면 채널을 구독을 할 수 없습니다")
-    void subscribeSuccess() throws Exception {
+    void subscribeFail() throws Exception {
         // expected
         mockMvc.perform(post("/api/subscription"))
                 .andExpect(status().isUnauthorized());
@@ -20,14 +20,14 @@ class SubscriptionControllerTest extends ControllerTest {
 
     @Test
     @DisplayName("로그인을 한 후 원하는 채널을 구독할 수 있습니다")
-    void subscribeFail() throws Exception {
+    void subscribeSuccess() throws Exception {
         // given
-        signup();
+        long channelId = signupChannelId();
         String accessToken = login();
 
         // expected
         mockMvc.perform(post("/api/subscription")
-                        .param("channelId", "1")
+                        .param("channelId", String.valueOf(channelId))
                         .header(ACCESS_TOKEN.value, accessToken)
                 )
                 .andExpect(status().isOk());

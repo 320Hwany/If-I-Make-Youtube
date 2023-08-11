@@ -8,7 +8,7 @@ public enum TimeConstant {
 
     public final long value;
 
-    TimeConstant(long value) {
+    TimeConstant(final long value) {
         this.value = value;
     }
 }

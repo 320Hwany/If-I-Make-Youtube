@@ -8,5 +8,7 @@ public interface ChannelRepository {
 
     Channel getByMemberId(final long memberId);
 
+    int getSubscribersCountByChannelId(final long channelId);
+
     long count();
 }
