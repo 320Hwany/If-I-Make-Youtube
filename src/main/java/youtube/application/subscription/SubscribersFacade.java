@@ -26,7 +26,7 @@ public class SubscribersFacade {
         return channelRepository.getSubscribersCountByChannelId(channelId);
     }
 
-    // todo 동시성 문제
+    // todo 동시성 문제, DB 동기화 문제
     public void increaseSubscribers(final long channelId) {
         Cache cache = cacheManager.getCache(SUBSCRIBERS_COUNT);
         assert cache != null;

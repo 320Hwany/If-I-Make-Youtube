@@ -8,5 +8,7 @@ public interface SubscriptionRepository {
 
     Subscription getById(final long subscriptionId);
 
+    boolean existsByMemberIdOrChannelId(final long memberId, final long channelId);
+
     long count();
 }

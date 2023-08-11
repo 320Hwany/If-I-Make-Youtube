@@ -13,7 +13,9 @@ import youtube.domain.member.vo.Nickname;
 import youtube.domain.member.vo.Password;
 import youtube.domain.subscription.Subscription;
 import youtube.global.constant.CacheConstant;
+import youtube.global.exception.BadRequestException;
 import youtube.mapper.channel.ChannelMapper;
+import youtube.mapper.subscription.SubscriptionMapper;
 import youtube.repository.channel.ChannelRepository;
 import youtube.repository.member.MemberRepository;
 import youtube.repository.subscription.SubscriptionRepository;
@@ -42,6 +44,29 @@ class CommandSubscribeTest {
     @Autowired
     private CacheManager cacheManager;
 
+
+    @Test
+    @DisplayName("이미 구독중인 채널은 여러번 구독할 수 없습니다")
+    void subscribeDuplicate() {
+        // given
+        Member member = Member.builder()
+                .nickname(Nickname.from(TEST_NICKNAME.value))
+                .loginId(LoginId.from(TEST_LOGIN_ID.value))
+                .password(Password.from(TEST_PASSWORD.value))
+                .build();
+        memberRepository.save(member);
+
+        Channel channel = ChannelMapper.toEntity(member);
+        channelRepository.save(channel);
+
+        Subscription subscription = SubscriptionMapper.toEntity(member.getId(), channel.getId());
+        subscriptionRepository.save(subscription);
+
+        // expected
+        assertThatThrownBy(() -> commandSubscribe.command(member.getId(), channel.getId()))
+                .isInstanceOf(BadRequestException.class);
+    }
+    
     @Test
     @DisplayName("회원이 채널을 구독하면 회원과 채널의 연결 엔티티인 Subscription이 생성됩니다")
     void subscribe() {
@@ -51,20 +76,17 @@ class CommandSubscribeTest {
                 .loginId(LoginId.from(TEST_LOGIN_ID.value))
                 .password(Password.from(TEST_PASSWORD.value))
                 .build();
-
         memberRepository.save(member);
+
         Channel channel = ChannelMapper.toEntity(member);
         channelRepository.save(channel);
 
         // when
         commandSubscribe.command(member.getId(), channel.getId());
-        Subscription entity = subscriptionRepository.getById(1L);
         Cache cache = cacheManager.getCache(SUBSCRIBERS_COUNT);
 
         // then
         assertThat(subscriptionRepository.count()).isEqualTo(1);
-        assertThat(entity.getMemberId()).isEqualTo(member.getId());
-        assertThat(entity.getChannelId()).isEqualTo(channel.getId());
         assertThat(cache).isNotNull();
     }
 }

@@ -2,7 +2,6 @@ package youtube.repository.subscription;
 
 import org.springframework.stereotype.Repository;
 import youtube.domain.subscription.Subscription;
-import youtube.global.constant.ExceptionMessageConstant;
 import youtube.global.exception.NotFoundException;
 
 import static youtube.global.constant.ExceptionMessageConstant.*;
@@ -25,6 +24,11 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
     public Subscription getById(final long subscriptionId) {
         return subscriptionJpaRepository.findById(subscriptionId)
                 .orElseThrow(() -> new NotFoundException(SUBSCRIPTION_NOT_FOUND.message));
+    }
+
+    @Override
+    public boolean existsByMemberIdOrChannelId(final long memberId, final long channelId) {
+        return subscriptionJpaRepository.existsByMemberIdOrChannelId(memberId, channelId);
     }
 
     @Override
