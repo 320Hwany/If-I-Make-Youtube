@@ -12,7 +12,6 @@ import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
 import youtube.domain.member.vo.Password;
 import youtube.domain.subscription.Subscription;
-import youtube.global.constant.CacheConstant;
 import youtube.global.exception.BadRequestException;
 import youtube.mapper.channel.ChannelMapper;
 import youtube.mapper.subscription.SubscriptionMapper;
@@ -20,6 +19,7 @@ import youtube.repository.channel.ChannelRepository;
 import youtube.repository.member.MemberRepository;
 import youtube.repository.subscription.SubscriptionRepository;
 import youtube.util.AcceptanceTest;
+
 
 import static org.assertj.core.api.Assertions.*;
 import static youtube.global.constant.CacheConstant.*;

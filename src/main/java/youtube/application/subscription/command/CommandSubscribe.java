@@ -2,7 +2,7 @@ package youtube.application.subscription.command;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import youtube.application.subscription.SubscribersFacade;
+import youtube.application.subscription.SubscribeFacade;
 import youtube.domain.subscription.Subscription;
 import youtube.global.exception.BadRequestException;
 import youtube.mapper.subscription.SubscriptionMapper;
@@ -15,12 +15,12 @@ import static youtube.global.constant.ExceptionMessageConstant.*;
 public class CommandSubscribe {
 
     private final SubscriptionRepository subscriptionRepository;
-    private final SubscribersFacade subscribersFacade;
+    private final SubscribeFacade subscribeFacade;
 
     public CommandSubscribe(final SubscriptionRepository subscriptionRepository,
-                            final SubscribersFacade subscribersFacade) {
+                            final SubscribeFacade subscribeFacade) {
         this.subscriptionRepository = subscriptionRepository;
-        this.subscribersFacade = subscribersFacade;
+        this.subscribeFacade = subscribeFacade;
     }
 
     @Transactional
@@ -30,8 +30,8 @@ public class CommandSubscribe {
         }
         Subscription subscription = SubscriptionMapper.toEntity(memberId, channelId);
         subscriptionRepository.save(subscription);
-        subscribersFacade.getCache(channelId);
-        subscribersFacade.increaseSubscribers(channelId);
+        subscribeFacade.getCache(channelId);
+        subscribeFacade.increaseSubscribers(channelId);
     }
 
     private boolean validateDuplication(final long memberId, final long channelId) {

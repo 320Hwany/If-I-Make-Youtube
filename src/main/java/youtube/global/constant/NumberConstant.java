@@ -4,9 +4,9 @@ public enum NumberConstant {
 
     ONE(1);
 
-    public final int value;
+    public final Integer value;
 
-    NumberConstant(final int value) {
+    NumberConstant(final Integer value) {
         this.value = value;
     }
 }
