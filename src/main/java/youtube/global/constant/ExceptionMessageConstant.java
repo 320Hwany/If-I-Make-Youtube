@@ -16,6 +16,7 @@ public enum ExceptionMessageConstant {
     LOGIN_ID_NOTFOUND("아이디와 일치하는 회원이 존재하지 않습니다"),
     PASSWORD_NOT_MATCH("비밀번호가 일치하지 않습니다"),
     MEMBER_NOT_FOUND("회원을 찾을 수 없습니다"),
+    CHANNEL_NOT_FOUND("채널을 찾을 수 없습니다"),
     SUBSCRIPTION_NOT_FOUND("구독 정보를 찾을 수 없습니다"),
     REFRESH_TOKEN_NOT_MATCH("Refresh Token이 일치하지 않습니다"),
     REFRESH_TOKEN_NOT_EXIST("Refresh Token을 찾을 수 없습니다"),

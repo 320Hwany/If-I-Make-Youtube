@@ -5,5 +5,5 @@ import youtube.domain.subscription.Subscription;
 
 public interface SubscriptionJpaRepository extends JpaRepository<Subscription, Long> {
 
-    boolean existsByMemberIdOrChannelId(final long memberId, final long channelId);
+    boolean existsByMemberIdAndChannelId(final long memberId, final long channelId);
 }

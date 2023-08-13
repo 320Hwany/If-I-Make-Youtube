@@ -35,6 +35,6 @@ public class CommandSubscribe {
     }
 
     private boolean validateDuplication(final long memberId, final long channelId) {
-        return subscriptionRepository.existsByMemberIdOrChannelId(memberId, channelId);
+        return subscriptionRepository.existsByMemberIdAndChannelId(memberId, channelId);
     }
 }

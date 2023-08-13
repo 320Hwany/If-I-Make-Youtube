@@ -26,6 +26,12 @@ public class ChannelRepositoryImpl implements ChannelRepository {
     }
 
     @Override
+    public Channel getById(final long channelId) {
+        return channelJpaRepository.findById(channelId)
+                .orElseThrow(() -> new NotFoundException(CHANNEL_NOT_FOUND.message));
+    }
+
+    @Override
     public Channel getByMemberId(final long memberId) {
         return channelJpaRepository.findByMemberId(memberId)
                 .orElseThrow(() -> new NotFoundException(MEMBER_NOT_FOUND.message));

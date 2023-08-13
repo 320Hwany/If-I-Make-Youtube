@@ -6,7 +6,7 @@ import youtube.domain.member.vo.*;
 
 import java.time.LocalDate;
 
-import static youtube.global.constant.ValidExceptionMessageConstant.*;
+import static youtube.global.constant.AnnotationMessageConstant.*;
 
 @Builder
 public record MemberSignupRequest(

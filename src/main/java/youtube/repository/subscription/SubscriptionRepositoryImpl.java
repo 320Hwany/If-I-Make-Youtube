@@ -27,8 +27,8 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
     }
 
     @Override
-    public boolean existsByMemberIdOrChannelId(final long memberId, final long channelId) {
-        return subscriptionJpaRepository.existsByMemberIdOrChannelId(memberId, channelId);
+    public boolean existsByMemberIdAndChannelId(final long memberId, final long channelId) {
+        return subscriptionJpaRepository.existsByMemberIdAndChannelId(memberId, channelId);
     }
 
     @Override
