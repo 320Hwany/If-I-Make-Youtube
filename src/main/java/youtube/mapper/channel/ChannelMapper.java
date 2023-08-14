@@ -2,10 +2,12 @@ package youtube.mapper.channel;
 
 import youtube.domain.channel.persist.Channel;
 import youtube.domain.channel.vo.Button;
+import youtube.domain.channel.vo.ChannelCache;
 import youtube.domain.channel.vo.ChannelDescription;
 import youtube.domain.channel.vo.ChannelName;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.Nickname;
+import youtube.mapper.channel.dto.ChannelCacheDto;
 
 public class ChannelMapper {
 
@@ -27,6 +29,15 @@ public class ChannelMapper {
                 .subscribersCount(ZERO)
                 .button(Button.NORMAL)
                 .isInfluencer(false)
+                .build();
+    }
+
+    public static ChannelCache toChannelCache(final ChannelCacheDto channelCacheDto) {
+        return ChannelCache.builder()
+                .channelName(channelCacheDto.channelName())
+                .channelDescription(channelCacheDto.channelDescription())
+                .videosCount(channelCacheDto.videosCount())
+                .subscribersCount(channelCacheDto.subscribersCount())
                 .build();
     }
 }

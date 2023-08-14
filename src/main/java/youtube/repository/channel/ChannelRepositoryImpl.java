@@ -3,13 +3,13 @@ package youtube.repository.channel;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 import youtube.domain.channel.persist.Channel;
-import youtube.domain.channel.vo.QChannelCache;
-import youtube.global.exception.NotFoundException;
+import youtube.domain.channel.persist.QChannel;
 import youtube.domain.channel.vo.ChannelCache;
+import youtube.global.exception.NotFoundException;
+import youtube.mapper.channel.dto.ChannelCacheDto;
+import youtube.mapper.channel.dto.QChannelCacheDto;
 
-import java.util.List;
-
-import static youtube.domain.channel.persist.QChannel.*;
+import static youtube.domain.channel.persist.QChannel.channel;
 import static youtube.global.constant.ExceptionMessageConstant.*;
 
 @Repository
@@ -42,8 +42,8 @@ public class ChannelRepositoryImpl implements ChannelRepository {
     }
 
     @Override
-    public ChannelCache getChannelCacheById(final long channelId) {
-        ChannelCache channelCache = queryFactory.select(new QChannelCache(
+    public ChannelCacheDto getChannelCacheDtoById(final long channelId) {
+        ChannelCacheDto channelCacheDto = queryFactory.select(new QChannelCacheDto(
                         channel.channelName,
                         channel.channelDescription,
                         channel.videosCount,
@@ -53,8 +53,8 @@ public class ChannelRepositoryImpl implements ChannelRepository {
                 .where(channel.id.eq(channelId))
                 .fetchFirst();
 
-        if (channelCache != null) {
-            return channelCache;
+        if (channelCacheDto != null) {
+            return channelCacheDto;
         }
 
         throw new NotFoundException(CHANNEL_NOT_FOUND.message);

@@ -1,17 +1,15 @@
 package youtube.domain.channel.vo;
 
-import com.querydsl.core.annotations.QueryProjection;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import youtube.domain.channel.vo.ChannelDescription;
-import youtube.domain.channel.vo.ChannelName;
 
 import static youtube.global.constant.NumberConstant.ONE;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ChannelCache {
+public final class ChannelCache {
 
     private ChannelName channelName;
 
@@ -21,8 +19,8 @@ public class ChannelCache {
 
     private int subscribersCount;
 
-    @QueryProjection
-    public ChannelCache(final ChannelName channelName, final ChannelDescription channelDescription,
+    @Builder
+    private ChannelCache(final ChannelName channelName, final ChannelDescription channelDescription,
                         final int videosCount, final int subscribersCount) {
         this.channelName = channelName;
         this.channelDescription = channelDescription;

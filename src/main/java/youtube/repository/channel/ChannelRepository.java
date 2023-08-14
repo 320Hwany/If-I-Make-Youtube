@@ -2,6 +2,7 @@ package youtube.repository.channel;
 
 import youtube.domain.channel.persist.Channel;
 import youtube.domain.channel.vo.ChannelCache;
+import youtube.mapper.channel.dto.ChannelCacheDto;
 
 public interface ChannelRepository {
 
@@ -11,7 +12,7 @@ public interface ChannelRepository {
 
     Channel getByMemberId(final long memberId);
 
-    ChannelCache getChannelCacheById(final long channelId);
+    ChannelCacheDto getChannelCacheDtoById(final long channelId);
 
     long count();
 }
