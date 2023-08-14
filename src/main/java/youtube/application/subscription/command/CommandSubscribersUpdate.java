@@ -4,6 +4,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import youtube.domain.channel.persist.Channel;
+import youtube.mapper.channel.dto.ChannelCache;
 import youtube.repository.channel.ChannelRepository;
 
 import java.util.concurrent.CompletableFuture;
@@ -19,8 +20,9 @@ public class CommandSubscribersUpdate {
     }
 
     @Async
-    public CompletableFuture<Void> command(final long channelId, final int subscribersCount) {
+    public CompletableFuture<Void> command(final long channelId, final ChannelCache channelCache) {
         Channel entity = channelRepository.getById(channelId);
+        int subscribersCount = channelCache.getSubscribersCount();
         entity.updateSubscribersCount(subscribersCount);
         return CompletableFuture.completedFuture(null);
     }

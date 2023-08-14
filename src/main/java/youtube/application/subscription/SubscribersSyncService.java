@@ -6,6 +6,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import youtube.application.subscription.command.CommandSubscribersUpdate;
+import youtube.mapper.channel.dto.ChannelCache;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 import static youtube.global.constant.AnnotationMessageConstant.*;
-import static youtube.global.constant.CacheConstant.SUBSCRIBERS_COUNT;
+import static youtube.global.constant.CacheConstant.CHANNEL_CACHE;
 
 @Service
 public class SubscribersSyncService {
@@ -30,14 +31,14 @@ public class SubscribersSyncService {
     @Async
     @Scheduled(fixedRate = ONE_MINUTE)
     public void syncSubscribersCount() {
-        Cache cache = cacheManager.getCache(SUBSCRIBERS_COUNT);
+        Cache cache = cacheManager.getCache(CHANNEL_CACHE);
         assert cache != null;
 
-        Map<Long, Integer> cacheMap = (Map<Long, Integer>) cache.getNativeCache();
+        Map<Long, ChannelCache> cacheMap = (Map<Long, ChannelCache>) cache.getNativeCache();
         List<CompletableFuture<Void>> futures = new ArrayList<>();
 
-        cacheMap.forEach((channelId, subscribersCount) ->
-                futures.add(commandSubscribersUpdate.command(channelId, subscribersCount)));
+        cacheMap.forEach((channelId, channelCache) ->
+                futures.add(commandSubscribersUpdate.command(channelId, channelCache)));
 
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
     }
