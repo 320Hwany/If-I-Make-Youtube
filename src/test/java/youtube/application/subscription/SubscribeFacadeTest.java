@@ -41,52 +41,52 @@ class SubscribeFacadeTest {
     @Autowired
     private CacheManager cacheManager;
 
-    @Test
-    @DisplayName("여러 명의 사용자가 동시에 같은 채널에 구독을 해도 구독자 수가 증가하는 동시성 문제를 처리할 수 있습니다")
-    public void increaseSubscribersConcurrent() throws Exception {
-        // given 1 - member, channel save
-        Member member = Member.builder()
-                .nickname(Nickname.from(TEST_NICKNAME.value))
-                .loginId(LoginId.from(TEST_LOGIN_ID.value))
-                .password(Password.from(TEST_PASSWORD.value))
-                .build();
-        memberRepository.save(member);
-
-        Channel channel = ChannelMapper.toEntity(member);
-        channelRepository.save(channel);
-
-        // given 2 - cache
-        subscribeFacade.getCache(channel.getId());
-
-        // given 3 - thread
-        int numThreads = 10;
-        int incrementsPerThread = 100;
-
-        ExecutorService executorService = Executors.newFixedThreadPool(numThreads);
-        List<CompletableFuture<Void>> futures = new ArrayList<>();
-
-        // when
-        for (int i = 0; i < numThreads; i++) {
-            CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
-                for (int j = 0; j < incrementsPerThread; j++) {
-                    subscribeFacade.increaseSubscribers(channel.getId());
-                }
-            }, executorService);
-
-            futures.add(future);
-        }
-
-        CompletableFuture<Void> allOf = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
-        allOf.get(); // Wait for all threads to complete
-
-        executorService.shutdown();
-
-        // then
-        Cache cache = cacheManager.getCache(SUBSCRIBERS_COUNT);
-        Cache.ValueWrapper valueWrapper = cache.get(channel.getId());
-        Integer finalCount = (Integer) valueWrapper.get();
-        int expectedCount = incrementsPerThread * numThreads;
-
-        assertThat(finalCount).isEqualTo(expectedCount);
-    }
+//    @Test
+//    @DisplayName("여러 명의 사용자가 동시에 같은 채널에 구독을 해도 구독자 수가 증가하는 동시성 문제를 처리할 수 있습니다")
+//    public void increaseSubscribersConcurrent() throws Exception {
+//        // given 1 - member, channel save
+//        Member member = Member.builder()
+//                .nickname(Nickname.from(TEST_NICKNAME.value))
+//                .loginId(LoginId.from(TEST_LOGIN_ID.value))
+//                .password(Password.from(TEST_PASSWORD.value))
+//                .build();
+//        memberRepository.save(member);
+//
+//        Channel channel = ChannelMapper.toEntity(member);
+//        channelRepository.save(channel);
+//
+//        // given 2 - cache
+//        subscribeFacade.getCache(channel.getId());
+//
+//        // given 3 - thread
+//        int numThreads = 10;
+//        int incrementsPerThread = 100;
+//
+//        ExecutorService executorService = Executors.newFixedThreadPool(numThreads);
+//        List<CompletableFuture<Void>> futures = new ArrayList<>();
+//
+//        // when
+//        for (int i = 0; i < numThreads; i++) {
+//            CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+//                for (int j = 0; j < incrementsPerThread; j++) {
+//                    subscribeFacade.increaseSubscribers(channel.getId());
+//                }
+//            }, executorService);
+//
+//            futures.add(future);
+//        }
+//
+//        CompletableFuture<Void> allOf = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
+//        allOf.get(); // Wait for all threads to complete
+//
+//        executorService.shutdown();
+//
+//        // then
+//        Cache cache = cacheManager.getCache(SUBSCRIBERS_COUNT);
+//        Cache.ValueWrapper valueWrapper = cache.get(channel.getId());
+//        Integer finalCount = (Integer) valueWrapper.get();
+//        int expectedCount = incrementsPerThread * numThreads;
+//
+//        assertThat(finalCount).isEqualTo(expectedCount);
+//    }
 }

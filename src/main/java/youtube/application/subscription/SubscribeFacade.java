@@ -2,38 +2,24 @@ package youtube.application.subscription;
 
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import youtube.repository.channel.ChannelRepository;
+import youtube.mapper.channel.dto.ChannelCache;
 
-import static youtube.global.constant.CacheConstant.SUBSCRIBERS_COUNT;
-import static youtube.global.constant.NumberConstant.ONE;
+import static youtube.global.constant.CacheConstant.CHANNEL_CACHE;
 
 @Service
 public class SubscribeFacade {
 
-    private final ChannelRepository channelRepository;
     private final CacheManager cacheManager;
 
-    public SubscribeFacade(final ChannelRepository channelRepository, final CacheManager cacheManager) {
-        this.channelRepository = channelRepository;
+    public SubscribeFacade(final CacheManager cacheManager) {
         this.cacheManager = cacheManager;
     }
 
-    @Cacheable(value = SUBSCRIBERS_COUNT, key = "#channelId")
-    public int getCache(final long channelId) {
-        return channelRepository.getSubscribersCountByChannelId(channelId);
-    }
-
-    public synchronized void increaseSubscribers(final long channelId) {
-        Cache cache = cacheManager.getCache(SUBSCRIBERS_COUNT);
+    public synchronized void increaseSubscribers(final long channelId, final ChannelCache channelCache) {
+        Cache cache = cacheManager.getCache(CHANNEL_CACHE);
         assert cache != null;
-
-        Cache.ValueWrapper valueWrapper = cache.get(channelId);
-        assert valueWrapper != null;
-
-        Integer currentCount = (Integer) valueWrapper.get();
-        assert currentCount != null;
-        cache.put(channelId, currentCount + ONE.value);
+        channelCache.increaseSubscribersCount();
+        cache.put(channelId, channelCache);
     }
 }

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import youtube.domain.channel.vo.ChannelDescription;
 import youtube.domain.channel.vo.ChannelName;
 
+import static youtube.global.constant.NumberConstant.ONE;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ChannelCache {
@@ -26,5 +28,9 @@ public class ChannelCache {
         this.channelDescription = channelDescription;
         this.videosCount = videosCount;
         this.subscribersCount = subscribersCount;
+    }
+
+    public void increaseSubscribersCount() {
+        this.subscribersCount += ONE.value;
     }
 }
