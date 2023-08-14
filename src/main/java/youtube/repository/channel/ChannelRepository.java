@@ -13,7 +13,5 @@ public interface ChannelRepository {
 
     ChannelCache getChannelCacheById(final long channelId);
 
-    int getSubscribersCountByChannelId(final long channelId);
-
     long count();
 }

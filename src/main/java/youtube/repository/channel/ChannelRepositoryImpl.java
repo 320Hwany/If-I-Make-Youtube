@@ -7,6 +7,8 @@ import youtube.domain.channel.vo.QChannelCache;
 import youtube.global.exception.NotFoundException;
 import youtube.domain.channel.vo.ChannelCache;
 
+import java.util.List;
+
 import static youtube.domain.channel.persist.QChannel.*;
 import static youtube.global.constant.ExceptionMessageConstant.*;
 
@@ -41,7 +43,7 @@ public class ChannelRepositoryImpl implements ChannelRepository {
 
     @Override
     public ChannelCache getChannelCacheById(final long channelId) {
-        return queryFactory.select(new QChannelCache(
+        ChannelCache channelCache = queryFactory.select(new QChannelCache(
                         channel.channelName,
                         channel.channelDescription,
                         channel.videosCount,
@@ -50,14 +52,12 @@ public class ChannelRepositoryImpl implements ChannelRepository {
                 .from(channel)
                 .where(channel.id.eq(channelId))
                 .fetchFirst();
-    }
 
-    @Override
-    public int getSubscribersCountByChannelId(final long channelId) {
-        return queryFactory.select(channel.subscribersCount)
-                .from(channel)
-                .where(channel.id.eq(channelId))
-                .fetchFirst();
+        if (channelCache != null) {
+            return channelCache;
+        }
+
+        throw new NotFoundException(CHANNEL_NOT_FOUND.message);
     }
 
     @Override

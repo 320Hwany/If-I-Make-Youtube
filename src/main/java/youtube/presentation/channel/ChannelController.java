@@ -22,8 +22,8 @@ public class ChannelController {
         this.channelCacheService = channelCacheService;
     }
 
-    @GetMapping("/channel/{channelId}")
-    public ChannelCache getChannel(@PathVariable final long channelId) {
+    @GetMapping("/channelCache/{channelId}")
+    public ChannelCache getChannelCache(@PathVariable final long channelId) {
         return channelCacheService.getCache(channelId);
     }
 
