@@ -1,4 +1,4 @@
-package youtube.mapper.channel.dto;
+package youtube.domain.channel.vo;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.AccessLevel;

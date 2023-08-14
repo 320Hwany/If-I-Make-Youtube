@@ -1,7 +1,7 @@
 package youtube.repository.channel;
 
 import youtube.domain.channel.persist.Channel;
-import youtube.mapper.channel.dto.ChannelCache;
+import youtube.domain.channel.vo.ChannelCache;
 
 public interface ChannelRepository {
 

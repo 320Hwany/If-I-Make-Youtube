@@ -6,7 +6,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import youtube.application.subscription.command.CommandSubscribersUpdate;
-import youtube.mapper.channel.dto.ChannelCache;
+import youtube.domain.channel.vo.ChannelCache;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +28,7 @@ public class SubscribersSyncService {
         this.cacheManager = cacheManager;
     }
 
+    // 1분에 한번씩 캐싱한 데이터를 DB와 동기화
     @Async
     @Scheduled(fixedRate = ONE_MINUTE)
     public void syncSubscribersCount() {

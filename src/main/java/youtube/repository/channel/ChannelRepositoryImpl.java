@@ -3,9 +3,9 @@ package youtube.repository.channel;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 import youtube.domain.channel.persist.Channel;
+import youtube.domain.channel.vo.QChannelCache;
 import youtube.global.exception.NotFoundException;
-import youtube.mapper.channel.dto.ChannelCache;
-import youtube.mapper.channel.dto.QChannelCache;
+import youtube.domain.channel.vo.ChannelCache;
 
 import static youtube.domain.channel.persist.QChannel.*;
 import static youtube.global.constant.ExceptionMessageConstant.*;

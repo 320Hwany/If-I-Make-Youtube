@@ -3,8 +3,7 @@ package youtube.application.subscription.command;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.Cache;
-import org.springframework.cache.CacheManager;
+import youtube.application.channel.ChannelCacheService;
 import youtube.domain.channel.persist.Channel;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.LoginId;
@@ -13,6 +12,7 @@ import youtube.domain.member.vo.Password;
 import youtube.domain.subscription.Subscription;
 import youtube.global.exception.BadRequestException;
 import youtube.mapper.channel.ChannelMapper;
+import youtube.domain.channel.vo.ChannelCache;
 import youtube.mapper.subscription.SubscriptionMapper;
 import youtube.repository.channel.ChannelRepository;
 import youtube.repository.member.MemberRepository;
@@ -21,7 +21,6 @@ import youtube.util.AcceptanceTest;
 
 
 import static org.assertj.core.api.Assertions.*;
-import static youtube.global.constant.CacheConstant.*;
 import static youtube.util.TestConstant.*;
 
 
@@ -41,8 +40,7 @@ class CommandSubscribeTest {
     private ChannelRepository channelRepository;
 
     @Autowired
-    private CacheManager cacheManager;
-
+    private ChannelCacheService channelCacheService;
 
     @Test
     @DisplayName("이미 구독중인 채널은 여러번 구독할 수 없습니다")
@@ -82,10 +80,10 @@ class CommandSubscribeTest {
 
         // when
         commandSubscribe.command(member.getId(), channel.getId());
-        Cache cache = cacheManager.getCache(SUBSCRIBERS_COUNT);
+        ChannelCache channelCache = channelCacheService.getCache(channel.getId());
 
         // then
         assertThat(subscriptionRepository.count()).isEqualTo(1);
-        assertThat(cache).isNotNull();
+        assertThat(channelCache).isNotNull();
     }
 }
