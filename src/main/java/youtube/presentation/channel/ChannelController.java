@@ -1,7 +1,7 @@
 package youtube.presentation.channel;
 
 import org.springframework.web.bind.annotation.*;
-import youtube.application.channel.ChannelCacheService;
+import youtube.application.channel.query.QueryChannelCache;
 import youtube.application.channel.command.CommandChannelUpdate;
 import youtube.domain.channel.vo.ChannelCache;
 import youtube.domain.channel.vo.ChannelDescription;
@@ -14,17 +14,17 @@ import youtube.global.annotation.Login;
 public class ChannelController {
 
     private final CommandChannelUpdate commandChannelUpdate;
-    private final ChannelCacheService channelCacheService;
+    private final QueryChannelCache queryChannelCache;
 
     public ChannelController(final CommandChannelUpdate commandChannelUpdate,
-                             final ChannelCacheService channelCacheService) {
+                             final QueryChannelCache queryChannelCache) {
         this.commandChannelUpdate = commandChannelUpdate;
-        this.channelCacheService = channelCacheService;
+        this.queryChannelCache = queryChannelCache;
     }
 
     @GetMapping("/channelCache/{channelId}")
     public ChannelCache getChannelCache(@PathVariable final long channelId) {
-        return channelCacheService.getCache(channelId);
+        return queryChannelCache.getCache(channelId);
     }
 
     @PatchMapping("/channel/channelName")
