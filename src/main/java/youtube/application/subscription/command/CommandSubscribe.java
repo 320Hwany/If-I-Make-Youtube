@@ -2,7 +2,7 @@ package youtube.application.subscription.command;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import youtube.application.channel.query.QueryChannelCache;
+import youtube.application.channel.query.QueryChannelCacheById;
 import youtube.application.subscription.SubscribersCountService;
 import youtube.domain.subscription.Subscription;
 import youtube.global.exception.BadRequestException;
@@ -18,14 +18,14 @@ public class CommandSubscribe {
 
     private final SubscriptionRepository subscriptionRepository;
     private final SubscribersCountService subscribersCountService;
-    private final QueryChannelCache queryChannelCache;
+    private final QueryChannelCacheById queryChannelCacheById;
 
     public CommandSubscribe(final SubscriptionRepository subscriptionRepository,
                             final SubscribersCountService subscribersCountService,
-                            final QueryChannelCache queryChannelCache) {
+                            final QueryChannelCacheById queryChannelCacheById) {
         this.subscriptionRepository = subscriptionRepository;
         this.subscribersCountService = subscribersCountService;
-        this.queryChannelCache = queryChannelCache;
+        this.queryChannelCacheById = queryChannelCacheById;
     }
 
     @Transactional
@@ -36,7 +36,7 @@ public class CommandSubscribe {
         Subscription subscription = SubscriptionMapper.toEntity(memberId, channelId);
         subscriptionRepository.save(subscription);
 
-        ChannelCache channelCache = queryChannelCache.getCache(channelId);
+        ChannelCache channelCache = queryChannelCacheById.query(channelId);
         subscribersCountService.increaseCount(channelId, channelCache);
     }
 

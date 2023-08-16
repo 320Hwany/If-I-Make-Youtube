@@ -16,7 +16,7 @@ public class QueryMemberByLoginId {
         this.memberRepository = memberRepository;
     }
 
-    public Member getByLoginId(final LoginId loginId) {
+    public Member query(final LoginId loginId) {
         return memberRepository.getByLoginId(loginId);
     }
 }

@@ -3,7 +3,7 @@ package youtube.application.subscription;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import youtube.application.channel.query.QueryChannelCache;
+import youtube.application.channel.query.QueryChannelCacheById;
 import youtube.domain.channel.persist.Channel;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.LoginId;
@@ -31,7 +31,7 @@ class SubscribersCountServiceTest {
     private SubscribersCountService subscribersCountService;
 
     @Autowired
-    private QueryChannelCache queryChannelCache;
+    private QueryChannelCacheById queryChannelCacheById;
 
     @Autowired
     private MemberRepository memberRepository;
@@ -54,7 +54,7 @@ class SubscribersCountServiceTest {
         channelRepository.save(channel);
 
         // given 2 - cache
-        ChannelCache channelCache = queryChannelCache.getCache(channel.getId());
+        ChannelCache channelCache = queryChannelCacheById.query(channel.getId());
 
         // given 3 - thread
         int numThreads = 10;

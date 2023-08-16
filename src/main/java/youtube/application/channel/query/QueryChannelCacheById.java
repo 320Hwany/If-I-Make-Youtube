@@ -12,16 +12,16 @@ import static youtube.global.constant.CacheConstant.CHANNEL_CACHE;
 
 @Transactional(readOnly = true)
 @Service
-public class QueryChannelCache {
+public class QueryChannelCacheById {
 
     private final ChannelRepository channelRepository;
 
-    public QueryChannelCache(final ChannelRepository channelRepository) {
+    public QueryChannelCacheById(final ChannelRepository channelRepository) {
         this.channelRepository = channelRepository;
     }
 
     @Cacheable(value = CHANNEL_CACHE, key = "#channelId")
-    public ChannelCache getCache(final long channelId) {
+    public ChannelCache query(final long channelId) {
         ChannelCacheDto dto = channelRepository.getChannelCacheDtoById(channelId);
         return ChannelMapper.toChannelCache(dto);
     }

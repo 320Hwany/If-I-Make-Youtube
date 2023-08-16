@@ -21,14 +21,19 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
     }
 
     @Override
-    public Subscription getById(final long subscriptionId) {
-        return subscriptionJpaRepository.findById(subscriptionId)
+    public Subscription getByMemberIdAndChannelId(final long memberId, final long channelId) {
+        return subscriptionJpaRepository.findByMemberIdAndChannelId(memberId, channelId)
                 .orElseThrow(() -> new NotFoundException(SUBSCRIPTION_NOT_FOUND.message));
     }
 
     @Override
     public boolean existsByMemberIdAndChannelId(final long memberId, final long channelId) {
         return subscriptionJpaRepository.existsByMemberIdAndChannelId(memberId, channelId);
+    }
+
+    @Override
+    public void delete(final Subscription subscription) {
+        subscriptionJpaRepository.delete(subscription);
     }
 
     @Override

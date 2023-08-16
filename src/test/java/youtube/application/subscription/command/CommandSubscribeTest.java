@@ -3,7 +3,7 @@ package youtube.application.subscription.command;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import youtube.application.channel.query.QueryChannelCache;
+import youtube.application.channel.query.QueryChannelCacheById;
 import youtube.domain.channel.persist.Channel;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.LoginId;
@@ -40,7 +40,7 @@ class CommandSubscribeTest {
     private ChannelRepository channelRepository;
 
     @Autowired
-    private QueryChannelCache queryChannelCache;
+    private QueryChannelCacheById queryChannelCacheById;
 
     @Test
     @DisplayName("이미 구독중인 채널은 여러번 구독할 수 없습니다")
@@ -80,7 +80,7 @@ class CommandSubscribeTest {
 
         // when
         commandSubscribe.command(member.getId(), channel.getId());
-        ChannelCache channelCache = queryChannelCache.getCache(channel.getId());
+        ChannelCache channelCache = queryChannelCacheById.query(channel.getId());
 
         // then
         assertThat(subscriptionRepository.count()).isEqualTo(1);
