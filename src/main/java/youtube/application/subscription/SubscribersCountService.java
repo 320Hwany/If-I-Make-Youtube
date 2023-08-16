@@ -22,4 +22,11 @@ public class SubscribersCountService {
         channelCache.increaseSubscribersCount();
         cache.put(channelId, channelCache);
     }
+
+    public synchronized void decreaseCount(final long channelId, final ChannelCache channelCache) {
+        Cache cache = cacheManager.getCache(CHANNEL_CACHE);
+        assert cache != null;
+        channelCache.decreaseSubscribersCount();
+        cache.put(channelId, channelCache);
+    }
 }

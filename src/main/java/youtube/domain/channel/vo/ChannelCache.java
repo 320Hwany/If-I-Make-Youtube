@@ -31,4 +31,8 @@ public final class ChannelCache {
     public void increaseSubscribersCount() {
         this.subscribersCount += ONE.value;
     }
+
+    public void decreaseSubscribersCount() {
+        this.subscribersCount -= ONE.value;
+    }
 }
