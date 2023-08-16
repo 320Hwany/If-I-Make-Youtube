@@ -14,15 +14,15 @@ import static youtube.global.constant.ExceptionMessageConstant.*;
 
 
 @Service
-public class CommandSubscribe {
+public class CommandSubscriptionSave {
 
     private final SubscriptionRepository subscriptionRepository;
     private final SubscribersCountService subscribersCountService;
     private final QueryChannelCacheById queryChannelCacheById;
 
-    public CommandSubscribe(final SubscriptionRepository subscriptionRepository,
-                            final SubscribersCountService subscribersCountService,
-                            final QueryChannelCacheById queryChannelCacheById) {
+    public CommandSubscriptionSave(final SubscriptionRepository subscriptionRepository,
+                                   final SubscribersCountService subscribersCountService,
+                                   final QueryChannelCacheById queryChannelCacheById) {
         this.subscriptionRepository = subscriptionRepository;
         this.subscribersCountService = subscribersCountService;
         this.queryChannelCacheById = queryChannelCacheById;

@@ -25,10 +25,10 @@ import static youtube.util.TestConstant.*;
 
 
 @AcceptanceTest
-class CommandSubscribeTest {
+class CommandSubscriptionSaveTest {
 
     @Autowired
-    private CommandSubscribe commandSubscribe;
+    private CommandSubscriptionSave commandSubscriptionSave;
 
     @Autowired
     private SubscriptionRepository subscriptionRepository;
@@ -60,7 +60,7 @@ class CommandSubscribeTest {
         subscriptionRepository.save(subscription);
 
         // expected
-        assertThatThrownBy(() -> commandSubscribe.command(member.getId(), channel.getId()))
+        assertThatThrownBy(() -> commandSubscriptionSave.command(member.getId(), channel.getId()))
                 .isInstanceOf(BadRequestException.class);
     }
     
@@ -79,7 +79,7 @@ class CommandSubscribeTest {
         channelRepository.save(channel);
 
         // when
-        commandSubscribe.command(member.getId(), channel.getId());
+        commandSubscriptionSave.command(member.getId(), channel.getId());
         ChannelCache channelCache = queryChannelCacheById.query(channel.getId());
 
         // then

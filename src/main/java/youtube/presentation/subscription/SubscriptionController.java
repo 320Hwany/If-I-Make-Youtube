@@ -1,10 +1,8 @@
 package youtube.presentation.subscription;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import youtube.application.subscription.command.CommandSubscribe;
+import org.springframework.web.bind.annotation.*;
+import youtube.application.subscription.command.CommandSubscriptionSave;
+import youtube.application.subscription.command.CommandSubscriptionCancel;
 import youtube.domain.member.vo.MemberSession;
 import youtube.global.annotation.Login;
 
@@ -12,15 +10,24 @@ import youtube.global.annotation.Login;
 @RestController
 public class SubscriptionController {
 
-    private final CommandSubscribe commandSubscribe;
+    private final CommandSubscriptionSave commandSubscriptionSave;
+    private final CommandSubscriptionCancel commandSubscriptionCancel;
 
-    public SubscriptionController(final CommandSubscribe commandSubscribe) {
-        this.commandSubscribe = commandSubscribe;
+    public SubscriptionController(final CommandSubscriptionSave commandSubscriptionSave,
+                                  final CommandSubscriptionCancel commandSubscriptionCancel) {
+        this.commandSubscriptionSave = commandSubscriptionSave;
+        this.commandSubscriptionCancel = commandSubscriptionCancel;
     }
 
     @PostMapping("/subscription")
     public void subscribe(@Login final MemberSession memberSession,
                           @RequestParam final long channelId) {
-        commandSubscribe.command(memberSession.id(), channelId);
+        commandSubscriptionSave.command(memberSession.id(), channelId);
+    }
+
+    @DeleteMapping("/subscription")
+    public void cancelSubscription(@Login final MemberSession memberSession,
+                                   @RequestParam final long channelId) {
+        commandSubscriptionCancel.command(memberSession.id(), channelId);
     }
 }
