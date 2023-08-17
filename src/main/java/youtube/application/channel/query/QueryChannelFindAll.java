@@ -1,4 +1,4 @@
-package youtube.application.subscription.query;
+package youtube.application.channel.query;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

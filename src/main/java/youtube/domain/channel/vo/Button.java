@@ -3,7 +3,7 @@ package youtube.domain.channel.vo;
 public enum Button {
 
     NORMAL(100000),
-    SILVER(10000000),
+    SILVER(1000000),
     GOLD(10000000),
     DIAMOND(100000000),
     RED_DIAMOND(Integer.MAX_VALUE);

@@ -1,10 +1,10 @@
-package youtube.application.subscription;
+package youtube.application.channel;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import youtube.application.subscription.command.CommandButtonUpdate;
-import youtube.application.subscription.query.QueryChannelFindAll;
+import youtube.application.channel.command.CommandButtonUpdate;
+import youtube.application.channel.query.QueryChannelFindAll;
 import youtube.domain.channel.persist.Channel;
 
 import java.util.List;
