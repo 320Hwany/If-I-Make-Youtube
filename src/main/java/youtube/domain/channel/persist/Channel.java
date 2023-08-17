@@ -53,4 +53,8 @@ public class Channel extends BaseTimeEntity {
     public void updateSubscribersCount(final int subscribersCount) {
         this.subscribersCount = subscribersCount;
     }
+
+    public void updateButton(final Button button) {
+        this.button = button;
+    }
 }

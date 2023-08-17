@@ -28,7 +28,7 @@ public class SubscribersSyncService {
         this.cacheManager = cacheManager;
     }
 
-    // 1분에 한번씩 캐싱한 데이터를 DB와 동기화
+    // 1분에 한번씩 구독자 수 캐싱한 데이터를 DB와 동기화
     @Async
     @Scheduled(fixedRate = ONE_MINUTE)
     public void syncSubscribersCount() {
