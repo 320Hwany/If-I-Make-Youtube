@@ -14,7 +14,7 @@ public enum Button {
         this.subscribersCount = subscribersCount;
     }
 
-    public Button getButton(final int subscribersCount) {
+    public static Button from(final int subscribersCount) {
         for (Button button : Button.values()) {
             if (button.subscribersCount > subscribersCount) {
                 return button;

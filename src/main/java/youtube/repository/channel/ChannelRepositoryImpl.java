@@ -9,6 +9,8 @@ import youtube.global.exception.NotFoundException;
 import youtube.mapper.channel.dto.ChannelCacheDto;
 import youtube.mapper.channel.dto.QChannelCacheDto;
 
+import java.util.List;
+
 import static youtube.domain.channel.persist.QChannel.channel;
 import static youtube.global.constant.ExceptionMessageConstant.*;
 
@@ -58,6 +60,11 @@ public class ChannelRepositoryImpl implements ChannelRepository {
         }
 
         throw new NotFoundException(CHANNEL_NOT_FOUND.message);
+    }
+
+    @Override
+    public List<Channel> findAll() {
+        return channelJpaRepository.findAll();
     }
 
     @Override
