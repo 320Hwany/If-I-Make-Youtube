@@ -3,6 +3,7 @@ package youtube.application.subscription.command;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import youtube.application.channel.query.QueryChannelCacheById;
+import youtube.application.subscription.SubscribersCountService;
 import youtube.domain.channel.vo.ChannelCache;
 import youtube.domain.subscription.Subscription;
 import youtube.repository.subscription.SubscriptionRepository;
@@ -12,11 +13,14 @@ public class CommandSubscriptionCancel {
 
     private final SubscriptionRepository subscriptionRepository;
     private final QueryChannelCacheById queryChannelCacheById;
+    private final SubscribersCountService subscribersCountService;
 
     public CommandSubscriptionCancel(final SubscriptionRepository subscriptionRepository,
-                                     final QueryChannelCacheById queryChannelCacheById) {
+                                     final QueryChannelCacheById queryChannelCacheById,
+                                     final SubscribersCountService subscribersCountService) {
         this.subscriptionRepository = subscriptionRepository;
         this.queryChannelCacheById = queryChannelCacheById;
+        this.subscribersCountService = subscribersCountService;
     }
 
     @Transactional
@@ -25,6 +29,6 @@ public class CommandSubscriptionCancel {
         subscriptionRepository.delete(entity);
 
         ChannelCache channelCache = queryChannelCacheById.query(channelId);
-        channelCache.decreaseSubscribersCount();
+        subscribersCountService.decreaseCount(channelId, channelCache);
     }
 }

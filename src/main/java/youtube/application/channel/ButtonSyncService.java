@@ -24,12 +24,11 @@ public class ButtonSyncService {
     }
 
     // 오전 5시에 구독자 수에 따른 유튜브 버튼 정보를 업데이트
-    @Async
     @Scheduled(cron = FIVE_AM)
     public void syncButton() {
         List<Channel> channels = queryChannelFindAll.query();
         for (Channel entity : channels) {
-            commandButtonUpdate.command(entity);
+            commandButtonUpdate.command(entity.getId());
         }
     }
 }
