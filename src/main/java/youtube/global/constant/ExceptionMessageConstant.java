@@ -18,6 +18,8 @@ public enum ExceptionMessageConstant {
     MEMBER_NOT_FOUND("회원을 찾을 수 없습니다"),
     CHANNEL_NOT_FOUND("채널을 찾을 수 없습니다"),
     SUBSCRIPTION_NOT_FOUND("구독 정보를 찾을 수 없습니다"),
+    SUBSCRIBERS_SCHEDULER_BAD_REQUEST("구독자 수를 캐시와 DB를 동기화하는 스케줄러 작업에 실패하였습니다"),
+    CLASS_CAST_BAD_REQUEST("클래스 자료 형변환에 실패합니다"),
     REFRESH_TOKEN_NOT_MATCH("Refresh Token이 일치하지 않습니다"),
     REFRESH_TOKEN_NOT_EXIST("Refresh Token을 찾을 수 없습니다"),
     REFRESH_TOKEN_NOT_VALID("Refresh Token이 유효하지 않습니다"),

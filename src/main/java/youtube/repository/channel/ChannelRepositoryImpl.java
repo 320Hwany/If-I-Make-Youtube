@@ -45,7 +45,8 @@ public class ChannelRepositoryImpl implements ChannelRepository {
 
     @Override
     public ChannelCacheDto getChannelCacheDtoById(final long channelId) {
-        ChannelCacheDto channelCacheDto = queryFactory.select(new QChannelCacheDto(
+        ChannelCacheDto channelCacheDto = queryFactory.select(
+                new QChannelCacheDto(
                         channel.channelName,
                         channel.channelDescription,
                         channel.videosCount,
