@@ -7,6 +7,8 @@ import youtube.domain.channel.persist.Channel;
 import youtube.domain.channel.vo.Button;
 import youtube.repository.channel.ChannelRepository;
 
+import java.util.concurrent.CompletableFuture;
+
 
 @Service
 public class CommandButtonUpdate {
@@ -19,9 +21,10 @@ public class CommandButtonUpdate {
 
     @Async
     @Transactional
-    public void command(final long channelId) {
+    public CompletableFuture<Void> command(final long channelId) {
         Channel entity = channelRepository.getById(channelId);
         Button button = Button.from(entity.getSubscribersCount());
         entity.updateButton(button);
+        return CompletableFuture.completedFuture(null);
     }
 }
