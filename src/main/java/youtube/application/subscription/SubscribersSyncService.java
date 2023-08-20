@@ -5,7 +5,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import youtube.application.subscription.command.CommandSubscribersUpdate;
+import youtube.application.channel.command.CommandChannelSubscribersUpdate;
 import youtube.domain.channel.vo.ChannelCache;
 import youtube.global.exception.BadRequestException;
 
@@ -20,12 +20,12 @@ import static youtube.global.constant.ExceptionMessageConstant.*;
 @Service
 public class SubscribersSyncService {
 
-    private final CommandSubscribersUpdate commandSubscribersUpdate;
+    private final CommandChannelSubscribersUpdate commandChannelSubscribersUpdate;
     private final CacheManager cacheManager;
 
-    public SubscribersSyncService(final CommandSubscribersUpdate commandSubscribersUpdate,
+    public SubscribersSyncService(final CommandChannelSubscribersUpdate commandChannelSubscribersUpdate,
                                   final CacheManager cacheManager) {
-        this.commandSubscribersUpdate = commandSubscribersUpdate;
+        this.commandChannelSubscribersUpdate = commandChannelSubscribersUpdate;
         this.cacheManager = cacheManager;
     }
 
@@ -39,7 +39,7 @@ public class SubscribersSyncService {
                 .stream()
                 .map(entry ->
                         CompletableFuture.runAsync(
-                                () -> commandSubscribersUpdate.command(entry.getKey(), entry.getValue())
+                                () -> commandChannelSubscribersUpdate.command(entry.getKey(), entry.getValue())
                         )
                 )
                 .toArray(CompletableFuture[]::new);

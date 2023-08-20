@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import youtube.application.channel.command.CommandButtonUpdate;
 import youtube.domain.channel.persist.Channel;
 import youtube.domain.channel.vo.Button;
 import youtube.domain.member.persist.Member;
@@ -14,6 +15,8 @@ import youtube.mapper.channel.ChannelMapper;
 import youtube.repository.channel.ChannelRepository;
 import youtube.repository.member.MemberRepository;
 import youtube.util.AcceptanceTest;
+
+import java.util.concurrent.*;
 
 import static org.assertj.core.api.Assertions.*;
 import static youtube.util.TestConstant.*;
@@ -33,7 +36,7 @@ class ButtonSyncServiceTest {
 
     @Test
     @DisplayName("구독자 수가 변경되어도 버튼 등급이 같으면 버튼은 변경되지 않습니다")
-    void syncButtonNoEffect() {
+    void syncButtonNoEffect() throws ExecutionException, InterruptedException {
         // given
         Member member1 = Member.builder()
                 .nickname(Nickname.from(TEST_NICKNAME.value))
@@ -48,10 +51,13 @@ class ButtonSyncServiceTest {
         channelRepository.save(channel);
 
         // when
-        buttonSyncService.syncButton();
-        Channel psChannel = channelRepository.getById(channel.getId());
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() -> buttonSyncService.syncButton());
+        Future<Channel> submit = executorService.submit(() -> channelRepository.getById(channel.getId()));
 
         // then
+        Channel psChannel = submit.get();
+        executorService.shutdown();
         assertThat(psChannel.getButton()).isEqualTo(Button.NORMAL);
     }
 
@@ -73,9 +79,9 @@ class ButtonSyncServiceTest {
 
         // when
         buttonSyncService.syncButton();
-        Channel psChannel = channelRepository.getById(channel.getId());
 
         // then
+        Channel psChannel = channelRepository.getById(channel.getId());
         assertThat(psChannel.getButton()).isEqualTo(Button.GOLD);
     }
 }

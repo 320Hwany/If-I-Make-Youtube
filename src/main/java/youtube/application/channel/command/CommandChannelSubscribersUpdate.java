@@ -1,4 +1,4 @@
-package youtube.application.subscription.command;
+package youtube.application.channel.command;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -11,11 +11,11 @@ import java.util.concurrent.CompletableFuture;
 
 @Transactional
 @Service
-public class CommandSubscribersUpdate {
+public class CommandChannelSubscribersUpdate {
 
     private final ChannelRepository channelRepository;
 
-    public CommandSubscribersUpdate(final ChannelRepository channelRepository) {
+    public CommandChannelSubscribersUpdate(final ChannelRepository channelRepository) {
         this.channelRepository = channelRepository;
     }
 
