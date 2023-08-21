@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import youtube.application.member.command.CommandMemberLogout;
 import youtube.application.member.command.CommandPasswordUpdate;
 import youtube.application.member.query.QueryMemberDetailedResponse;
-import youtube.application.member.query.QueryMemberLogin;
+import youtube.application.member.MemberLoginService;
 import youtube.application.member.command.CommandMemberSignup;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.MemberSession;
@@ -23,18 +23,18 @@ import youtube.mapper.member.dto.MemberSignupRequest;
 public class MemberController {
 
     private final CommandMemberSignup commandMemberSignup;
-    private final QueryMemberLogin queryMemberLogin;
+    private final MemberLoginService memberLoginService;
     private final QueryMemberDetailedResponse queryMemberDetailedResponse;
     private final CommandMemberLogout commandMemberLogout;
     private final CommandPasswordUpdate commandPasswordUpdate;
 
     public MemberController(final CommandMemberSignup commandMemberSignup,
-                            final QueryMemberLogin queryMemberLogin,
+                            final MemberLoginService memberLoginService,
                             final QueryMemberDetailedResponse queryMemberDetailedResponse,
                             final CommandMemberLogout commandMemberLogout,
                             final CommandPasswordUpdate commandPasswordUpdate) {
         this.commandMemberSignup = commandMemberSignup;
-        this.queryMemberLogin = queryMemberLogin;
+        this.memberLoginService = memberLoginService;
         this.queryMemberDetailedResponse = queryMemberDetailedResponse;
         this.commandMemberLogout = commandMemberLogout;
         this.commandPasswordUpdate = commandPasswordUpdate;
@@ -48,7 +48,7 @@ public class MemberController {
     @PostMapping("/login")
     public MemberDetailedResponse login(@RequestBody @Valid final MemberLoginRequest dto,
                                         final HttpServletResponse response) {
-        Member entity = queryMemberLogin.query(dto, response);
+        Member entity = memberLoginService.login(dto, response);
         return MemberMapper.toMemberDetailedResponse(entity);
     }
 

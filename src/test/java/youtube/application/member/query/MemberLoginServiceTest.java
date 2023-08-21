@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import youtube.application.member.MemberLoginService;
 import youtube.domain.member.persist.Member;
 import youtube.repository.member.MemberRepository;
 import youtube.domain.member.vo.LoginId;
@@ -22,10 +23,10 @@ import static youtube.global.constant.JwtConstant.REFRESH_TOKEN;
 import static youtube.util.TestConstant.*;
 
 @AcceptanceTest
-class QueryMemberLoginTest {
+class MemberLoginServiceTest {
 
     @Autowired
-    private QueryMemberLogin queryMemberLogin;
+    private MemberLoginService memberLoginService;
 
     @Autowired
     private MemberRepository memberRepository;
@@ -45,7 +46,7 @@ class QueryMemberLoginTest {
         MockHttpServletResponse response = new MockHttpServletResponse();
 
         // expected
-        assertThatThrownBy(() -> queryMemberLogin.query(dto, response))
+        assertThatThrownBy(() -> memberLoginService.login(dto, response))
                 .isInstanceOf(NotFoundException.class);
     }
 
@@ -67,7 +68,7 @@ class QueryMemberLoginTest {
         MockHttpServletResponse response = new MockHttpServletResponse();
 
         // expected
-        assertThatThrownBy(() -> queryMemberLogin.query(dto, response))
+        assertThatThrownBy(() -> memberLoginService.login(dto, response))
                 .isInstanceOf(BadRequestException.class);
     }
 
@@ -91,7 +92,7 @@ class QueryMemberLoginTest {
         MockHttpServletResponse response = new MockHttpServletResponse();
 
         // when
-        queryMemberLogin.query(dto, response);
+        memberLoginService.login(dto, response);
 
         // then
         Cookie cookie = response.getCookie(REFRESH_TOKEN.value);

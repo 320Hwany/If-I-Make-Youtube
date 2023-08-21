@@ -6,7 +6,6 @@ import youtube.domain.member.persist.Member;
 import youtube.repository.member.MemberRepository;
 import youtube.domain.member.vo.LoginId;
 
-@Transactional(readOnly = true)
 @Service
 public class QueryMemberByLoginId {
 
@@ -16,6 +15,7 @@ public class QueryMemberByLoginId {
         this.memberRepository = memberRepository;
     }
 
+    @Transactional(readOnly = true)
     public Member query(final LoginId loginId) {
         return memberRepository.getByLoginId(loginId);
     }

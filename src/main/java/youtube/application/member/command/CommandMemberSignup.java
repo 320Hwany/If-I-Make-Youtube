@@ -14,7 +14,6 @@ import youtube.mapper.member.dto.MemberSignupRequest;
 
 import static youtube.global.constant.ExceptionMessageConstant.MEMBER_DUPLICATION;
 
-@Transactional
 @Service
 public class CommandMemberSignup {
 
@@ -31,6 +30,7 @@ public class CommandMemberSignup {
     }
 
     // 회원가입한 신규회원은 자동으로 채널 하나 생성
+    @Transactional
     public void command(final MemberSignupRequest dto) {
         boolean isPresent = memberRepository.existsByNicknameOrLoginId(dto.nickname(), dto.loginId());
         if (isPresent) {

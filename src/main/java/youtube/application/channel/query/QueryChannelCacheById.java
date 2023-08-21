@@ -10,7 +10,6 @@ import youtube.repository.channel.ChannelRepository;
 
 import static youtube.global.constant.CacheConstant.CHANNEL_CACHE;
 
-@Transactional(readOnly = true)
 @Service
 public class QueryChannelCacheById {
 
@@ -20,6 +19,7 @@ public class QueryChannelCacheById {
         this.channelRepository = channelRepository;
     }
 
+    @Transactional(readOnly = true)
     @Cacheable(value = CHANNEL_CACHE, key = "#channelId")
     public ChannelCache query(final long channelId) {
         ChannelCacheDto dto = channelRepository.getChannelCacheDtoById(channelId);

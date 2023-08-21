@@ -7,7 +7,6 @@ import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.Password;
 import youtube.repository.member.MemberRepository;
 
-@Transactional
 @Service
 public class CommandPasswordUpdate {
 
@@ -19,6 +18,7 @@ public class CommandPasswordUpdate {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Transactional
     public void command(final long memberId, final Password updatePassword) {
         Member member = memberRepository.getById(memberId);
         Password password = member.getPassword();
