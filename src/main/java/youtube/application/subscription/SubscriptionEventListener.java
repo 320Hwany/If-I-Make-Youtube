@@ -21,6 +21,7 @@ public class SubscriptionEventListener {
         this.subscribersCountService = subscribersCountService;
     }
 
+    // CommandSubscriptionSave - 채널 구독시 발생하는 이벤트
     @EventListener(classes = {SubscriptionEvent.class})
     public void event(final SubscriptionEvent subscriptionEvent) {
         long channelId = subscriptionEvent.channelId();
