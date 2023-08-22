@@ -6,4 +6,5 @@ public class CacheConstant {
     }
 
     public static final String CHANNEL_CACHE = "channelCache";
+    public static final String SUBSCRIPTION_CHANNELS_CACHE = "subscriptionChannelCache";
 }
