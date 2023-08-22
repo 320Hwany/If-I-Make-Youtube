@@ -26,7 +26,7 @@ public class SubscriptionController {
         this.commandSubscriptionCancel = commandSubscriptionCancel;
     }
 
-    @GetMapping("/subscriptions")
+    @GetMapping("/subscription")
     public List<SubscriptionChannelsCache> getSubscriptionChannels(@Login final MemberSession memberSession) {
         return querySubscriptionsByMemberId.query(memberSession.id());
     }
