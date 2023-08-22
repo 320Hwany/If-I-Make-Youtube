@@ -6,11 +6,8 @@ import youtube.domain.channel.vo.ChannelName;
 
 public record ChannelCacheDto(
         ChannelName channelName,
-
         ChannelDescription channelDescription,
-
         int videosCount,
-
         int subscribersCount
 ) {
     @QueryProjection

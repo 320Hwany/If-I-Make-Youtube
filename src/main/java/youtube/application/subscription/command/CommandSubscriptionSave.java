@@ -1,13 +1,12 @@
 package youtube.application.subscription.command;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import youtube.application.channel.query.QueryChannelCacheById;
-import youtube.application.subscription.SubscribersCountService;
 import youtube.domain.subscription.Subscription;
 import youtube.global.exception.BadRequestException;
-import youtube.domain.channel.vo.ChannelCache;
 import youtube.mapper.subscription.SubscriptionMapper;
+import youtube.mapper.subscription.dto.SubscriptionEvent;
 import youtube.repository.subscription.SubscriptionRepository;
 
 import static youtube.global.constant.ExceptionMessageConstant.*;
@@ -17,15 +16,12 @@ import static youtube.global.constant.ExceptionMessageConstant.*;
 public class CommandSubscriptionSave {
 
     private final SubscriptionRepository subscriptionRepository;
-    private final SubscribersCountService subscribersCountService;
-    private final QueryChannelCacheById queryChannelCacheById;
+    private final ApplicationEventPublisher publisher;
 
     public CommandSubscriptionSave(final SubscriptionRepository subscriptionRepository,
-                                   final SubscribersCountService subscribersCountService,
-                                   final QueryChannelCacheById queryChannelCacheById) {
+                                   final ApplicationEventPublisher publisher) {
         this.subscriptionRepository = subscriptionRepository;
-        this.subscribersCountService = subscribersCountService;
-        this.queryChannelCacheById = queryChannelCacheById;
+        this.publisher = publisher;
     }
 
     @Transactional
@@ -33,11 +29,12 @@ public class CommandSubscriptionSave {
         if (validateDuplication(memberId, channelId)) {
             throw new BadRequestException(SUBSCRIBE_DUPLICATION.message);
         }
+
         Subscription subscription = SubscriptionMapper.toEntity(memberId, channelId);
         subscriptionRepository.save(subscription);
 
-        ChannelCache channelCache = queryChannelCacheById.query(channelId);
-        subscribersCountService.increaseCount(channelId, channelCache);
+        // 스프링 이벤트 호출 - SubscriptionEventListener
+        publisher.publishEvent(new SubscriptionEvent(memberId, channelId));
     }
 
     private boolean validateDuplication(final long memberId, final long channelId) {
