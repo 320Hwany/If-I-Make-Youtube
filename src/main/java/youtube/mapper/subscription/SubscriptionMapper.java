@@ -1,6 +1,11 @@
 package youtube.mapper.subscription;
 
 import youtube.domain.subscription.Subscription;
+import youtube.mapper.subscription.dto.SubscriptionChannelDto;
+import youtube.mapper.subscription.dto.SubscriptionChannelsCache;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class SubscriptionMapper {
 
@@ -13,5 +18,16 @@ public class SubscriptionMapper {
                 .channelId(channelId)
                 .isNotification(false)
                 .build();
+    }
+
+    public static List<SubscriptionChannelsCache> toCaches(final List<SubscriptionChannelDto> dtos) {
+        return dtos
+                .stream()
+                .map(SubscriptionMapper::toCache)
+                .collect(Collectors.toList());
+    }
+
+    private static SubscriptionChannelsCache toCache(final SubscriptionChannelDto dto) {
+        return new SubscriptionChannelsCache(dto.channelId(), dto.channelName());
     }
 }
