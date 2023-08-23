@@ -6,7 +6,9 @@ import youtube.application.subscription.command.CommandSubscriptionCancel;
 import youtube.application.subscription.query.QuerySubscriptionsByMemberId;
 import youtube.domain.member.vo.MemberSession;
 import youtube.global.annotation.Login;
+import youtube.mapper.subscription.SubscriptionMapper;
 import youtube.mapper.subscription.dto.SubscriptionChannelsCache;
+import youtube.mapper.subscription.dto.SubscriptionResult;
 
 import java.util.List;
 
@@ -27,8 +29,9 @@ public class SubscriptionController {
     }
 
     @GetMapping("/subscription")
-    public List<SubscriptionChannelsCache> getSubscriptionChannels(@Login final MemberSession memberSession) {
-        return querySubscriptionsByMemberId.query(memberSession.id());
+    public SubscriptionResult getSubscriptionChannels(@Login final MemberSession memberSession) {
+        List<SubscriptionChannelsCache> caches = querySubscriptionsByMemberId.query(memberSession.id());
+        return SubscriptionMapper.toResult(caches, caches.size());
     }
 
     @PostMapping("/subscription")

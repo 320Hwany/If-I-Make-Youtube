@@ -3,6 +3,7 @@ package youtube.mapper.subscription;
 import youtube.domain.subscription.Subscription;
 import youtube.mapper.subscription.dto.SubscriptionChannelDto;
 import youtube.mapper.subscription.dto.SubscriptionChannelsCache;
+import youtube.mapper.subscription.dto.SubscriptionResult;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,5 +30,10 @@ public class SubscriptionMapper {
 
     private static SubscriptionChannelsCache toCache(final SubscriptionChannelDto dto) {
         return new SubscriptionChannelsCache(dto.channelId(), dto.channelName());
+    }
+
+    public static SubscriptionResult toResult(final List<SubscriptionChannelsCache> caches,
+                                              final int channelCount) {
+        return new SubscriptionResult(caches, channelCount);
     }
 }
