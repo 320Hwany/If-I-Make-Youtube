@@ -50,16 +50,18 @@ public class MemberRepositoryImpl implements MemberRepository {
         QNickname nickname = member.nickname;
         QLoginId loginId = member.loginId;
 
-        return queryFactory.select(new QMemberDetailedResponse(
-                        Expressions.asNumber(memberId),
-                        nickname.nickname,
-                        loginId.loginId,
-                        member.roleType,
-                        member.gender,
-                        member.birthDate,
-                        member.likedVideosCount,
-                        member.watchLaterVideosCount
-                )).from(member)
+        return queryFactory.select(
+                        new QMemberDetailedResponse(
+                                Expressions.asNumber(memberId),
+                                nickname.nickname,
+                                loginId.loginId,
+                                member.roleType,
+                                member.gender,
+                                member.birthDate,
+                                member.likedVideosCount,
+                                member.watchLaterVideosCount
+                        ))
+                .from(member)
                 .where(member.id.eq(memberId))
                 .fetchOne();
     }

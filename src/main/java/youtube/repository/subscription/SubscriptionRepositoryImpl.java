@@ -2,8 +2,6 @@ package youtube.repository.subscription;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
-import youtube.domain.channel.persist.QChannel;
-import youtube.domain.subscription.QSubscription;
 import youtube.domain.subscription.Subscription;
 import youtube.global.exception.NotFoundException;
 import youtube.mapper.subscription.dto.QSubscriptionChannelDto;
@@ -41,12 +39,14 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
     @Override
     public List<SubscriptionChannelDto> findSubscriptionChannelsByMemberId(final long memberId) {
         return queryFactory.select(
-                new QSubscriptionChannelDto(
-                        subscription.channelId,
-                        channel.channelName
-                ))
+                        new QSubscriptionChannelDto(
+                                channel.id,
+                                channel.channelName
+                        ))
                 .from(subscription)
                 .innerJoin(channel).on(subscription.channelId.eq(channel.id))
+                .where(subscription.memberId.eq(memberId))
+                .orderBy(subscription.id.desc())
                 .fetch();
     }
 

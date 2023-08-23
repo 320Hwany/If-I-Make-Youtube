@@ -45,16 +45,17 @@ public class ChannelRepositoryImpl implements ChannelRepository {
 
     @Override
     public ChannelCacheDto getChannelCacheDtoById(final long channelId) {
-        ChannelCacheDto channelCacheDto = queryFactory.select(
-                new QChannelCacheDto(
-                        channel.channelName,
-                        channel.channelDescription,
-                        channel.videosCount,
-                        channel.subscribersCount
-                ))
-                .from(channel)
-                .where(channel.id.eq(channelId))
-                .fetchFirst();
+        ChannelCacheDto channelCacheDto =
+                queryFactory.select(
+                                new QChannelCacheDto(
+                                        channel.channelName,
+                                        channel.channelDescription,
+                                        channel.videosCount,
+                                        channel.subscribersCount
+                                ))
+                        .from(channel)
+                        .where(channel.id.eq(channelId))
+                        .fetchFirst();
 
         if (channelCacheDto != null) {
             return channelCacheDto;
