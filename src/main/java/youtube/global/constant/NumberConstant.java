@@ -2,11 +2,12 @@ package youtube.global.constant;
 
 public enum NumberConstant {
 
+    ZERO(0),
     ONE(1);
 
-    public final Integer value;
+    public final int value;
 
-    NumberConstant(final Integer value) {
+    NumberConstant(final int value) {
         this.value = value;
     }
 }

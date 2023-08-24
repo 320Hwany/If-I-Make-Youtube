@@ -7,11 +7,13 @@ import youtube.domain.channel.vo.ChannelDescription;
 import youtube.domain.channel.vo.ChannelName;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.Nickname;
+import youtube.global.constant.NumberConstant;
 import youtube.mapper.channel.dto.ChannelCacheDto;
+
+import static youtube.global.constant.NumberConstant.ZERO;
 
 public class ChannelMapper {
 
-    private static final int ZERO = 0;
     private static final String BLANK = "";
 
     private ChannelMapper() {
@@ -25,8 +27,8 @@ public class ChannelMapper {
                 .memberId(member.getId())
                 .channelName(ChannelName.from(nickname.getNickname()))
                 .channelDescription(ChannelDescription.from(BLANK))
-                .videosCount(ZERO)
-                .subscribersCount(ZERO)
+                .videosCount(ZERO.value)
+                .subscribersCount(ZERO.value)
                 .button(Button.NORMAL)
                 .isInfluencer(false)
                 .build();
