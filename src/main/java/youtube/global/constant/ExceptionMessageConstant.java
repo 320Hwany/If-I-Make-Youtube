@@ -12,6 +12,8 @@ public enum ExceptionMessageConstant {
     PASSWORD_REGEX("비밀번호는 한글, 영어, 숫자와 최소 1개 이상의 특수문자를 사용해야 합니다"),
     MEMBER_DUPLICATION("이미 가입된 닉네임/아이디가 있습니다"),
     SUBSCRIBE_DUPLICATION("이미 구독중인 채널입니다"),
+
+
     UNAUTHORIZED("로그인 후 이용해주세요"),
     LOGIN_ID_NOTFOUND("아이디와 일치하는 회원이 존재하지 않습니다"),
     PASSWORD_NOT_MATCH("비밀번호가 일치하지 않습니다"),
@@ -21,6 +23,9 @@ public enum ExceptionMessageConstant {
     SUBSCRIBERS_SCHEDULER_BAD_REQUEST("구독자 수를 캐시와 DB를 동기화하는 스케줄러 작업에 실패하였습니다"),
     BUTTON_SCHEDULER_BAD_REQUEST("구독자 수 변화에 따른 유튜브 버튼 업데이트 스케줄러 작업에 실패하였습니다"),
     CLASS_CAST_BAD_REQUEST("클래스 자료 형변환에 실패합니다"),
+    SAVE_TO_VIDEO_BAD_REQUEST("동영상을 서버에 저장할 수 없습니다"),
+    EMPTY_VIDEO_BAD_REQUEST("동영상이 존재하지 않아 서버에 저장할 수 없습니다"),
+    VIDEO_UPLOAD_SECURITY_BAD_REQUEST("동영상 저장 디렉토리가 일치하지 않으면 저장할 수 없습니다"),
     REFRESH_TOKEN_NOT_MATCH("Refresh Token이 일치하지 않습니다"),
     REFRESH_TOKEN_NOT_EXIST("Refresh Token을 찾을 수 없습니다"),
     REFRESH_TOKEN_NOT_VALID("Refresh Token이 유효하지 않습니다"),

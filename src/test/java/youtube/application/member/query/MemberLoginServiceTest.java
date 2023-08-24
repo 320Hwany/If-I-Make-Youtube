@@ -18,8 +18,8 @@ import youtube.mapper.member.dto.MemberLoginRequest;
 import youtube.util.AcceptanceTest;
 
 import static org.assertj.core.api.Assertions.*;
-import static youtube.global.constant.JwtConstant.ACCESS_TOKEN;
-import static youtube.global.constant.JwtConstant.REFRESH_TOKEN;
+import static youtube.global.constant.StringConstant.ACCESS_TOKEN;
+import static youtube.global.constant.StringConstant.REFRESH_TOKEN;
 import static youtube.util.TestConstant.*;
 
 @AcceptanceTest

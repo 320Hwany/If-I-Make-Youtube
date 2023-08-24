@@ -6,7 +6,7 @@ import youtube.util.ControllerTest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static youtube.global.constant.JwtConstant.ACCESS_TOKEN;
+import static youtube.global.constant.StringConstant.ACCESS_TOKEN;
 
 class SubscriptionControllerTest extends ControllerTest {
 

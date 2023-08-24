@@ -14,7 +14,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import static youtube.global.constant.AnnotationMessageConstant.*;
-import static youtube.global.constant.CacheConstant.CHANNEL_CACHE;
 import static youtube.global.constant.ExceptionMessageConstant.*;
 
 @Service

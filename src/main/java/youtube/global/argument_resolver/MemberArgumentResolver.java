@@ -9,7 +9,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import youtube.domain.member.vo.MemberSession;
 import youtube.global.annotation.Login;
 
-import static youtube.global.constant.JwtConstant.MEMBER_SESSION;
+import static youtube.global.constant.StringConstant.MEMBER_SESSION;
 
 public class MemberArgumentResolver implements HandlerMethodArgumentResolver {
 

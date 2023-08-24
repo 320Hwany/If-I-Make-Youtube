@@ -10,7 +10,8 @@ import youtube.repository.subscription.SubscriptionRepository;
 
 import java.util.List;
 
-import static youtube.global.constant.CacheConstant.SUBSCRIPTION_CHANNELS_CACHE;
+import static youtube.global.constant.AnnotationMessageConstant.SUBSCRIPTION_CHANNELS_CACHE;
+
 
 @Service
 public class QuerySubscriptionsByMemberId {

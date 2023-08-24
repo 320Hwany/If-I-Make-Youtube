@@ -4,10 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import youtube.util.ControllerTest;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static youtube.global.constant.JwtConstant.ACCESS_TOKEN;
+import static youtube.global.constant.StringConstant.ACCESS_TOKEN;
 
 public class MemberControllerGetDetailedTest extends ControllerTest {
 

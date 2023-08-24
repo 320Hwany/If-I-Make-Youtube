@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 
-import static youtube.global.constant.JwtConstant.ACCESS_TOKEN;
-import static youtube.global.constant.JwtConstant.REFRESH_TOKEN;
+import static youtube.global.constant.StringConstant.ACCESS_TOKEN;
+import static youtube.global.constant.StringConstant.REFRESH_TOKEN;
 import static youtube.global.constant.TimeConstant.*;
 
 @Service

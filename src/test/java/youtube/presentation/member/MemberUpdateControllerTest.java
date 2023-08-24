@@ -2,18 +2,14 @@ package youtube.presentation.member;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import youtube.application.member.command.CommandPasswordUpdate;
 import youtube.domain.member.vo.Password;
 import youtube.util.ControllerTest;
-import youtube.util.TestConstant;
 
 import static org.springframework.http.MediaType.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static youtube.global.constant.JwtConstant.ACCESS_TOKEN;
+import static youtube.global.constant.StringConstant.ACCESS_TOKEN;
 
 public class MemberUpdateControllerTest extends ControllerTest {
 

@@ -17,6 +17,11 @@ spring:
         format_sql: true
     open-in-view: false
 
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
 logging:
   level:
     org.hibernate.SQL: debug
@@ -24,3 +29,7 @@ logging:
 # 운영환경과 다른 개발용 jwt 키 값
 jwt:
   key: OewPcNeX7cy++FrTqVsB14Fg8kC9xaphxD9LEdWu170=
+
+# 운영환경과 다른 개발용 동영상 저장 장소
+file:
+  video: /Users/jeong-youhwan/file

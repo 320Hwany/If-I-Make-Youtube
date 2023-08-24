@@ -1,15 +1,17 @@
 package youtube.global.constant;
 
-public enum JwtConstant {
+public enum StringConstant {
 
     MEMBER_SESSION("MemberSession"),
+
     ACCESS_TOKEN("AccessToken"),
-    REFRESH_TOKEN("RefreshToken");
+    REFRESH_TOKEN("RefreshToken"),
+    DOT(".");
 
 
     public final String value;
 
-    JwtConstant(final String value) {
+    StringConstant(final String value) {
         this.value = value;
     }
 }

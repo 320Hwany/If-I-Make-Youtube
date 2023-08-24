@@ -5,7 +5,8 @@ import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
 import youtube.domain.channel.vo.ChannelCache;
 
-import static youtube.global.constant.CacheConstant.CHANNEL_CACHE;
+import static youtube.global.constant.AnnotationMessageConstant.CHANNEL_CACHE;
+
 
 @Service
 public class SubscribersCountService {

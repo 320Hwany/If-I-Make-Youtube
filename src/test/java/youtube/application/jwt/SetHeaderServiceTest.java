@@ -1,7 +1,6 @@
 package youtube.application.jwt;
 
 import jakarta.servlet.http.Cookie;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +8,8 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import youtube.util.AcceptanceTest;
 
 import static org.assertj.core.api.Assertions.*;
-import static youtube.global.constant.JwtConstant.ACCESS_TOKEN;
-import static youtube.global.constant.JwtConstant.REFRESH_TOKEN;
+import static youtube.global.constant.StringConstant.ACCESS_TOKEN;
+import static youtube.global.constant.StringConstant.REFRESH_TOKEN;
 
 @AcceptanceTest
 class SetHeaderServiceTest {

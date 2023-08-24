@@ -21,7 +21,7 @@ import youtube.mapper.member.MemberMapper;
 import java.util.Base64;
 
 import static youtube.global.constant.ExceptionMessageConstant.*;
-import static youtube.global.constant.JwtConstant.*;
+import static youtube.global.constant.StringConstant.*;
 import static youtube.global.constant.JwtKey.JWT_KEY;
 
 public class LoginInterceptor implements HandlerInterceptor {

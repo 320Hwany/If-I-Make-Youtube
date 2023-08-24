@@ -8,7 +8,7 @@ import youtube.repository.jwt.JwtRepository;
 import youtube.util.AcceptanceTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static youtube.global.constant.JwtConstant.REFRESH_TOKEN;
+import static youtube.global.constant.StringConstant.REFRESH_TOKEN;
 
 @AcceptanceTest
 class CommandMemberLogoutTest {

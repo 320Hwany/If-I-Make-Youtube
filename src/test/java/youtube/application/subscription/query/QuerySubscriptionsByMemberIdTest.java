@@ -22,7 +22,7 @@ import youtube.util.AcceptanceTest;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static youtube.global.constant.CacheConstant.SUBSCRIPTION_CHANNELS_CACHE;
+import static youtube.global.constant.AnnotationMessageConstant.SUBSCRIPTION_CHANNELS_CACHE;
 import static youtube.util.TestConstant.*;
 
 @AcceptanceTest

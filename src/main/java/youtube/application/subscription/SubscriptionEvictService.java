@@ -4,7 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
-import static youtube.global.constant.CacheConstant.SUBSCRIPTION_CHANNELS_CACHE;
+import static youtube.global.constant.AnnotationMessageConstant.SUBSCRIPTION_CHANNELS_CACHE;
+
 
 @Slf4j
 @Service

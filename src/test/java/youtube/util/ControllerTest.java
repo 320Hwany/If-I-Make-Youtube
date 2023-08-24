@@ -15,7 +15,7 @@ import youtube.repository.member.MemberRepository;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
 import youtube.domain.member.vo.Password;
-import youtube.global.constant.JwtConstant;
+import youtube.global.constant.StringConstant;
 import youtube.mapper.member.dto.MemberLoginRequest;
 import youtube.repository.subscription.SubscriptionRepository;
 
@@ -107,6 +107,6 @@ public class ControllerTest {
                         .content(objectMapper.writeValueAsString(dto)))
                 .andReturn().getResponse();
 
-        return response.getHeader(JwtConstant.ACCESS_TOKEN.value);
+        return response.getHeader(StringConstant.ACCESS_TOKEN.value);
     }
 }
