@@ -2,6 +2,7 @@ package youtube.application.video_info.media_type;
 
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import youtube.application.video_info.query.QueryVideoInfoById;
 import youtube.domain.video_info.persist.VideoInfo;
 import youtube.global.exception.BadRequestException;
 import youtube.repository.video_info.VideoInfoRepository;
@@ -14,16 +15,16 @@ import static youtube.global.constant.ExceptionMessageConstant.MEDIA_TYPE_BAD_RE
 public class MediaTypeService {
 
     private final List<MediaTypeForExtension> mediaTypeForExtensions;
-    private final VideoInfoRepository videoInfoRepository;
+    private final QueryVideoInfoById queryVideoInfoById;
 
     public MediaTypeService(final List<MediaTypeForExtension> mediaTypeForExtensions,
-                            final VideoInfoRepository videoInfoRepository) {
+                            final QueryVideoInfoById queryVideoInfoById) {
         this.mediaTypeForExtensions = mediaTypeForExtensions;
-        this.videoInfoRepository = videoInfoRepository;
+        this.queryVideoInfoById = queryVideoInfoById;
     }
 
     public MediaType getMediaType(final long videoInfoId) {
-        VideoInfo videoInfo = videoInfoRepository.getById(videoInfoId);
+        VideoInfo videoInfo = queryVideoInfoById.query(videoInfoId);
         String fileExtension = videoInfo.getFileExtension();
 
         for (MediaTypeForExtension mediaTypeForExtension : mediaTypeForExtensions) {
