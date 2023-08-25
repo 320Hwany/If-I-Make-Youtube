@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import youtube.application.video_info.command.CommandVideoInfoSave;
 import youtube.global.exception.BadRequestException;
-import youtube.mapper.video.dto.VideoSaveRequest;
+import youtube.mapper.video_info.dto.VideoInfoSaveRequest;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,7 +29,7 @@ public class VideoUploadService {
         this.commandVideoInfoSave = commandVideoInfoSave;
     }
 
-    public void saveToServer(final MultipartFile uploadVideo, final long memberId, final VideoSaveRequest dto) {
+    public void saveToServer(final MultipartFile uploadVideo, final long memberId, final VideoInfoSaveRequest dto) {
         String fileName = getFileName(uploadVideo, memberId, dto);
 
         try {
@@ -53,12 +53,12 @@ public class VideoUploadService {
         }
     }
 
-    private String getFileName(final MultipartFile uploadVideo, final long memberId, final VideoSaveRequest dto) {
-        long videoId = commandVideoInfoSave.command(memberId, dto);
-
+    private String getFileName(final MultipartFile uploadVideo, final long memberId, final VideoInfoSaveRequest dto) {
         String originalFilename = uploadVideo.getOriginalFilename();
         assert originalFilename != null;
         String fileExtension = originalFilename.substring(originalFilename.lastIndexOf(DOT.value));
-        return videoId + fileExtension;
+
+        long videoInfoId = commandVideoInfoSave.command(memberId, dto, fileExtension);
+        return videoInfoId + fileExtension;
     }
 }

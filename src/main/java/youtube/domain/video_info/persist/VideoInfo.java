@@ -34,9 +34,12 @@ public class VideoInfo extends BaseTimeEntity {
 
     private String videoDescription;
 
+    private String fileExtension;
+
     @Builder
-    private VideoInfo(final Long channelId, final String videoTitle, final VideoType videoType, final long views,
-                      final long likesCount, final int contentCount, final String videoDescription) {
+    public VideoInfo(final Long channelId, final String videoTitle, final VideoType videoType,
+                     final long views, final long likesCount, final int contentCount,
+                     final String videoDescription, final String fileExtension) {
         this.channelId = channelId;
         this.videoTitle = videoTitle;
         this.videoType = videoType;
@@ -44,5 +47,6 @@ public class VideoInfo extends BaseTimeEntity {
         this.likesCount = likesCount;
         this.contentCount = contentCount;
         this.videoDescription = videoDescription;
+        this.fileExtension = fileExtension;
     }
 }

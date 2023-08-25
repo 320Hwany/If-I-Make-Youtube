@@ -11,7 +11,7 @@ import youtube.domain.member.vo.Password;
 import youtube.domain.video_info.vo.VideoType;
 import youtube.global.exception.NotFoundException;
 import youtube.mapper.channel.ChannelMapper;
-import youtube.mapper.video.dto.VideoSaveRequest;
+import youtube.mapper.video_info.dto.VideoInfoSaveRequest;
 import youtube.repository.channel.ChannelRepository;
 import youtube.repository.member.MemberRepository;
 import youtube.repository.video_info.VideoInfoRepository;
@@ -40,7 +40,7 @@ class CommandVideoInfoSaveTestInfo {
     @DisplayName("회원의 채널을 찾을 수 없으면 동영상 정보를 저장할 수 없습니다")
     void commandVideoInfoSaveFail() {
         // given
-        VideoSaveRequest dto = VideoSaveRequest.builder()
+        VideoInfoSaveRequest dto = VideoInfoSaveRequest.builder()
                 .videoTitle("동영상 제목")
                 .videoType(VideoType.NORMAL)
                 .videoDescription("동영상 설명")
@@ -65,7 +65,7 @@ class CommandVideoInfoSaveTestInfo {
         Channel channel = ChannelMapper.toEntity(member);
         channelRepository.save(channel);
 
-        VideoSaveRequest dto = VideoSaveRequest.builder()
+        VideoInfoSaveRequest dto = VideoInfoSaveRequest.builder()
                 .videoTitle("동영상 제목")
                 .videoType(VideoType.NORMAL)
                 .videoDescription("동영상 설명")

@@ -6,7 +6,7 @@ public interface VideoInfoRepository {
 
     void save(final VideoInfo videoInfo);
 
-    VideoInfo getById(final long videoId);
+    VideoInfo getById(final long videoInfoId);
 
     long count();
 }

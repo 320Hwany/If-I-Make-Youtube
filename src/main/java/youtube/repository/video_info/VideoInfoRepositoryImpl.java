@@ -21,8 +21,8 @@ public class VideoInfoRepositoryImpl implements VideoInfoRepository {
     }
 
     @Override
-    public VideoInfo getById(final long videoId) {
-        return videoInfoJpaRepository.findById(videoId)
+    public VideoInfo getById(final long videoInfoId) {
+        return videoInfoJpaRepository.findById(videoInfoId)
                 .orElseThrow(() -> new NotFoundException(VIDEO_INFO_NOT_FOUND.message));
     }
 
