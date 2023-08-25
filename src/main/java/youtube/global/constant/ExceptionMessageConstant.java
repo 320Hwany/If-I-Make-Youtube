@@ -29,6 +29,7 @@ public enum ExceptionMessageConstant {
     MALFORMED_URL_BAD_REQUEST("잘못된 형식의 URL을 생성할 수 없습니다"),
     EMPTY_VIDEO_BAD_REQUEST("동영상이 존재하지 않아 서버에 저장할 수 없습니다"),
     VIDEO_UPLOAD_SECURITY_BAD_REQUEST("동영상 저장 디렉토리가 일치하지 않으면 저장할 수 없습니다"),
+    MEDIA_TYPE_BAD_REQUEST("지원하지 않는 MediaType입니다"),
     REFRESH_TOKEN_NOT_MATCH("Refresh Token이 일치하지 않습니다"),
     REFRESH_TOKEN_NOT_EXIST("Refresh Token을 찾을 수 없습니다"),
     REFRESH_TOKEN_NOT_VALID("Refresh Token이 유효하지 않습니다"),

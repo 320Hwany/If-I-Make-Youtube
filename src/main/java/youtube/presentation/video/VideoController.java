@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import youtube.application.video_info.VideoFindService;
 import youtube.application.video_info.VideoUploadService;
+import youtube.application.video_info.media_type.MediaTypeService;
 import youtube.domain.member.vo.MemberSession;
 import youtube.global.annotation.Login;
 import youtube.mapper.video_info.dto.VideoInfoSaveRequest;
@@ -17,18 +18,23 @@ public class VideoController {
 
     private final VideoUploadService videoUploadService;
     private final VideoFindService videoFindService;
+    private final MediaTypeService mediaTypeService;
 
     public VideoController(final VideoUploadService videoUploadService,
-                           final VideoFindService videoFindService) {
+                           final VideoFindService videoFindService,
+                           final MediaTypeService mediaTypeService) {
         this.videoUploadService = videoUploadService;
         this.videoFindService = videoFindService;
+        this.mediaTypeService = mediaTypeService;
     }
 
-    @GetMapping("/video/{filename}")
-    public ResponseEntity<Resource> serveFile(@PathVariable final String filename) {
-        Resource resource = videoFindService.loadAsResource(filename);
+    @GetMapping("/video/{videoInfoId}")
+    public ResponseEntity<Resource> getVideo(@PathVariable final long videoInfoId) {
+        Resource resource = videoFindService.loadAsResource(videoInfoId);
+        MediaType mediaType = mediaTypeService.getMediaType(videoInfoId);
+
         return ResponseEntity.ok()
-                .contentType(MediaType.IMAGE_PNG)
+                .contentType(mediaType)
                 .body(resource);
     }
 

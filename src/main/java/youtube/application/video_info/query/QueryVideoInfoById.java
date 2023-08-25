@@ -15,8 +15,7 @@ public class QueryVideoInfoById {
     }
 
     @Transactional(readOnly = true)
-    public long query(final long videoInfoId) {
-        VideoInfo entity = videoInfoRepository.getById(videoInfoId);
-        return entity.getId();
+    public VideoInfo query(final long videoInfoId) {
+        return videoInfoRepository.getById(videoInfoId);
     }
 }
