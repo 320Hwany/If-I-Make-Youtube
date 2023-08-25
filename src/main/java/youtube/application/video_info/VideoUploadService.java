@@ -1,9 +1,9 @@
-package youtube.application.video;
+package youtube.application.video_info;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import youtube.application.video.command.CommandVideoInfoSave;
+import youtube.application.video_info.command.CommandVideoInfoSave;
 import youtube.global.exception.BadRequestException;
 import youtube.mapper.video.dto.VideoSaveRequest;
 

@@ -1,6 +1,5 @@
-package youtube.application.video.command;
+package youtube.application.video_info.command;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +8,13 @@ import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
 import youtube.domain.member.vo.Password;
-import youtube.domain.video.vo.VideoType;
+import youtube.domain.video_info.vo.VideoType;
 import youtube.global.exception.NotFoundException;
 import youtube.mapper.channel.ChannelMapper;
 import youtube.mapper.video.dto.VideoSaveRequest;
 import youtube.repository.channel.ChannelRepository;
 import youtube.repository.member.MemberRepository;
-import youtube.repository.video.VideoRepository;
+import youtube.repository.video_info.VideoInfoRepository;
 import youtube.util.AcceptanceTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,13 +22,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static youtube.util.TestConstant.*;
 
 @AcceptanceTest
-class CommandVideoInfoSaveTest {
+class CommandVideoInfoSaveTestInfo {
 
     @Autowired
     private CommandVideoInfoSave commandVideoInfoSave;
 
     @Autowired
-    private VideoRepository videoRepository;
+    private VideoInfoRepository videoInfoRepository;
 
     @Autowired
     private MemberRepository memberRepository;
@@ -76,6 +75,6 @@ class CommandVideoInfoSaveTest {
         commandVideoInfoSave.command(member.getId(), dto);
 
         // then
-        assertThat(videoRepository.count()).isEqualTo(1);
+        assertThat(videoInfoRepository.count()).isEqualTo(1);
     }
 }

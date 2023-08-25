@@ -1,4 +1,4 @@
-package youtube.domain.video.vo;
+package youtube.domain.video_info.vo;
 
 public enum VideoType {
 

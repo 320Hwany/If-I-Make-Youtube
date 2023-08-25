@@ -2,7 +2,7 @@ package youtube.presentation.video;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import youtube.application.video.VideoUploadService;
+import youtube.application.video_info.VideoUploadService;
 import youtube.domain.member.vo.MemberSession;
 import youtube.global.annotation.Login;
 import youtube.mapper.video.dto.VideoSaveRequest;

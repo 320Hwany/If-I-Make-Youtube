@@ -1,4 +1,4 @@
-package youtube.domain.video.persist;
+package youtube.domain.video_info.persist;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -6,16 +6,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import youtube.domain.BaseTimeEntity;
-import youtube.domain.video.vo.VideoType;
+import youtube.domain.video_info.vo.VideoType;
 import youtube.global.annotation.Association;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class Video extends BaseTimeEntity {
+public class VideoInfo extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "video_id")
+    @Column(name = "video_info_id")
     private Long id;
 
     @Association
@@ -35,8 +35,8 @@ public class Video extends BaseTimeEntity {
     private String videoDescription;
 
     @Builder
-    private Video(final Long channelId, final String videoTitle, final VideoType videoType, final long views,
-                 final long likesCount, final int contentCount, final String videoDescription) {
+    private VideoInfo(final Long channelId, final String videoTitle, final VideoType videoType, final long views,
+                      final long likesCount, final int contentCount, final String videoDescription) {
         this.channelId = channelId;
         this.videoTitle = videoTitle;
         this.videoType = videoType;
