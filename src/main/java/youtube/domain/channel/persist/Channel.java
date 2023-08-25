@@ -39,8 +39,9 @@ public class Channel extends BaseTimeEntity {
     private Boolean isInfluencer;
 
     @Builder
-    private Channel(final Long memberId, final ChannelName channelName, final ChannelDescription channelDescription,
-                   final int videosCount, final int subscribersCount, final Button button, final Boolean isInfluencer) {
+    private Channel(final Long memberId, final ChannelName channelName,
+                    final ChannelDescription channelDescription, final int videosCount,
+                    final int subscribersCount, final Button button, final Boolean isInfluencer) {
         this.memberId = memberId;
         this.channelName = channelName;
         this.channelDescription = channelDescription;

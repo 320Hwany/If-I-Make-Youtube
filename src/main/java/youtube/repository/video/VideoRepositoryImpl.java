@@ -16,4 +16,9 @@ public class VideoRepositoryImpl implements VideoRepository {
     public void save(final Video video) {
         videoJpaRepository.save(video);
     }
+
+    @Override
+    public long count() {
+        return videoJpaRepository.count();
+    }
 }
