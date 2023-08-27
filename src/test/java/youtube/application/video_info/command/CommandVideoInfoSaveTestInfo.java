@@ -47,7 +47,7 @@ class CommandVideoInfoSaveTestInfo {
                 .build();
 
         // expected
-        assertThatThrownBy(() -> commandVideoInfoSave.command(9999L, dto))
+        assertThatThrownBy(() -> commandVideoInfoSave.command(9999L, dto, ".mp4"))
                 .isInstanceOf(NotFoundException.class);
     }
 
@@ -72,7 +72,7 @@ class CommandVideoInfoSaveTestInfo {
                 .build();
 
         // when
-        commandVideoInfoSave.command(member.getId(), dto);
+        commandVideoInfoSave.command(member.getId(), dto, ".mp4");
 
         // then
         assertThat(videoInfoRepository.count()).isEqualTo(1);

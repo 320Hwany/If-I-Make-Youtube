@@ -6,15 +6,15 @@ import org.springframework.stereotype.Service;
 import static youtube.global.constant.MediaTypeConstant.*;
 
 @Service
-public class MOVMediaType implements MediaTypeForExtension {
+public class MP4MediaType implements MediaTypeForExtension {
 
     @Override
     public boolean isSupport(final String fileExtension) {
-        return fileExtension.equals(MOV_EXTENSION.value);
+        return fileExtension.equals(MP4_EXTENSION.value);
     }
 
     @Override
     public MediaType getMediaType() {
-        return MediaType.parseMediaType(VIDEO_MP4.value);
+        return MediaType.valueOf(VIDEO_MP4.value);
     }
 }

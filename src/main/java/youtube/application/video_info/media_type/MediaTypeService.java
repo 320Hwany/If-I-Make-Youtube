@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import youtube.application.video_info.query.QueryVideoInfoById;
 import youtube.domain.video_info.persist.VideoInfo;
 import youtube.global.exception.BadRequestException;
-import youtube.repository.video_info.VideoInfoRepository;
 
 import java.util.List;
 
