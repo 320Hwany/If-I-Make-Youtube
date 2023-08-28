@@ -7,7 +7,7 @@ import youtube.application.member.command.CommandMemberLogout;
 import youtube.application.member.command.CommandPasswordUpdate;
 import youtube.application.member.query.QueryMemberDetailedResponse;
 import youtube.application.member.MemberLoginService;
-import youtube.application.member.command.CommandMemberSignup;
+import youtube.application.member.MemberSignupService;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.MemberSession;
 import youtube.domain.member.vo.Password;
@@ -22,18 +22,18 @@ import youtube.mapper.member.dto.MemberSignupRequest;
 @RestController
 public class MemberController {
 
-    private final CommandMemberSignup commandMemberSignup;
+    private final MemberSignupService memberSignupService;
     private final MemberLoginService memberLoginService;
     private final QueryMemberDetailedResponse queryMemberDetailedResponse;
     private final CommandMemberLogout commandMemberLogout;
     private final CommandPasswordUpdate commandPasswordUpdate;
 
-    public MemberController(final CommandMemberSignup commandMemberSignup,
+    public MemberController(final MemberSignupService memberSignupService,
                             final MemberLoginService memberLoginService,
                             final QueryMemberDetailedResponse queryMemberDetailedResponse,
                             final CommandMemberLogout commandMemberLogout,
                             final CommandPasswordUpdate commandPasswordUpdate) {
-        this.commandMemberSignup = commandMemberSignup;
+        this.memberSignupService = memberSignupService;
         this.memberLoginService = memberLoginService;
         this.queryMemberDetailedResponse = queryMemberDetailedResponse;
         this.commandMemberLogout = commandMemberLogout;
@@ -42,7 +42,7 @@ public class MemberController {
 
     @PostMapping("/signup")
     public void signup(@RequestBody @Valid final MemberSignupRequest dto) {
-        commandMemberSignup.command(dto);
+        memberSignupService.signup(dto);
     }
 
     @PostMapping("/login")
