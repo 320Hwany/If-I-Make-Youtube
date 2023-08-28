@@ -3,7 +3,7 @@ package youtube.presentation.member;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-import youtube.application.member.command.CommandMemberLogout;
+import youtube.application.jwt.command.CommandJwtDelete;
 import youtube.application.member.command.CommandPasswordUpdate;
 import youtube.application.member.query.QueryMemberDetailedResponse;
 import youtube.application.member.MemberLoginService;
@@ -25,18 +25,18 @@ public class MemberController {
     private final MemberSignupService memberSignupService;
     private final MemberLoginService memberLoginService;
     private final QueryMemberDetailedResponse queryMemberDetailedResponse;
-    private final CommandMemberLogout commandMemberLogout;
+    private final CommandJwtDelete commandJwtDelete;
     private final CommandPasswordUpdate commandPasswordUpdate;
 
     public MemberController(final MemberSignupService memberSignupService,
                             final MemberLoginService memberLoginService,
                             final QueryMemberDetailedResponse queryMemberDetailedResponse,
-                            final CommandMemberLogout commandMemberLogout,
+                            final CommandJwtDelete commandJwtDelete,
                             final CommandPasswordUpdate commandPasswordUpdate) {
         this.memberSignupService = memberSignupService;
         this.memberLoginService = memberLoginService;
         this.queryMemberDetailedResponse = queryMemberDetailedResponse;
-        this.commandMemberLogout = commandMemberLogout;
+        this.commandJwtDelete = commandJwtDelete;
         this.commandPasswordUpdate = commandPasswordUpdate;
     }
 
@@ -54,7 +54,7 @@ public class MemberController {
 
     @PostMapping("/logout")
     public void logout(@Login final MemberSession memberSession) {
-        commandMemberLogout.command(memberSession.id());
+        commandJwtDelete.command(memberSession.id());
     }
 
     // DB 조회 없이 AccessToken 만으로 회원 정보 가져오기

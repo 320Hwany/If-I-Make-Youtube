@@ -3,6 +3,7 @@ package youtube.application.member.command;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import youtube.application.jwt.command.CommandJwtDelete;
 import youtube.domain.jwt.JwtRefreshToken;
 import youtube.repository.jwt.JwtRepository;
 import youtube.util.AcceptanceTest;
@@ -11,10 +12,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static youtube.global.constant.StringConstant.REFRESH_TOKEN;
 
 @AcceptanceTest
-class CommandMemberLogoutTest {
+class CommandJwtDeleteTest {
 
     @Autowired
-    private CommandMemberLogout commandMemberLogout;
+    private CommandJwtDelete commandJwtDelete;
 
     @Autowired
     private JwtRepository jwtRepository;
@@ -31,7 +32,7 @@ class CommandMemberLogoutTest {
         jwtRepository.save(entity);
 
         // when
-        commandMemberLogout.command(1L);
+        commandJwtDelete.command(1L);
 
         // then
         assertThat(jwtRepository.count()).isEqualTo(0);
