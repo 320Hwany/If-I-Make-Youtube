@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import youtube.domain.BaseTimeEntity;
+import youtube.domain.video_reaction.vo.Reaction;
 import youtube.global.annotation.Association;
 
 @Getter
@@ -23,9 +24,13 @@ public class VideoReaction extends BaseTimeEntity {
     @Association
     private Long videoInfoId;
 
+    @Enumerated(EnumType.STRING)
+    private Reaction reaction;
+
     @Builder
-    private VideoReaction(final Long memberId, final Long videoInfoId) {
+    private VideoReaction(final Long memberId, final Long videoInfoId, final Reaction reaction) {
         this.memberId = memberId;
         this.videoInfoId = videoInfoId;
+        this.reaction = reaction;
     }
 }
