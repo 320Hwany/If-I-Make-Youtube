@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import youtube.domain.subscription.Subscription;
 import youtube.global.exception.BadRequestException;
 import youtube.mapper.subscription.SubscriptionMapper;
-import youtube.mapper.subscription.dto.SubscriptionEvent;
+import youtube.mapper.subscription.dto.SubscriptionSaveEvent;
 import youtube.repository.subscription.SubscriptionRepository;
 
 import static youtube.global.constant.ExceptionMessageConstant.*;
@@ -34,7 +34,7 @@ public class CommandSubscriptionSave {
         subscriptionRepository.save(subscription);
 
         // 스프링 이벤트 호출 - SubscriptionEventListener
-        publisher.publishEvent(new SubscriptionEvent(memberId, channelId));
+        publisher.publishEvent(new SubscriptionSaveEvent(memberId, channelId));
     }
 
     private boolean validateDuplication(final long memberId, final long channelId) {

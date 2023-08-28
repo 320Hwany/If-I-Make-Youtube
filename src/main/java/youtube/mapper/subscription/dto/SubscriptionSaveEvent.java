@@ -1,6 +1,6 @@
 package youtube.mapper.subscription.dto;
 
-public record SubscriptionEvent(
+public record SubscriptionSaveEvent(
         long memberId,
         long channelId
 ) {
