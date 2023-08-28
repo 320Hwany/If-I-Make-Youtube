@@ -18,6 +18,7 @@ public class VideoInfoMapper {
                 .videoType(dto.videoType())
                 .views(ZERO.value)
                 .likesCount(ZERO.value)
+                .dislikesCount(ZERO.value)
                 .contentCount(ZERO.value)
                 .videoDescription(dto.videoDescription())
                 .fileExtension(fileExtension)
