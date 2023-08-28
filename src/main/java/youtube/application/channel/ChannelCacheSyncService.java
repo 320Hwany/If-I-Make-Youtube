@@ -1,11 +1,11 @@
-package youtube.application.subscription;
+package youtube.application.channel;
 
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import youtube.application.channel.command.CommandChannelSubscribersUpdate;
+import youtube.application.channel.command.CommandChannelSubscriptionCountUpdate;
 import youtube.domain.channel.vo.ChannelCache;
 import youtube.global.exception.BadRequestException;
 
@@ -17,28 +17,28 @@ import static youtube.global.constant.AnnotationMessageConstant.*;
 import static youtube.global.constant.ExceptionMessageConstant.*;
 
 @Service
-public class SubscribersSyncService {
+public class ChannelCacheSyncService {
 
-    private final CommandChannelSubscribersUpdate commandChannelSubscribersUpdate;
+    private final CommandChannelSubscriptionCountUpdate commandChannelSubscriptionCountUpdate;
     private final CacheManager cacheManager;
 
-    public SubscribersSyncService(final CommandChannelSubscribersUpdate commandChannelSubscribersUpdate,
-                                  final CacheManager cacheManager) {
-        this.commandChannelSubscribersUpdate = commandChannelSubscribersUpdate;
+    public ChannelCacheSyncService(final CommandChannelSubscriptionCountUpdate commandChannelSubscriptionCountUpdate,
+                                   final CacheManager cacheManager) {
+        this.commandChannelSubscriptionCountUpdate = commandChannelSubscriptionCountUpdate;
         this.cacheManager = cacheManager;
     }
 
-    // 1분에 한번씩 구독자 수 캐싱한 데이터를 DB와 동기화
+    // 1분에 한번씩 채널 정보 캐싱한 데이터를 DB와 동기화
     @Async
     @Scheduled(fixedRate = ONE_MINUTE)
-    public void syncSubscribersCount() {
+    public void syncChannelCache() {
         Map<Long, ChannelCache> cacheMap = getChannelCacheMap();
 
         CompletableFuture<?>[] futures = cacheMap.entrySet()
                 .stream()
                 .map(entry ->
                         CompletableFuture.runAsync(
-                                () -> commandChannelSubscribersUpdate.command(entry.getKey(), entry.getValue())
+                                () -> commandChannelSubscriptionCountUpdate.command(entry.getKey(), entry.getValue())
                         )
                 )
                 .toArray(CompletableFuture[]::new);

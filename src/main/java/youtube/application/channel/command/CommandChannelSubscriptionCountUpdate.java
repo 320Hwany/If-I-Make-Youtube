@@ -10,11 +10,11 @@ import youtube.repository.channel.ChannelRepository;
 import java.util.concurrent.CompletableFuture;
 
 @Service
-public class CommandChannelSubscribersUpdate {
+public class CommandChannelSubscriptionCountUpdate {
 
     private final ChannelRepository channelRepository;
 
-    public CommandChannelSubscribersUpdate(final ChannelRepository channelRepository) {
+    public CommandChannelSubscriptionCountUpdate(final ChannelRepository channelRepository) {
         this.channelRepository = channelRepository;
     }
 

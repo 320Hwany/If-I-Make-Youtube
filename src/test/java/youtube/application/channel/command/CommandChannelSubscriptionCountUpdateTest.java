@@ -1,13 +1,11 @@
 package youtube.application.channel.command;
 
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import youtube.application.channel.query.QueryChannelCacheById;
 import youtube.domain.channel.persist.Channel;
-import youtube.domain.channel.vo.Button;
 import youtube.domain.channel.vo.ChannelCache;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.LoginId;
@@ -26,10 +24,10 @@ import static youtube.util.TestConstant.*;
 
 @Slf4j
 @AcceptanceTest
-class CommandChannelSubscribersUpdateTest {
+class CommandChannelSubscriptionCountUpdateTest {
 
     @Autowired
-    private CommandChannelSubscribersUpdate commandChannelSubscribersUpdate;
+    private CommandChannelSubscriptionCountUpdate commandChannelSubscriptionCountUpdate;
 
     @Autowired
     private MemberRepository memberRepository;
@@ -71,6 +69,6 @@ class CommandChannelSubscribersUpdateTest {
         for (int i = 0; i < 10; i++) {
             channelCache.increaseSubscribersCount();
         }
-        return commandChannelSubscribersUpdate.command(channel.getId(), channelCache);
+        return commandChannelSubscriptionCountUpdate.command(channel.getId(), channelCache);
     }
 }

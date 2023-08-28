@@ -1,5 +1,7 @@
 package youtube.application.channel.command;
 
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import youtube.domain.channel.persist.Channel;
@@ -17,15 +19,17 @@ public class CommandChannelUpdate {
         this.channelRepository = channelRepository;
     }
 
-    public void updateChannelName(final long memberId, final ChannelName channelNameUpdate) {
+    public long updateChannelName(final long memberId, final ChannelName channelNameUpdate) {
         Channel entity = channelRepository.getByMemberId(memberId);
         ChannelName channelName = entity.getChannelName();
         channelName.update(channelNameUpdate);
+        return entity.getId();
     }
 
-    public void updateChannelDescription(final long memberId, final ChannelDescription channelDescriptionUpdate) {
+    public long updateChannelDescription(final long memberId, final ChannelDescription channelDescriptionUpdate) {
         Channel entity = channelRepository.getByMemberId(memberId);
         ChannelDescription channelDescription = entity.getChannelDescription();
         channelDescription.update(channelDescriptionUpdate);
+        return entity.getId();
     }
 }

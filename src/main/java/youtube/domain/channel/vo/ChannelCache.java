@@ -35,4 +35,12 @@ public final class ChannelCache {
     public void decreaseSubscribersCount() {
         this.subscribersCount -= ONE.value;
     }
+
+    public void updateChannelName(final ChannelName channelName) {
+        this.channelName = channelName;
+    }
+
+    public void updateChannelDescription(final ChannelDescription channelDescription) {
+        this.channelDescription = channelDescription;
+    }
 }
