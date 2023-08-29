@@ -28,19 +28,19 @@ public class SubscriptionController {
         this.commandSubscriptionCancel = commandSubscriptionCancel;
     }
 
-    @GetMapping("/subscription")
+    @GetMapping("/subscriptions")
     public SubscriptionResult getSubscriptionChannels(@Login final MemberSession memberSession) {
         List<SubscriptionChannelsCache> caches = querySubscriptionsByMemberId.query(memberSession.id());
         return SubscriptionMapper.toResult(caches, caches.size());
     }
 
-    @PostMapping("/subscription")
+    @PostMapping("/subscriptions")
     public void subscribe(@Login final MemberSession memberSession,
                           @RequestParam final long channelId) {
         commandSubscriptionSave.command(memberSession.id(), channelId);
     }
 
-    @DeleteMapping("/subscription")
+    @DeleteMapping("/subscriptions")
     public void cancelSubscription(@Login final MemberSession memberSession,
                                    @RequestParam final long channelId) {
         commandSubscriptionCancel.command(memberSession.id(), channelId);

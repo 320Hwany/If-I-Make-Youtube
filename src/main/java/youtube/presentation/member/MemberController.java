@@ -58,18 +58,18 @@ public class MemberController {
     }
 
     // DB 조회 없이 AccessToken 만으로 회원 정보 가져오기
-    @GetMapping("/member")
+    @GetMapping("/members")
     public MemberResponse getMember(@Login final MemberSession memberSession) {
         return MemberMapper.toMemberResponse(memberSession);
     }
 
     // 자세한 회원 정보가 필요할 경우 DB에서 회원 정보 가져오기
-    @GetMapping("/member/detailed")
+    @GetMapping("/members/detailed")
     public MemberDetailedResponse getDetailedMember(@Login final MemberSession memberSession) {
         return queryMemberDetailedResponse.query(memberSession.id());
     }
 
-    @PatchMapping("/member/password")
+    @PatchMapping("/members/password")
     public void updatePassword(@Login final MemberSession memberSession,
                                @RequestBody final Password updatePassword) {
         commandPasswordUpdate.command(memberSession.id(), updatePassword);

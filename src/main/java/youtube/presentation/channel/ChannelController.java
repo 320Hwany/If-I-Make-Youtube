@@ -27,13 +27,13 @@ public class ChannelController {
         return queryChannelCacheById.query(channelId);
     }
 
-    @PatchMapping("/channel/channelName")
+    @PatchMapping("/channels/channelName")
     public void updateChannelName(@Login final MemberSession memberSession,
                                   @RequestBody final ChannelName channelName) {
         channelUpdateService.updateChannelName(memberSession.id(), channelName);
     }
 
-    @PatchMapping("/channel/channelDescription")
+    @PatchMapping("/channels/channelDescription")
     public void updateChannelDescription(@Login final MemberSession memberSession,
                                          @RequestBody final ChannelDescription channelDescription) {
         channelUpdateService.updateChannelDescription(memberSession.id(), channelDescription);

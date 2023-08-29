@@ -28,7 +28,7 @@ public class VideoController {
         this.mediaTypeService = mediaTypeService;
     }
 
-    @GetMapping("/video/{videoInfoId}")
+    @GetMapping("/videos/{videoInfoId}")
     public ResponseEntity<Resource> getVideo(@PathVariable final long videoInfoId) {
         Resource resource = videoFindService.loadAsResource(videoInfoId);
         MediaType mediaType = mediaTypeService.getMediaType(videoInfoId);
@@ -38,7 +38,7 @@ public class VideoController {
                 .body(resource);
     }
 
-    @PostMapping("/video")
+    @PostMapping("/videos")
     public void upload(@RequestPart final MultipartFile uploadVideo,
                        @RequestPart final VideoInfoSaveRequest videoInfoSaveRequest,
                        @Login final MemberSession memberSession) {

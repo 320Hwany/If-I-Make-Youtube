@@ -17,7 +17,7 @@ public class ChannelUpdateControllerTest extends ControllerTest {
     @DisplayName("로그인하지 않은 회원은 채널명을 수정할 수 없습니다")
     void channelNameUpdateFail() throws Exception {
         // expected
-        mockMvc.perform(patch("/api/channel/channelName")
+        mockMvc.perform(patch("/api/channels/channelName")
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(ChannelName.from("수정 채널명"))))
                 .andExpect(status().isUnauthorized());
@@ -31,7 +31,7 @@ public class ChannelUpdateControllerTest extends ControllerTest {
         String accessToken = login();
 
         // expected
-        mockMvc.perform(patch("/api/channel/channelName")
+        mockMvc.perform(patch("/api/channels/channelName")
                         .header(ACCESS_TOKEN.value, accessToken)
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(ChannelName.from("수정 채널명")))
@@ -43,7 +43,7 @@ public class ChannelUpdateControllerTest extends ControllerTest {
     @DisplayName("로그인하지 않은 회원은 채널 설명을 수정할 수 없습니다")
     void channelDescriptionUpdateFail() throws Exception {
         // expected
-        mockMvc.perform(patch("/api/channel/channelDescription")
+        mockMvc.perform(patch("/api/channels/channelDescription")
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(ChannelName.from("수정 채널 설명"))))
                 .andExpect(status().isUnauthorized());
@@ -57,7 +57,7 @@ public class ChannelUpdateControllerTest extends ControllerTest {
         String accessToken = login();
 
         // expected
-        mockMvc.perform(patch("/api/channel/channelDescription")
+        mockMvc.perform(patch("/api/channels/channelDescription")
                         .header(ACCESS_TOKEN.value, accessToken)
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(ChannelDescription.from("수정 채널 설명")))
