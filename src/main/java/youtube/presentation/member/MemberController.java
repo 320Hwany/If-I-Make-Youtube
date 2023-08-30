@@ -4,10 +4,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import youtube.application.jwt.command.CommandJwtDelete;
+import youtube.application.member.command.CommandMemberSignup;
 import youtube.application.member.command.CommandPasswordUpdate;
 import youtube.application.member.query.QueryMemberDetailedResponse;
 import youtube.application.member.MemberLoginService;
-import youtube.application.member.MemberSignupService;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.MemberSession;
 import youtube.domain.member.vo.Password;
@@ -22,18 +22,18 @@ import youtube.mapper.member.dto.MemberSignupRequest;
 @RestController
 public class MemberController {
 
-    private final MemberSignupService memberSignupService;
+    private final CommandMemberSignup commandMemberSignup;
     private final MemberLoginService memberLoginService;
     private final QueryMemberDetailedResponse queryMemberDetailedResponse;
     private final CommandJwtDelete commandJwtDelete;
     private final CommandPasswordUpdate commandPasswordUpdate;
 
-    public MemberController(final MemberSignupService memberSignupService,
+    public MemberController(final CommandMemberSignup commandMemberSignup,
                             final MemberLoginService memberLoginService,
                             final QueryMemberDetailedResponse queryMemberDetailedResponse,
                             final CommandJwtDelete commandJwtDelete,
                             final CommandPasswordUpdate commandPasswordUpdate) {
-        this.memberSignupService = memberSignupService;
+        this.commandMemberSignup = commandMemberSignup;
         this.memberLoginService = memberLoginService;
         this.queryMemberDetailedResponse = queryMemberDetailedResponse;
         this.commandJwtDelete = commandJwtDelete;
@@ -42,7 +42,7 @@ public class MemberController {
 
     @PostMapping("/signup")
     public void signup(@RequestBody @Valid final MemberSignupRequest dto) {
-        memberSignupService.signup(dto);
+        commandMemberSignup.signup(dto);
     }
 
     @PostMapping("/login")
