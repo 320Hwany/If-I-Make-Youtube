@@ -16,6 +16,11 @@ public class VideoReactionRepositoryImpl implements VideoReactionRepository {
     }
 
     @Override
+    public void save(final VideoReaction videoReaction) {
+        videoReactionJpaRepository.save(videoReaction);
+    }
+
+    @Override
     public VideoReaction getByMemberIdAndVideoInfoId(final long memberId, final long videoInfoId) {
         return videoReactionJpaRepository.findByMemberIdAndVideoInfoId(memberId, videoInfoId)
                 .orElseThrow(() -> new BadRequestException(VIDEO_REACTION_NOT_FOUND.message));
