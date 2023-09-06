@@ -1,10 +1,18 @@
 package youtube.presentation.member;
 
+import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.restdocs.payload.JsonFieldType;
 import youtube.util.ControllerTest;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static com.epages.restdocs.apispec.ResourceDocumentation.resource;
+import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static youtube.global.constant.StringConstant.ACCESS_TOKEN;
 
@@ -15,7 +23,18 @@ public class MemberControllerGetDetailedTest extends ControllerTest {
     void getMemberDetailedFail() throws Exception {
         // expected
         mockMvc.perform(get("/api/members/detailed"))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isUnauthorized())
+                .andDo(document("회원정보 가져오기 실패 (DB) - 401 (로그인 상태가 아님)",
+                        preprocessResponse(prettyPrint()),
+                        resource(ResourceSnippetParameters.builder()
+                                .tag("회원")
+                                .summary("회원정보 가져오기 (DB)")
+                                .responseFields(
+                                        fieldWithPath("statusCode").description("닉네임"),
+                                        fieldWithPath("message").description("오류 메세지")
+                                )
+                                .build()
+                        )));
     }
 
     @Test
@@ -29,6 +48,28 @@ public class MemberControllerGetDetailedTest extends ControllerTest {
         mockMvc.perform(get("/api/members/detailed")
                         .header(ACCESS_TOKEN.value, accessToken)
                 )
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andDo(document("회원정보 가져오기 성공 (DB)",
+                        preprocessResponse(prettyPrint()),
+                        resource(ResourceSnippetParameters.builder()
+                                .tag("회원")
+                                .summary("회원정보 가져오기 (DB)")
+                                .requestHeaders(
+                                        headerWithName(ACCESS_TOKEN.value).description("AccessToken")
+                                )
+                                .responseFields(
+                                        fieldWithPath("id").type(JsonFieldType.NUMBER).description("회원 기본키"),
+                                        fieldWithPath("nickname").type(JsonFieldType.STRING).description("닉네임"),
+                                        fieldWithPath("loginId").type(JsonFieldType.STRING).description("로그인 아이디"),
+                                        fieldWithPath("roleType").type(JsonFieldType.STRING).description("권한"),
+                                        fieldWithPath("gender").type(JsonFieldType.STRING).description("성별"),
+                                        fieldWithPath("birthDate").type(JsonFieldType.STRING).description("생년월일"),
+                                        fieldWithPath("likedVideosCount").type(JsonFieldType.NUMBER)
+                                                .description("좋아요 누른 동영상 수"),
+                                        fieldWithPath("watchLaterVideosCount").type(JsonFieldType.NUMBER)
+                                                .description("나중에 볼 동영상 수")
+                                )
+                                .build()
+                        )));
     }
 }
