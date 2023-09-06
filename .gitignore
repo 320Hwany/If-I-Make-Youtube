@@ -6,6 +6,8 @@ build/
 !**/src/test/**/build/
 dump.rdb
 
+src/main/java/youtube/test_data
+
 http
 application-prod.yml
 
