@@ -1,5 +1,6 @@
 package youtube.presentation.member;
 
+import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import youtube.domain.member.vo.Gender;
@@ -11,8 +12,13 @@ import youtube.util.ControllerTest;
 
 import java.time.LocalDate;
 
+import static com.epages.restdocs.apispec.ResourceDocumentation.resource;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.restdocs.payload.JsonFieldType.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static youtube.util.TestConstant.*;
 
@@ -29,7 +35,18 @@ public class MemberControllerSignupTest extends ControllerTest {
         mockMvc.perform(post("/api/signup")
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andDo(document("회원 가입 실패",
+                        preprocessResponse(prettyPrint()),
+                        resource(ResourceSnippetParameters.builder()
+                                .tag("회원")
+                                .description("회원 가입")
+                                .responseFields(
+                                        fieldWithPath("statusCode").description("닉네임"),
+                                        fieldWithPath("message").description("오류 메세지")
+                                )
+                                .build(
+                                ))));
     }
 
     @Test
@@ -48,7 +65,20 @@ public class MemberControllerSignupTest extends ControllerTest {
         mockMvc.perform(post("/api/signup")
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andDo(document("회원 가입 성공",
+                        preprocessRequest(prettyPrint()),
+                        resource(ResourceSnippetParameters.builder()
+                                .tag("회원")
+                                .summary("회원 가입")
+                                .requestFields(
+                                        fieldWithPath("nickname.nickname").type(STRING).description("닉네임"),
+                                        fieldWithPath("loginId.loginId").type(STRING).description("로그인 아이디"),
+                                        fieldWithPath("password.password").type(STRING).description("비밀번호"),
+                                        fieldWithPath("gender").type(STRING).description("성별"),
+                                        fieldWithPath("birthDate").type(STRING).description("생년월일")
+                                )
+                                .build()
+                        )));
     }
-
 }
