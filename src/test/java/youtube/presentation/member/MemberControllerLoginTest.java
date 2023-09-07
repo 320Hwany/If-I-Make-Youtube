@@ -49,8 +49,8 @@ public class MemberControllerLoginTest extends ControllerTest {
                                         fieldWithPath("password.password").type(STRING).description("비밀번호")
                                 )
                                 .responseFields(
-                                        fieldWithPath("statusCode").description("닉네임"),
-                                        fieldWithPath("message").description("오류 메세지")
+                                        fieldWithPath("statusCode").type(STRING).description("닉네임"),
+                                        fieldWithPath("message").type(STRING).description("오류 메세지")
                                 )
                                 .build()
                         )));
@@ -89,8 +89,8 @@ public class MemberControllerLoginTest extends ControllerTest {
                                         fieldWithPath("password.password").type(STRING).description("비밀번호")
                                 )
                                 .responseFields(
-                                        fieldWithPath("statusCode").description("닉네임"),
-                                        fieldWithPath("message").description("오류 메세지")
+                                        fieldWithPath("statusCode").type(STRING).description("닉네임"),
+                                        fieldWithPath("message").type(STRING).description("오류 메세지")
                                 )
                                 .build()
                         )));

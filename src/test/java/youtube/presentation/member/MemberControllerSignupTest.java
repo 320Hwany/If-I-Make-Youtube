@@ -42,8 +42,8 @@ public class MemberControllerSignupTest extends ControllerTest {
                                 .tag("회원")
                                 .description("회원 가입")
                                 .responseFields(
-                                        fieldWithPath("statusCode").description("닉네임"),
-                                        fieldWithPath("message").description("오류 메세지")
+                                        fieldWithPath("statusCode").type(STRING).description("닉네임"),
+                                        fieldWithPath("message").type(STRING).description("오류 메세지")
                                 )
                                 .build(
                                 ))));

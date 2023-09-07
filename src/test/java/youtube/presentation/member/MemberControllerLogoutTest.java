@@ -10,6 +10,7 @@ import static org.springframework.restdocs.headers.HeaderDocumentation.headerWit
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.restdocs.payload.JsonFieldType.STRING;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static youtube.global.constant.StringConstant.ACCESS_TOKEN;
@@ -28,8 +29,8 @@ public class MemberControllerLogoutTest extends ControllerTest {
                                 .tag("회원")
                                 .summary("로그아웃")
                                 .responseFields(
-                                        fieldWithPath("statusCode").description("닉네임"),
-                                        fieldWithPath("message").description("오류 메세지")
+                                        fieldWithPath("statusCode").type(STRING).description("닉네임"),
+                                        fieldWithPath("message").type(STRING).description("오류 메세지")
                                 )
                                 .build()
                         )));

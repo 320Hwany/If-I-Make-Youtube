@@ -12,6 +12,8 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
+import static org.springframework.restdocs.payload.JsonFieldType.*;
+import static org.springframework.restdocs.payload.JsonFieldType.NUMBER;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static youtube.global.constant.StringConstant.ACCESS_TOKEN;
@@ -30,8 +32,8 @@ public class MemberControllerGetDetailedTest extends ControllerTest {
                                 .tag("회원")
                                 .summary("회원정보 가져오기 (DB)")
                                 .responseFields(
-                                        fieldWithPath("statusCode").description("닉네임"),
-                                        fieldWithPath("message").description("오류 메세지")
+                                        fieldWithPath("statusCode").type(STRING).description("닉네임"),
+                                        fieldWithPath("message").type(STRING).description("오류 메세지")
                                 )
                                 .build()
                         )));
@@ -58,15 +60,15 @@ public class MemberControllerGetDetailedTest extends ControllerTest {
                                         headerWithName(ACCESS_TOKEN.value).description("AccessToken")
                                 )
                                 .responseFields(
-                                        fieldWithPath("id").type(JsonFieldType.NUMBER).description("회원 기본키"),
-                                        fieldWithPath("nickname").type(JsonFieldType.STRING).description("닉네임"),
-                                        fieldWithPath("loginId").type(JsonFieldType.STRING).description("로그인 아이디"),
-                                        fieldWithPath("roleType").type(JsonFieldType.STRING).description("권한"),
-                                        fieldWithPath("gender").type(JsonFieldType.STRING).description("성별"),
-                                        fieldWithPath("birthDate").type(JsonFieldType.STRING).description("생년월일"),
-                                        fieldWithPath("likedVideosCount").type(JsonFieldType.NUMBER)
+                                        fieldWithPath("id").type(NUMBER).description("회원 기본키"),
+                                        fieldWithPath("nickname").type(STRING).description("닉네임"),
+                                        fieldWithPath("loginId").type(STRING).description("로그인 아이디"),
+                                        fieldWithPath("roleType").type(STRING).description("권한"),
+                                        fieldWithPath("gender").type(STRING).description("성별"),
+                                        fieldWithPath("birthDate").type(STRING).description("생년월일"),
+                                        fieldWithPath("likedVideosCount").type(NUMBER)
                                                 .description("좋아요 누른 동영상 수"),
-                                        fieldWithPath("watchLaterVideosCount").type(JsonFieldType.NUMBER)
+                                        fieldWithPath("watchLaterVideosCount").type(NUMBER)
                                                 .description("나중에 볼 동영상 수")
                                 )
                                 .build()
