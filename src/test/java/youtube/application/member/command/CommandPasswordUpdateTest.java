@@ -3,35 +3,24 @@ package youtube.application.member.command;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import youtube.domain.member.persist.Member;
-import youtube.domain.member.vo.LoginId;
-import youtube.domain.member.vo.Nickname;
 import youtube.domain.member.vo.Password;
 import youtube.global.exception.NotFoundException;
-import youtube.repository.member.MemberRepository;
-import youtube.util.AcceptanceTest;
+import youtube.util.ServiceTest;
 
 import static org.assertj.core.api.Assertions.*;
 import static youtube.util.TestConstant.*;
 
-@AcceptanceTest
-class CommandPasswordUpdateTest {
+class CommandPasswordUpdateTest extends ServiceTest {
 
     @Autowired
     private CommandPasswordUpdate commandPasswordUpdate;
-
-    @Autowired
-    private MemberRepository memberRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Test
     @DisplayName("로그인한 회원의 정보가 DB에 존재하지 않으면 비밀번호 변경에 실패합니다")
     void passwordUpdateFail() {
         // given
-        long memberId = 1L;
+        long memberId = 9999L;
         Password password = Password.from(TEST_PASSWORD.value);
 
         // expected
@@ -42,21 +31,17 @@ class CommandPasswordUpdateTest {
     @Test
     @DisplayName("로그인한 회원의 비밀번호를 수정합니다")
     void passwordUpdateSuccess() {
-        // given
-        Member entity = Member.builder()
-                .nickname(Nickname.from(TEST_NICKNAME.value))
-                .loginId(LoginId.from(TEST_LOGIN_ID.value))
-                .password(Password.from(TEST_PASSWORD.value))
-                .build();
+        // given 1
+        long memberId = saveMember();
 
-        memberRepository.save(entity);
+        // given 2
         Password updatePassword = Password.from("수정 비밀번호!");
 
         // when
-        commandPasswordUpdate.command(entity.getId(), updatePassword);
+        commandPasswordUpdate.command(memberId, updatePassword);
 
         // then
-        Member psEntity = memberRepository.getById(entity.getId());
+        Member psEntity = memberRepository.getById(memberId);
         Password password = psEntity.getPassword();
         assertThat(passwordEncoder.matches(updatePassword.getPassword(), password.getPassword())).isTrue();
     }

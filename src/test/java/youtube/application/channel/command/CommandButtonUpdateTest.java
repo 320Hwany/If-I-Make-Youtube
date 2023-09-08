@@ -1,13 +1,10 @@
 package youtube.application.channel.command;
 
-import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import youtube.domain.channel.persist.Channel;
 import youtube.domain.channel.vo.Button;
-import youtube.domain.channel.vo.ChannelCache;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;

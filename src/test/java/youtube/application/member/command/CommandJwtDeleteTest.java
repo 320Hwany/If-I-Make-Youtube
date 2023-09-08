@@ -6,13 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import youtube.application.jwt.command.CommandJwtDelete;
 import youtube.domain.jwt.JwtRefreshToken;
 import youtube.repository.jwt.JwtRepository;
-import youtube.util.AcceptanceTest;
+import youtube.util.ServiceTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static youtube.global.constant.StringConstant.REFRESH_TOKEN;
 
-@AcceptanceTest
-class CommandJwtDeleteTest {
+class CommandJwtDeleteTest extends ServiceTest {
 
     @Autowired
     private CommandJwtDelete commandJwtDelete;
