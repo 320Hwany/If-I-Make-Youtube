@@ -17,6 +17,7 @@ import youtube.domain.channel.persist.Channel;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.Gender;
 import youtube.domain.subscription.Subscription;
+import youtube.domain.video_info.persist.VideoInfo;
 import youtube.mapper.channel.ChannelMapper;
 import youtube.mapper.member.dto.MemberSignupRequest;
 import youtube.repository.channel.ChannelRepository;
@@ -27,6 +28,7 @@ import youtube.domain.member.vo.Password;
 import youtube.global.constant.StringConstant;
 import youtube.mapper.member.dto.MemberLoginRequest;
 import youtube.repository.subscription.SubscriptionRepository;
+import youtube.repository.video_info.VideoInfoRepository;
 
 import java.time.LocalDate;
 
@@ -58,6 +60,9 @@ public class ControllerTest {
     protected SubscriptionRepository subscriptionRepository;
 
     @Autowired
+    protected VideoInfoRepository videoInfoRepository;
+
+    @Autowired
     protected PasswordEncoder passwordEncoder;
 
     @BeforeEach
@@ -73,6 +78,19 @@ public class ControllerTest {
                         .withHost("localhost")
                         .withPort(8080))
                 .build();
+    }
+
+    protected VideoInfo saveVideoInfo() {
+        VideoInfo videoInfo = VideoInfo.builder()
+                .videoTitle("동영상 제목")
+                .videoDescription("동영상 설명")
+                .views(10000)
+                .likesCount(500)
+                .dislikesCount(10)
+                .build();
+
+        videoInfoRepository.save(videoInfo);
+        return videoInfo;
     }
 
     protected long signupChannelId() {
