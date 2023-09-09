@@ -13,6 +13,7 @@ import youtube.repository.channel.ChannelRepository;
 import youtube.repository.jwt.JwtRepository;
 import youtube.repository.member.MemberRepository;
 import youtube.repository.subscription.SubscriptionRepository;
+import youtube.repository.video_info.VideoInfoRepository;
 
 import static youtube.util.TestConstant.*;
 
@@ -33,6 +34,9 @@ public class ServiceTest {
 
     @Autowired
     protected SubscriptionRepository subscriptionRepository;
+
+    @Autowired
+    protected VideoInfoRepository videoInfoRepository;
 
     @Autowired
     protected PasswordEncoder passwordEncoder;
