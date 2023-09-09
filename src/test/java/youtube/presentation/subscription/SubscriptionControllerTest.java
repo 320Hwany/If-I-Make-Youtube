@@ -3,6 +3,7 @@ package youtube.presentation.subscription;
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import youtube.domain.channel.persist.Channel;
 import youtube.util.ControllerTest;
 
 import static com.epages.restdocs.apispec.ResourceDocumentation.resource;
@@ -41,12 +42,13 @@ class SubscriptionControllerTest extends ControllerTest {
     @DisplayName("로그인을 한 후 원하는 채널을 구독할 수 있습니다")
     void subscribeSuccess() throws Exception {
         // given
-        long channelId = signupChannelId();
+        signup();
         String accessToken = login();
+        Channel channel = saveChannel();
 
         // expected
         mockMvc.perform(post("/api/subscriptions")
-                        .param("channelId", String.valueOf(channelId))
+                        .param("channelId", String.valueOf(channel.getId()))
                         .header(ACCESS_TOKEN.value, accessToken)
                 )
                 .andExpect(status().isOk())

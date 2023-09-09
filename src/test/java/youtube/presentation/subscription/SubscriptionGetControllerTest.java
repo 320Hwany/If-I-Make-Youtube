@@ -21,7 +21,7 @@ public class SubscriptionGetControllerTest extends ControllerTest {
     @DisplayName("로그인을 하지 않으면 구독한 채널 리스트를 가져올 수 없습니다")
     void getSubscriptionChannelsFail() throws Exception {
         // given
-        signupAndSubscription();
+        saveSubscription();
 
         // expected
         mockMvc.perform(get("/api/subscriptions")
@@ -45,7 +45,7 @@ public class SubscriptionGetControllerTest extends ControllerTest {
     @DisplayName("로그인을 한 후 구독한 채널 리스트를 가져올 수 있습니다")
     void getSubscriptionChannelsSuccess() throws Exception {
         // given
-        signupAndSubscription();
+        saveSubscription();
         String accessToken = login();
 
         // expected

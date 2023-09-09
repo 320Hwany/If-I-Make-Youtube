@@ -14,6 +14,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import youtube.domain.channel.persist.Channel;
+import youtube.domain.channel.vo.ChannelDescription;
+import youtube.domain.channel.vo.ChannelName;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.Gender;
 import youtube.domain.subscription.Subscription;
@@ -80,6 +82,31 @@ public class ControllerTest {
                 .build();
     }
 
+    protected Member saveMember() {
+        Password password = Password.from(TEST_PASSWORD.value);
+
+        Member member = Member.builder()
+                .nickname(Nickname.from(TEST_NICKNAME.value))
+                .loginId(LoginId.from(TEST_LOGIN_ID.value))
+                .password(password.encode(passwordEncoder))
+                .build();
+
+        memberRepository.save(member);
+        return member;
+    }
+
+    protected Channel saveChannel() {
+        Channel channel = Channel.builder()
+                .channelName(ChannelName.from("채널 이름"))
+                .channelDescription(ChannelDescription.from("채널 설명"))
+                .videosCount(30)
+                .subscribersCount(10000)
+                .build();
+
+        channelRepository.save(channel);
+        return channel;
+    }
+
     protected VideoInfo saveVideoInfo() {
         VideoInfo videoInfo = VideoInfo.builder()
                 .videoTitle("동영상 제목")
@@ -93,40 +120,20 @@ public class ControllerTest {
         return videoInfo;
     }
 
-    protected long signupChannelId() {
-        Password password = Password.from(TEST_PASSWORD.value);
+    protected Subscription saveSubscription() {
+        Member member = saveMember();
 
-        Member member = Member.builder()
-                .nickname(Nickname.from(TEST_NICKNAME.value))
-                .loginId(LoginId.from(TEST_LOGIN_ID.value))
-                .password(password.encode(passwordEncoder))
-                .build();
-
-        memberRepository.save(member);
-        Channel channel = ChannelMapper.toEntity(member);
-        channelRepository.save(channel);
-        return channel.getId();
-    }
-
-    protected long signupAndSubscription() {
-        Password password = Password.from(TEST_PASSWORD.value);
-
-        Member member = Member.builder()
-                .nickname(Nickname.from(TEST_NICKNAME.value))
-                .loginId(LoginId.from(TEST_LOGIN_ID.value))
-                .password(password.encode(passwordEncoder))
-                .build();
-
-        memberRepository.save(member);
         Channel channel = ChannelMapper.toEntity(member);
         channelRepository.save(channel);
 
-        subscriptionRepository.save(Subscription.builder()
+        Subscription subscription = Subscription.builder()
                 .memberId(member.getId())
                 .channelId(channel.getId())
-                .build());
+                .build();
 
-        return channel.getId();
+        subscriptionRepository.save(subscription);
+
+        return subscription;
     }
 
     protected void signup() throws Exception {

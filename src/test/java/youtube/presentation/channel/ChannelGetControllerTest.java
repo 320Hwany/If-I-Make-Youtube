@@ -3,11 +3,10 @@ package youtube.presentation.channel;
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.restdocs.payload.JsonFieldType;
+import youtube.domain.channel.persist.Channel;
 import youtube.util.ControllerTest;
 
 import static com.epages.restdocs.apispec.ResourceDocumentation.resource;
-import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
@@ -46,9 +45,9 @@ public class ChannelGetControllerTest extends ControllerTest {
     @DisplayName("채널 id로 채널 캐시 정보를 가져옵니다")
     void getChannelSuccess() throws Exception {
         // expected
-        long channelId = signupChannelId();
+        Channel channel = saveChannel();
 
-        mockMvc.perform(get("/api/channelCache/{channelId}", channelId))
+        mockMvc.perform(get("/api/channelCache/{channelId}", channel.getId()))
                 .andExpect(status().isOk())
                 .andDo(document("채널 찾기 성공",
                         preprocessResponse(prettyPrint()),

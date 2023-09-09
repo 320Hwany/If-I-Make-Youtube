@@ -3,6 +3,7 @@ package youtube.presentation.subscription;
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import youtube.domain.subscription.Subscription;
 import youtube.util.ControllerTest;
 
 import static com.epages.restdocs.apispec.ResourceDocumentation.resource;
@@ -40,7 +41,7 @@ class SubscriptionCancelControllerTest extends ControllerTest {
     @DisplayName("회원이 구독한 채널이 아니면 구독을 취소할 수 없습니다")
     void subscribeCancelFailNotFound() throws Exception {
         // given
-        long channelId = signupAndSubscription();
+        Subscription subscription = saveSubscription();
         String accessToken = login();
 
         // expected
@@ -67,12 +68,12 @@ class SubscriptionCancelControllerTest extends ControllerTest {
     @DisplayName("로그인을 한 후 구독한 채널을 취소할 수 있습니다")
     void subscribeCancelSuccess() throws Exception {
         // given
-        long channelId = signupAndSubscription();
+        Subscription subscription = saveSubscription();
         String accessToken = login();
 
         // expected
         mockMvc.perform(delete("/api/subscriptions")
-                        .param("channelId", String.valueOf(channelId))
+                        .param("channelId", String.valueOf(subscription.getChannelId()))
                         .header(ACCESS_TOKEN.value, accessToken)
                 )
                 .andExpect(status().isOk())
