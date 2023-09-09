@@ -1,7 +1,7 @@
 package youtube.repository.video_info;
 
 import youtube.domain.video_info.persist.VideoInfo;
-import youtube.domain.video_info.vo.VideoInfoCache;
+import youtube.mapper.video_info.dto.VideoInfoCacheDto;
 
 public interface VideoInfoRepository {
 
@@ -9,7 +9,7 @@ public interface VideoInfoRepository {
 
     VideoInfo getById(final long videoInfoId);
 
-    VideoInfoCache getVideoInfoCacheDtoById(final long videoInfoId);
+    VideoInfoCacheDto getVideoInfoCacheDtoById(final long videoInfoId);
 
     long count();
 }

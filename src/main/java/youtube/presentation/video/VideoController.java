@@ -8,7 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 import youtube.application.video_info.VideoFindService;
 import youtube.application.video_info.VideoUploadService;
 import youtube.application.video_info.media_type.MediaTypeService;
+import youtube.application.video_info.query.QueryVideoInfoCacheById;
 import youtube.domain.member.vo.MemberSession;
+import youtube.domain.video_info.vo.VideoInfoCache;
 import youtube.global.annotation.Login;
 import youtube.mapper.video_info.dto.VideoInfoSaveRequest;
 
@@ -16,13 +18,16 @@ import youtube.mapper.video_info.dto.VideoInfoSaveRequest;
 @RestController
 public class VideoController {
 
+    private final QueryVideoInfoCacheById queryVideoInfoCacheById;
     private final VideoUploadService videoUploadService;
     private final VideoFindService videoFindService;
     private final MediaTypeService mediaTypeService;
 
-    public VideoController(final VideoUploadService videoUploadService,
+    public VideoController(final QueryVideoInfoCacheById queryVideoInfoCacheById,
+                           final VideoUploadService videoUploadService,
                            final VideoFindService videoFindService,
                            final MediaTypeService mediaTypeService) {
+        this.queryVideoInfoCacheById = queryVideoInfoCacheById;
         this.videoUploadService = videoUploadService;
         this.videoFindService = videoFindService;
         this.mediaTypeService = mediaTypeService;
@@ -36,6 +41,11 @@ public class VideoController {
         return ResponseEntity.ok()
                 .contentType(mediaType)
                 .body(resource);
+    }
+
+    @GetMapping("/videoInfo/{videoInfoId}")
+    public VideoInfoCache getVideoInfo(@PathVariable final long videoInfoId) {
+        return queryVideoInfoCacheById.query(videoInfoId);
     }
 
     @PostMapping("/videos")
