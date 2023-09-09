@@ -17,7 +17,7 @@ import youtube.mapper.subscription.dto.SubscriptionChannelsCache;
 import youtube.repository.channel.ChannelRepository;
 import youtube.repository.member.MemberRepository;
 import youtube.repository.subscription.SubscriptionRepository;
-import youtube.util.AcceptanceTest;
+import youtube.util.ServiceTest;
 
 import java.util.List;
 
@@ -25,34 +25,16 @@ import static org.assertj.core.api.Assertions.*;
 import static youtube.global.constant.AnnotationMessageConstant.SUBSCRIPTION_CHANNELS_CACHE;
 import static youtube.util.TestConstant.*;
 
-@AcceptanceTest
-class QuerySubscriptionsByMemberIdTest {
+class QuerySubscriptionsByMemberIdTest extends ServiceTest {
 
     @Autowired
     private QuerySubscriptionsByMemberId querySubscriptionsByMemberId;
-
-    @Autowired
-    private CacheManager cacheManager;
-
-    @Autowired
-    private MemberRepository memberRepository;
-
-    @Autowired
-    private ChannelRepository channelRepository;
-
-    @Autowired
-    private SubscriptionRepository subscriptionRepository;
 
     @Test
     @DisplayName("회원이 구독한 채널 리스트 DB에서 가져온 후 캐시에 저장합니다")
     void querySubscriptionsByMemberId() {
         // given
-        Member member = Member.builder()
-                .nickname(Nickname.from(TEST_NICKNAME.value))
-                .loginId(LoginId.from(TEST_LOGIN_ID.value))
-                .password(Password.from(TEST_PASSWORD.value))
-                .build();
-        memberRepository.save(member);
+        Member member = saveMember();
 
         Channel channel = ChannelMapper.toEntity(member);
         channelRepository.save(channel);

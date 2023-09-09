@@ -47,7 +47,7 @@ class CommandChannelUpdateTest extends ServiceTest {
 
         Channel channel = ChannelMapper.toEntity(member);
         channelRepository.save(channel);
-        ChannelDescription channelDescriptionUpdate = ChannelDescription.from("수정 채널설명");
+        ChannelDescription channelDescriptionUpdate = ChannelDescription.from("수정 채널 설명");
 
         // when
         commandChannelUpdate.updateChannelDescription(member.getId(), channelDescriptionUpdate);

@@ -2,6 +2,7 @@ package youtube.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import youtube.application.channel.query.QueryChannelCacheById;
 import youtube.domain.member.persist.Member;
@@ -11,6 +12,7 @@ import youtube.domain.member.vo.Password;
 import youtube.repository.channel.ChannelRepository;
 import youtube.repository.jwt.JwtRepository;
 import youtube.repository.member.MemberRepository;
+import youtube.repository.subscription.SubscriptionRepository;
 
 import static youtube.util.TestConstant.*;
 
@@ -30,10 +32,16 @@ public class ServiceTest {
     protected QueryChannelCacheById queryChannelCacheById;
 
     @Autowired
+    protected SubscriptionRepository subscriptionRepository;
+
+    @Autowired
     protected PasswordEncoder passwordEncoder;
 
     @Autowired
     protected ObjectMapper objectMapper;
+
+    @Autowired
+    protected CacheManager cacheManager;
 
     protected Member saveMember() {
         Password password = Password.from(TEST_PASSWORD.value);
