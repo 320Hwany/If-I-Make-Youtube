@@ -2,9 +2,7 @@ package youtube.repository.video_info;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
-import youtube.domain.video_info.persist.QVideoInfo;
 import youtube.domain.video_info.persist.VideoInfo;
-import youtube.domain.video_info.vo.VideoInfoCache;
 import youtube.global.exception.NotFoundException;
 import youtube.mapper.video_info.dto.QVideoInfoCacheDto;
 import youtube.mapper.video_info.dto.VideoInfoCacheDto;
@@ -37,7 +35,7 @@ public class VideoInfoRepositoryImpl implements VideoInfoRepository {
 
     @Override
     public VideoInfoCacheDto getVideoInfoCacheDtoById(final long videoInfoId) {
-        return queryFactory.select(new QVideoInfoCacheDto(
+        VideoInfoCacheDto videoInfoCacheDto = queryFactory.select(new QVideoInfoCacheDto(
                         videoInfo.videoTitle,
                         videoInfo.videoDescription,
                         videoInfo.views,
@@ -48,6 +46,12 @@ public class VideoInfoRepositoryImpl implements VideoInfoRepository {
                 .from(videoInfo)
                 .where(videoInfo.id.eq(videoInfoId))
                 .fetchFirst();
+
+        if (videoInfoCacheDto != null) {
+            return videoInfoCacheDto;
+        }
+
+        throw new NotFoundException(CHANNEL_NOT_FOUND.message);
     }
 
     @Override

@@ -3,7 +3,6 @@ package youtube.application.video_info;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import youtube.application.video_info.query.QueryVideoInfoById;
 import youtube.domain.video_info.persist.VideoInfo;
