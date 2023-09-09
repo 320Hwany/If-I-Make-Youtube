@@ -5,14 +5,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletResponse;
-import youtube.util.AcceptanceTest;
+import youtube.util.ServiceTest;
 
 import static org.assertj.core.api.Assertions.*;
 import static youtube.global.constant.StringConstant.ACCESS_TOKEN;
 import static youtube.global.constant.StringConstant.REFRESH_TOKEN;
 
-@AcceptanceTest
-class SetHeaderServiceTest {
+class SetHeaderServiceTest extends ServiceTest {
 
     @Autowired
     private SetHeaderService setHeaderService;
@@ -33,7 +32,7 @@ class SetHeaderServiceTest {
     }
 
     @Test
-    @DisplayName("Http 응답 메세지의 쿠키에 RefreshToken을 넣습니다")
+    @DisplayName("Http 응답 헤더의 쿠키에 RefreshToken을 넣습니다")
     void setRefreshTokenCookie() {
         // given
         MockHttpServletResponse response = new MockHttpServletResponse();
@@ -42,6 +41,7 @@ class SetHeaderServiceTest {
         // when
         setHeaderService.setRefreshTokenCookie(response, refreshToken);
         Cookie cookie = response.getCookie(REFRESH_TOKEN.value);
+        assert cookie != null;
         String value = cookie.getValue();
 
         // then

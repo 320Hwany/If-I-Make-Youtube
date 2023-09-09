@@ -4,21 +4,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import youtube.domain.jwt.JwtRefreshToken;
-import youtube.repository.jwt.JwtRepository;
-import youtube.util.AcceptanceTest;
+import youtube.util.ServiceTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static youtube.global.constant.StringConstant.REFRESH_TOKEN;
 import static youtube.util.TestConstant.*;
 
-@AcceptanceTest
-class JwtFacadeTest {
+class JwtFacadeTest extends ServiceTest {
 
     @Autowired
     private JwtFacade jwtFacade;
-
-    @Autowired
-    private JwtRepository jwtRepository;
 
     @Test
     @DisplayName("이미 회원 Id에 대한 RefreshToken이 DB에 있다면 RefreshToken을 업데이트합니다")

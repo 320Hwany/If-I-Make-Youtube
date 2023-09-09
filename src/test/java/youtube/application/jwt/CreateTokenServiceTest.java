@@ -1,18 +1,16 @@
 package youtube.application.jwt;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import youtube.domain.member.vo.MemberSession;
 import youtube.domain.member.vo.Nickname;
 import youtube.domain.member.vo.RoleType;
-import youtube.util.AcceptanceTest;
+import youtube.util.ServiceTest;
 import youtube.util.TestConstant;
 
 import java.util.Base64;
@@ -21,19 +19,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static youtube.global.constant.JwtKey.JWT_KEY;
 import static youtube.global.constant.TimeConstant.ONE_HOUR;
 
-@AcceptanceTest
-class CreateTokenServiceTest {
+class CreateTokenServiceTest extends ServiceTest {
 
     @Autowired
     private CreateTokenService createTokenService;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @Test
     @DisplayName("MemberSession 정보를 가진 AccessToken을 생성합니다")
     void createAccessToken() throws JsonProcessingException {
-        // given
+        // given 1
         MemberSession memberSession = MemberSession.builder()
                 .id(1)
                 .nickname(Nickname.from(TestConstant.TEST_NICKNAME.value))
@@ -42,6 +36,7 @@ class CreateTokenServiceTest {
                 .watchLaterVideosCount(20)
                 .build();
 
+        // given 2
         long expired = ONE_HOUR.value;
         byte[] decodedKey = Base64.getDecoder().decode(JWT_KEY);
 

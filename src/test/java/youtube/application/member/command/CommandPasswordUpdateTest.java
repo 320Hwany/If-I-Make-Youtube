@@ -32,16 +32,16 @@ class CommandPasswordUpdateTest extends ServiceTest {
     @DisplayName("로그인한 회원의 비밀번호를 수정합니다")
     void passwordUpdateSuccess() {
         // given 1
-        long memberId = saveMember();
+        Member member = saveMember();
 
         // given 2
         Password updatePassword = Password.from("수정 비밀번호!");
 
         // when
-        commandPasswordUpdate.command(memberId, updatePassword);
+        commandPasswordUpdate.command(member.getId(), updatePassword);
 
         // then
-        Member psEntity = memberRepository.getById(memberId);
+        Member psEntity = memberRepository.getById(member.getId());
         Password password = psEntity.getPassword();
         assertThat(passwordEncoder.matches(updatePassword.getPassword(), password.getPassword())).isTrue();
     }

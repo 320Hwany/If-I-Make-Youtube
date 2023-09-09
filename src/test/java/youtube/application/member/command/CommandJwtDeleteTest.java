@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import youtube.application.jwt.command.CommandJwtDelete;
 import youtube.domain.jwt.JwtRefreshToken;
-import youtube.repository.jwt.JwtRepository;
 import youtube.util.ServiceTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,9 +14,6 @@ class CommandJwtDeleteTest extends ServiceTest {
 
     @Autowired
     private CommandJwtDelete commandJwtDelete;
-
-    @Autowired
-    private JwtRepository jwtRepository;
 
     @Test
     @DisplayName("회원 로그아웃을 하면 DB에 저장된 RefreshToken이 삭제됩니다")

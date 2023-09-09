@@ -1,12 +1,15 @@
 package youtube.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import youtube.application.channel.query.QueryChannelCacheById;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
 import youtube.domain.member.vo.Password;
 import youtube.repository.channel.ChannelRepository;
+import youtube.repository.jwt.JwtRepository;
 import youtube.repository.member.MemberRepository;
 
 import static youtube.util.TestConstant.*;
@@ -21,9 +24,18 @@ public class ServiceTest {
     protected ChannelRepository channelRepository;
 
     @Autowired
+    protected JwtRepository jwtRepository;
+
+    @Autowired
+    protected QueryChannelCacheById queryChannelCacheById;
+
+    @Autowired
     protected PasswordEncoder passwordEncoder;
 
-    protected long saveMember() {
+    @Autowired
+    protected ObjectMapper objectMapper;
+
+    protected Member saveMember() {
         Password password = Password.from(TEST_PASSWORD.value);
 
         Member member = Member.builder()
@@ -34,6 +46,6 @@ public class ServiceTest {
 
         memberRepository.save(member);
 
-        return member.getId();
+        return member;
     }
 }
