@@ -12,7 +12,7 @@ public class VideoReactionMapper {
         return VideoReaction.builder()
                 .memberId(memberId)
                 .videoInfoId(dto.videoInfoId())
-                .reaction(dto.reaction())
+                .reaction(dto.updateReaction())
                 .build();
     }
 }

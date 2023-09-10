@@ -1,32 +1,23 @@
 package youtube.application.video_reaction;
 
-import org.springframework.cache.Cache;
-import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
-import youtube.application.video_info.query.QueryVideoInfoCacheById;
-import youtube.domain.video_info.vo.VideoInfoCache;
-import youtube.domain.video_reaction.vo.Reaction;
-
-import static youtube.global.constant.AnnotationMessageConstant.VIDEO_INFO_CACHE;
+import youtube.application.video_reaction.command.CommandVideoReaction;
+import youtube.mapper.video_reaction.dto.VideoReactionRequest;
 
 @Service
 public class VideoReactionUpdateService {
 
-    private final QueryVideoInfoCacheById queryVideoInfoCacheById;
-    private final CacheManager cacheManager;
+    private final CommandVideoReaction commandVideoReaction;
+    private final VideoReactionCacheUpdateService videoReactionCacheUpdateService;
 
-    public VideoReactionUpdateService(final QueryVideoInfoCacheById queryVideoInfoCacheById,
-                                      final CacheManager cacheManager) {
-        this.queryVideoInfoCacheById = queryVideoInfoCacheById;
-        this.cacheManager = cacheManager;
+    public VideoReactionUpdateService(final CommandVideoReaction commandVideoReaction,
+                                      final VideoReactionCacheUpdateService videoReactionCacheUpdateService) {
+        this.commandVideoReaction = commandVideoReaction;
+        this.videoReactionCacheUpdateService = videoReactionCacheUpdateService;
     }
 
-    public synchronized void updateReactionCount(final long videoInfoId, final Reaction updateReaction,
-                                                  final Reaction originalReaction) {
-        VideoInfoCache videoInfoCache = queryVideoInfoCacheById.query(videoInfoId);
-        videoInfoCache.updateReactionCount(originalReaction, updateReaction);
-        Cache cache = cacheManager.getCache(VIDEO_INFO_CACHE);
-        assert cache != null;
-        cache.put(videoInfoId, videoInfoCache);
+    public void saveReaction(final long memberId, final VideoReactionRequest dto) {
+        commandVideoReaction.command(memberId, dto);
+        videoReactionCacheUpdateService.updateCache(dto);
     }
 }

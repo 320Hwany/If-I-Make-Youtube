@@ -7,4 +7,6 @@ public interface VideoReactionRepository {
     void save(final VideoReaction videoReaction);
 
     VideoReaction getByMemberIdAndVideoInfoId(final long memberId, final long videoInfoId);
+
+    long count();
 }

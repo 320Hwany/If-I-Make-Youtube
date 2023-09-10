@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import youtube.application.channel.query.QueryChannelCacheById;
+import youtube.application.video_info.query.QueryVideoInfoCacheById;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
@@ -14,6 +15,7 @@ import youtube.repository.jwt.JwtRepository;
 import youtube.repository.member.MemberRepository;
 import youtube.repository.subscription.SubscriptionRepository;
 import youtube.repository.video_info.VideoInfoRepository;
+import youtube.repository.video_reaction.VideoReactionRepository;
 
 import static youtube.util.TestConstant.*;
 
@@ -30,13 +32,19 @@ public class ServiceTest {
     protected JwtRepository jwtRepository;
 
     @Autowired
-    protected QueryChannelCacheById queryChannelCacheById;
-
-    @Autowired
     protected SubscriptionRepository subscriptionRepository;
 
     @Autowired
     protected VideoInfoRepository videoInfoRepository;
+
+    @Autowired
+    protected VideoReactionRepository videoReactionRepository;
+
+    @Autowired
+    protected QueryChannelCacheById queryChannelCacheById;
+
+    @Autowired
+    protected QueryVideoInfoCacheById queryVideoInfoCacheById;
 
     @Autowired
     protected PasswordEncoder passwordEncoder;

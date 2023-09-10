@@ -40,7 +40,6 @@ public final class VideoInfoCache {
     public void updateReactionCount(final Reaction originalReaction, final Reaction updateReaction) {
         this.likesCount -= originalReaction.count;
         this.likesCount += updateReaction.count;
-
         this.dislikesCount -= originalReaction.count;
         this.dislikesCount += updateReaction.count;
     }

@@ -25,4 +25,9 @@ public class VideoReactionRepositoryImpl implements VideoReactionRepository {
         return videoReactionJpaRepository.findByMemberIdAndVideoInfoId(memberId, videoInfoId)
                 .orElseThrow(() -> new BadRequestException(VIDEO_REACTION_NOT_FOUND.message));
     }
+
+    @Override
+    public long count() {
+        return videoReactionJpaRepository.count();
+    }
 }
