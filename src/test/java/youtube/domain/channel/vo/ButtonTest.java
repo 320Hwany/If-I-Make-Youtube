@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ButtonTest {
 
     @Test
-    @DisplayName("각 구독자 수에 맞는 유튜브 버튼을 반환합니다")
+    @DisplayName("각 구독자 수에 맞는 유튜브 버튼을 반환합니다 - 경계값 테스트")
     void buttonForSubscribers() {
         // given
         Button normal = Button.from(99999);
