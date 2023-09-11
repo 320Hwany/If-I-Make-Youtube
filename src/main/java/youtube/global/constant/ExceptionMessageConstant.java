@@ -23,6 +23,7 @@ public enum ExceptionMessageConstant {
     VIDEO_INFO_NOT_FOUND("동영상 정보를 찾을 수 없습니다"),
     VIDEO_NOT_FOUND("동영상을 찾을 수 없습니다"),
     VIDEO_REACTION_NOT_FOUND("동영상에 대한 리액션 정보를 찾을 수 없습니다"),
+    VIDEO_INFO_SCHEDULER_BAD_REQUEST("동영상 정보를 캐시와 DB를 동기화하는 스케줄러 작업에 실패하였습니다"),
     SUBSCRIBERS_SCHEDULER_BAD_REQUEST("구독자 수를 캐시와 DB를 동기화하는 스케줄러 작업에 실패하였습니다"),
     BUTTON_SCHEDULER_BAD_REQUEST("구독자 수 변화에 따른 유튜브 버튼 업데이트 스케줄러 작업에 실패하였습니다"),
     CLASS_CAST_BAD_REQUEST("클래스 자료 형변환에 실패합니다"),
