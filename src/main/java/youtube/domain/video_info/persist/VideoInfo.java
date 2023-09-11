@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import youtube.domain.BaseTimeEntity;
+import youtube.domain.video_info.vo.VideoInfoCache;
 import youtube.domain.video_info.vo.VideoType;
 import youtube.global.annotation.Association;
 
@@ -51,5 +52,13 @@ public class VideoInfo extends BaseTimeEntity {
         this.contentCount = contentCount;
         this.videoDescription = videoDescription;
         this.fileExtension = fileExtension;
+    }
+
+    public void updateCacheInfo(final VideoInfoCache cache) {
+        this.videoTitle = cache.getVideoTitle();
+        this.videoDescription = cache.getVideoDescription();
+        this.views = cache.getViews();
+        this.likesCount = cache.getLikesCount();
+        this.dislikesCount = cache.getDislikesCount();
     }
 }

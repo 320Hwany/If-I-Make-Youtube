@@ -8,7 +8,6 @@ import youtube.domain.video_reaction.vo.Reaction;
 
 import java.time.LocalDateTime;
 
-import static youtube.global.constant.NumberConstant.ONE;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
