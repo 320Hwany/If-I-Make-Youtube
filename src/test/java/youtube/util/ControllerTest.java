@@ -19,7 +19,7 @@ import youtube.domain.channel.vo.ChannelName;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.Gender;
 import youtube.domain.subscription.Subscription;
-import youtube.domain.video_info.persist.VideoInfo;
+import youtube.domain.video.video_info.persist.VideoInfo;
 import youtube.mapper.channel.ChannelMapper;
 import youtube.mapper.member.dto.MemberSignupRequest;
 import youtube.repository.channel.ChannelRepository;
@@ -30,7 +30,7 @@ import youtube.domain.member.vo.Password;
 import youtube.global.constant.StringConstant;
 import youtube.mapper.member.dto.MemberLoginRequest;
 import youtube.repository.subscription.SubscriptionRepository;
-import youtube.repository.video_info.VideoInfoRepository;
+import youtube.repository.video.video_info.VideoInfoRepository;
 
 import java.time.LocalDate;
 
