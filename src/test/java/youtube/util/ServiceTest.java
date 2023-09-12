@@ -16,6 +16,7 @@ import youtube.repository.member.MemberRepository;
 import youtube.repository.subscription.SubscriptionRepository;
 import youtube.repository.video.video_info.VideoInfoRepository;
 import youtube.repository.video.video_reaction.VideoReactionRepository;
+import youtube.repository.video.video_watch_later.VideoWatchLaterRepository;
 
 import static youtube.util.TestConstant.*;
 
@@ -39,6 +40,9 @@ public class ServiceTest {
 
     @Autowired
     protected VideoReactionRepository videoReactionRepository;
+
+    @Autowired
+    protected VideoWatchLaterRepository videoWatchLaterRepository;
 
     @Autowired
     protected QueryChannelCacheById queryChannelCacheById;

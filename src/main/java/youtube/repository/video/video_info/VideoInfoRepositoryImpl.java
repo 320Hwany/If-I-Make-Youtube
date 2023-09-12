@@ -4,10 +4,10 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 import youtube.domain.video.video_info.persist.VideoInfo;
 import youtube.global.exception.NotFoundException;
-import youtube.mapper.video_info.dto.QVideoInfoCacheDto;
+import youtube.mapper.video.video_info.dto.QVideoInfoCacheDto;
 import youtube.mapper.video.video_info.dto.VideoInfoCacheDto;
 
-import static youtube.domain.video_info.persist.QVideoInfo.videoInfo;
+import static youtube.domain.video.video_info.persist.QVideoInfo.videoInfo;
 import static youtube.global.constant.ExceptionMessageConstant.*;
 
 @Repository

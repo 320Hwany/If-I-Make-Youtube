@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import youtube.domain.video.video_watch_later.VideoWatchLater;
 import youtube.mapper.video.video_watch_later.VideoWatchLaterMapper;
-import youtube.mapper.video.video_watch_later.dto.VideoWatchLaterSaveRequest;
 import youtube.repository.video.video_watch_later.VideoWatchLaterRepository;
 
 @Service
@@ -17,8 +16,10 @@ public class CommandVideoWatchLaterSave {
     }
 
     @Transactional
-    public void command(final VideoWatchLaterSaveRequest dto) {
-        VideoWatchLater entity = VideoWatchLaterMapper.toEntity(dto);
-        videoWatchLaterRepository.save(entity);
+    public void command(final long memberId, final long videoInfoId) {
+        if (!videoWatchLaterRepository.existsByMemberIdAndVideoInfoId(memberId, videoInfoId)) {
+            VideoWatchLater entity = VideoWatchLaterMapper.toEntity(memberId, videoInfoId);
+            videoWatchLaterRepository.save(entity);
+        }
     }
 }
