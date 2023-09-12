@@ -1,4 +1,4 @@
-package youtube.presentation.video;
+package youtube.presentation.video_info;
 
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +18,7 @@ import static org.springframework.restdocs.request.RequestDocumentation.paramete
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class VideoControllerTest extends ControllerTest {
+class VideoInfoControllerTest extends ControllerTest {
 
     @Test
     @DisplayName("동영상 정보 id와 일치하는 동영상 정보가 존재하지 않으면 예외가 발생합니다")

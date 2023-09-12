@@ -1,4 +1,4 @@
-package youtube.presentation.video;
+package youtube.presentation.video_info;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
@@ -16,17 +16,17 @@ import youtube.mapper.video_info.dto.VideoInfoSaveRequest;
 
 @RequestMapping("/api")
 @RestController
-public class VideoController {
+public class VideoInfoController {
 
     private final QueryVideoInfoCacheById queryVideoInfoCacheById;
     private final VideoUploadService videoUploadService;
     private final VideoFindService videoFindService;
     private final MediaTypeService mediaTypeService;
 
-    public VideoController(final QueryVideoInfoCacheById queryVideoInfoCacheById,
-                           final VideoUploadService videoUploadService,
-                           final VideoFindService videoFindService,
-                           final MediaTypeService mediaTypeService) {
+    public VideoInfoController(final QueryVideoInfoCacheById queryVideoInfoCacheById,
+                               final VideoUploadService videoUploadService,
+                               final VideoFindService videoFindService,
+                               final MediaTypeService mediaTypeService) {
         this.queryVideoInfoCacheById = queryVideoInfoCacheById;
         this.videoUploadService = videoUploadService;
         this.videoFindService = videoFindService;
