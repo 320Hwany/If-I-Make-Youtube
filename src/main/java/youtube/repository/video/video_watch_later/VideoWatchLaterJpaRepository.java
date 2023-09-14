@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface VideoWatchLaterJpaRepository extends JpaRepository<VideoWatchLater, Long> {
 
     boolean existsByMemberIdAndVideoInfoId(final long memberId, final long videoInfoId);
+
+    Optional<VideoWatchLater> findByMemberIdAndVideoInfoId(final long memberId, final long videoInfoId);
 }

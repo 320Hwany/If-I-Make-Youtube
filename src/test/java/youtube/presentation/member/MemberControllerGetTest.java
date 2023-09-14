@@ -3,7 +3,6 @@ package youtube.presentation.member;
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.restdocs.payload.JsonFieldType;
 import youtube.util.ControllerTest;
 
 import static com.epages.restdocs.apispec.ResourceDocumentation.resource;

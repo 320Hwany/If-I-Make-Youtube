@@ -9,5 +9,9 @@ public interface VideoWatchLaterRepository {
 
     boolean existsByMemberIdAndVideoInfoId(final long memberId, final long videoInfoId);
 
+    VideoWatchLater getByMemberIdAndVideoInfoId(final long memberId, final long videoInfoId);
+
+    void delete(final VideoWatchLater videoWatchLater);
+
     long count();
 }
