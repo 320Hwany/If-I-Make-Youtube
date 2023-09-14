@@ -31,6 +31,7 @@ import youtube.global.constant.StringConstant;
 import youtube.mapper.member.dto.MemberLoginRequest;
 import youtube.repository.subscription.SubscriptionRepository;
 import youtube.repository.video.video_info.VideoInfoRepository;
+import youtube.repository.video.video_watch_later.VideoWatchLaterRepository;
 
 import java.time.LocalDate;
 
@@ -63,6 +64,9 @@ public class ControllerTest {
 
     @Autowired
     protected VideoInfoRepository videoInfoRepository;
+
+    @Autowired
+    protected VideoWatchLaterRepository videoWatchLaterRepository;
 
     @Autowired
     protected PasswordEncoder passwordEncoder;
@@ -147,7 +151,7 @@ public class ControllerTest {
                 .build();
 
         // expected
-        mockMvc.perform(RestDocumentationRequestBuilders.post("/api/signup")
+        mockMvc.perform(post("/api/signup")
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isOk());

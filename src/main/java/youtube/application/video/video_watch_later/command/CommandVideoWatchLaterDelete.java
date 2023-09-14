@@ -17,6 +17,7 @@ public class CommandVideoWatchLaterDelete {
     @Transactional
     public void command(final long memberId, final long videoInfoId) {
         VideoWatchLater entity = videoWatchLaterRepository.getByMemberIdAndVideoInfoId(memberId, videoInfoId);
+        System.out.println(entity);
         videoWatchLaterRepository.delete(entity);
     }
 }

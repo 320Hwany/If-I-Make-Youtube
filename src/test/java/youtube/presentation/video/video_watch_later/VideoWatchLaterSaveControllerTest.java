@@ -14,7 +14,7 @@ import static org.springframework.restdocs.request.RequestDocumentation.pathPara
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static youtube.global.constant.StringConstant.ACCESS_TOKEN;
 
-class VideoWatchLaterControllerTest extends ControllerTest {
+class VideoWatchLaterSaveControllerTest extends ControllerTest {
 
     @Test
     @DisplayName("로그인 하지 않으면 나중에 볼 동영상을 저장에 실패합니다")
