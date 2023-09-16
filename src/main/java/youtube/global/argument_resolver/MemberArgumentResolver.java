@@ -14,15 +14,15 @@ import static youtube.global.constant.StringConstant.MEMBER_SESSION;
 public class MemberArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Override
-    public boolean supportsParameter(MethodParameter parameter) {
+    public boolean supportsParameter(final MethodParameter parameter) {
         boolean hasMemberSessionType = parameter.getParameterType().equals(MemberSession.class);
         boolean hasLoginMemberAnnotation = parameter.hasParameterAnnotation(Login.class);
         return hasMemberSessionType && hasLoginMemberAnnotation;
     }
 
     @Override
-    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
-                                  NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
+    public Object resolveArgument(final MethodParameter parameter, final ModelAndViewContainer mavContainer,
+                                  final NativeWebRequest webRequest, final WebDataBinderFactory binderFactory) {
         HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
         assert request != null;
         return request.getAttribute(MEMBER_SESSION.value);

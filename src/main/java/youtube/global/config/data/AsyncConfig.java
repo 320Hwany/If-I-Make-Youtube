@@ -15,7 +15,7 @@ public class AsyncConfig {
         executor.setCorePoolSize(20);
         executor.setMaxPoolSize(50);
         executor.setQueueCapacity(100);
-        executor.setThreadNamePrefix("Subscribers Count Async Task-");
+        executor.setThreadNamePrefix("Async Task-");
         executor.initialize();
         return executor;
     }
