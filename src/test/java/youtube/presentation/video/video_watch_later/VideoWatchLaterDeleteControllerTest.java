@@ -37,7 +37,7 @@ public class VideoWatchLaterDeleteControllerTest extends ControllerTest {
         videoWatchLaterRepository.save(videoWatchLater);
 
         // expected
-        mockMvc.perform(delete("/api/videoWatchLater/{videoInfoId}", videoWatchLater.getId()))
+        mockMvc.perform(delete("/api/video-watch-later/{videoInfoId}", videoWatchLater.getId()))
                 .andExpect(status().isUnauthorized())
                 .andDo(document("나중에 볼 동영상 삭제 실패 - 로그인 하지 않음",
                         preprocessRequest(prettyPrint()),
@@ -59,7 +59,7 @@ public class VideoWatchLaterDeleteControllerTest extends ControllerTest {
         String accessToken = login();
 
         // expected
-        mockMvc.perform(delete("/api/videoWatchLater/{videoInfoId}", 9999L)
+        mockMvc.perform(delete("/api/video-watch-later/{videoInfoId}", 9999L)
                         .header(ACCESS_TOKEN.value, accessToken)
                 )
                 .andExpect(status().isNotFound())
@@ -96,7 +96,7 @@ public class VideoWatchLaterDeleteControllerTest extends ControllerTest {
         videoWatchLaterRepository.save(videoWatchLater);
 
         // expected
-        mockMvc.perform(delete("/api/videoWatchLater/{videoInfoId}", videoWatchLater.getId())
+        mockMvc.perform(delete("/api/video-watch-later/{videoInfoId}", videoWatchLater.getId())
                         .header(ACCESS_TOKEN.value, accessToken)
                 )
                 .andExpect(status().isOk())

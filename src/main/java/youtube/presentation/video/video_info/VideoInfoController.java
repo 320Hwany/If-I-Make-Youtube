@@ -43,7 +43,7 @@ public class VideoInfoController {
                 .body(resource);
     }
 
-    @GetMapping("/videoInfoCache/{videoInfoId}")
+    @GetMapping("/video-info-cache/{videoInfoId}")
     public VideoInfoCache getVideoInfoCache(@PathVariable final long videoInfoId) {
         return queryVideoInfoCacheById.query(videoInfoId);
     }

@@ -22,7 +22,7 @@ public class ChannelGetControllerTest extends ControllerTest {
     @Test
     @DisplayName("채널 id와 일치하는 채널이 존재하지 않으면 예외가 발생합니다")
     void getChannelFail() throws Exception {
-        mockMvc.perform(get("/api/channelCache/{channelId}", 9999))
+        mockMvc.perform(get("/api/channel-cache/{channelId}", 9999))
                 .andExpect(status().isNotFound())
                 .andDo(document("채널을 찾을 수 없음 - 404",
                         preprocessResponse(prettyPrint()),
@@ -47,7 +47,7 @@ public class ChannelGetControllerTest extends ControllerTest {
         // expected
         Channel channel = saveChannel();
 
-        mockMvc.perform(get("/api/channelCache/{channelId}", channel.getId()))
+        mockMvc.perform(get("/api/channel-cache/{channelId}", channel.getId()))
                 .andExpect(status().isOk())
                 .andDo(document("채널 찾기 성공",
                         preprocessResponse(prettyPrint()),

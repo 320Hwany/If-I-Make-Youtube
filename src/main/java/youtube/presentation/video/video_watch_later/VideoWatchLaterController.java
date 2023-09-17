@@ -19,13 +19,13 @@ public class VideoWatchLaterController {
         this.commandVideoWatchLaterDelete = commandVideoWatchLaterDelete;
     }
 
-    @PostMapping("/videoWatchLater/{videoInfoId}")
+    @PostMapping("/video-watch-later/{videoInfoId}")
     public void saveVideoWatchLater(@Login final MemberSession memberSession,
                                     @PathVariable final long videoInfoId) {
         commandVideoWatchLaterSave.command(memberSession.id(), videoInfoId);
     }
 
-    @DeleteMapping("/videoWatchLater/{videoInfoId}")
+    @DeleteMapping("/video-watch-later/{videoInfoId}")
     public void deleteVideoWatchLater(@Login final MemberSession memberSession,
                                       @PathVariable final long videoInfoId) {
         commandVideoWatchLaterDelete.command(memberSession.id(), videoInfoId);

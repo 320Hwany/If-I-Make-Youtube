@@ -22,18 +22,18 @@ public class ChannelController {
         this.channelUpdateService = channelUpdateService;
     }
 
-    @GetMapping("/channelCache/{channelId}")
+    @GetMapping("/channel-cache/{channelId}")
     public ChannelCache getChannelCache(@PathVariable final long channelId) {
         return queryChannelCacheById.query(channelId);
     }
 
-    @PatchMapping("/channels/channelName")
+    @PatchMapping("/channels/channel-name")
     public void updateChannelName(@Login final MemberSession memberSession,
                                   @RequestBody final ChannelName channelName) {
         channelUpdateService.updateChannelName(memberSession.id(), channelName);
     }
 
-    @PatchMapping("/channels/channelDescription")
+    @PatchMapping("/channels/channel-description")
     public void updateChannelDescription(@Login final MemberSession memberSession,
                                          @RequestBody final ChannelDescription channelDescription) {
         channelUpdateService.updateChannelDescription(memberSession.id(), channelDescription);

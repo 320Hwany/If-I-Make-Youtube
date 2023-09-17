@@ -35,7 +35,7 @@ class VideoReactionControllerTest extends ControllerTest {
                 .build();
 
         // expected
-        mockMvc.perform(post("/api/videoReaction")
+        mockMvc.perform(post("/api/video-reaction")
                 .contentType(APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isUnauthorized())
@@ -74,7 +74,7 @@ class VideoReactionControllerTest extends ControllerTest {
                 .build();
 
         // expected
-        mockMvc.perform(post("/api/videoReaction")
+        mockMvc.perform(post("/api/video-reaction")
                         .header(ACCESS_TOKEN.value, accessToken)
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto))
