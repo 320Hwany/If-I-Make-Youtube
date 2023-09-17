@@ -1,16 +1,13 @@
 package youtube.domain.video.video_watched.persist;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import youtube.global.annotation.Association;
 
 import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class VideoWatched {
 
@@ -25,6 +22,9 @@ public class VideoWatched {
     private Long videoInfoId;
 
     private LocalDateTime lastWatchedDate;
+
+    protected VideoWatched() {
+    }
 
     @Builder
     private VideoWatched(final Long memberId, final Long videoInfoId, final LocalDateTime watchedDate) {

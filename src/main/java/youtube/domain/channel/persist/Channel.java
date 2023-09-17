@@ -1,10 +1,8 @@
 package youtube.domain.channel.persist;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import youtube.domain.BaseTimeEntity;
 import youtube.domain.channel.vo.Button;
 import youtube.domain.channel.vo.ChannelDescription;
@@ -12,7 +10,6 @@ import youtube.domain.channel.vo.ChannelName;
 import youtube.global.annotation.Association;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Channel extends BaseTimeEntity {
 
@@ -37,6 +34,9 @@ public class Channel extends BaseTimeEntity {
     private Button button;
 
     private Boolean isInfluencer;
+
+    protected Channel() {
+    }
 
     @Builder
     private Channel(final Long memberId, final ChannelName channelName,

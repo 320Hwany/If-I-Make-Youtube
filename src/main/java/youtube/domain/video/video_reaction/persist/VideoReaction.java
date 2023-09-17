@@ -1,16 +1,13 @@
 package youtube.domain.video.video_reaction.persist;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import youtube.domain.BaseTimeEntity;
 import youtube.domain.video.video_reaction.vo.Reaction;
 import youtube.global.annotation.Association;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class VideoReaction extends BaseTimeEntity {
 
@@ -26,6 +23,9 @@ public class VideoReaction extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     private Reaction reaction;
+
+    protected VideoReaction() {
+    }
 
     @Builder
     private VideoReaction(final Long memberId, final Long videoInfoId, final Reaction reaction) {

@@ -1,15 +1,12 @@
 package youtube.domain.jwt;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import youtube.domain.BaseTimeEntity;
 import youtube.global.annotation.Association;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class JwtRefreshToken extends BaseTimeEntity {
 
@@ -22,6 +19,9 @@ public class JwtRefreshToken extends BaseTimeEntity {
     private Long memberId;
 
     private String refreshToken;
+
+    protected JwtRefreshToken() {
+    }
 
     @Builder
     private JwtRefreshToken(final Long memberId, final String refreshToken) {

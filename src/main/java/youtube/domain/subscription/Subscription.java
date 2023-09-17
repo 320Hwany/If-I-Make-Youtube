@@ -1,15 +1,12 @@
 package youtube.domain.subscription;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import youtube.domain.BaseTimeEntity;
 import youtube.global.annotation.Association;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Subscription extends BaseTimeEntity {
 
@@ -25,6 +22,9 @@ public class Subscription extends BaseTimeEntity {
     private Long channelId;
 
     private Boolean isNotification;
+
+    protected Subscription() {
+    }
 
     @Builder
     private Subscription(final Long memberId, final Long channelId, final Boolean isNotification) {
