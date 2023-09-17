@@ -11,8 +11,9 @@ import static com.epages.restdocs.apispec.ResourceDocumentation.resource;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.restdocs.payload.JsonFieldType.STRING;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -41,12 +42,17 @@ public class VideoWatchLaterDeleteControllerTest extends ControllerTest {
                 .andExpect(status().isUnauthorized())
                 .andDo(document("나중에 볼 동영상 삭제 실패 - 로그인 하지 않음",
                         preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
                         pathParameters(
                                 parameterWithName("videoInfoId").description("동영상 정보 id")
                         ),
                         resource(ResourceSnippetParameters.builder()
                                 .tag("동영상")
                                 .summary("나중에 볼 동영상")
+                                .responseFields(
+                                        fieldWithPath("statusCode").type(STRING).description("상태 코드"),
+                                        fieldWithPath("message").type(STRING).description("오류 메세지")
+                                )
                                 .build()
                         )));
     }
@@ -65,6 +71,7 @@ public class VideoWatchLaterDeleteControllerTest extends ControllerTest {
                 .andExpect(status().isNotFound())
                 .andDo(document("나중에 볼 동영상 삭제 실패 - 동영상 찾을 수 없음",
                         preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
                         pathParameters(
                                 parameterWithName("videoInfoId").description("동영상 정보 id")
                         ),
@@ -73,6 +80,10 @@ public class VideoWatchLaterDeleteControllerTest extends ControllerTest {
                                 .summary("나중에 볼 동영상")
                                 .requestHeaders(
                                         headerWithName(ACCESS_TOKEN.value).description("AccessToken")
+                                )
+                                .responseFields(
+                                        fieldWithPath("statusCode").type(STRING).description("상태 코드"),
+                                        fieldWithPath("message").type(STRING).description("오류 메세지")
                                 )
                                 .build()
                         )));

@@ -5,8 +5,11 @@ import youtube.application.video.video_watched.command.CommandVideoWatchedUpdate
 import youtube.application.video.video_watched.query.QueryVideoWatchedCacheByMemberId;
 import youtube.domain.member.vo.MemberSession;
 import youtube.global.annotation.Login;
+import youtube.mapper.video.video_watched.dto.VideoWatchedResponse;
+import youtube.mapper.video.video_watched.dto.VideoWatchedResult;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RequestMapping("/api")
 @RestController
@@ -22,8 +25,9 @@ public class VideoWatchedController {
     }
 
     @GetMapping("/video-watched")
-    public void getVideoWatched(@Login final MemberSession memberSession){
-        queryVideoWatchedCacheByMemberId.query(memberSession.id());
+    public VideoWatchedResult getVideoWatched(@Login final MemberSession memberSession){
+        List<VideoWatchedResponse> responses = queryVideoWatchedCacheByMemberId.query(memberSession.id());
+        return VideoWatchedResult.from(responses.size(), responses);
     }
 
     @PostMapping("/video-watched/{videoInfoId}")
