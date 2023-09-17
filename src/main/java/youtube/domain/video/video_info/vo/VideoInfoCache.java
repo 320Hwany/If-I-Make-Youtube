@@ -1,16 +1,12 @@
 package youtube.domain.video.video_info.vo;
 
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import youtube.domain.video.video_reaction.vo.Reaction;
 
 import java.time.LocalDateTime;
 
-
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public final class VideoInfoCache {
 
     private String videoTitle;

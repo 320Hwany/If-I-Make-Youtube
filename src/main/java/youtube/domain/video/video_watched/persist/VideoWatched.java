@@ -1,4 +1,4 @@
-package youtube.domain.video.video_watched;
+package youtube.domain.video.video_watched.persist;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -24,12 +24,12 @@ public class VideoWatched {
     @Association
     private Long videoInfoId;
 
-    private LocalDateTime watchedDate;
+    private LocalDateTime lastWatchedDate;
 
     @Builder
     private VideoWatched(final Long memberId, final Long videoInfoId, final LocalDateTime watchedDate) {
         this.memberId = memberId;
         this.videoInfoId = videoInfoId;
-        this.watchedDate = watchedDate;
+        this.lastWatchedDate = watchedDate;
     }
 }

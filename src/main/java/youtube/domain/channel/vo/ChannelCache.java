@@ -1,14 +1,11 @@
 package youtube.domain.channel.vo;
 
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import static youtube.global.constant.NumberConstant.ONE;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public final class ChannelCache {
 
     private ChannelName channelName;
