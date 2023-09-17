@@ -4,7 +4,7 @@ import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import youtube.domain.member.persist.Member;
-import youtube.domain.video.video_watch_later.VideoWatchLater;
+import youtube.domain.video.video_watch_later.persist.VideoWatchLater;
 import youtube.util.ControllerTest;
 
 import static com.epages.restdocs.apispec.ResourceDocumentation.resource;

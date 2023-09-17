@@ -1,4 +1,4 @@
-package youtube.domain.video.video_watch_later;
+package youtube.domain.video.video_watch_later.persist;
 
 import jakarta.persistence.*;
 import lombok.Builder;

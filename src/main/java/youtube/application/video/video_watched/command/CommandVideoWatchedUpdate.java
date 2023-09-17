@@ -7,19 +7,28 @@ import youtube.mapper.video.video_watched.VideoWatchedMapper;
 import youtube.repository.video.video_watched.VideoWatchedRepository;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
-public class CommandVideoWatchedSave {
+public class CommandVideoWatchedUpdate {
 
     private final VideoWatchedRepository videoWatchedRepository;
 
-    public CommandVideoWatchedSave(final VideoWatchedRepository videoWatchedRepository) {
+    public CommandVideoWatchedUpdate(final VideoWatchedRepository videoWatchedRepository) {
         this.videoWatchedRepository = videoWatchedRepository;
     }
 
     @Transactional
     public void command(final long memberId, final long videoInfoId, final LocalDateTime watchedDateTime) {
-        VideoWatched entity = VideoWatchedMapper.toEntity(memberId, videoInfoId, watchedDateTime);
-        videoWatchedRepository.save(entity);
+        Optional<VideoWatched> optionalVideoWatched =
+                videoWatchedRepository.findByMemberIdAndVideoInfoId(memberId, videoInfoId);
+
+        if (optionalVideoWatched.isPresent()) {
+            VideoWatched entity = optionalVideoWatched.get();
+            entity.updateLastWatchedDateTime(watchedDateTime);
+        } else {
+            VideoWatched entity = VideoWatchedMapper.toEntity(memberId, videoInfoId, watchedDateTime);
+            videoWatchedRepository.save(entity);
+        }
     }
 }

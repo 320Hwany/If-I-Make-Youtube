@@ -1,7 +1,7 @@
 package youtube.repository.video.video_watch_later;
 
 import org.springframework.stereotype.Repository;
-import youtube.domain.video.video_watch_later.VideoWatchLater;
+import youtube.domain.video.video_watch_later.persist.VideoWatchLater;
 import youtube.global.exception.NotFoundException;
 
 import static youtube.global.constant.ExceptionMessageConstant.*;

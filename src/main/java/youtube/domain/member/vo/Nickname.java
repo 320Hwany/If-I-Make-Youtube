@@ -2,9 +2,7 @@ package youtube.domain.member.vo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import youtube.global.exception.BadRequestException;
 
 import java.util.Objects;
@@ -14,7 +12,6 @@ import static youtube.global.constant.ExceptionMessageConstant.NICKNAME_LENGTH;
 import static youtube.global.constant.ExceptionMessageConstant.NICKNAME_REGEX;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Embeddable
 public final class Nickname {
 
@@ -26,6 +23,9 @@ public final class Nickname {
 
     @Column(unique = true, nullable = false)
     private String nickname;
+
+    protected Nickname() {
+    }
 
     private Nickname(final String nickname) {
         validateCreation(nickname);

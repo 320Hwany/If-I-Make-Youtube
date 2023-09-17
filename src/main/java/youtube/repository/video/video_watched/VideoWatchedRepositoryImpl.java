@@ -2,12 +2,12 @@ package youtube.repository.video.video_watched;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
-import youtube.domain.video.video_watched.persist.QVideoWatched;
 import youtube.domain.video.video_watched.persist.VideoWatched;
-import youtube.mapper.video.video_watched.dto.QVideoWatchedCacheDto;
-import youtube.mapper.video.video_watched.dto.VideoWatchedCacheDto;
+import youtube.mapper.video.video_watched.dto.QVideoWatchedResponse;
+import youtube.mapper.video.video_watched.dto.VideoWatchedResponse;
 
 import java.util.List;
+import java.util.Optional;
 
 import static youtube.domain.video.video_watched.persist.QVideoWatched.videoWatched;
 
@@ -29,11 +29,16 @@ public class VideoWatchedRepositoryImpl implements VideoWatchedRepository {
     }
 
     @Override
-    public List<VideoWatchedCacheDto> getVideoWatchedCacheDtosByMemberId(final long memberId) {
+    public Optional<VideoWatched> findByMemberIdAndVideoInfoId(final long memberId, final long videoInfoId) {
+        return videoWatchedJpaRepository.findByMemberIdAndVideoInfoId(memberId, videoInfoId);
+    }
+
+    @Override
+    public List<VideoWatchedResponse> findVideoWatchedResponsesByMemberId(final long memberId) {
         return queryFactory.select(
-                        new QVideoWatchedCacheDto(
+                        new QVideoWatchedResponse(
                                 videoWatched.videoInfoId,
-                                videoWatched.lastWatchedDate
+                                videoWatched.lastWatchedDateTime
                         ))
                 .from(videoWatched)
                 .where(videoWatched.memberId.eq(memberId))

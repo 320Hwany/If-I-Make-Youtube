@@ -4,12 +4,12 @@ import com.querydsl.core.annotations.QueryProjection;
 
 import java.time.LocalDateTime;
 
-public record VideoWatchedCacheDto(
+public record VideoWatchedResponse(
         long videoInfoId,
-        LocalDateTime lastWatchedDate
+        LocalDateTime lastWatchedDateTime
 ) {
 
     @QueryProjection
-    public VideoWatchedCacheDto {
+    public VideoWatchedResponse {
     }
 }

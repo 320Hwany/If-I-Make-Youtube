@@ -2,9 +2,7 @@ package youtube.domain.channel.vo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import youtube.global.exception.BadRequestException;
 
 import java.util.Objects;
@@ -13,7 +11,6 @@ import java.util.regex.Pattern;
 import static youtube.global.constant.ExceptionMessageConstant.*;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Embeddable
 public final class ChannelName {
 
@@ -25,6 +22,9 @@ public final class ChannelName {
 
     @Column(unique = true, nullable = false)
     private String channelName;
+
+    protected ChannelName() {
+    }
 
     private ChannelName(final String channelName) {
         validateCreation(channelName);

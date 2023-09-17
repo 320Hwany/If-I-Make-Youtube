@@ -2,9 +2,7 @@ package youtube.domain.member.vo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import youtube.global.exception.BadRequestException;
 
 import java.util.Objects;
@@ -14,7 +12,6 @@ import static youtube.global.constant.ExceptionMessageConstant.LOGIN_ID_LENGTH;
 import static youtube.global.constant.ExceptionMessageConstant.LOGIN_ID_REGEX;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Embeddable
 public final class LoginId {
 
@@ -26,6 +23,9 @@ public final class LoginId {
 
     @Column(unique = true, nullable = false)
     private String loginId;
+
+    protected LoginId() {
+    }
 
     private LoginId(final String loginId) {
         validateCreation(loginId);

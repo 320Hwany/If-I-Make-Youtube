@@ -3,7 +3,7 @@ package youtube.application.video.video_watch_later.command;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import youtube.domain.video.video_watch_later.VideoWatchLater;
+import youtube.domain.video.video_watch_later.persist.VideoWatchLater;
 import youtube.util.ServiceTest;
 
 import static org.assertj.core.api.Assertions.assertThat;

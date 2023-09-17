@@ -21,7 +21,7 @@ public class VideoWatched {
     @Association
     private Long videoInfoId;
 
-    private LocalDateTime lastWatchedDate;
+    private LocalDateTime lastWatchedDateTime;
 
     protected VideoWatched() {
     }
@@ -30,6 +30,10 @@ public class VideoWatched {
     private VideoWatched(final Long memberId, final Long videoInfoId, final LocalDateTime watchedDate) {
         this.memberId = memberId;
         this.videoInfoId = videoInfoId;
-        this.lastWatchedDate = watchedDate;
+        this.lastWatchedDateTime = watchedDate;
+    }
+
+    public void updateLastWatchedDateTime(final LocalDateTime watchedDateTime) {
+        this.lastWatchedDateTime = watchedDateTime;
     }
 }

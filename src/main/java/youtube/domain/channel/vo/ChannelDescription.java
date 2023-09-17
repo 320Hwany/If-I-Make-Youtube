@@ -2,19 +2,19 @@ package youtube.domain.channel.vo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Embeddable
 public final class ChannelDescription {
 
     @Column(nullable = false)
     private String channelDescription;
+
+    protected ChannelDescription() {
+    }
 
     private ChannelDescription(final String channelDescription) {
         this.channelDescription = channelDescription;

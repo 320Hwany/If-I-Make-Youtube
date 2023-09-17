@@ -14,7 +14,6 @@ import java.util.regex.Pattern;
 import static youtube.global.constant.ExceptionMessageConstant.*;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Embeddable
 public final class Password {
 
@@ -26,6 +25,9 @@ public final class Password {
 
     @Column(nullable = false)
     private String password;
+
+    protected Password() {
+    }
 
     private Password(final String password) {
         validateCreation(password);

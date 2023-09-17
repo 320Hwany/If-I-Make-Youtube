@@ -1,6 +1,6 @@
 package youtube.repository.video.video_watch_later;
 
-import youtube.domain.video.video_watch_later.VideoWatchLater;
+import youtube.domain.video.video_watch_later.persist.VideoWatchLater;
 
 
 public interface VideoWatchLaterRepository {

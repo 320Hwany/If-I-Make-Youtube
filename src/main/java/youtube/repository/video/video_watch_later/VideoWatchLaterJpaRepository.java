@@ -1,7 +1,7 @@
 package youtube.repository.video.video_watch_later;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import youtube.domain.video.video_watch_later.VideoWatchLater;
+import youtube.domain.video.video_watch_later.persist.VideoWatchLater;
 
 import java.util.Optional;
 
