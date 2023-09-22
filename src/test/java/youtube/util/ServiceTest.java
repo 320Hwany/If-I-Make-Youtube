@@ -11,6 +11,7 @@ import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
 import youtube.domain.member.vo.Password;
 import youtube.repository.channel.ChannelRepository;
+import youtube.repository.comment.CommentRepository;
 import youtube.repository.jwt.JwtRepository;
 import youtube.repository.member.MemberRepository;
 import youtube.repository.subscription.SubscriptionRepository;
@@ -47,6 +48,9 @@ public class ServiceTest {
 
     @Autowired
     protected VideoWatchedRepository videoWatchedRepository;
+
+    @Autowired
+    protected CommentRepository commentRepository;
 
     @Autowired
     protected QueryChannelCacheById queryChannelCacheById;

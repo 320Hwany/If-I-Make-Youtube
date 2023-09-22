@@ -33,8 +33,8 @@ public class ApiRestControllerAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public MethodArgumentExceptionResponse methodArgumentNotValidException(
-            final MethodArgumentNotValidException e
-    ) {
+            final MethodArgumentNotValidException e) {
+
         MethodArgumentExceptionResponse exceptionResponse = new MethodArgumentExceptionResponse(
                 BAD_REQUEST.statusCode,
                 new ConcurrentHashMap<>()

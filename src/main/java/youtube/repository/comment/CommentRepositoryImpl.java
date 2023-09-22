@@ -16,4 +16,9 @@ public class CommentRepositoryImpl implements CommentRepository {
     public void save(final Comment comment) {
         commentJpaRepository.save(comment);
     }
+
+    @Override
+    public long count() {
+        return commentJpaRepository.count();
+    }
 }

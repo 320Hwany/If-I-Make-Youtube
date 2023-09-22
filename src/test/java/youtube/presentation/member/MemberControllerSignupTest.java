@@ -34,7 +34,8 @@ public class MemberControllerSignupTest extends ControllerTest {
         // expected
         mockMvc.perform(post("/api/signup")
                         .contentType(APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(dto)))
+                        .content(objectMapper.writeValueAsString(dto))
+                )
                 .andExpect(status().isBadRequest())
                 .andDo(document("회원 가입 실패",
                         preprocessResponse(prettyPrint()),
