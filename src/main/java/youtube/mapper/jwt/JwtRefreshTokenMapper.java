@@ -2,10 +2,10 @@ package youtube.mapper.jwt;
 
 import youtube.domain.jwt.JwtRefreshToken;
 
-public class JwtRefreshTokenMapper {
+public enum JwtRefreshTokenMapper {
 
-    private JwtRefreshTokenMapper() {
-    }
+    JwtRefreshTokenMapper() {
+    };
 
     public static JwtRefreshToken toEntity(final long memberId, final String refreshToken) {
         return JwtRefreshToken.builder()

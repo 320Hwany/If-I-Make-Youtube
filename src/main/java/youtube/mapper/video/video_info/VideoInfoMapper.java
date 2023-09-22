@@ -7,10 +7,10 @@ import youtube.mapper.video.video_info.dto.VideoInfoSaveRequest;
 
 import static youtube.global.constant.NumberConstant.*;
 
-public class VideoInfoMapper {
+public enum VideoInfoMapper {
 
-    private VideoInfoMapper() {
-    }
+    VideoInfoMapper() {
+    };
 
     public static VideoInfo toEntity(final long channelId, final VideoInfoSaveRequest dto,
                                      final String fileExtension) {

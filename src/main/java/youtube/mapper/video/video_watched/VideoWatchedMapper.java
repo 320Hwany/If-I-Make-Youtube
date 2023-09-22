@@ -7,10 +7,10 @@ import youtube.mapper.video.video_watched.dto.VideoWatchedResult;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class VideoWatchedMapper {
+public enum VideoWatchedMapper {
 
-    private VideoWatchedMapper() {
-    }
+    VideoWatchedMapper() {
+    };
 
     public static VideoWatched toEntity(final long memberId, final long videoInfoId,
                                         final LocalDateTime watchedDateTime) {

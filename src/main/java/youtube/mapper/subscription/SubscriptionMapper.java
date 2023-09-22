@@ -8,10 +8,10 @@ import youtube.mapper.subscription.dto.SubscriptionResult;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SubscriptionMapper {
+public enum SubscriptionMapper {
 
-    private SubscriptionMapper() {
-    }
+    SubscriptionMapper() {
+    };
 
     public static Subscription toEntity(final long memberId, final long channelId) {
         return Subscription.builder()
@@ -28,7 +28,7 @@ public class SubscriptionMapper {
                 .collect(Collectors.toList());
     }
 
-    private static SubscriptionChannelsCache toCache(final SubscriptionChannelDto dto) {
+    private SubscriptionChannelsCache toCache(final SubscriptionChannelDto dto) {
         return new SubscriptionChannelsCache(dto.channelId(), dto.channelName());
     }
 

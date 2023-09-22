@@ -11,12 +11,12 @@ import youtube.mapper.member.dto.MemberSignupRequest;
 
 import java.time.LocalDate;
 
-public class MemberMapper {
+public enum MemberMapper {
+
+    MemberMapper() {
+    };
 
     private static final LocalDate BASIC_DATE = LocalDate.of(0, 1, 1);
-
-    private MemberMapper() {
-    }
 
     // 회원가입시 값을 입력하지 않은 필드는 기본값을 넣는다
     // roleType : NORMAL, gender : UNKNOWN, birthDate : 0000-01-01

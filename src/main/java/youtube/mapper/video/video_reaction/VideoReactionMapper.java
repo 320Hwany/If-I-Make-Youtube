@@ -3,10 +3,10 @@ package youtube.mapper.video.video_reaction;
 import youtube.domain.video.video_reaction.persist.VideoReaction;
 import youtube.mapper.video.video_reaction.dto.VideoReactionRequest;
 
-public class VideoReactionMapper {
+public enum VideoReactionMapper {
 
-    private VideoReactionMapper() {
-    }
+    VideoReactionMapper() {
+    };
 
     public static VideoReaction toEntity(final long memberId, final VideoReactionRequest dto) {
         return VideoReaction.builder()

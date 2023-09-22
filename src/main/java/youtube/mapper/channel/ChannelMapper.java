@@ -7,17 +7,16 @@ import youtube.domain.channel.vo.ChannelDescription;
 import youtube.domain.channel.vo.ChannelName;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.Nickname;
-import youtube.global.constant.NumberConstant;
 import youtube.mapper.channel.dto.ChannelCacheDto;
 
 import static youtube.global.constant.NumberConstant.ZERO;
 
-public class ChannelMapper {
+public enum ChannelMapper {
+
+    ChannelMapper() {
+    };
 
     private static final String BLANK = "";
-
-    private ChannelMapper() {
-    }
 
     // 신규회원은 회원가입한 닉네임으로 채널명을 만듭니다
     public static Channel toEntity(final Member member) {

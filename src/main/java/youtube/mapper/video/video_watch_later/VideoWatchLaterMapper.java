@@ -4,10 +4,10 @@ import youtube.domain.video.video_watch_later.persist.VideoWatchLater;
 
 import java.time.LocalDateTime;
 
-public class VideoWatchLaterMapper {
+public enum VideoWatchLaterMapper {
 
-    private VideoWatchLaterMapper() {
-    }
+    VideoWatchLaterMapper() {
+    };
 
     public static VideoWatchLater toEntity(final long memberId, final long videoInfoId) {
         return VideoWatchLater.builder()
