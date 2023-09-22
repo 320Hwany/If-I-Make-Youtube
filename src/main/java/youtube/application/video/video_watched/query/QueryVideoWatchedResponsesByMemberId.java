@@ -8,11 +8,11 @@ import youtube.repository.video.video_watched.VideoWatchedRepository;
 import java.util.List;
 
 @Service
-public class QueryVideoWatchedCacheByMemberId {
+public class QueryVideoWatchedResponsesByMemberId {
 
     private final VideoWatchedRepository videoWatchedRepository;
 
-    public QueryVideoWatchedCacheByMemberId(final VideoWatchedRepository videoWatchedRepository) {
+    public QueryVideoWatchedResponsesByMemberId(final VideoWatchedRepository videoWatchedRepository) {
         this.videoWatchedRepository = videoWatchedRepository;
     }
 
