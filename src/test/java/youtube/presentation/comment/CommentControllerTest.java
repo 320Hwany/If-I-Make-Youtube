@@ -50,6 +50,7 @@ class CommentControllerTest extends ControllerTest {
 
         CommentSaveRequest dto = CommentSaveRequest.builder()
                 .videoInfoId(1L)
+                .parentId(0L)
                 .content("")
                 .build();
 
@@ -71,6 +72,7 @@ class CommentControllerTest extends ControllerTest {
                                 )
                                 .requestFields(
                                         fieldWithPath("videoInfoId").type(NUMBER).description("동영상 정보 id"),
+                                        fieldWithPath("parentId").type(NUMBER).description("부모 댓글 id"),
                                         fieldWithPath("content").type(STRING).description("댓글 내용")
                                 )
                                 .responseFields(
@@ -90,6 +92,7 @@ class CommentControllerTest extends ControllerTest {
 
         CommentSaveRequest dto = CommentSaveRequest.builder()
                 .videoInfoId(1L)
+                .parentId(0L)
                 .content("댓글 내용입니다")
                 .build();
 
@@ -110,6 +113,7 @@ class CommentControllerTest extends ControllerTest {
                                 )
                                 .requestFields(
                                         fieldWithPath("videoInfoId").type(NUMBER).description("동영상 정보 id"),
+                                        fieldWithPath("parentId").type(NUMBER).description("부모 댓글 id"),
                                         fieldWithPath("content").type(STRING).description("댓글 내용")
                                 )
                                 .build()

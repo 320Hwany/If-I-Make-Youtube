@@ -10,11 +10,12 @@ public enum CommentMapper {
 
     private static final long ZERO = 0;
 
+    // parentId가 0이면 일반 댓글, 0이상이면 대댓글
     public static Comment toEntity(final long memberId, final CommentSaveRequest dto) {
         return Comment.builder()
                 .memberId(memberId)
                 .videoInfoId(dto.videoInfoId())
-                .parentId(ZERO)
+                .parentId(dto.parentId())
                 .content(dto.content())
                 .childContentCount(ZERO)
                 .likesCount(ZERO)
