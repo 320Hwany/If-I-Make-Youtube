@@ -1,8 +1,8 @@
 package youtube.presentation.video.video_watch_later;
 
 import org.springframework.web.bind.annotation.*;
-import youtube.application.video.video_watch_later.command.CommandVideoWatchLaterDelete;
-import youtube.application.video.video_watch_later.command.CommandVideoWatchLaterSave;
+import youtube.application.video.video_watch_later.command.VideoWatchLaterDeleter;
+import youtube.application.video.video_watch_later.command.VideoWatchLaterCreator;
 import youtube.domain.member.vo.MemberSession;
 import youtube.global.annotation.Login;
 
@@ -10,24 +10,24 @@ import youtube.global.annotation.Login;
 @RestController
 public class VideoWatchLaterController {
 
-    private final CommandVideoWatchLaterSave commandVideoWatchLaterSave;
-    private final CommandVideoWatchLaterDelete commandVideoWatchLaterDelete;
+    private final VideoWatchLaterCreator videoWatchLaterCreator;
+    private final VideoWatchLaterDeleter videoWatchLaterDeleter;
 
-    public VideoWatchLaterController(final CommandVideoWatchLaterSave commandVideoWatchLaterSave,
-                                     final CommandVideoWatchLaterDelete commandVideoWatchLaterDelete) {
-        this.commandVideoWatchLaterSave = commandVideoWatchLaterSave;
-        this.commandVideoWatchLaterDelete = commandVideoWatchLaterDelete;
+    public VideoWatchLaterController(final VideoWatchLaterCreator videoWatchLaterCreator,
+                                     final VideoWatchLaterDeleter videoWatchLaterDeleter) {
+        this.videoWatchLaterCreator = videoWatchLaterCreator;
+        this.videoWatchLaterDeleter = videoWatchLaterDeleter;
     }
 
     @PostMapping("/video-watch-later/{videoInfoId}")
     public void saveVideoWatchLater(@Login final MemberSession memberSession,
                                     @PathVariable final long videoInfoId) {
-        commandVideoWatchLaterSave.command(memberSession.id(), videoInfoId);
+        videoWatchLaterCreator.command(memberSession.id(), videoInfoId);
     }
 
     @DeleteMapping("/video-watch-later/{videoInfoId}")
     public void deleteVideoWatchLater(@Login final MemberSession memberSession,
                                       @PathVariable final long videoInfoId) {
-        commandVideoWatchLaterDelete.command(memberSession.id(), videoInfoId);
+        videoWatchLaterDeleter.command(memberSession.id(), videoInfoId);
     }
 }

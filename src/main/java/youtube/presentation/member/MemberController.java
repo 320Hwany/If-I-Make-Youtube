@@ -3,11 +3,11 @@ package youtube.presentation.member;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-import youtube.application.jwt.command.CommandJwtDelete;
-import youtube.application.member.command.CommandMemberSignup;
-import youtube.application.member.command.CommandPasswordUpdate;
-import youtube.application.member.query.QueryMemberDetailedResponse;
-import youtube.application.member.MemberLoginService;
+import youtube.application.jwt.command.RefreshTokenDeleter;
+import youtube.application.member.command.MemberSignup;
+import youtube.application.member.command.PasswordUpdater;
+import youtube.application.member.query.MemberDetailedResponseReader;
+import youtube.application.member.MemberLogin;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.MemberSession;
 import youtube.domain.member.vo.Password;
@@ -22,39 +22,39 @@ import youtube.mapper.member.dto.MemberSignupRequest;
 @RestController
 public class MemberController {
 
-    private final CommandMemberSignup commandMemberSignup;
-    private final MemberLoginService memberLoginService;
-    private final QueryMemberDetailedResponse queryMemberDetailedResponse;
-    private final CommandJwtDelete commandJwtDelete;
-    private final CommandPasswordUpdate commandPasswordUpdate;
+    private final MemberSignup memberSignup;
+    private final MemberLogin memberLogin;
+    private final MemberDetailedResponseReader memberDetailedResponseReader;
+    private final RefreshTokenDeleter refreshTokenDeleter;
+    private final PasswordUpdater passwordUpdater;
 
-    public MemberController(final CommandMemberSignup commandMemberSignup,
-                            final MemberLoginService memberLoginService,
-                            final QueryMemberDetailedResponse queryMemberDetailedResponse,
-                            final CommandJwtDelete commandJwtDelete,
-                            final CommandPasswordUpdate commandPasswordUpdate) {
-        this.commandMemberSignup = commandMemberSignup;
-        this.memberLoginService = memberLoginService;
-        this.queryMemberDetailedResponse = queryMemberDetailedResponse;
-        this.commandJwtDelete = commandJwtDelete;
-        this.commandPasswordUpdate = commandPasswordUpdate;
+    public MemberController(final MemberSignup memberSignup,
+                            final MemberLogin memberLogin,
+                            final MemberDetailedResponseReader memberDetailedResponseReader,
+                            final RefreshTokenDeleter refreshTokenDeleter,
+                            final PasswordUpdater passwordUpdater) {
+        this.memberSignup = memberSignup;
+        this.memberLogin = memberLogin;
+        this.memberDetailedResponseReader = memberDetailedResponseReader;
+        this.refreshTokenDeleter = refreshTokenDeleter;
+        this.passwordUpdater = passwordUpdater;
     }
 
     @PostMapping("/signup")
     public void signup(@RequestBody @Valid final MemberSignupRequest dto) {
-        commandMemberSignup.signup(dto);
+        memberSignup.signup(dto);
     }
 
     @PostMapping("/login")
     public MemberDetailedResponse login(@RequestBody @Valid final MemberLoginRequest dto,
                                         final HttpServletResponse response) {
-        Member entity = memberLoginService.login(dto, response);
+        Member entity = memberLogin.login(dto, response);
         return MemberMapper.toMemberDetailedResponse(entity);
     }
 
     @PostMapping("/logout")
     public void logout(@Login final MemberSession memberSession) {
-        commandJwtDelete.command(memberSession.id());
+        refreshTokenDeleter.command(memberSession.id());
     }
 
     // DB 조회 없이 AccessToken 만으로 회원 정보 가져오기
@@ -66,12 +66,12 @@ public class MemberController {
     // 자세한 회원 정보가 필요할 경우 DB에서 회원 정보 가져오기
     @GetMapping("/members/detailed")
     public MemberDetailedResponse getDetailedMember(@Login final MemberSession memberSession) {
-        return queryMemberDetailedResponse.query(memberSession.id());
+        return memberDetailedResponseReader.query(memberSession.id());
     }
 
     @PatchMapping("/members/password")
     public void updatePassword(@Login final MemberSession memberSession,
                                @RequestBody final Password updatePassword) {
-        commandPasswordUpdate.command(memberSession.id(), updatePassword);
+        passwordUpdater.command(memberSession.id(), updatePassword);
     }
 }

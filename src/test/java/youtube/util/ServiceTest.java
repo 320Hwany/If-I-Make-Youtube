@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import youtube.application.channel.query.QueryChannelCacheById;
-import youtube.application.video.video_info.query.QueryVideoInfoCacheById;
+import youtube.application.channel.query.ChannelCacheReader;
+import youtube.application.video.video_info.query.VideoInfoCacheReader;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
@@ -53,10 +53,10 @@ public class ServiceTest {
     protected CommentRepository commentRepository;
 
     @Autowired
-    protected QueryChannelCacheById queryChannelCacheById;
+    protected ChannelCacheReader channelCacheReader;
 
     @Autowired
-    protected QueryVideoInfoCacheById queryVideoInfoCacheById;
+    protected VideoInfoCacheReader videoInfoCacheReader;
 
     @Autowired
     protected PasswordEncoder passwordEncoder;

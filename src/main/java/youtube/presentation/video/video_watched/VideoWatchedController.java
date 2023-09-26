@@ -1,8 +1,8 @@
 package youtube.presentation.video.video_watched;
 
 import org.springframework.web.bind.annotation.*;
-import youtube.application.video.video_watched.command.CommandVideoWatchedUpdate;
-import youtube.application.video.video_watched.query.QueryVideoWatchedResponsesByMemberId;
+import youtube.application.video.video_watched.command.VideoWatchedUpdater;
+import youtube.application.video.video_watched.query.VideoWatchedResponsesReader;
 import youtube.domain.member.vo.MemberSession;
 import youtube.global.annotation.Login;
 import youtube.mapper.video.video_watched.VideoWatchedMapper;
@@ -16,24 +16,24 @@ import java.util.List;
 @RestController
 public class VideoWatchedController {
 
-    private final QueryVideoWatchedResponsesByMemberId queryVideoWatchedResponsesByMemberId;
-    private final CommandVideoWatchedUpdate commandVideoWatchedUpdate;
+    private final VideoWatchedResponsesReader videoWatchedResponsesReader;
+    private final VideoWatchedUpdater videoWatchedUpdater;
 
-    public VideoWatchedController(final QueryVideoWatchedResponsesByMemberId queryVideoWatchedResponsesByMemberId,
-                                  final CommandVideoWatchedUpdate commandVideoWatchedUpdate) {
-        this.queryVideoWatchedResponsesByMemberId = queryVideoWatchedResponsesByMemberId;
-        this.commandVideoWatchedUpdate = commandVideoWatchedUpdate;
+    public VideoWatchedController(final VideoWatchedResponsesReader videoWatchedResponsesReader,
+                                  final VideoWatchedUpdater videoWatchedUpdater) {
+        this.videoWatchedResponsesReader = videoWatchedResponsesReader;
+        this.videoWatchedUpdater = videoWatchedUpdater;
     }
 
     @GetMapping("/video-watched")
     public VideoWatchedResult getVideoWatched(@Login final MemberSession memberSession){
-        List<VideoWatchedResponse> responses = queryVideoWatchedResponsesByMemberId.query(memberSession.id());
+        List<VideoWatchedResponse> responses = videoWatchedResponsesReader.query(memberSession.id());
         return VideoWatchedMapper.toResult(responses.size(), responses);
     }
 
     @PostMapping("/video-watched/{videoInfoId}")
     public void updateVideoWatched(@Login final MemberSession memberSession,
                                    @PathVariable final long videoInfoId) {
-        commandVideoWatchedUpdate.command(memberSession.id(), videoInfoId, LocalDateTime.now());
+        videoWatchedUpdater.command(memberSession.id(), videoInfoId, LocalDateTime.now());
     }
 }
