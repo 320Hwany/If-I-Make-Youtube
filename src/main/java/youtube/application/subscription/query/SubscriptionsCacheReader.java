@@ -24,7 +24,7 @@ public class SubscriptionsCacheReader {
 
     @Transactional(readOnly = true)
     @Cacheable(value = SUBSCRIPTION_CHANNELS_CACHE, key = "#memberId")
-    public List<SubscriptionChannelsCache> query(final long memberId) {
+    public List<SubscriptionChannelsCache> findAllByMemberId(final long memberId) {
         List<SubscriptionChannelDto> dtos = subscriptionRepository.findSubscriptionChannelsByMemberId(memberId);
         return SubscriptionMapper.toCaches(dtos);
     }

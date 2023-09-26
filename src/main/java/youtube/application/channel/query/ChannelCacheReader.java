@@ -21,7 +21,7 @@ public class ChannelCacheReader {
 
     @Transactional(readOnly = true)
     @Cacheable(value = CHANNEL_CACHE, key = "#channelId")
-    public ChannelCache query(final long channelId) {
+    public ChannelCache getByChannelId(final long channelId) {
         ChannelCacheDto dto = channelRepository.getChannelCacheDtoById(channelId);
         return ChannelMapper.toChannelCache(dto);
     }

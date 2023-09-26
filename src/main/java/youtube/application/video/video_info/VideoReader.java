@@ -45,7 +45,7 @@ public class VideoReader {
     }
 
     private String getFilename(final long videoInfoId) {
-        VideoInfo videoInfo = videoInfoReader.query(videoInfoId);
+        VideoInfo videoInfo = videoInfoReader.getByVideoInfoId(videoInfoId);
         return videoInfo.getId() + videoInfo.getFileExtension();
     }
 }

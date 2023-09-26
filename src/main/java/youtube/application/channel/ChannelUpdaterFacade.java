@@ -37,7 +37,7 @@ public class ChannelUpdaterFacade {
     }
 
     private synchronized void updateChannelNameCache(final long channelId, final ChannelName channelName) {
-        ChannelCache channelCache = channelCacheReader.query(channelId);
+        ChannelCache channelCache = channelCacheReader.getByChannelId(channelId);
         channelCache.updateChannelName(channelName);
         Cache cache = cacheManager.getCache(CHANNEL_CACHE);
         assert cache != null;
@@ -46,7 +46,7 @@ public class ChannelUpdaterFacade {
 
     private synchronized void updateChannelDescriptionCache(final long channelId,
                                                            final ChannelDescription channelDescription) {
-        ChannelCache channelCache = channelCacheReader.query(channelId);
+        ChannelCache channelCache = channelCacheReader.getByChannelId(channelId);
         channelCache.updateChannelDescription(channelDescription);
         Cache cache = cacheManager.getCache(CHANNEL_CACHE);
         assert cache != null;

@@ -4,7 +4,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import youtube.application.channel.command.ChannelButtonUpdater;
-import youtube.application.channel.query.ChannelFindAllReader;
+import youtube.application.channel.query.ChannelReader;
 import youtube.domain.channel.persist.Channel;
 import youtube.global.exception.BadRequestException;
 
@@ -18,12 +18,12 @@ import static youtube.global.constant.ExceptionMessageConstant.BUTTON_SCHEDULER_
 @Service
 public class ButtonSyncFacade {
 
-    private final ChannelFindAllReader channelFindAllReader;
+    private final ChannelReader channelReader;
     private final ChannelButtonUpdater channelButtonUpdater;
 
-    public ButtonSyncFacade(final ChannelFindAllReader channelFindAllReader,
+    public ButtonSyncFacade(final ChannelReader channelReader,
                             final ChannelButtonUpdater channelButtonUpdater) {
-        this.channelFindAllReader = channelFindAllReader;
+        this.channelReader = channelReader;
         this.channelButtonUpdater = channelButtonUpdater;
     }
 
@@ -31,7 +31,7 @@ public class ButtonSyncFacade {
     @Async
     @Scheduled(cron = FIVE_AM)
     public void syncButton() {
-        List<Channel> channels = channelFindAllReader.query();
+        List<Channel> channels = channelReader.findAll();
 
         List<CompletableFuture<Void>> futures = channels.stream()
                 .map(

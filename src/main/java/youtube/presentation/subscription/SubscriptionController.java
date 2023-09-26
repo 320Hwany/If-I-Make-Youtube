@@ -30,7 +30,7 @@ public class SubscriptionController {
 
     @GetMapping("/subscriptions")
     public SubscriptionResult getSubscriptionChannels(@Login final MemberSession memberSession) {
-        List<SubscriptionChannelsCache> caches = subscriptionsCacheReader.query(memberSession.id());
+        List<SubscriptionChannelsCache> caches = subscriptionsCacheReader.findAllByMemberId(memberSession.id());
         return SubscriptionMapper.toResult(caches, caches.size());
     }
 

@@ -39,7 +39,7 @@ class ChannelSubscriptionCountUpdaterTest extends ServiceTest {
 
     private CompletableFuture<Void> asyncWork(final Channel channel) {
         // given
-        ChannelCache channelCache = channelCacheReader.query(channel.getId());
+        ChannelCache channelCache = channelCacheReader.getByChannelId(channel.getId());
 
         // when
         for (int i = 0; i < 10; i++) {

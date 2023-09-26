@@ -17,7 +17,7 @@ public class VideoWatchedResponsesReader {
     }
 
     @Transactional(readOnly = true)
-    public List<VideoWatchedResponse> query(final long memberId) {
+    public List<VideoWatchedResponse> findAllByMemberId(final long memberId) {
         return videoWatchedRepository.findVideoWatchedResponsesByMemberId(memberId);
     }
 }

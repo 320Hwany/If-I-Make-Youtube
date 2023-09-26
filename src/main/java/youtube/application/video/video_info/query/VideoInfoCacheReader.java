@@ -21,7 +21,7 @@ public class VideoInfoCacheReader {
 
     @Transactional(readOnly = true)
     @Cacheable(value = VIDEO_INFO_CACHE, key = "#videoInfoId")
-    public VideoInfoCache query(final long videoInfoId) {
+    public VideoInfoCache getByVideoInfoId(final long videoInfoId) {
         VideoInfoCacheDto dto = videoInfoRepository.getVideoInfoCacheDtoById(videoInfoId);
         return VideoInfoMapper.toCache(dto);
     }

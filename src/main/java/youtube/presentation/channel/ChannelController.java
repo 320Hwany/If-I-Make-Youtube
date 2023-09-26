@@ -24,7 +24,7 @@ public class ChannelController {
 
     @GetMapping("/channel-cache/{channelId}")
     public ChannelCache getChannelCache(@PathVariable final long channelId) {
-        return channelCacheReader.query(channelId);
+        return channelCacheReader.getByChannelId(channelId);
     }
 
     @PatchMapping("/channels/channel-name")

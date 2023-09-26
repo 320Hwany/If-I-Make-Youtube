@@ -49,7 +49,7 @@ class SubscriptionsCreatorTest extends ServiceTest {
 
         // when
         subscriptionsCreator.command(member.getId(), channel.getId());
-        ChannelCache channelCache = channelCacheReader.query(channel.getId());
+        ChannelCache channelCache = channelCacheReader.getByChannelId(channel.getId());
 
         // then
         assertThat(subscriptionRepository.count()).isEqualTo(1);

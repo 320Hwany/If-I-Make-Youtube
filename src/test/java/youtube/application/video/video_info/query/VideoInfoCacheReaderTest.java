@@ -19,7 +19,7 @@ class VideoInfoCacheReaderTest extends ServiceTest {
     @DisplayName("id와 일치하는 동영상 정보가 없다면 동영상 캐시 정보를 가져올 수 없습니다")
     void queryVideoInfoCacheByIdFail() {
         // expected
-        assertThatThrownBy(() -> videoInfoCacheReader.query(9999L))
+        assertThatThrownBy(() -> videoInfoCacheReader.getByVideoInfoId(9999L))
                 .isInstanceOf(NotFoundException.class);
     }
 
@@ -35,7 +35,7 @@ class VideoInfoCacheReaderTest extends ServiceTest {
         videoInfoRepository.save(videoInfo);
 
         // when
-        VideoInfoCache cache = videoInfoCacheReader.query(videoInfo.getId());
+        VideoInfoCache cache = videoInfoCacheReader.getByVideoInfoId(videoInfo.getId());
 
         // then
         assertThat(cache.getVideoTitle()).isEqualTo(videoInfo.getVideoTitle());

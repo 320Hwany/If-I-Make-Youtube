@@ -41,7 +41,7 @@ class VideoReactionCacheUpdaterTest extends ServiceTest {
                 .build();
 
         // given 2 - cache
-        VideoInfoCache videoInfoCache = videoInfoCacheReader.query(videoInfo.getId());
+        VideoInfoCache videoInfoCache = videoInfoCacheReader.getByVideoInfoId(videoInfo.getId());
 
         // given 3 - thread
         int numThreads = 10;

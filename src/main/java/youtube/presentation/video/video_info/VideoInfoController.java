@@ -36,7 +36,7 @@ public class VideoInfoController {
     @GetMapping("/videos/{videoInfoId}")
     public ResponseEntity<Resource> getVideo(@PathVariable final long videoInfoId) {
         Resource resource = videoReader.loadAsResource(videoInfoId);
-        MediaType mediaType = mediaTypeReader.getMediaType(videoInfoId);
+        MediaType mediaType = mediaTypeReader.getByVideoInfoId(videoInfoId);
 
         return ResponseEntity.ok()
                 .contentType(mediaType)
@@ -45,7 +45,7 @@ public class VideoInfoController {
 
     @GetMapping("/video-info-cache/{videoInfoId}")
     public VideoInfoCache getVideoInfoCache(@PathVariable final long videoInfoId) {
-        return videoInfoCacheReader.query(videoInfoId);
+        return videoInfoCacheReader.getByVideoInfoId(videoInfoId);
     }
 
     @PostMapping("/videos")

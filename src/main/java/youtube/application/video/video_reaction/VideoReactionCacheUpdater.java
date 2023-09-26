@@ -22,7 +22,7 @@ public class VideoReactionCacheUpdater {
     }
 
     public synchronized void updateCache(final VideoReactionRequest dto) {
-        VideoInfoCache videoInfoCache = videoInfoCacheReader.query(dto.videoInfoId());
+        VideoInfoCache videoInfoCache = videoInfoCacheReader.getByVideoInfoId(dto.videoInfoId());
         videoInfoCache.updateReactionCount(dto.originalReaction(), dto.updateReaction());
         Cache cache = cacheManager.getCache(VIDEO_INFO_CACHE);
         assert cache != null;

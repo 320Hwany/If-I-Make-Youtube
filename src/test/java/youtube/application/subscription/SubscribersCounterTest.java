@@ -32,7 +32,7 @@ class SubscribersCounterTest extends ServiceTest {
         channelRepository.save(channel);
 
         // given 2 - cache
-        ChannelCache channelCache = channelCacheReader.query(channel.getId());
+        ChannelCache channelCache = channelCacheReader.getByChannelId(channel.getId());
 
         // given 3 - thread
         int numThreads = 10;

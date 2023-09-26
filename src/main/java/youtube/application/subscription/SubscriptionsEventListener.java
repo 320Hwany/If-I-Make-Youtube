@@ -28,7 +28,7 @@ public class SubscriptionsEventListener {
         long channelId = subscriptionSaveEvent.channelId();
         long memberId = subscriptionSaveEvent.memberId();
 
-        ChannelCache channelCache = channelCacheReader.query(channelId);
+        ChannelCache channelCache = channelCacheReader.getByChannelId(channelId);
         subscribersCounter.increaseCount(channelId, channelCache);
         subscriptionsCacheEvictor.clearCacheByMemberId(memberId);
     }
@@ -40,7 +40,7 @@ public class SubscriptionsEventListener {
         long channelId = subscriptionCancelEvent.channelId();
         long memberId = subscriptionCancelEvent.memberId();
 
-        ChannelCache channelCache = channelCacheReader.query(channelId);
+        ChannelCache channelCache = channelCacheReader.getByChannelId(channelId);
         subscribersCounter.decreaseCount(channelId, channelCache);
         subscriptionsCacheEvictor.clearCacheByMemberId(memberId);
     }

@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import youtube.application.jwt.command.RefreshTokenDeleter;
 import youtube.application.member.command.MemberSignup;
 import youtube.application.member.command.PasswordUpdater;
-import youtube.application.member.query.MemberDetailedResponseReader;
 import youtube.application.member.MemberLogin;
+import youtube.application.member.query.MemberReader;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.MemberSession;
 import youtube.domain.member.vo.Password;
@@ -24,18 +24,16 @@ public class MemberController {
 
     private final MemberSignup memberSignup;
     private final MemberLogin memberLogin;
-    private final MemberDetailedResponseReader memberDetailedResponseReader;
+    private final MemberReader memberReader;
     private final RefreshTokenDeleter refreshTokenDeleter;
     private final PasswordUpdater passwordUpdater;
 
-    public MemberController(final MemberSignup memberSignup,
-                            final MemberLogin memberLogin,
-                            final MemberDetailedResponseReader memberDetailedResponseReader,
-                            final RefreshTokenDeleter refreshTokenDeleter,
+    public MemberController(final MemberSignup memberSignup, final MemberLogin memberLogin,
+                            final MemberReader memberReader, final RefreshTokenDeleter refreshTokenDeleter,
                             final PasswordUpdater passwordUpdater) {
         this.memberSignup = memberSignup;
         this.memberLogin = memberLogin;
-        this.memberDetailedResponseReader = memberDetailedResponseReader;
+        this.memberReader = memberReader;
         this.refreshTokenDeleter = refreshTokenDeleter;
         this.passwordUpdater = passwordUpdater;
     }
@@ -66,7 +64,7 @@ public class MemberController {
     // 자세한 회원 정보가 필요할 경우 DB에서 회원 정보 가져오기
     @GetMapping("/members/detailed")
     public MemberDetailedResponse getDetailedMember(@Login final MemberSession memberSession) {
-        return memberDetailedResponseReader.query(memberSession.id());
+        return memberReader.getMemberResponseById(memberSession.id());
     }
 
     @PatchMapping("/members/password")

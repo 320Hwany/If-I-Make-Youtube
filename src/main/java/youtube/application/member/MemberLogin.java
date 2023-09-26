@@ -28,7 +28,7 @@ public class MemberLogin {
     }
 
     public Member login(final MemberLoginRequest dto, final HttpServletResponse response) {
-        Member entity = memberReader.query(dto.loginId());
+        Member entity = memberReader.getByLoginId(dto.loginId());
         Password password = entity.getPassword();
 
         if (password.validateMatchPassword(passwordEncoder, dto.password())) {

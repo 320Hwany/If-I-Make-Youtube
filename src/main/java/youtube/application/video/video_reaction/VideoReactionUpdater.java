@@ -16,7 +16,7 @@ public class VideoReactionUpdater {
         this.videoReactionCacheUpdater = videoReactionCacheUpdater;
     }
 
-    public void saveReaction(final long memberId, final VideoReactionRequest dto) {
+    public void updateReaction(final long memberId, final VideoReactionRequest dto) {
         videoReactionCreator.command(memberId, dto);
         videoReactionCacheUpdater.updateCache(dto);
     }

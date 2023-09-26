@@ -27,7 +27,7 @@ public class VideoWatchedController {
 
     @GetMapping("/video-watched")
     public VideoWatchedResult getVideoWatched(@Login final MemberSession memberSession){
-        List<VideoWatchedResponse> responses = videoWatchedResponsesReader.query(memberSession.id());
+        List<VideoWatchedResponse> responses = videoWatchedResponsesReader.findAllByMemberId(memberSession.id());
         return VideoWatchedMapper.toResult(responses.size(), responses);
     }
 

@@ -22,8 +22,8 @@ public class MediaTypeReader {
         this.videoInfoReader = videoInfoReader;
     }
 
-    public MediaType getMediaType(final long videoInfoId) {
-        VideoInfo videoInfo = videoInfoReader.query(videoInfoId);
+    public MediaType getByVideoInfoId(final long videoInfoId) {
+        VideoInfo videoInfo = videoInfoReader.getByVideoInfoId(videoInfoId);
         String fileExtension = videoInfo.getFileExtension();
 
         for (MediaTypeForExtension mediaTypeForExtension : mediaTypeForExtensions) {

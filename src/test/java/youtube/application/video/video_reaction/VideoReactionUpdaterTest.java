@@ -45,7 +45,7 @@ class VideoReactionUpdaterTest extends ServiceTest {
                 .build();
 
         // given 3 - cache
-        VideoInfoCache videoInfoCache = videoInfoCacheReader.query(videoInfo.getId());
+        VideoInfoCache videoInfoCache = videoInfoCacheReader.getByVideoInfoId(videoInfo.getId());
 
         // given 4 - thread
         int numThreads = 10;
@@ -56,7 +56,7 @@ class VideoReactionUpdaterTest extends ServiceTest {
         // when
         for (int i = 0; i < numThreads; i++) {
             CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
-                videoReactionUpdater.saveReaction(member.getId(), dto);
+                videoReactionUpdater.updateReaction(member.getId(), dto);
             }, executorService);
 
             futures.add(future);

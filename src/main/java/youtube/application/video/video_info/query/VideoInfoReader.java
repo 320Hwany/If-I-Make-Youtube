@@ -15,7 +15,7 @@ public class VideoInfoReader {
     }
 
     @Transactional(readOnly = true)
-    public VideoInfo query(final long videoInfoId) {
+    public VideoInfo getByVideoInfoId(final long videoInfoId) {
         return videoInfoRepository.getById(videoInfoId);
     }
 }

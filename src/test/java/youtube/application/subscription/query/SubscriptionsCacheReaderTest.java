@@ -35,7 +35,7 @@ class SubscriptionsCacheReaderTest extends ServiceTest {
         subscriptionRepository.save(subscription);
 
         // when
-        List<SubscriptionChannelsCache> caches = subscriptionsCacheReader.query(member.getId());
+        List<SubscriptionChannelsCache> caches = subscriptionsCacheReader.findAllByMemberId(member.getId());
         Cache cache = cacheManager.getCache(SUBSCRIPTION_CHANNELS_CACHE);
 
         // then
