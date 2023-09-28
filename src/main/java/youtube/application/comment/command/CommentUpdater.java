@@ -16,7 +16,7 @@ public class CommentUpdater {
 
     @Transactional
     public void pressLike(final long commentId) {
-        Comment comment = commentRepository.getById(commentId);
+        Comment comment = commentRepository.getByIdWithPessimisticLock(commentId);
         comment.pressLike();
     }
 }

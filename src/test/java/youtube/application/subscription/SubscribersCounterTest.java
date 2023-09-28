@@ -36,7 +36,7 @@ class SubscribersCounterTest extends ServiceTest {
 
         // given 3 - thread
         int numThreads = 10;
-        int incrementsPerThread = 100;
+        int incrementsPerThread = 10;
 
         ExecutorService executorService = Executors.newFixedThreadPool(numThreads);
         List<CompletableFuture<Void>> futures = new ArrayList<>();

@@ -8,5 +8,7 @@ public interface CommentRepository {
 
     Comment getById(final long commentId);
 
+    Comment getByIdWithPessimisticLock(final long commentId);
+
     long count();
 }

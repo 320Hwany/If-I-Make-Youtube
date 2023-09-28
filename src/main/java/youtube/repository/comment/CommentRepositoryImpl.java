@@ -1,8 +1,10 @@
 package youtube.repository.comment;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import jakarta.persistence.LockModeType;
 import org.springframework.stereotype.Repository;
 import youtube.domain.comment.Comment;
-import youtube.global.constant.ExceptionMessageConstant;
+import youtube.domain.comment.QComment;
 import youtube.global.exception.NotFoundException;
 
 import static youtube.global.constant.ExceptionMessageConstant.*;
@@ -11,9 +13,12 @@ import static youtube.global.constant.ExceptionMessageConstant.*;
 public class CommentRepositoryImpl implements CommentRepository {
 
     private final CommentJpaRepository commentJpaRepository;
+    private final JPAQueryFactory queryFactory;
 
-    public CommentRepositoryImpl(final CommentJpaRepository commentJpaRepository) {
+    public CommentRepositoryImpl(final CommentJpaRepository commentJpaRepository,
+                                 final JPAQueryFactory queryFactory) {
         this.commentJpaRepository = commentJpaRepository;
+        this.queryFactory = queryFactory;
     }
 
     @Override
@@ -25,6 +30,20 @@ public class CommentRepositoryImpl implements CommentRepository {
     public Comment getById(final long commentId) {
         return commentJpaRepository.findById(commentId)
                 .orElseThrow(() -> new NotFoundException(COMMENT_NOT_FOUND.message));
+    }
+
+    @Override
+    public Comment getByIdWithPessimisticLock(final long commentId) {
+        Comment comment = queryFactory.selectFrom(QComment.comment)
+                .where(QComment.comment.id.eq(commentId))
+                .setLockMode(LockModeType.PESSIMISTIC_WRITE)
+                .fetchFirst();
+
+        if (comment == null) {
+            throw new NotFoundException(COMMENT_NOT_FOUND.message);
+        }
+
+        return comment;
     }
 
     @Override
