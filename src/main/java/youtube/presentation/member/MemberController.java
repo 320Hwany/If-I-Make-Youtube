@@ -4,9 +4,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import youtube.application.jwt.command.RefreshTokenDeleter;
-import youtube.application.member.command.MemberSignup;
+import youtube.application.member.MemberSignupFacade;
 import youtube.application.member.command.PasswordUpdater;
-import youtube.application.member.MemberLogin;
+import youtube.application.member.MemberLoginFacade;
 import youtube.application.member.query.MemberReader;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.MemberSession;
@@ -22,17 +22,17 @@ import youtube.mapper.member.dto.MemberSignupRequest;
 @RestController
 public class MemberController {
 
-    private final MemberSignup memberSignup;
-    private final MemberLogin memberLogin;
+    private final MemberSignupFacade memberSignupFacade;
+    private final MemberLoginFacade memberLoginFacade;
     private final MemberReader memberReader;
     private final RefreshTokenDeleter refreshTokenDeleter;
     private final PasswordUpdater passwordUpdater;
 
-    public MemberController(final MemberSignup memberSignup, final MemberLogin memberLogin,
+    public MemberController(final MemberSignupFacade memberSignupFacade, final MemberLoginFacade memberLoginFacade,
                             final MemberReader memberReader, final RefreshTokenDeleter refreshTokenDeleter,
                             final PasswordUpdater passwordUpdater) {
-        this.memberSignup = memberSignup;
-        this.memberLogin = memberLogin;
+        this.memberSignupFacade = memberSignupFacade;
+        this.memberLoginFacade = memberLoginFacade;
         this.memberReader = memberReader;
         this.refreshTokenDeleter = refreshTokenDeleter;
         this.passwordUpdater = passwordUpdater;
@@ -40,13 +40,13 @@ public class MemberController {
 
     @PostMapping("/signup")
     public void signup(@RequestBody @Valid final MemberSignupRequest dto) {
-        memberSignup.signup(dto);
+        memberSignupFacade.signup(dto);
     }
 
     @PostMapping("/login")
     public MemberDetailedResponse login(@RequestBody @Valid final MemberLoginRequest dto,
                                         final HttpServletResponse response) {
-        Member entity = memberLogin.login(dto, response);
+        Member entity = memberLoginFacade.login(dto, response);
         return MemberMapper.toMemberDetailedResponse(entity);
     }
 

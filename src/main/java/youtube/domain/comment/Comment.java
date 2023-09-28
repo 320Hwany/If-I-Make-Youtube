@@ -42,4 +42,8 @@ public class Comment extends BaseTimeEntity {
         this.childContentCount = childContentCount;
         this.likesCount = likesCount;
     }
+
+    public void pressLike() {
+        this.likesCount += 1;
+    }
 }

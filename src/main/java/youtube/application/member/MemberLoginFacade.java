@@ -14,14 +14,14 @@ import youtube.mapper.member.dto.MemberLoginRequest;
 import static youtube.global.constant.TimeConstant.*;
 
 @Service
-public class MemberLogin {
+public class MemberLoginFacade {
 
     private final MemberReader memberReader;
     private final TokenFacade tokenFacade;
     private final PasswordEncoder passwordEncoder;
 
-    public MemberLogin(final MemberReader memberReader, final TokenFacade tokenFacade,
-                       final PasswordEncoder passwordEncoder) {
+    public MemberLoginFacade(final MemberReader memberReader, final TokenFacade tokenFacade,
+                             final PasswordEncoder passwordEncoder) {
         this.memberReader = memberReader;
         this.tokenFacade = tokenFacade;
         this.passwordEncoder = passwordEncoder;

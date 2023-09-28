@@ -3,6 +3,7 @@ package youtube.application.member.command;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import youtube.application.member.MemberSignupFacade;
 import youtube.domain.member.vo.Gender;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
@@ -18,10 +19,10 @@ import static org.assertj.core.api.Assertions.*;
 import static youtube.util.TestConstant.*;
 
 @AcceptanceTest
-class MemberSignupTest extends ServiceTest {
+class MemberSignupFacadeTest extends ServiceTest {
 
     @Autowired
-    private MemberSignup memberSignup;
+    private MemberSignupFacade memberSignupFacade;
 
     @Test
     @DisplayName("이미 가입된 회원이면 예외가 발생합니다")
@@ -39,7 +40,7 @@ class MemberSignupTest extends ServiceTest {
                 .build();
 
         // expected
-        assertThatThrownBy(() -> memberSignup.signup(dto))
+        assertThatThrownBy(() -> memberSignupFacade.signup(dto))
                 .isInstanceOf(BadRequestException.class);
     }
 
@@ -56,7 +57,7 @@ class MemberSignupTest extends ServiceTest {
                 .build();
 
         // when
-        memberSignup.signup(dto);
+        memberSignupFacade.signup(dto);
 
         // then
         assertThat(memberRepository.count()).isEqualTo(1);

@@ -1,4 +1,4 @@
-package youtube.application.member.command;
+package youtube.application.member;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,15 +16,15 @@ import static youtube.global.constant.ExceptionMessageConstant.MEMBER_DUPLICATIO
 
 
 @Service
-public class MemberSignup {
+public class MemberSignupFacade {
 
     private final MemberRepository memberRepository;
     private final ChannelRepository channelRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public MemberSignup(final MemberRepository memberRepository,
-                        final ChannelRepository channelRepository,
-                        final PasswordEncoder passwordEncoder) {
+    public MemberSignupFacade(final MemberRepository memberRepository,
+                              final ChannelRepository channelRepository,
+                              final PasswordEncoder passwordEncoder) {
         this.memberRepository = memberRepository;
         this.channelRepository = channelRepository;
         this.passwordEncoder = passwordEncoder;

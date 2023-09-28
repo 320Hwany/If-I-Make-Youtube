@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletResponse;
-import youtube.application.member.MemberLogin;
+import youtube.application.member.MemberLoginFacade;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Password;
 import youtube.global.exception.BadRequestException;
@@ -18,10 +18,10 @@ import static youtube.global.constant.StringConstant.ACCESS_TOKEN;
 import static youtube.global.constant.StringConstant.REFRESH_TOKEN;
 import static youtube.util.TestConstant.*;
 
-class MemberLoginTest extends ServiceTest {
+class MemberLoginFacadeTest extends ServiceTest {
 
     @Autowired
-    private MemberLogin memberLogin;
+    private MemberLoginFacade memberLoginFacade;
 
     @Test
     @DisplayName("입력한 아이디와 일치하는 회원이 없으면 예외가 발생합니다")
@@ -35,7 +35,7 @@ class MemberLoginTest extends ServiceTest {
         MockHttpServletResponse response = new MockHttpServletResponse();
 
         // expected
-        assertThatThrownBy(() -> memberLogin.login(dto, response))
+        assertThatThrownBy(() -> memberLoginFacade.login(dto, response))
                 .isInstanceOf(NotFoundException.class);
     }
 
@@ -53,7 +53,7 @@ class MemberLoginTest extends ServiceTest {
         MockHttpServletResponse response = new MockHttpServletResponse();
 
         // expected
-        assertThatThrownBy(() -> memberLogin.login(dto, response))
+        assertThatThrownBy(() -> memberLoginFacade.login(dto, response))
                 .isInstanceOf(BadRequestException.class);
     }
 
@@ -72,7 +72,7 @@ class MemberLoginTest extends ServiceTest {
         MockHttpServletResponse response = new MockHttpServletResponse();
 
         // when
-        memberLogin.login(dto, response);
+        memberLoginFacade.login(dto, response);
 
         // then
         Cookie cookie = response.getCookie(REFRESH_TOKEN.value);
