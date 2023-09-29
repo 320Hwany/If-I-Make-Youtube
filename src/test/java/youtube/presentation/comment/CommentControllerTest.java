@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import youtube.domain.channel.persist.Channel;
+import youtube.domain.video.video_info.persist.VideoInfo;
 import youtube.mapper.comment.dto.CommentSaveRequest;
 import youtube.util.ControllerTest;
 
@@ -89,9 +90,10 @@ class CommentControllerTest extends ControllerTest {
         // given
         signup();
         String accessToken = login();
+        VideoInfo videoInfo = saveVideoInfo();
 
         CommentSaveRequest dto = CommentSaveRequest.builder()
-                .videoInfoId(1L)
+                .videoInfoId(videoInfo.getId())
                 .parentId(0L)
                 .content("댓글 내용입니다")
                 .build();

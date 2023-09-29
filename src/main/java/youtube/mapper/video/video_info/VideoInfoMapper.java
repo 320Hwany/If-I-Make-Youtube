@@ -21,7 +21,7 @@ public enum VideoInfoMapper {
                 .views(ZERO.value)
                 .likesCount(ZERO.value)
                 .dislikesCount(ZERO.value)
-                .contentCount(ZERO.value)
+                .commentCount(ZERO.value)
                 .videoDescription(dto.videoDescription())
                 .fileExtension(fileExtension)
                 .build();

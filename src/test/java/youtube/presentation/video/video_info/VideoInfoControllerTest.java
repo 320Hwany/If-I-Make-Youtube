@@ -64,6 +64,7 @@ class VideoInfoControllerTest extends ControllerTest {
                                         fieldWithPath("views").type(NUMBER).description("조회수"),
                                         fieldWithPath("likesCount").type(NUMBER).description("좋아요 수"),
                                         fieldWithPath("dislikesCount").type(NUMBER).description("싫어요 수"),
+                                        fieldWithPath("commentCount").type(NUMBER).description("댓글 수"),
                                         fieldWithPath("createdAt").type(STRING).description("동영상 개시 일자")
                                 )
                                 .build()

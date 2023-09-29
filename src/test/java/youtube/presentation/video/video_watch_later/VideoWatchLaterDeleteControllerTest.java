@@ -4,6 +4,7 @@ import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import youtube.domain.member.persist.Member;
+import youtube.domain.video.video_info.persist.VideoInfo;
 import youtube.domain.video.video_watch_later.persist.VideoWatchLater;
 import youtube.util.ControllerTest;
 
@@ -95,13 +96,12 @@ public class VideoWatchLaterDeleteControllerTest extends ControllerTest {
         // given 1
         Member member = saveMember();
         String accessToken = login();
+        VideoInfo videoInfo = saveVideoInfo();
 
         // given 2
-        long videoInfoId = 1L;
-
         VideoWatchLater videoWatchLater = VideoWatchLater.builder()
                 .memberId(member.getId())
-                .videoInfoId(videoInfoId)
+                .videoInfoId(videoInfo.getId())
                 .build();
 
         videoWatchLaterRepository.save(videoWatchLater);

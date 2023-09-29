@@ -2,6 +2,7 @@ package youtube.global.constant;
 
 public enum NumberConstant {
 
+    MINUS_ONE(-1),
     ZERO(0),
     ONE(1);
 
