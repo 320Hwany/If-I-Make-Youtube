@@ -1,6 +1,6 @@
 package youtube.repository.comment;
 
-import youtube.domain.comment.Comment;
+import youtube.domain.comment.persist.Comment;
 
 public interface CommentRepository {
 

@@ -4,6 +4,7 @@ import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 import youtube.domain.member.persist.Member;
+import youtube.domain.member.persist.QMember;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
 import youtube.domain.member.vo.QLoginId;
@@ -42,6 +43,14 @@ public class MemberRepositoryImpl implements MemberRepository {
     public Member getById(final long memberId) {
         return memberJpaRepository.findById(memberId)
                 .orElseThrow(() -> new NotFoundException(MEMBER_NOT_FOUND.message));
+    }
+
+    @Override
+    public Nickname getNicknameById(final long memberId) {
+        return queryFactory.select(member.nickname)
+                .from(member)
+                .where(member.id.eq(memberId))
+                .fetchFirst();
     }
 
     @Override

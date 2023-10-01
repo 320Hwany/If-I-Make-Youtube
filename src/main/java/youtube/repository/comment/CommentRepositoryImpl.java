@@ -3,10 +3,11 @@ package youtube.repository.comment;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.LockModeType;
 import org.springframework.stereotype.Repository;
-import youtube.domain.comment.Comment;
-import youtube.domain.comment.QComment;
+import youtube.domain.comment.persist.Comment;
+import youtube.domain.comment.persist.QComment;
 import youtube.global.exception.NotFoundException;
 
+import static youtube.domain.comment.persist.QComment.*;
 import static youtube.global.constant.ExceptionMessageConstant.*;
 
 @Repository

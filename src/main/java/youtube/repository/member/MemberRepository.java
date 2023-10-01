@@ -13,6 +13,8 @@ public interface MemberRepository {
 
     Member getById(final long memberId);
 
+    Nickname getNicknameById(final long memberId);
+
     MemberDetailedResponse getDetailedResponseById(final long memberId);
 
     boolean existsByNicknameOrLoginId(final Nickname nickname, final LoginId loginId);

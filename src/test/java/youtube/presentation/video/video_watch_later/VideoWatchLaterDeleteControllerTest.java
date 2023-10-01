@@ -25,18 +25,8 @@ public class VideoWatchLaterDeleteControllerTest extends ControllerTest {
     @Test
     @DisplayName("로그인을 하지 않으면 나중에 볼 동영상 삭제 실패합니다")
     void videoWatchLaterDeleteFailUnauthorized() throws Exception {
-        // given 1
-        Member member = saveMember();
-
-        // given 2
-        long videoInfoId = 1L;
-
-        VideoWatchLater videoWatchLater = VideoWatchLater.builder()
-                .memberId(member.getId())
-                .videoInfoId(videoInfoId)
-                .build();
-
-        videoWatchLaterRepository.save(videoWatchLater);
+        // given
+        VideoWatchLater videoWatchLater = saveVideoWatchLater();
 
         // expected
         mockMvc.perform(delete("/api/video-watch-later/{videoInfoId}", videoWatchLater.getId()))
@@ -94,17 +84,8 @@ public class VideoWatchLaterDeleteControllerTest extends ControllerTest {
     @DisplayName("나중에 볼 동영상 삭제에 성공합니다")
     void videoWatchLaterDeleteSuccess() throws Exception {
         // given 1
-        Member member = saveMember();
+        VideoWatchLater videoWatchLater = saveVideoWatchLater();
         String accessToken = login();
-        VideoInfo videoInfo = saveVideoInfo();
-
-        // given 2
-        VideoWatchLater videoWatchLater = VideoWatchLater.builder()
-                .memberId(member.getId())
-                .videoInfoId(videoInfo.getId())
-                .build();
-
-        videoWatchLaterRepository.save(videoWatchLater);
 
         // expected
         mockMvc.perform(delete("/api/video-watch-later/{videoInfoId}", videoWatchLater.getId())

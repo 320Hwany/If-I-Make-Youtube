@@ -8,7 +8,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -20,6 +19,7 @@ import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.Gender;
 import youtube.domain.subscription.Subscription;
 import youtube.domain.video.video_info.persist.VideoInfo;
+import youtube.domain.video.video_watch_later.persist.VideoWatchLater;
 import youtube.mapper.channel.ChannelMapper;
 import youtube.mapper.member.dto.MemberSignupRequest;
 import youtube.repository.channel.ChannelRepository;
@@ -138,6 +138,19 @@ public class ControllerTest {
         subscriptionRepository.save(subscription);
 
         return subscription;
+    }
+
+    protected VideoWatchLater saveVideoWatchLater() {
+        Member member = saveMember();
+        VideoInfo videoInfo = saveVideoInfo();
+
+        VideoWatchLater videoWatchLater = VideoWatchLater.builder()
+                .memberId(member.getId())
+                .videoInfoId(videoInfo.getId())
+                .build();
+
+        videoWatchLaterRepository.save(videoWatchLater);
+        return videoWatchLater;
     }
 
     protected void signup() throws Exception {

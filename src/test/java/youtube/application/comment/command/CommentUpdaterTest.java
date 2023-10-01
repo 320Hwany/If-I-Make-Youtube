@@ -1,21 +1,21 @@
 package youtube.application.comment.command;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import youtube.domain.comment.Comment;
+import youtube.domain.comment.persist.Comment;
+import youtube.domain.member.vo.Nickname;
 import youtube.global.exception.NotFoundException;
 import youtube.util.ServiceTest;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static org.assertj.core.api.Assertions.*;
+import static youtube.util.TestConstant.*;
 
 class CommentUpdaterTest extends ServiceTest {
 
@@ -35,6 +35,7 @@ class CommentUpdaterTest extends ServiceTest {
     void pressLike() {
         // given
         Comment comment = Comment.builder()
+                .nickname(Nickname.from(TEST_NICKNAME.value))
                 .likesCount(0)
                 .build();
 
@@ -50,9 +51,10 @@ class CommentUpdaterTest extends ServiceTest {
 
     @Test
     @DisplayName("여러 명의 사용자가 동시에 같은 댓글에 좋아요를 눌러도 좋아요 수가 누락되지 않고 동시성 문제를 처리합니다")
-    void pressLikeConcurrencyTest() throws ExecutionException, InterruptedException {
+    void pressLikeConcurrencyTest() throws Exception {
         // given
         Comment comment = Comment.builder()
+                .nickname(Nickname.from(TEST_NICKNAME.value))
                 .likesCount(0)
                 .build();
 
@@ -60,7 +62,7 @@ class CommentUpdaterTest extends ServiceTest {
 
         // given2 - thread
         int numThreads = 10;
-        int incrementsPerThread = 10;
+        int incrementsPerThread = 100;
 
         ExecutorService executorService = Executors.newFixedThreadPool(numThreads);
         List<CompletableFuture<Void>> futures = new ArrayList<>();
