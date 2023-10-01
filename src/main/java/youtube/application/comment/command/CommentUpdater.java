@@ -2,7 +2,7 @@ package youtube.application.comment.command;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import youtube.domain.comment.persist.Comment;
+import youtube.domain.comment.Comment;
 import youtube.repository.comment.CommentRepository;
 
 @Service

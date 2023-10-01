@@ -4,7 +4,8 @@ public enum NumberConstant {
 
     MINUS_ONE(-1),
     ZERO(0),
-    ONE(1);
+    ONE(1),
+    TWENTY(20);
 
     public final int value;
 

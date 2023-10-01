@@ -3,12 +3,17 @@ package youtube.repository.comment;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.LockModeType;
 import org.springframework.stereotype.Repository;
-import youtube.domain.comment.persist.Comment;
-import youtube.domain.comment.persist.QComment;
+import youtube.domain.comment.Comment;
+import youtube.domain.comment.QComment;
 import youtube.global.exception.NotFoundException;
+import youtube.mapper.comment.dto.CommentResponse;
+import youtube.mapper.comment.dto.QCommentResponse;
 
-import static youtube.domain.comment.persist.QComment.*;
+import java.util.List;
+
+import static youtube.domain.comment.QComment.*;
 import static youtube.global.constant.ExceptionMessageConstant.*;
+import static youtube.global.constant.NumberConstant.TWENTY;
 
 @Repository
 public class CommentRepositoryImpl implements CommentRepository {
@@ -45,6 +50,23 @@ public class CommentRepositoryImpl implements CommentRepository {
         }
 
         return comment;
+    }
+
+    @Override
+    public List<CommentResponse> findCommentResponsesOrderByLikes(final long videoInfoId, final long page) {
+        return queryFactory.select(
+                        new QCommentResponse(
+                                comment.nickname,
+                                comment.content,
+                                comment.childCommentCount,
+                                comment.likesCount,
+                                comment.createdAt
+                        ))
+                .where(comment.videoInfoId.eq(videoInfoId))
+                .orderBy(comment.likesCount.desc())
+                .offset(page * TWENTY.value)
+                .limit(TWENTY.value)
+                .fetch();
     }
 
     @Override

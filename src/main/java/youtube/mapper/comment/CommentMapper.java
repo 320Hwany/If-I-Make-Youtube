@@ -1,8 +1,12 @@
 package youtube.mapper.comment;
 
-import youtube.domain.comment.persist.Comment;
+import youtube.domain.comment.Comment;
 import youtube.domain.member.vo.Nickname;
+import youtube.mapper.comment.dto.CommentResponse;
+import youtube.mapper.comment.dto.CommentResult;
 import youtube.mapper.comment.dto.CommentSaveRequest;
+
+import java.util.List;
 
 public enum CommentMapper {
 
@@ -19,8 +23,12 @@ public enum CommentMapper {
                 .parentId(dto.parentId())
                 .nickname(nickname)
                 .content(dto.content())
-                .childContentCount(ZERO)
+                .childCommentCount(ZERO)
                 .likesCount(ZERO)
                 .build();
+    }
+
+    public static CommentResult toCommentResult(final long page, final List<CommentResponse> commentResponses) {
+        return new CommentResult(page, commentResponses);
     }
 }

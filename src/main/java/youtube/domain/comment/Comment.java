@@ -1,4 +1,4 @@
-package youtube.domain.comment.persist;
+package youtube.domain.comment;
 
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -31,7 +31,7 @@ public class Comment extends BaseTimeEntity {
 
     private String content;
 
-    private long childContentCount;
+    private long childCommentCount;
 
     private long likesCount;
 
@@ -40,13 +40,13 @@ public class Comment extends BaseTimeEntity {
 
     @Builder
     private Comment(final Long memberId, final Long videoInfoId, final Long parentId, final Nickname nickname,
-                   final String content, final long childContentCount, final long likesCount) {
+                    final String content, final long childCommentCount, final long likesCount) {
         this.memberId = memberId;
         this.videoInfoId = videoInfoId;
         this.parentId = parentId;
         this.nickname = nickname;
         this.content = content;
-        this.childContentCount = childContentCount;
+        this.childCommentCount = childCommentCount;
         this.likesCount = likesCount;
     }
 
