@@ -3,8 +3,6 @@ package youtube.presentation.comment;
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.MediaType;
-import youtube.domain.channel.persist.Channel;
 import youtube.domain.video.video_info.persist.VideoInfo;
 import youtube.mapper.comment.dto.CommentSaveRequest;
 import youtube.util.ControllerTest;
@@ -21,13 +19,13 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWit
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static youtube.global.constant.StringConstant.ACCESS_TOKEN;
 
-class CommentControllerTest extends ControllerTest {
+class CommentSaveControllerTest extends ControllerTest {
 
     @Test
     @DisplayName("로그인을 하지 않으면 댓글을 작성할 수 없습니다")
     void commentSaveUnauthorized() throws Exception {
         // expected
-        mockMvc.perform(post("/api/comments"))
+        mockMvc.perform(post("/api/v2/comments"))
                 .andExpect(status().isUnauthorized())
                 .andDo(document("댓글 작성 실패 - 401 (로그인 하지 않음)",
                         preprocessResponse(prettyPrint()),
@@ -56,7 +54,7 @@ class CommentControllerTest extends ControllerTest {
                 .build();
 
         // expected
-        mockMvc.perform(post("/api/comments")
+        mockMvc.perform(post("/api/v2/comments")
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto))
                         .header(ACCESS_TOKEN.value, accessToken)
@@ -99,7 +97,7 @@ class CommentControllerTest extends ControllerTest {
                 .build();
 
         // expected
-        mockMvc.perform(post("/api/comments")
+        mockMvc.perform(post("/api/v2/comments")
                         .header(ACCESS_TOKEN.value, accessToken)
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto))

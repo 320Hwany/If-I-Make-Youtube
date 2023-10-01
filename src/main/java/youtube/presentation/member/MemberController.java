@@ -38,36 +38,36 @@ public class MemberController {
         this.passwordUpdater = passwordUpdater;
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/v1/signup")
     public void signup(@RequestBody @Valid final MemberSignupRequest dto) {
         memberSignupFacade.signup(dto);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/v1/login")
     public MemberDetailedResponse login(@RequestBody @Valid final MemberLoginRequest dto,
                                         final HttpServletResponse response) {
         Member entity = memberLoginFacade.login(dto, response);
         return MemberMapper.toMemberDetailedResponse(entity);
     }
 
-    @PostMapping("/logout")
+    @PostMapping("/v2/logout")
     public void logout(@Login final MemberSession memberSession) {
         refreshTokenDeleter.command(memberSession.id());
     }
 
     // DB 조회 없이 AccessToken 만으로 회원 정보 가져오기
-    @GetMapping("/members")
+    @GetMapping("/v2/members")
     public MemberResponse getMember(@Login final MemberSession memberSession) {
         return MemberMapper.toMemberResponse(memberSession);
     }
 
     // 자세한 회원 정보가 필요할 경우 DB에서 회원 정보 가져오기
-    @GetMapping("/members/detailed")
+    @GetMapping("/v2/members/detailed")
     public MemberDetailedResponse getDetailedMember(@Login final MemberSession memberSession) {
         return memberReader.getMemberResponseById(memberSession.id());
     }
 
-    @PatchMapping("/members/password")
+    @PatchMapping("/v2/members/password")
     public void updatePassword(@Login final MemberSession memberSession,
                                @RequestBody final Password updatePassword) {
         passwordUpdater.command(memberSession.id(), updatePassword);

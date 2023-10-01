@@ -56,12 +56,13 @@ public class CommentRepositoryImpl implements CommentRepository {
     public List<CommentResponse> findCommentResponsesOrderByLikes(final long videoInfoId, final long page) {
         return queryFactory.select(
                         new QCommentResponse(
-                                comment.nickname,
+                                comment.nickname.nickname,
                                 comment.content,
                                 comment.childCommentCount,
                                 comment.likesCount,
                                 comment.createdAt
                         ))
+                .from(comment)
                 .where(comment.videoInfoId.eq(videoInfoId))
                 .orderBy(comment.likesCount.desc())
                 .offset(page * TWENTY.value)

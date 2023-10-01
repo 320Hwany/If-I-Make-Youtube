@@ -26,8 +26,6 @@ public class InterceptorWebConfig implements WebMvcConfigurer {
     public void addInterceptors(final InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor(objectMapper, memberRepository, jwtRepository))
                 .order(1)
-                .addPathPatterns("/api/**")
-                .excludePathPatterns("/api/signup", "/api/login", "/api/channel-cache/**",
-                        "/api/video-info-cache/**");
+                .addPathPatterns("/api/v2/**");
     }
 }

@@ -22,7 +22,7 @@ public class MemberControllerGetTest extends ControllerTest {
     @DisplayName("로그인하지 않은 회원정보를 가져올 수 없습니다")
     void getMemberFail() throws Exception {
         // expected
-        mockMvc.perform(get("/api/members"))
+        mockMvc.perform(get("/api/v2/members"))
                 .andExpect(status().isUnauthorized())
                 .andDo(document("회원정보 가져오기 실패 (token) - 401 (로그인 상태가 아님)",
                         preprocessResponse(prettyPrint()),
@@ -45,7 +45,7 @@ public class MemberControllerGetTest extends ControllerTest {
         String accessToken = login();
 
         // expected
-        mockMvc.perform(get("/api/members")
+        mockMvc.perform(get("/api/v2/members")
                         .header(ACCESS_TOKEN.value, accessToken)
                 )
                 .andExpect(status().isOk())

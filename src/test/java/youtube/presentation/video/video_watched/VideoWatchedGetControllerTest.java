@@ -24,7 +24,7 @@ class VideoWatchedGetControllerTest extends ControllerTest {
         signup();
 
         // expected
-        mockMvc.perform(get("/api/video-watched"))
+        mockMvc.perform(get("/api/v2/video-watched"))
                 .andExpect(status().isUnauthorized())
                 .andDo(document("시청 기록 가져오기 실패 (로그인 하지 않음)",
                         preprocessResponse(prettyPrint()),
@@ -47,7 +47,7 @@ class VideoWatchedGetControllerTest extends ControllerTest {
         String accessToken = login();
 
         // expected
-        mockMvc.perform(get("/api/video-watched")
+        mockMvc.perform(get("/api/v2/video-watched")
                         .header(ACCESS_TOKEN.value, accessToken)
                 )
                 .andExpect(status().isOk())

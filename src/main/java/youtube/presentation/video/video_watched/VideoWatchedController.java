@@ -25,13 +25,13 @@ public class VideoWatchedController {
         this.videoWatchedUpdater = videoWatchedUpdater;
     }
 
-    @GetMapping("/video-watched")
+    @GetMapping("/v2/video-watched")
     public VideoWatchedResult getVideoWatched(@Login final MemberSession memberSession){
         List<VideoWatchedResponse> responses = videoWatchedResponsesReader.findAllByMemberId(memberSession.id());
         return VideoWatchedMapper.toResult(responses.size(), responses);
     }
 
-    @PostMapping("/video-watched/{videoInfoId}")
+    @PostMapping("/v2/video-watched/{videoInfoId}")
     public void updateVideoWatched(@Login final MemberSession memberSession,
                                    @PathVariable final long videoInfoId) {
         videoWatchedUpdater.command(memberSession.id(), videoInfoId, LocalDateTime.now());

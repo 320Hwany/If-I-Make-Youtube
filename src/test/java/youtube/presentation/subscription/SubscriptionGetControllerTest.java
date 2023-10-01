@@ -24,7 +24,7 @@ public class SubscriptionGetControllerTest extends ControllerTest {
         saveSubscription();
 
         // expected
-        mockMvc.perform(get("/api/subscriptions")
+        mockMvc.perform(get("/api/v2/subscriptions")
                         .param("channelId", String.valueOf(9999))
                 )
                 .andExpect(status().isUnauthorized())
@@ -49,7 +49,7 @@ public class SubscriptionGetControllerTest extends ControllerTest {
         String accessToken = login();
 
         // expected
-        mockMvc.perform(get("/api/subscriptions")
+        mockMvc.perform(get("/api/v2/subscriptions")
                         .header(ACCESS_TOKEN.value, accessToken)
                 )
                 .andExpect(status().isOk())

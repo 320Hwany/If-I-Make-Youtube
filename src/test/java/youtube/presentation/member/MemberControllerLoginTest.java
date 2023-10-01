@@ -35,7 +35,7 @@ public class MemberControllerLoginTest extends ControllerTest {
         );
 
         // expected
-        mockMvc.perform(post("/api/login")
+        mockMvc.perform(post("/api/v1/login")
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isNotFound())
@@ -75,7 +75,7 @@ public class MemberControllerLoginTest extends ControllerTest {
         );
 
         // expected
-        mockMvc.perform(post("/api/login")
+        mockMvc.perform(post("/api/v1/login")
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isBadRequest())
@@ -108,7 +108,7 @@ public class MemberControllerLoginTest extends ControllerTest {
         );
 
         // expected
-        mockMvc.perform(post("/api/login")
+        mockMvc.perform(post("/api/v1/login")
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isOk())

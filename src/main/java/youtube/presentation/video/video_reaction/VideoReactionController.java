@@ -16,7 +16,7 @@ public class VideoReactionController {
         this.videoReactionUpdater = videoReactionUpdater;
     }
 
-    @PostMapping("/video-reaction")
+    @PostMapping("/v2/video-reaction")
     public void videoReaction(@Login final MemberSession memberSession,
                               @RequestBody final VideoReactionRequest dto) {
         videoReactionUpdater.updateReaction(memberSession.id(), dto);

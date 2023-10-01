@@ -33,7 +33,7 @@ public class VideoInfoController {
         this.mediaTypeReader = mediaTypeReader;
     }
 
-    @GetMapping("/videos/{videoInfoId}")
+    @GetMapping("/v1/videos/{videoInfoId}")
     public ResponseEntity<Resource> getVideo(@PathVariable final long videoInfoId) {
         Resource resource = videoReader.loadAsResource(videoInfoId);
         MediaType mediaType = mediaTypeReader.getByVideoInfoId(videoInfoId);
@@ -43,12 +43,12 @@ public class VideoInfoController {
                 .body(resource);
     }
 
-    @GetMapping("/video-info-cache/{videoInfoId}")
+    @GetMapping("/v1/video-info-cache/{videoInfoId}")
     public VideoInfoCache getVideoInfoCache(@PathVariable final long videoInfoId) {
         return videoInfoCacheReader.getByVideoInfoId(videoInfoId);
     }
 
-    @PostMapping("/videos")
+    @PostMapping("/v2/videos")
     public void upload(@RequestPart final MultipartFile uploadVideo,
                        @RequestPart final VideoInfoSaveRequest videoInfoSaveRequest,
                        @Login final MemberSession memberSession) {

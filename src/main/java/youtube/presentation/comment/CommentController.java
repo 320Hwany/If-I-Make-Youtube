@@ -30,7 +30,7 @@ public class CommentController {
         this.commentReader = commentReader;
     }
 
-    @GetMapping("/comments/{videoInfoId}/{page}")
+    @GetMapping("/v1/comments/{videoInfoId}/{page}")
     public CommentResult findCommentResponses(@PathVariable final long videoInfoId,
                                               @PathVariable final long page) {
         List<CommentResponse> commentResponses =
@@ -38,13 +38,13 @@ public class CommentController {
         return CommentMapper.toCommentResult(page, commentResponses);
     }
 
-    @PostMapping("/comments")
+    @PostMapping("/v2/comments")
     public void commentSave(@Login final MemberSession memberSession,
                             @RequestBody @Valid final CommentSaveRequest dto) {
         commentCreator.command(memberSession.id(), dto);
     }
 
-    @PatchMapping("/comments/likes/{commentId}")
+    @PatchMapping("/v2/comments/likes/{commentId}")
     public void commentPressLike(@PathVariable @Valid final long commentId) {
         commentUpdater.pressLike(commentId);
     }

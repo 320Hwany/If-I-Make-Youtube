@@ -6,7 +6,7 @@ import youtube.domain.member.vo.Nickname;
 import java.time.LocalDateTime;
 
 public record CommentResponse(
-        Nickname nickname,
+        String nickname,
         String content,
         long childCommentCount,
         long likesCount,

@@ -23,7 +23,7 @@ class VideoWatchLaterSaveControllerTest extends ControllerTest {
         signup();
 
         // expected
-        mockMvc.perform(post("/api/video-watch-later/{videoInfoId}", 1L)
+        mockMvc.perform(post("/api/v2/video-watch-later/{videoInfoId}", 1L)
                 )
                 .andExpect(status().isUnauthorized())
                 .andDo(document("나중에 볼 동영상 저장 실패",
@@ -45,7 +45,7 @@ class VideoWatchLaterSaveControllerTest extends ControllerTest {
         String accessToken = login();
 
         // expected
-        mockMvc.perform(post("/api/video-watch-later/{videoInfoId}", 1L)
+        mockMvc.perform(post("/api/v2/video-watch-later/{videoInfoId}", 1L)
                         .header(ACCESS_TOKEN.value, accessToken)
                 )
                 .andExpect(status().isOk())

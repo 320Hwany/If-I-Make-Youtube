@@ -21,7 +21,7 @@ public class MemberControllerLogoutTest extends ControllerTest {
     @DisplayName("로그인을 하지 않으면 로그아웃을 할 수 없습니다")
     void logoutFail() throws Exception {
         // expected
-        mockMvc.perform(post("/api/logout"))
+        mockMvc.perform(post("/api/v2/logout"))
                 .andExpect(status().isUnauthorized())
                 .andDo(document("로그아웃 실패 - 401 (로그인 상태가 아님)",
                         preprocessResponse(prettyPrint()),
@@ -44,7 +44,7 @@ public class MemberControllerLogoutTest extends ControllerTest {
         String accessToken = login();
 
         // expected
-        mockMvc.perform(post("/api/logout")
+        mockMvc.perform(post("/api/v2/logout")
                         .header(ACCESS_TOKEN.value, accessToken)
                 )
                 .andExpect(status().isOk())

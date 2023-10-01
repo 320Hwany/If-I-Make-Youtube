@@ -24,7 +24,7 @@ class VideoInfoControllerTest extends ControllerTest {
     @DisplayName("동영상 정보 id와 일치하는 동영상 정보가 존재하지 않으면 예외가 발생합니다")
     void getVideoInfoFail404() throws Exception {
         // expected
-        mockMvc.perform(get("/api/video-info-cache/{videoInfoId}", 9999))
+        mockMvc.perform(get("/api/v1/video-info-cache/{videoInfoId}", 9999))
                 .andExpect(status().isNotFound())
                 .andDo(document("동영상 정보를 찾을 수 없음 - 404",
                         preprocessResponse(prettyPrint()),
@@ -48,7 +48,7 @@ class VideoInfoControllerTest extends ControllerTest {
         // expected
         VideoInfo videoInfo = saveVideoInfo();
 
-        mockMvc.perform(get("/api/video-info-cache/{videoInfoId}", videoInfo.getId()))
+        mockMvc.perform(get("/api/v1/video-info-cache/{videoInfoId}", videoInfo.getId()))
                 .andExpect(status().isOk())
                 .andDo(document("동영상 정보 찾기 성공",
                         preprocessResponse(prettyPrint()),

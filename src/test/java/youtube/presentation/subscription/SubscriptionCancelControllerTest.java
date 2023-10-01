@@ -22,7 +22,7 @@ class SubscriptionCancelControllerTest extends ControllerTest {
     @DisplayName("로그인을 하지 않으면 채널을 구독을 취소할 수 없습니다")
     void subscribeCancelUnauthorized() throws Exception {
         // expected
-        mockMvc.perform(delete("/api/subscriptions"))
+        mockMvc.perform(delete("/api/v2/subscriptions"))
                 .andExpect(status().isUnauthorized())
                 .andDo(document("구독 취소 실패 - 401 (로그인 하지 않음)",
                         preprocessResponse(prettyPrint()),
@@ -45,7 +45,7 @@ class SubscriptionCancelControllerTest extends ControllerTest {
         String accessToken = login();
 
         // expected
-        mockMvc.perform(delete("/api/subscriptions")
+        mockMvc.perform(delete("/api/v2/subscriptions")
                         .param("channelId", String.valueOf(9999))
                         .header(ACCESS_TOKEN.value, accessToken)
                 )
@@ -72,7 +72,7 @@ class SubscriptionCancelControllerTest extends ControllerTest {
         String accessToken = login();
 
         // expected
-        mockMvc.perform(delete("/api/subscriptions")
+        mockMvc.perform(delete("/api/v2/subscriptions")
                         .param("channelId", String.valueOf(subscription.getChannelId()))
                         .header(ACCESS_TOKEN.value, accessToken)
                 )

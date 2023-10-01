@@ -32,7 +32,7 @@ public class MemberControllerSignupTest extends ControllerTest {
                 .build();
 
         // expected
-        mockMvc.perform(post("/api/signup")
+        mockMvc.perform(post("/api/v1/signup")
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto))
                 )
@@ -65,7 +65,7 @@ public class MemberControllerSignupTest extends ControllerTest {
                 .build();
 
         // expected
-        mockMvc.perform(post("/api/signup")
+        mockMvc.perform(post("/api/v1/signup")
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isOk())

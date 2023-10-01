@@ -28,7 +28,7 @@ class VideoWatchedUpdateControllerTest extends ControllerTest {
         signup();
 
         // expected
-        mockMvc.perform(post("/api/video-watched/{videoInfoId}", 1L)
+        mockMvc.perform(post("/api/v2/video-watched/{videoInfoId}", 1L)
                 )
                 .andExpect(status().isUnauthorized())
                 .andDo(document("시청 기록 업데이트 실패 (로그인 하지 않음)",
@@ -55,7 +55,7 @@ class VideoWatchedUpdateControllerTest extends ControllerTest {
         String accessToken = login();
 
         // expected
-        mockMvc.perform(post("/api/video-watched/{videoInfoId}", 1L)
+        mockMvc.perform(post("/api/v2/video-watched/{videoInfoId}", 1L)
                         .header(ACCESS_TOKEN.value, accessToken)
                 )
                 .andExpect(status().isOk())

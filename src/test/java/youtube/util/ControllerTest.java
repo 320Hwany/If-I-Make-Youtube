@@ -23,6 +23,7 @@ import youtube.domain.video.video_watch_later.persist.VideoWatchLater;
 import youtube.mapper.channel.ChannelMapper;
 import youtube.mapper.member.dto.MemberSignupRequest;
 import youtube.repository.channel.ChannelRepository;
+import youtube.repository.comment.CommentRepository;
 import youtube.repository.member.MemberRepository;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.Nickname;
@@ -67,6 +68,9 @@ public class ControllerTest {
 
     @Autowired
     protected VideoWatchLaterRepository videoWatchLaterRepository;
+
+    @Autowired
+    protected CommentRepository commentRepository;
 
     @Autowired
     protected PasswordEncoder passwordEncoder;
@@ -164,7 +168,7 @@ public class ControllerTest {
                 .build();
 
         // expected
-        mockMvc.perform(post("/api/signup")
+        mockMvc.perform(post("/api/v1/signup")
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isOk());
@@ -177,7 +181,7 @@ public class ControllerTest {
         );
 
         // expected
-        MockHttpServletResponse response = mockMvc.perform(post("/api/login")
+        MockHttpServletResponse response = mockMvc.perform(post("/api/v1/login")
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
                 .andReturn().getResponse();

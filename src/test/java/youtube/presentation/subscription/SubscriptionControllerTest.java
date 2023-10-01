@@ -23,7 +23,7 @@ class SubscriptionControllerTest extends ControllerTest {
     @DisplayName("로그인을 하지 않으면 채널을 구독을 할 수 없습니다")
     void subscribeFail() throws Exception {
         // expected
-        mockMvc.perform(post("/api/subscriptions"))
+        mockMvc.perform(post("/api/v2/subscriptions"))
                 .andExpect(status().isUnauthorized())
                 .andDo(document("구독 실패 - 401 (로그인 하지 않음)",
                         preprocessResponse(prettyPrint()),
@@ -47,7 +47,7 @@ class SubscriptionControllerTest extends ControllerTest {
         Channel channel = saveChannel();
 
         // expected
-        mockMvc.perform(post("/api/subscriptions")
+        mockMvc.perform(post("/api/v2/subscriptions")
                         .param("channelId", String.valueOf(channel.getId()))
                         .header(ACCESS_TOKEN.value, accessToken)
                 )

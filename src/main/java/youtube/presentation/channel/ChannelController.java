@@ -22,18 +22,18 @@ public class ChannelController {
         this.channelUpdaterFacade = channelUpdaterFacade;
     }
 
-    @GetMapping("/channel-cache/{channelId}")
+    @GetMapping("/v1/channel-cache/{channelId}")
     public ChannelCache getChannelCache(@PathVariable final long channelId) {
         return channelCacheReader.getByChannelId(channelId);
     }
 
-    @PatchMapping("/channels/channel-name")
+    @PatchMapping("/v2/channels/channel-name")
     public void updateChannelName(@Login final MemberSession memberSession,
                                   @RequestBody final ChannelName channelName) {
         channelUpdaterFacade.updateChannelName(memberSession.id(), channelName);
     }
 
-    @PatchMapping("/channels/channel-description")
+    @PatchMapping("/v2/channels/channel-description")
     public void updateChannelDescription(@Login final MemberSession memberSession,
                                          @RequestBody final ChannelDescription channelDescription) {
         channelUpdaterFacade.updateChannelDescription(memberSession.id(), channelDescription);
