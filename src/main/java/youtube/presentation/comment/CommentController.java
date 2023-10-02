@@ -30,11 +30,19 @@ public class CommentController {
         this.commentReader = commentReader;
     }
 
-    @GetMapping("/v1/comments/{videoInfoId}/{page}")
-    public CommentResult findCommentResponses(@PathVariable final long videoInfoId,
-                                              @PathVariable final long page) {
+    @GetMapping("/v1/comments-likes/{videoInfoId}/{page}")
+    public CommentResult findCommentResponsesOrderByLikes(@PathVariable final long videoInfoId,
+                                                          @PathVariable final long page) {
         List<CommentResponse> commentResponses =
                 commentReader.findCommentResponsesOrderByLikes(videoInfoId, page);
+        return CommentMapper.toCommentResult(page, commentResponses);
+    }
+
+    @GetMapping("/v1/comments-latest/{videoInfoId}/{page}")
+    public CommentResult findCommentResponsesOrderByLatest(@PathVariable final long videoInfoId,
+                                                           @PathVariable final long page) {
+        List<CommentResponse> commentResponses =
+                commentReader.findCommentResponsesOrderByLatest(videoInfoId, page);
         return CommentMapper.toCommentResult(page, commentResponses);
     }
 

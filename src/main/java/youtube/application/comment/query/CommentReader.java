@@ -20,4 +20,9 @@ public class CommentReader {
     public List<CommentResponse> findCommentResponsesOrderByLikes(final long videoInfoId, final long page) {
         return commentRepository.findCommentResponsesOrderByLikes(videoInfoId, page);
     }
+
+    @Transactional(readOnly = true)
+    public List<CommentResponse> findCommentResponsesOrderByLatest(final long videoInfoId, final long page) {
+        return commentRepository.findCommentResponsesOrderByLatest(videoInfoId, page);
+    }
 }

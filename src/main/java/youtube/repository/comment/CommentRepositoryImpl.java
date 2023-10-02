@@ -71,6 +71,24 @@ public class CommentRepositoryImpl implements CommentRepository {
     }
 
     @Override
+    public List<CommentResponse> findCommentResponsesOrderByLatest(final long videoInfoId, final long page) {
+        return queryFactory.select(
+                        new QCommentResponse(
+                                comment.nickname.nickname,
+                                comment.content,
+                                comment.childCommentCount,
+                                comment.likesCount,
+                                comment.createdAt
+                        ))
+                .from(comment)
+                .where(comment.videoInfoId.eq(videoInfoId))
+                .orderBy(comment.id.desc())
+                .offset(page * TWENTY.value)
+                .limit(TWENTY.value)
+                .fetch();
+    }
+
+    @Override
     public long count() {
         return commentJpaRepository.count();
     }

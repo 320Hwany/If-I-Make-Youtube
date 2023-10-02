@@ -15,5 +15,7 @@ public interface CommentRepository {
 
     List<CommentResponse> findCommentResponsesOrderByLikes(final long videoInfoId, final long page);
 
+    List<CommentResponse> findCommentResponsesOrderByLatest(final long videoInfoId, final long page);
+
     long count();
 }
