@@ -40,7 +40,7 @@ public class VideoInfo extends BaseTimeEntity {
     }
 
     @Builder
-    private VideoInfo(final Long channelId, final String videoTitle, final VideoType videoType, final long views,
+    private VideoInfo(final long channelId, final String videoTitle, final VideoType videoType, final long views,
                      final long likesCount, final long dislikesCount, final int commentCount,
                      final String videoDescription, final String fileExtension) {
         this.channelId = channelId;

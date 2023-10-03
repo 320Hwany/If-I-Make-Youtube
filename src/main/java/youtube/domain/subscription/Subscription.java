@@ -27,7 +27,7 @@ public class Subscription extends BaseTimeEntity {
     }
 
     @Builder
-    private Subscription(final Long memberId, final Long channelId, final Boolean isNotification) {
+    private Subscription(final long memberId, final long channelId, final boolean isNotification) {
         this.memberId = memberId;
         this.channelId = channelId;
         this.isNotification = isNotification;

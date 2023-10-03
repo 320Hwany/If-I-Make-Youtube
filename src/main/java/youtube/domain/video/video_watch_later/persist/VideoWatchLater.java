@@ -27,7 +27,7 @@ public class VideoWatchLater {
     }
 
     @Builder
-    private VideoWatchLater(final Long memberId, final Long videoInfoId, final LocalDateTime watchLaterDate) {
+    private VideoWatchLater(final long memberId, final long videoInfoId, final LocalDateTime watchLaterDate) {
         this.memberId = memberId;
         this.videoInfoId = videoInfoId;
         this.watchLaterDate = watchLaterDate;

@@ -27,7 +27,7 @@ public class VideoWatched {
     }
 
     @Builder
-    private VideoWatched(final Long memberId, final Long videoInfoId, final LocalDateTime watchedDate) {
+    private VideoWatched(final long memberId, final long videoInfoId, final LocalDateTime watchedDate) {
         this.memberId = memberId;
         this.videoInfoId = videoInfoId;
         this.lastWatchedDateTime = watchedDate;

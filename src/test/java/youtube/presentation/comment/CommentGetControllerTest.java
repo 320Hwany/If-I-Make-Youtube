@@ -43,7 +43,7 @@ public class CommentGetControllerTest extends ControllerTest {
         // expected
         mockMvc.perform(get("/api/v1/comments-likes/{videoInfoId}/{page}", 9999L, 0))
                 .andExpect(status().isOk())
-                .andDo(document("댓글 가져오기 성공",
+                .andDo(document("댓글 좋아요 순 가져오기 성공",
                         preprocessResponse(prettyPrint()),
                         resource(ResourceSnippetParameters.builder()
                                 .tag("댓글")
@@ -91,7 +91,7 @@ public class CommentGetControllerTest extends ControllerTest {
         // expected
         mockMvc.perform(get("/api/v1/comments-latest/{videoInfoId}/{page}", 9999L, 0))
                 .andExpect(status().isOk())
-                .andDo(document("댓글 가져오기 성공",
+                .andDo(document("댓글 최신순 가져오기 성공",
                         preprocessResponse(prettyPrint()),
                         resource(ResourceSnippetParameters.builder()
                                 .tag("댓글")

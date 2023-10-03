@@ -28,7 +28,7 @@ public class VideoReaction extends BaseTimeEntity {
     }
 
     @Builder
-    private VideoReaction(final Long memberId, final Long videoInfoId, final Reaction reaction) {
+    private VideoReaction(final long memberId, final long videoInfoId, final Reaction reaction) {
         this.memberId = memberId;
         this.videoInfoId = videoInfoId;
         this.reaction = reaction;

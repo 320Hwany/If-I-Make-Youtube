@@ -39,7 +39,7 @@ public class Comment extends BaseTimeEntity {
     }
 
     @Builder
-    private Comment(final Long memberId, final Long videoInfoId, final Long parentId, final Nickname nickname,
+    private Comment(final long memberId, final long videoInfoId, final long parentId, final Nickname nickname,
                     final String content, final long childCommentCount, final long likesCount) {
         this.memberId = memberId;
         this.videoInfoId = videoInfoId;

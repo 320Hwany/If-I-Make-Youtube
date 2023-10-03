@@ -24,7 +24,7 @@ public class JwtRefreshToken extends BaseTimeEntity {
     }
 
     @Builder
-    private JwtRefreshToken(final Long memberId, final String refreshToken) {
+    private JwtRefreshToken(final long memberId, final String refreshToken) {
         this.memberId = memberId;
         this.refreshToken = refreshToken;
     }
