@@ -89,6 +89,22 @@ public class CommentRepositoryImpl implements CommentRepository {
     }
 
     @Override
+    public List<CommentResponse> findChildCommentResponses(final long commentId) {
+        return queryFactory.select(
+                        new QCommentResponse(
+                                comment.nickname.nickname,
+                                comment.content,
+                                comment.childCommentCount,
+                                comment.likesCount,
+                                comment.createdAt
+                        ))
+                .from(comment)
+                .where(comment.parentId.eq(commentId))
+                .orderBy(comment.likesCount.desc())
+                .fetch();
+    }
+
+    @Override
     public long count() {
         return commentJpaRepository.count();
     }

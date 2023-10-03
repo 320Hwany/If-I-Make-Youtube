@@ -2,6 +2,7 @@ package youtube.mapper.comment;
 
 import youtube.domain.comment.Comment;
 import youtube.domain.member.vo.Nickname;
+import youtube.mapper.comment.dto.ChildCommentResult;
 import youtube.mapper.comment.dto.CommentResponse;
 import youtube.mapper.comment.dto.CommentResult;
 import youtube.mapper.comment.dto.CommentSaveRequest;
@@ -30,5 +31,9 @@ public enum CommentMapper {
 
     public static CommentResult toCommentResult(final long page, final List<CommentResponse> commentResponses) {
         return new CommentResult(page, commentResponses);
+    }
+
+    public static ChildCommentResult toChildCommentResult(final List<CommentResponse> childCommentResponses) {
+        return new ChildCommentResult(childCommentResponses);
     }
 }
