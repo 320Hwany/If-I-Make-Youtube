@@ -8,6 +8,7 @@ import youtube.domain.channel.vo.ChannelCache;
 import youtube.repository.channel.ChannelRepository;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class ChannelSubscriptionCountUpdater {
@@ -23,7 +24,8 @@ public class ChannelSubscriptionCountUpdater {
     @Transactional
     public CompletableFuture<Void> command(final long channelId, final ChannelCache channelCache) {
         Channel entity = channelRepository.getById(channelId);
-        int subscribersCount = channelCache.getSubscribersCount();
+        AtomicInteger atomicSubscribersCount = channelCache.getSubscribersCount();
+        int subscribersCount = atomicSubscribersCount.get();
         entity.updateSubscribersCount(subscribersCount);
         return CompletableFuture.completedFuture(null);
     }

@@ -7,7 +7,6 @@ import youtube.domain.channel.vo.ChannelCache;
 
 import static youtube.global.constant.AnnotationMessageConstant.CHANNEL_CACHE;
 
-
 @Service
 public class SubscribersCounter {
 
@@ -17,16 +16,18 @@ public class SubscribersCounter {
         this.cacheManager = cacheManager;
     }
 
-    public synchronized void increaseCount(final long channelId, final ChannelCache channelCache) {
+    public void increaseCount(final long channelId, final ChannelCache channelCache) {
         Cache cache = cacheManager.getCache(CHANNEL_CACHE);
         assert cache != null;
+
         channelCache.increaseSubscribersCount();
         cache.put(channelId, channelCache);
     }
 
-    public synchronized void decreaseCount(final long channelId, final ChannelCache channelCache) {
+    public void decreaseCount(final long channelId, final ChannelCache channelCache) {
         Cache cache = cacheManager.getCache(CHANNEL_CACHE);
         assert cache != null;
+
         channelCache.decreaseSubscribersCount();
         cache.put(channelId, channelCache);
     }

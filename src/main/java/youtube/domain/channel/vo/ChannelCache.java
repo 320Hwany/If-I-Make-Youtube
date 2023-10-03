@@ -3,7 +3,7 @@ package youtube.domain.channel.vo;
 import lombok.Builder;
 import lombok.Getter;
 
-import static youtube.global.constant.NumberConstant.ONE;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Getter
 public final class ChannelCache {
@@ -14,11 +14,11 @@ public final class ChannelCache {
 
     private int videosCount;
 
-    private int subscribersCount;
+    private AtomicInteger subscribersCount;
 
     @Builder
     private ChannelCache(final ChannelName channelName, final ChannelDescription channelDescription,
-                        final int videosCount, final int subscribersCount) {
+                        final int videosCount, final AtomicInteger subscribersCount) {
         this.channelName = channelName;
         this.channelDescription = channelDescription;
         this.videosCount = videosCount;
@@ -26,11 +26,11 @@ public final class ChannelCache {
     }
 
     public void increaseSubscribersCount() {
-        this.subscribersCount += ONE.value;
+        subscribersCount.incrementAndGet();
     }
 
     public void decreaseSubscribersCount() {
-        this.subscribersCount -= ONE.value;
+        subscribersCount.decrementAndGet();
     }
 
     public void updateChannelName(final ChannelName channelName) {

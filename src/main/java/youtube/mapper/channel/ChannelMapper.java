@@ -9,6 +9,8 @@ import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.Nickname;
 import youtube.mapper.channel.dto.ChannelCacheDto;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import static youtube.global.constant.NumberConstant.ZERO;
 
 public enum ChannelMapper {
@@ -34,11 +36,17 @@ public enum ChannelMapper {
     }
 
     public static ChannelCache toChannelCache(final ChannelCacheDto channelCacheDto) {
+        AtomicInteger atomicSubscribersCount = toAtomicType(channelCacheDto.subscribersCount());
+
         return ChannelCache.builder()
                 .channelName(channelCacheDto.channelName())
                 .channelDescription(channelCacheDto.channelDescription())
                 .videosCount(channelCacheDto.videosCount())
-                .subscribersCount(channelCacheDto.subscribersCount())
+                .subscribersCount(atomicSubscribersCount)
                 .build();
+    }
+
+    private static AtomicInteger toAtomicType(final int subscribersCount) {
+        return new AtomicInteger(subscribersCount);
     }
 }

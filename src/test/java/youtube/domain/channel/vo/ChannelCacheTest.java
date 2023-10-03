@@ -3,6 +3,8 @@ package youtube.domain.channel.vo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ChannelCacheTest {
@@ -12,14 +14,14 @@ class ChannelCacheTest {
     void increaseSubscribersCount() {
         // given
         ChannelCache channelCache = ChannelCache.builder()
-                .subscribersCount(10)
+                .subscribersCount(new AtomicInteger(10))
                 .build();
 
         // when
         channelCache.increaseSubscribersCount();
 
         // then
-        assertThat(channelCache.getSubscribersCount()).isEqualTo(11);
+        assertThat(channelCache.getSubscribersCount().get()).isEqualTo(11);
     }
 
     @Test
@@ -27,13 +29,13 @@ class ChannelCacheTest {
     void decreaseSubscribersCount() {
         // given
         ChannelCache channelCache = ChannelCache.builder()
-                .subscribersCount(10)
+                .subscribersCount(new AtomicInteger(10))
                 .build();
 
         // when
         channelCache.decreaseSubscribersCount();
 
         // then
-        assertThat(channelCache.getSubscribersCount()).isEqualTo(9);
+        assertThat(channelCache.getSubscribersCount().get()).isEqualTo(9);
     }
 }

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -58,7 +59,9 @@ class SubscribersCounterTest extends ServiceTest {
         executorService.shutdown();
 
         // then
+        AtomicInteger atomicSubscribersCount = channelCache.getSubscribersCount();
+        int subscribersCount = atomicSubscribersCount.get();
         int expectedCount = incrementsPerThread * numThreads;
-        assertThat(channelCache.getSubscribersCount()).isEqualTo(expectedCount);
+        assertThat(subscribersCount).isEqualTo(expectedCount);
     }
 }

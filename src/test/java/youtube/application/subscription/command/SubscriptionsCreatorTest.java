@@ -13,6 +13,8 @@ import youtube.mapper.subscription.SubscriptionMapper;
 import youtube.util.AcceptanceTest;
 import youtube.util.ServiceTest;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import static org.assertj.core.api.Assertions.*;
 
 @AcceptanceTest
@@ -52,7 +54,10 @@ class SubscriptionsCreatorTest extends ServiceTest {
         ChannelCache channelCache = channelCacheReader.getByChannelId(channel.getId());
 
         // then
+        AtomicInteger atomicSubscribersCount = channelCache.getSubscribersCount();
+        int subscribersCount = atomicSubscribersCount.get();
+
         assertThat(subscriptionRepository.count()).isEqualTo(1);
-        assertThat(channelCache.getSubscribersCount()).isEqualTo(1);
+        assertThat(subscribersCount).isEqualTo(1);
     }
 }

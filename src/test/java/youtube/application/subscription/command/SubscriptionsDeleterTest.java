@@ -12,6 +12,8 @@ import youtube.mapper.channel.ChannelMapper;
 import youtube.mapper.subscription.SubscriptionMapper;
 import youtube.util.ServiceTest;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -45,7 +47,10 @@ class SubscriptionsDeleterTest extends ServiceTest {
         ChannelCache channelCache = channelCacheReader.getByChannelId(channel.getId());
 
         // then
+        AtomicInteger atomicSubscribersCount = channelCache.getSubscribersCount();
+        int subscribersCount = atomicSubscribersCount.get();
+
         assertThat(subscriptionRepository.count()).isEqualTo(0);
-        assertThat(channelCache.getSubscribersCount()).isEqualTo(-1);
+        assertThat(subscribersCount).isEqualTo(-1);
     }
 }
