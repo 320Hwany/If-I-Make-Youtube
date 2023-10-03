@@ -7,7 +7,6 @@ import youtube.domain.channel.vo.ChannelDescription;
 import youtube.domain.channel.vo.ChannelName;
 import youtube.repository.channel.ChannelRepository;
 
-@Transactional
 @Service
 public class ChannelUpdater {
 
@@ -17,6 +16,7 @@ public class ChannelUpdater {
         this.channelRepository = channelRepository;
     }
 
+    @Transactional
     public long updateChannelName(final long memberId, final ChannelName channelNameUpdate) {
         Channel entity = channelRepository.getByMemberId(memberId);
         ChannelName channelName = entity.getChannelName();
@@ -24,6 +24,7 @@ public class ChannelUpdater {
         return entity.getId();
     }
 
+    @Transactional
     public long updateChannelDescription(final long memberId, final ChannelDescription channelDescriptionUpdate) {
         Channel entity = channelRepository.getByMemberId(memberId);
         ChannelDescription channelDescription = entity.getChannelDescription();

@@ -36,7 +36,7 @@ public class ChannelUpdaterFacade {
         updateChannelDescriptionCache(channelId, channelDescription);
     }
 
-    private synchronized void updateChannelNameCache(final long channelId, final ChannelName channelName) {
+    private void updateChannelNameCache(final long channelId, final ChannelName channelName) {
         ChannelCache channelCache = channelCacheReader.getByChannelId(channelId);
         channelCache.updateChannelName(channelName);
         Cache cache = cacheManager.getCache(CHANNEL_CACHE);
@@ -44,7 +44,7 @@ public class ChannelUpdaterFacade {
         cache.put(channelId, channelCache);
     }
 
-    private synchronized void updateChannelDescriptionCache(final long channelId,
+    private void updateChannelDescriptionCache(final long channelId,
                                                            final ChannelDescription channelDescription) {
         ChannelCache channelCache = channelCacheReader.getByChannelId(channelId);
         channelCache.updateChannelDescription(channelDescription);
