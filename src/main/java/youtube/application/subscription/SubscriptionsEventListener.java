@@ -12,14 +12,11 @@ public class SubscriptionsEventListener {
 
     private final SubscriptionsCacheEvictor subscriptionsCacheEvictor;
     private final ChannelCacheReader channelCacheReader;
-    private final SubscribersCounter subscribersCounter;
 
     public SubscriptionsEventListener(final SubscriptionsCacheEvictor subscriptionsCacheEvictor,
-                                      final ChannelCacheReader channelCacheReader,
-                                      final SubscribersCounter subscribersCounter) {
+                                      final ChannelCacheReader channelCacheReader) {
         this.subscriptionsCacheEvictor = subscriptionsCacheEvictor;
         this.channelCacheReader = channelCacheReader;
-        this.subscribersCounter = subscribersCounter;
     }
 
     // SubscriptionsCreator - 채널 구독시 발생하는 이벤트
@@ -29,7 +26,7 @@ public class SubscriptionsEventListener {
         long memberId = subscriptionSaveEvent.memberId();
 
         ChannelCache channelCache = channelCacheReader.getByChannelId(channelId);
-        subscribersCounter.increaseCount(channelId, channelCache);
+        channelCache.increaseSubscribersCount();;
         subscriptionsCacheEvictor.clearCacheByMemberId(memberId);
     }
 
@@ -41,7 +38,7 @@ public class SubscriptionsEventListener {
         long memberId = subscriptionCancelEvent.memberId();
 
         ChannelCache channelCache = channelCacheReader.getByChannelId(channelId);
-        subscribersCounter.decreaseCount(channelId, channelCache);
+        channelCache.decreaseSubscribersCount();
         subscriptionsCacheEvictor.clearCacheByMemberId(memberId);
     }
 }

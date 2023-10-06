@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import youtube.application.channel.ChannelUpdaterFacade;
-import youtube.application.subscription.SubscribersCounter;
 import youtube.domain.channel.persist.Channel;
 import youtube.domain.channel.vo.ChannelCache;
 import youtube.domain.channel.vo.ChannelDescription;
@@ -26,9 +25,6 @@ class ChannelUpdaterFacadeTest extends ServiceTest {
 
     @Autowired
     private ChannelUpdaterFacade channelUpdaterFacade;
-
-    @Autowired
-    private SubscribersCounter subscribersCounter;
 
     @Test
     @DisplayName("로그인한 회원의 채널명을 수정합니다")
@@ -92,7 +88,7 @@ class ChannelUpdaterFacadeTest extends ServiceTest {
             CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
                 for (int j = 0; j < incrementsPerThread; j++) {
                     channelUpdaterFacade.updateChannelName(member.getId(), channelNameUpdate);
-                    subscribersCounter.increaseCount(channel.getId(), channelCache);
+                    channelCache.increaseSubscribersCount();;
                     channelUpdaterFacade.updateChannelDescription(member.getId(), channelDescriptionUpdate);
                 }
             }, executorService);

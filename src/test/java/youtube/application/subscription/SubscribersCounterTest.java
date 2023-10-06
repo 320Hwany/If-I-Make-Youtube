@@ -20,9 +20,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class SubscribersCounterTest extends ServiceTest {
 
-    @Autowired
-    private SubscribersCounter subscribersCounter;
-
     @Test
     @DisplayName("여러 명의 사용자가 동시에 같은 채널에 구독을 해도 구독자 수가 증가하는 동시성 문제를 처리할 수 있습니다")
     public void increaseSubscribersConcurrent() throws Exception {
@@ -46,7 +43,7 @@ class SubscribersCounterTest extends ServiceTest {
         for (int i = 0; i < numThreads; i++) {
             CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
                 for (int j = 0; j < incrementsPerThread; j++) {
-                    subscribersCounter.increaseCount(channel.getId(), channelCache);
+                    channelCache.increaseSubscribersCount();;
                 }
             }, executorService);
 

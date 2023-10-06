@@ -1,7 +1,5 @@
 package youtube.application.channel;
 
-import org.springframework.cache.Cache;
-import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
 import youtube.application.channel.command.ChannelUpdater;
 import youtube.application.channel.query.ChannelCacheReader;
@@ -9,21 +7,15 @@ import youtube.domain.channel.vo.ChannelCache;
 import youtube.domain.channel.vo.ChannelDescription;
 import youtube.domain.channel.vo.ChannelName;
 
-import static youtube.global.constant.AnnotationMessageConstant.CHANNEL_CACHE;
-
 @Service
 public class ChannelUpdaterFacade {
 
     private final ChannelUpdater channelUpdater;
     private final ChannelCacheReader channelCacheReader;
-    private final CacheManager cacheManager;
 
-    public ChannelUpdaterFacade(final youtube.application.channel.command.ChannelUpdater channelUpdater,
-                                final ChannelCacheReader channelCacheReader,
-                                final CacheManager cacheManager) {
+    public ChannelUpdaterFacade(final ChannelUpdater channelUpdater, final ChannelCacheReader channelCacheReader) {
         this.channelUpdater = channelUpdater;
         this.channelCacheReader = channelCacheReader;
-        this.cacheManager = cacheManager;
     }
 
     public void updateChannelName(final long memberId, final ChannelName channelName) {
@@ -39,17 +31,11 @@ public class ChannelUpdaterFacade {
     private void updateChannelNameCache(final long channelId, final ChannelName channelName) {
         ChannelCache channelCache = channelCacheReader.getByChannelId(channelId);
         channelCache.updateChannelName(channelName);
-        Cache cache = cacheManager.getCache(CHANNEL_CACHE);
-        assert cache != null;
-        cache.put(channelId, channelCache);
     }
 
     private void updateChannelDescriptionCache(final long channelId,
-                                                           final ChannelDescription channelDescription) {
+                                               final ChannelDescription channelDescription) {
         ChannelCache channelCache = channelCacheReader.getByChannelId(channelId);
         channelCache.updateChannelDescription(channelDescription);
-        Cache cache = cacheManager.getCache(CHANNEL_CACHE);
-        assert cache != null;
-        cache.put(channelId, channelCache);
     }
 }
