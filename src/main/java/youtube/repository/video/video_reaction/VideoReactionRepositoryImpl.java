@@ -2,9 +2,9 @@ package youtube.repository.video.video_reaction;
 
 import org.springframework.stereotype.Repository;
 import youtube.domain.video.video_reaction.persist.VideoReaction;
-import youtube.global.exception.BadRequestException;
 
-import static youtube.global.constant.ExceptionMessageConstant.*;
+import java.util.Optional;
+
 
 @Repository
 public class VideoReactionRepositoryImpl implements VideoReactionRepository {
@@ -21,9 +21,8 @@ public class VideoReactionRepositoryImpl implements VideoReactionRepository {
     }
 
     @Override
-    public VideoReaction getByMemberIdAndVideoInfoId(final long memberId, final long videoInfoId) {
-        return videoReactionJpaRepository.findByMemberIdAndVideoInfoId(memberId, videoInfoId)
-                .orElseThrow(() -> new BadRequestException(VIDEO_REACTION_NOT_FOUND.message));
+    public Optional<VideoReaction> findByMemberIdAndVideoInfoId(final long memberId, final long videoInfoId) {
+        return videoReactionJpaRepository.findByMemberIdAndVideoInfoId(memberId, videoInfoId);
     }
 
     @Override

@@ -7,6 +7,8 @@ import youtube.mapper.video.video_reaction.VideoReactionMapper;
 import youtube.mapper.video.video_reaction.dto.VideoReactionRequest;
 import youtube.repository.video.video_reaction.VideoReactionRepository;
 
+import java.util.Optional;
+
 @Service
 public class VideoReactionCreator {
 
@@ -18,7 +20,15 @@ public class VideoReactionCreator {
 
     @Transactional
     public void command(final long memberId, final VideoReactionRequest dto) {
-        VideoReaction entity = VideoReactionMapper.toEntity(memberId, dto);
-        videoReactionRepository.save(entity);
+        Optional<VideoReaction> optionalVideoReaction =
+                videoReactionRepository.findByMemberIdAndVideoInfoId(memberId, dto.videoInfoId());
+
+        if (optionalVideoReaction.isPresent()) {
+            VideoReaction psReaction = optionalVideoReaction.get();
+            psReaction.updateReaction(dto.updateReaction());
+        } else {
+            VideoReaction entity = VideoReactionMapper.toEntity(memberId, dto);
+            videoReactionRepository.save(entity);
+        }
     }
 }

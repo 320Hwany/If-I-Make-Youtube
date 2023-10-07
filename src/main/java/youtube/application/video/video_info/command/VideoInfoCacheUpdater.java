@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import youtube.domain.video.video_info.persist.VideoInfo;
 import youtube.domain.video.video_info.vo.VideoInfoCache;
+import youtube.mapper.video.video_info.VideoInfoMapper;
+import youtube.mapper.video.video_info.dto.VideoInfoCacheUpdateDto;
 import youtube.repository.video.video_info.VideoInfoRepository;
 
 import java.util.concurrent.CompletableFuture;
@@ -22,8 +24,9 @@ public class VideoInfoCacheUpdater {
     @Async
     @Transactional
     public CompletableFuture<Void> command(final long videoInfoId, final VideoInfoCache cache) {
+        VideoInfoCacheUpdateDto dto = VideoInfoMapper.toVideoInfoCacheUpdateDto(cache);
         VideoInfo entity = videoInfoRepository.getById(videoInfoId);
-        entity.updateCacheInfo(cache);
+        entity.updateCacheInfo(dto);
         return CompletableFuture.completedFuture(null);
     }
 }

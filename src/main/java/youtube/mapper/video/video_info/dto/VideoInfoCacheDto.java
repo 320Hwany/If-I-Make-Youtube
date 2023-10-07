@@ -6,16 +6,11 @@ import java.time.LocalDateTime;
 
 public record VideoInfoCacheDto(
         String videoTitle,
-
         String videoDescription,
-
         long views,
-
         long likesCount,
-
         long dislikesCount,
         long commentCount,
-
         LocalDateTime createdAt
 ) {
 

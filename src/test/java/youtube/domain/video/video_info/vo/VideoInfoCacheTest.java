@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import youtube.domain.video.video_reaction.vo.Reaction;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 import static org.assertj.core.api.Assertions.*;
 
 class VideoInfoCacheTest {
@@ -13,19 +15,23 @@ class VideoInfoCacheTest {
     void updateReaction1() {
         // given
         VideoInfoCache cache = VideoInfoCache.builder()
-                .likesCount(100)
-                .dislikesCount(10)
+                .likesCount(new AtomicLong(100))
+                .dislikesCount(new AtomicLong(10))
                 .build();
 
         Reaction originalReaction = Reaction.DISLIKE;
         Reaction updateReaction = Reaction.LIKE;
 
         // when
-        cache.updateReactionCount(originalReaction, updateReaction);
+        cache.updateLikesCount(originalReaction, updateReaction);
+        cache.updateDisLikesCount(originalReaction, updateReaction);
 
         // then
-        assertThat(cache.getLikesCount()).isEqualTo(101);
-        assertThat(cache.getDislikesCount()).isEqualTo(9);
+        AtomicLong atomicLikesCount = cache.getLikesCount();
+        AtomicLong atomicDislikesCount = cache.getDislikesCount();
+
+        assertThat(atomicLikesCount.get()).isEqualTo(101);
+        assertThat(atomicDislikesCount.get()).isEqualTo(9);
     }
 
     @Test
@@ -33,19 +39,23 @@ class VideoInfoCacheTest {
     void updateReaction2() {
         // given
         VideoInfoCache cache = VideoInfoCache.builder()
-                .likesCount(100)
-                .dislikesCount(10)
+                .likesCount(new AtomicLong(100))
+                .dislikesCount(new AtomicLong(10))
                 .build();
 
         Reaction originalReaction = Reaction.NO_REACTION;
         Reaction updateReaction = Reaction.LIKE;
 
         // when
-        cache.updateReactionCount(originalReaction, updateReaction);
+        cache.updateLikesCount(originalReaction, updateReaction);
+        cache.updateDisLikesCount(originalReaction, updateReaction);
 
         // then
-        assertThat(cache.getLikesCount()).isEqualTo(101);
-        assertThat(cache.getDislikesCount()).isEqualTo(10);
+        AtomicLong atomicLikesCount = cache.getLikesCount();
+        AtomicLong atomicDislikesCount = cache.getDislikesCount();
+
+        assertThat(atomicLikesCount.get()).isEqualTo(101);
+        assertThat(atomicDislikesCount.get()).isEqualTo(10);
     }
 
     @Test
@@ -53,18 +63,22 @@ class VideoInfoCacheTest {
     void updateReaction3() {
         // given
         VideoInfoCache cache = VideoInfoCache.builder()
-                .likesCount(100)
-                .dislikesCount(10)
+                .likesCount(new AtomicLong(100))
+                .dislikesCount(new AtomicLong(10))
                 .build();
 
         Reaction originalReaction = Reaction.DISLIKE;
         Reaction updateReaction = Reaction.NO_REACTION;
 
         // when
-        cache.updateReactionCount(originalReaction, updateReaction);
+        cache.updateLikesCount(originalReaction, updateReaction);
+        cache.updateDisLikesCount(originalReaction, updateReaction);
 
         // then
-        assertThat(cache.getLikesCount()).isEqualTo(100);
-        assertThat(cache.getDislikesCount()).isEqualTo(9);
+        AtomicLong atomicLikesCount = cache.getLikesCount();
+        AtomicLong atomicDislikesCount = cache.getDislikesCount();
+
+        assertThat(atomicLikesCount.get()).isEqualTo(100);
+        assertThat(atomicDislikesCount.get()).isEqualTo(9);
     }
 }

@@ -16,6 +16,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicLong;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -68,7 +69,8 @@ class VideoReactionUpdaterTest extends ServiceTest {
         executorService.shutdown();
 
         // then
-        assertThat(videoInfoCache.getLikesCount()).isEqualTo(10);
+        AtomicLong atomicLikesCount = videoInfoCache.getLikesCount();
+        assertThat(atomicLikesCount.get()).isEqualTo(10);
         assertThat(videoReactionRepository.count()).isEqualTo(10);
     }
 }

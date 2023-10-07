@@ -33,4 +33,8 @@ public class VideoReaction extends BaseTimeEntity {
         this.videoInfoId = videoInfoId;
         this.reaction = reaction;
     }
+
+    public void updateReaction(final Reaction updateReaction) {
+        this.reaction = updateReaction;
+    }
 }
