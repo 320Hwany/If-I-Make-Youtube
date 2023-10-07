@@ -41,6 +41,7 @@ public class VideoInfoRepositoryImpl implements VideoInfoRepository {
                         videoInfo.views,
                         videoInfo.likesCount,
                         videoInfo.dislikesCount,
+                        videoInfo.commentCount,
                         videoInfo.createdAt
                 ))
                 .from(videoInfo)

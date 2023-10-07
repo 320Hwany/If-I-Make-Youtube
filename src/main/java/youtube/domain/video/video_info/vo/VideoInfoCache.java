@@ -5,6 +5,7 @@ import lombok.Getter;
 import youtube.domain.video.video_reaction.vo.Reaction;
 
 import java.time.LocalDateTime;
+import java.util.concurrent.atomic.AtomicLong;
 
 import static youtube.global.constant.NumberConstant.*;
 
@@ -21,14 +22,14 @@ public final class VideoInfoCache {
 
     private long dislikesCount;
 
-    private long commentCount;
+    private AtomicLong commentCount;
 
     private LocalDateTime createdAt;
 
     @Builder
     private VideoInfoCache(final String videoTitle, final String videoDescription, final long views,
                           final long likesCount, final long dislikesCount,
-                          final long commentCount, final LocalDateTime createdAt) {
+                          final AtomicLong commentCount, final LocalDateTime createdAt) {
         this.videoTitle = videoTitle;
         this.videoDescription = videoDescription;
         this.views = views;
@@ -44,6 +45,6 @@ public final class VideoInfoCache {
     }
 
     public void plusOneCommentCount() {
-        this.commentCount += ONE.value;
+        commentCount.incrementAndGet();
     }
 }

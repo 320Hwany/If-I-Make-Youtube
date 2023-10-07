@@ -5,6 +5,8 @@ import youtube.domain.video.video_info.vo.VideoInfoCache;
 import youtube.mapper.video.video_info.dto.VideoInfoCacheDto;
 import youtube.mapper.video.video_info.dto.VideoInfoSaveRequest;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 import static youtube.global.constant.NumberConstant.*;
 
 public enum VideoInfoMapper {
@@ -28,13 +30,20 @@ public enum VideoInfoMapper {
     }
 
     public static VideoInfoCache toCache(final VideoInfoCacheDto dto) {
+        long commentCount = dto.commentCount();
+
         return VideoInfoCache.builder()
                 .videoTitle(dto.videoTitle())
                 .videoDescription(dto.videoDescription())
                 .views(dto.views())
                 .likesCount(dto.likesCount())
                 .dislikesCount(dto.dislikesCount())
+                .commentCount(toAtomicType(commentCount))
                 .createdAt(dto.createdAt())
                 .build();
+    }
+
+    private static AtomicLong toAtomicType(final long commentCount) {
+        return new AtomicLong(commentCount);
     }
 }

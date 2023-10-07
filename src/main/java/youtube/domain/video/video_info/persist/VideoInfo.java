@@ -8,6 +8,8 @@ import youtube.domain.video.video_info.vo.VideoInfoCache;
 import youtube.domain.video.video_info.vo.VideoType;
 import youtube.global.annotation.Association;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 @Getter
 @Entity
 public class VideoInfo extends BaseTimeEntity {
@@ -55,11 +57,13 @@ public class VideoInfo extends BaseTimeEntity {
     }
 
     public void updateCacheInfo(final VideoInfoCache cache) {
+        AtomicLong atomicCommentCount = cache.getCommentCount();
+
         this.videoTitle = cache.getVideoTitle();
         this.videoDescription = cache.getVideoDescription();
         this.views = cache.getViews();
         this.likesCount = cache.getLikesCount();
         this.dislikesCount = cache.getDislikesCount();
-        this.commentCount = cache.getCommentCount();
+        this.commentCount = atomicCommentCount.get();
     }
 }

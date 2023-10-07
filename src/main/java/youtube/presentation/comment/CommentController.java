@@ -60,7 +60,7 @@ public class CommentController {
     @PostMapping("/v2/comments")
     public void commentSave(@Login final MemberSession memberSession,
                             @RequestBody @Valid final CommentSaveRequest dto) {
-        commentCreator.command(memberSession.id(), dto);
+        commentCreator.command(memberSession, dto);
     }
 
     @PatchMapping("/v2/comments/likes/{commentId}")

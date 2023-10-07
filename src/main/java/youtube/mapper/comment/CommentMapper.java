@@ -1,6 +1,7 @@
 package youtube.mapper.comment;
 
 import youtube.domain.comment.Comment;
+import youtube.domain.member.vo.MemberSession;
 import youtube.domain.member.vo.Nickname;
 import youtube.mapper.comment.dto.ChildCommentResult;
 import youtube.mapper.comment.dto.CommentResponse;
@@ -17,12 +18,12 @@ public enum CommentMapper {
     private static final long ZERO = 0;
 
     // parentId가 0이면 일반 댓글, 0이상이면 대댓글
-    public static Comment toEntity(final long memberId, final Nickname nickname, final CommentSaveRequest dto) {
+    public static Comment toEntity(final MemberSession memberSession, final CommentSaveRequest dto) {
         return Comment.builder()
-                .memberId(memberId)
+                .memberId(memberSession.id())
                 .videoInfoId(dto.videoInfoId())
                 .parentId(dto.parentId())
-                .nickname(nickname)
+                .nickname(memberSession.nickname())
                 .content(dto.content())
                 .childCommentCount(ZERO)
                 .likesCount(ZERO)

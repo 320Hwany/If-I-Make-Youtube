@@ -14,6 +14,7 @@ public record VideoInfoCacheDto(
         long likesCount,
 
         long dislikesCount,
+        long commentCount,
 
         LocalDateTime createdAt
 ) {

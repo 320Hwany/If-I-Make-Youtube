@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import youtube.application.video.video_info.query.VideoInfoCacheReader;
 import youtube.domain.comment.Comment;
+import youtube.domain.member.vo.MemberSession;
 import youtube.domain.member.vo.Nickname;
 import youtube.domain.video.video_info.vo.VideoInfoCache;
 import youtube.mapper.comment.CommentMapper;
@@ -15,21 +16,17 @@ import youtube.repository.member.MemberRepository;
 public class CommentCreator {
 
     private final CommentRepository commentRepository;
-    private final MemberRepository memberRepository;
     private final VideoInfoCacheReader videoInfoCacheReader;
 
     public CommentCreator(final CommentRepository commentRepository,
-                          final MemberRepository memberRepository,
                           final VideoInfoCacheReader videoInfoCacheReader) {
         this.commentRepository = commentRepository;
-        this.memberRepository = memberRepository;
         this.videoInfoCacheReader = videoInfoCacheReader;
     }
 
     @Transactional
-    public void command(final long memberId, final CommentSaveRequest dto) {
-        Nickname nickname = memberRepository.getNicknameById(memberId);
-        Comment entity = CommentMapper.toEntity(memberId, nickname, dto);
+    public void command(final MemberSession memberSession, final CommentSaveRequest dto) {
+        Comment entity = CommentMapper.toEntity(memberSession, dto);
         commentRepository.save(entity);
         VideoInfoCache cache = videoInfoCacheReader.getByVideoInfoId(dto.videoInfoId());
         cache.plusOneCommentCount();
