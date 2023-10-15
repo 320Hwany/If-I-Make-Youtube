@@ -15,7 +15,7 @@ public final class VideoInfoCache {
 
     private String videoDescription;
 
-    private long views;
+    private AtomicLong views;
 
     private AtomicLong likesCount;
 
@@ -26,9 +26,9 @@ public final class VideoInfoCache {
     private LocalDateTime createdAt;
 
     @Builder
-    private VideoInfoCache(final String videoTitle, final String videoDescription, final long views,
-                          final AtomicLong likesCount, final AtomicLong dislikesCount,
-                          final AtomicLong commentCount, final LocalDateTime createdAt) {
+    private VideoInfoCache(final String videoTitle, final String videoDescription, final AtomicLong views,
+                           final AtomicLong likesCount, final AtomicLong dislikesCount,
+                           final AtomicLong commentCount, final LocalDateTime createdAt) {
         this.videoTitle = videoTitle;
         this.videoDescription = videoDescription;
         this.views = views;
@@ -40,21 +40,21 @@ public final class VideoInfoCache {
 
     public void updateLikesCount(final Reaction originalReaction, final Reaction updateReaction) {
         if (originalReaction.value == Reaction.LIKE.value) {
-            this.likesCount.decrementAndGet();
+            likesCount.decrementAndGet();
         }
 
         if (updateReaction.value == Reaction.LIKE.value) {
-            this.likesCount.incrementAndGet();
+            likesCount.incrementAndGet();
         }
     }
 
     public void updateDisLikesCount(final Reaction originalReaction, final Reaction updateReaction) {
         if (originalReaction.value == Reaction.DISLIKE.value) {
-            this.dislikesCount.decrementAndGet();
+            dislikesCount.decrementAndGet();
         }
 
         if (updateReaction.value == Reaction.DISLIKE.value) {
-            this.dislikesCount.incrementAndGet();
+            dislikesCount.incrementAndGet();
         }
     }
 

@@ -5,12 +5,10 @@ import org.springframework.transaction.annotation.Transactional;
 import youtube.application.video.video_info.query.VideoInfoCacheReader;
 import youtube.domain.comment.Comment;
 import youtube.domain.member.vo.MemberSession;
-import youtube.domain.member.vo.Nickname;
 import youtube.domain.video.video_info.vo.VideoInfoCache;
 import youtube.mapper.comment.CommentMapper;
 import youtube.mapper.comment.dto.CommentSaveRequest;
 import youtube.repository.comment.CommentRepository;
-import youtube.repository.member.MemberRepository;
 
 @Service
 public class CommentCreator {

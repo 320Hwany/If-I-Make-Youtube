@@ -49,9 +49,9 @@ public class VideoInfoController {
     }
 
     @PostMapping("/v2/videos")
-    public void upload(@RequestPart final MultipartFile uploadVideo,
-                       @RequestPart final VideoInfoSaveRequest videoInfoSaveRequest,
-                       @Login final MemberSession memberSession) {
+    public void upload(@Login final MemberSession memberSession,
+                       @RequestPart final MultipartFile uploadVideo,
+                       @RequestPart final VideoInfoSaveRequest videoInfoSaveRequest) {
         videoUploader.saveToServer(uploadVideo, memberSession.id(), videoInfoSaveRequest);
     }
 }

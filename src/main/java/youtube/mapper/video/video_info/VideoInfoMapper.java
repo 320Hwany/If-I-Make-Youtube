@@ -31,6 +31,7 @@ public enum VideoInfoMapper {
     }
 
     public static VideoInfoCacheUpdateDto toVideoInfoCacheUpdateDto(final VideoInfoCache cache) {
+        AtomicLong atomicViews = cache.getViews();
         AtomicLong atomicLikesCount = cache.getLikesCount();
         AtomicLong atomicDislikesCount = cache.getDislikesCount();
         AtomicLong atomicCommentCount = cache.getCommentCount();
@@ -38,7 +39,7 @@ public enum VideoInfoMapper {
         return VideoInfoCacheUpdateDto.builder()
                 .videoTitle(cache.getVideoTitle())
                 .videoDescription(cache.getVideoDescription())
-                .views(cache.getViews())
+                .views(atomicViews.get())
                 .likesCount(atomicLikesCount.get())
                 .disLikesCount(atomicDislikesCount.get())
                 .commentCount(atomicCommentCount.get())
@@ -46,17 +47,18 @@ public enum VideoInfoMapper {
     }
 
     public static VideoInfoCache toCache(final VideoInfoCacheDto dto) {
-        long atomicLikesCount = dto.likesCount();
-        long atomicDisLikesCount = dto.dislikesCount();
-        long atomicCommentCount = dto.commentCount();
+        long views = dto.views();
+        long likesCount = dto.likesCount();
+        long disLikesCount = dto.dislikesCount();
+        long commentCount = dto.commentCount();
 
         return VideoInfoCache.builder()
                 .videoTitle(dto.videoTitle())
                 .videoDescription(dto.videoDescription())
-                .views(dto.views())
-                .likesCount(toAtomicType(atomicLikesCount))
-                .dislikesCount(toAtomicType(atomicDisLikesCount))
-                .commentCount(toAtomicType(atomicCommentCount))
+                .views(toAtomicType(views))
+                .likesCount(toAtomicType(likesCount))
+                .dislikesCount(toAtomicType(disLikesCount))
+                .commentCount(toAtomicType(commentCount))
                 .createdAt(dto.createdAt())
                 .build();
     }
