@@ -16,4 +16,9 @@ public class MembershipRepositoryImpl implements MembershipRepository {
     public void save(final Membership membership) {
         membershipJpaRepository.save(membership);
     }
+
+    @Override
+    public long count() {
+        return membershipJpaRepository.count();
+    }
 }

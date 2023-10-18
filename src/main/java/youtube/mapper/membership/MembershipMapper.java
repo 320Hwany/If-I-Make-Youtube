@@ -11,15 +11,15 @@ public enum MembershipMapper {
     };
 
     private static final int ZERO = 0;
-    private static final MembershipLevel startLevel = MembershipLevel.BRONZE;
-    private static final LocalDateTime startJoinDate = LocalDateTime.now();
+    private static final MembershipLevel START_LEVEL = MembershipLevel.BRONZE;
 
     public static Membership toEntity(final long memberId, final long channelId) {
+        LocalDateTime startJoinDate = LocalDateTime.now();
 
         return Membership.builder()
                 .memberId(memberId)
                 .channelId(channelId)
-                .membershipLevel(startLevel)
+                .membershipLevel(START_LEVEL)
                 .subscriptionPeriod(ZERO)
                 .joinDate(startJoinDate)
                 .build();
