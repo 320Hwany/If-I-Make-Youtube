@@ -3,6 +3,7 @@ package youtube.application.subscription.command;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import youtube.application.subscription.implement.SubscriptionsDeleter;
 import youtube.domain.channel.persist.Channel;
 import youtube.domain.channel.vo.ChannelCache;
 import youtube.domain.member.persist.Member;

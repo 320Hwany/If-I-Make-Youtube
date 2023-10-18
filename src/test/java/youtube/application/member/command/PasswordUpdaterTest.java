@@ -3,6 +3,7 @@ package youtube.application.member.command;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import youtube.application.member.implement.PasswordUpdater;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.Password;
 import youtube.global.exception.NotFoundException;

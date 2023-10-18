@@ -3,7 +3,7 @@ package youtube.application.member.command;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import youtube.application.jwt.command.RefreshTokenDeleter;
+import youtube.application.jwt.implement.RefreshTokenDeleter;
 import youtube.domain.jwt.JwtRefreshToken;
 import youtube.util.ServiceTest;
 

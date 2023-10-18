@@ -3,6 +3,7 @@ package youtube.application.video.video_reaction.command;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import youtube.application.video.video_reaction.implement.VideoReactionCreator;
 import youtube.domain.member.persist.Member;
 import youtube.domain.video.video_reaction.persist.VideoReaction;
 import youtube.domain.video.video_reaction.vo.Reaction;

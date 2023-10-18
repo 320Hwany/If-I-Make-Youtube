@@ -3,13 +3,13 @@ package youtube.application.comment.command;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import youtube.application.comment.implement.CommentCreator;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.LoginId;
 import youtube.domain.member.vo.MemberSession;
 import youtube.domain.member.vo.Nickname;
 import youtube.domain.member.vo.Password;
 import youtube.domain.video.video_info.persist.VideoInfo;
-import youtube.global.constant.NumberConstant;
 import youtube.mapper.comment.dto.CommentSaveRequest;
 import youtube.util.ServiceTest;
 

@@ -10,9 +10,8 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
-import youtube.application.jwt.TokenFacade;
+import youtube.application.jwt.business.TokenBusiness;
 import youtube.domain.jwt.JwtRefreshToken;
-import youtube.global.constant.TimeConstant;
 import youtube.repository.jwt.JwtRepository;
 import youtube.domain.member.persist.Member;
 import youtube.repository.member.MemberRepository;
@@ -34,16 +33,16 @@ public class LoginInterceptor implements HandlerInterceptor {
     private final ObjectMapper objectMapper;
     private final MemberRepository memberRepository;
     private final JwtRepository jwtRepository;
-    private final TokenFacade tokenFacade;
+    private final TokenBusiness tokenBusiness;
 
     public LoginInterceptor(final ObjectMapper objectMapper,
                             final MemberRepository memberRepository,
                             final JwtRepository jwtRepository,
-                            final TokenFacade tokenFacade) {
+                            final TokenBusiness tokenBusiness) {
         this.objectMapper = objectMapper;
         this.memberRepository = memberRepository;
         this.jwtRepository = jwtRepository;
-        this.tokenFacade = tokenFacade;
+        this.tokenBusiness = tokenBusiness;
     }
 
     @Override
@@ -110,7 +109,7 @@ public class LoginInterceptor implements HandlerInterceptor {
                 Member member = memberRepository.getById(Long.parseLong(memberId));
                 MemberSession memberSession = MemberMapper.toMemberSession(member);
 
-                String accessToken = tokenFacade.createAccessToken(memberSession, ONE_HOUR.value);
+                String accessToken = tokenBusiness.createAccessToken(memberSession, ONE_HOUR.value);
                 response.setHeader(ACCESS_TOKEN.value, accessToken);
 
                 return memberSession;

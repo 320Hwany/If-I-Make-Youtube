@@ -3,6 +3,7 @@ package youtube.application.comment.query;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import youtube.application.comment.implement.CommentReader;
 import youtube.domain.comment.Comment;
 import youtube.domain.member.vo.Nickname;
 import youtube.mapper.comment.dto.CommentResponse;

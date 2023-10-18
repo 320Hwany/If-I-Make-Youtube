@@ -1,8 +1,8 @@
 package youtube.presentation.video.video_watched;
 
 import org.springframework.web.bind.annotation.*;
-import youtube.application.video.video_watched.command.VideoWatchedUpdater;
-import youtube.application.video.video_watched.query.VideoWatchedResponsesReader;
+import youtube.application.video.video_watched.implement.VideoWatchedUpdater;
+import youtube.application.video.video_watched.implement.VideoWatchedResponsesReader;
 import youtube.domain.member.vo.MemberSession;
 import youtube.global.annotation.Login;
 import youtube.mapper.video.video_watched.VideoWatchedMapper;

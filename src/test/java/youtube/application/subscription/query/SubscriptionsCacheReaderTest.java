@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
+import youtube.application.subscription.implement.SubscriptionsCacheReader;
 import youtube.domain.channel.persist.Channel;
 import youtube.domain.member.persist.Member;
 import youtube.domain.subscription.Subscription;

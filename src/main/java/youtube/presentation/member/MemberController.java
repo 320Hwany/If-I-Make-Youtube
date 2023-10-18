@@ -3,11 +3,11 @@ package youtube.presentation.member;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-import youtube.application.jwt.command.RefreshTokenDeleter;
-import youtube.application.member.MemberSignupFacade;
-import youtube.application.member.command.PasswordUpdater;
-import youtube.application.member.MemberLoginFacade;
-import youtube.application.member.query.MemberReader;
+import youtube.application.jwt.implement.RefreshTokenDeleter;
+import youtube.application.member.business.MemberSignupBusiness;
+import youtube.application.member.implement.PasswordUpdater;
+import youtube.application.member.business.MemberLoginBusiness;
+import youtube.application.member.implement.MemberReader;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.MemberSession;
 import youtube.domain.member.vo.Password;
@@ -22,17 +22,17 @@ import youtube.mapper.member.dto.MemberSignupRequest;
 @RestController
 public class MemberController {
 
-    private final MemberSignupFacade memberSignupFacade;
-    private final MemberLoginFacade memberLoginFacade;
+    private final MemberSignupBusiness memberSignupBusiness;
+    private final MemberLoginBusiness memberLoginBusiness;
     private final MemberReader memberReader;
     private final RefreshTokenDeleter refreshTokenDeleter;
     private final PasswordUpdater passwordUpdater;
 
-    public MemberController(final MemberSignupFacade memberSignupFacade, final MemberLoginFacade memberLoginFacade,
+    public MemberController(final MemberSignupBusiness memberSignupBusiness, final MemberLoginBusiness memberLoginBusiness,
                             final MemberReader memberReader, final RefreshTokenDeleter refreshTokenDeleter,
                             final PasswordUpdater passwordUpdater) {
-        this.memberSignupFacade = memberSignupFacade;
-        this.memberLoginFacade = memberLoginFacade;
+        this.memberSignupBusiness = memberSignupBusiness;
+        this.memberLoginBusiness = memberLoginBusiness;
         this.memberReader = memberReader;
         this.refreshTokenDeleter = refreshTokenDeleter;
         this.passwordUpdater = passwordUpdater;
@@ -40,13 +40,13 @@ public class MemberController {
 
     @PostMapping("/v1/signup")
     public void signup(@RequestBody @Valid final MemberSignupRequest dto) {
-        memberSignupFacade.signup(dto);
+        memberSignupBusiness.signup(dto);
     }
 
     @PostMapping("/v1/login")
     public MemberDetailedResponse login(@RequestBody @Valid final MemberLoginRequest dto,
                                         final HttpServletResponse response) {
-        Member entity = memberLoginFacade.login(dto, response);
+        Member entity = memberLoginBusiness.login(dto, response);
         return MemberMapper.toMemberDetailedResponse(entity);
     }
 

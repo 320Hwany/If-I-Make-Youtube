@@ -3,6 +3,7 @@ package youtube.application.comment.command;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import youtube.application.comment.implement.CommentUpdater;
 import youtube.domain.comment.Comment;
 import youtube.domain.member.vo.Nickname;
 import youtube.global.exception.NotFoundException;

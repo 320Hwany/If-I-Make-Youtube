@@ -1,7 +1,7 @@
 package youtube.presentation.video.video_reaction;
 
 import org.springframework.web.bind.annotation.*;
-import youtube.application.video.video_reaction.VideoReactionUpdater;
+import youtube.application.video.video_reaction.implement.VideoReactionUpdater;
 import youtube.domain.member.vo.MemberSession;
 import youtube.global.annotation.Login;
 import youtube.mapper.video.video_reaction.dto.VideoReactionRequest;
