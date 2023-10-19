@@ -15,5 +15,6 @@ public class AnnotationMessageConstant {
     public static final String VIDEO_INFO_CACHE = "videoInfoCache";
     public static final String SUBSCRIPTION_CHANNELS_CACHE = "subscriptionChannelCache";
     public static final String FIVE_AM = "0 0 5 * * *";
+    public static final String SIX_AM = "0 0 6 * * *";
     public static final int ONE_MINUTE = 60 * 1000;
 }
