@@ -1,4 +1,4 @@
-package youtube.application.jwt.implement;
+package youtube.application.jwt;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

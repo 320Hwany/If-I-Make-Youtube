@@ -3,7 +3,7 @@ package youtube.presentation.member;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-import youtube.application.jwt.implement.RefreshTokenDeleter;
+import youtube.application.jwt.RefreshTokenDeleter;
 import youtube.application.member.business.MemberSignupBusiness;
 import youtube.application.member.implement.PasswordUpdater;
 import youtube.application.member.business.MemberLoginBusiness;

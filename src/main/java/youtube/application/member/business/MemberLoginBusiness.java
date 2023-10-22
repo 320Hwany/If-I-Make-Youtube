@@ -3,7 +3,7 @@ package youtube.application.member.business;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import youtube.application.jwt.business.TokenBusiness;
+import youtube.application.jwt.TokenManager;
 import youtube.application.member.implement.MemberReader;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.MemberSession;
@@ -17,13 +17,13 @@ import static youtube.global.constant.TimeConstant.*;
 public class MemberLoginBusiness {
 
     private final MemberReader memberReader;
-    private final TokenBusiness tokenBusiness;
+    private final TokenManager tokenManager;
     private final PasswordEncoder passwordEncoder;
 
-    public MemberLoginBusiness(final MemberReader memberReader, final TokenBusiness tokenBusiness,
+    public MemberLoginBusiness(final MemberReader memberReader, final TokenManager tokenManager,
                                final PasswordEncoder passwordEncoder) {
         this.memberReader = memberReader;
-        this.tokenBusiness = tokenBusiness;
+        this.tokenManager = tokenManager;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -33,10 +33,10 @@ public class MemberLoginBusiness {
 
         if (password.validateMatchPassword(passwordEncoder, dto.password())) {
             MemberSession memberSession = MemberMapper.toMemberSession(entity);
-            String accessToken = tokenBusiness.createAccessToken(memberSession, ONE_HOUR.value);
-            String refreshToken = tokenBusiness.createRefreshToken(memberSession.id(), ONE_MONTH.value);
-            tokenBusiness.createJwtRefreshToken(memberSession.id(), refreshToken);
-            tokenBusiness.setHeader(response, accessToken, refreshToken);
+            String accessToken = tokenManager.createAccessToken(memberSession, ONE_HOUR.value);
+            String refreshToken = tokenManager.createRefreshToken(memberSession.id(), ONE_MONTH.value);
+            tokenManager.createJwtRefreshToken(memberSession.id(), refreshToken);
+            tokenManager.setHeader(response, accessToken, refreshToken);
         }
 
         return entity;

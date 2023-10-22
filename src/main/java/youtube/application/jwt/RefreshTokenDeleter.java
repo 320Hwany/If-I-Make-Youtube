@@ -1,4 +1,4 @@
-package youtube.application.jwt.implement;
+package youtube.application.jwt;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

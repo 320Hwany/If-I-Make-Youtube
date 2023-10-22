@@ -2,10 +2,10 @@ package youtube.presentation.comment;
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-import youtube.application.comment.implement.CommentCreator;
-import youtube.application.comment.implement.CommentUpdater;
-import youtube.application.comment.implement.ChildCommentReader;
-import youtube.application.comment.implement.CommentReader;
+import youtube.application.comment.CommentCreator;
+import youtube.application.comment.CommentUpdater;
+import youtube.application.comment.ChildCommentReader;
+import youtube.application.comment.CommentReader;
 import youtube.domain.member.vo.MemberSession;
 import youtube.global.annotation.Login;
 import youtube.mapper.comment.CommentMapper;

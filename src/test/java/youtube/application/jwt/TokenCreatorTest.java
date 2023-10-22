@@ -7,7 +7,6 @@ import io.jsonwebtoken.Jwts;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import youtube.application.jwt.implement.TokenCreator;
 import youtube.domain.member.vo.MemberSession;
 import youtube.domain.member.vo.Nickname;
 import youtube.domain.member.vo.RoleType;

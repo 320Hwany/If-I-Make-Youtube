@@ -1,4 +1,4 @@
-package youtube.application.subscription.implement;
+package youtube.application.subscription;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;

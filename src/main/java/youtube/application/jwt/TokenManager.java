@@ -1,10 +1,8 @@
-package youtube.application.jwt.business;
+package youtube.application.jwt;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import youtube.application.jwt.implement.HeaderSetter;
-import youtube.application.jwt.implement.TokenCreator;
 import youtube.domain.jwt.JwtRefreshToken;
 import youtube.repository.jwt.JwtRepository;
 import youtube.domain.member.vo.MemberSession;
@@ -13,14 +11,14 @@ import youtube.mapper.jwt.JwtRefreshTokenMapper;
 import java.util.Optional;
 
 @Service
-public class TokenBusiness {
+public class TokenManager {
 
     private final TokenCreator tokenCreator;
     private final HeaderSetter headerSetter;
     private final JwtRepository jwtRepository;
 
-    public TokenBusiness(final TokenCreator tokenCreator, final HeaderSetter headerSetter,
-                         final JwtRepository jwtRepository) {
+    public TokenManager(final TokenCreator tokenCreator, final HeaderSetter headerSetter,
+                        final JwtRepository jwtRepository) {
         this.tokenCreator = tokenCreator;
         this.headerSetter = headerSetter;
         this.jwtRepository = jwtRepository;

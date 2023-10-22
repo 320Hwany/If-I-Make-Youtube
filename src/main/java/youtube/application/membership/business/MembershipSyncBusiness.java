@@ -19,7 +19,6 @@ import static youtube.global.constant.ExceptionMessageConstant.MEMBERSHIP_SCHEDU
 public class MembershipSyncBusiness {
 
     private final MembershipReader membershipReader;
-
     private final MembershipUpdater membershipUpdater;
 
     public MembershipSyncBusiness(final MembershipReader membershipReader,

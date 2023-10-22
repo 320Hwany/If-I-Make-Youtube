@@ -3,7 +3,6 @@ package youtube.application.subscription;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import youtube.application.channel.implement.ChannelCacheReader;
-import youtube.application.subscription.implement.SubscriptionsCacheEvictor;
 import youtube.domain.channel.vo.ChannelCache;
 import youtube.mapper.subscription.dto.SubscriptionCancelEvent;
 import youtube.mapper.subscription.dto.SubscriptionSaveEvent;

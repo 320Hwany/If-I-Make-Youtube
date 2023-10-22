@@ -1,4 +1,4 @@
-package youtube.application.subscription.implement;
+package youtube.application.subscription;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;

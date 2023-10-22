@@ -1,4 +1,4 @@
-package youtube.application.jwt.implement;
+package youtube.application.jwt;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpHeaders;

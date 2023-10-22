@@ -1,4 +1,4 @@
-package youtube.application.comment.implement;
+package youtube.application.comment;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
