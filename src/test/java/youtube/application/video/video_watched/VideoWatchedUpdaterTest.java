@@ -3,7 +3,6 @@ package youtube.application.video.video_watched;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import youtube.application.video.video_watched.implement.VideoWatchedUpdater;
 import youtube.util.ServiceTest;
 
 import java.time.LocalDateTime;

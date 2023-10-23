@@ -3,7 +3,7 @@ package youtube.application.membership.command;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import youtube.application.membership.implement.MembershipCreator;
+import youtube.application.membership.MembershipCreator;
 import youtube.util.ServiceTest;
 
 import static org.assertj.core.api.Assertions.assertThat;

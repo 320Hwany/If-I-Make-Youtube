@@ -3,7 +3,7 @@ package youtube.application.video.video_info.media_type.implement;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import youtube.application.video.video_info.media_type.MediaTypeForExtension;
-import youtube.application.video.video_info.implement.VideoInfoReader;
+import youtube.application.video.video_info.VideoInfoReader;
 import youtube.domain.video.video_info.persist.VideoInfo;
 import youtube.global.exception.BadRequestException;
 

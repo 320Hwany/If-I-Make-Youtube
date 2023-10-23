@@ -3,7 +3,7 @@ package youtube.application.channel.command;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import youtube.application.channel.implement.ChannelSubscriptionCountUpdater;
+import youtube.application.channel.ChannelSubscriptionCountUpdater;
 import youtube.domain.channel.persist.Channel;
 import youtube.domain.channel.vo.ChannelCache;
 import youtube.domain.member.persist.Member;

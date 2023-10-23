@@ -3,7 +3,7 @@ package youtube.application.video.video_info.command;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import youtube.application.video.video_info.implement.VideoInfoCreator;
+import youtube.application.video.video_info.VideoInfoCreator;
 import youtube.domain.channel.persist.Channel;
 import youtube.domain.member.persist.Member;
 import youtube.domain.video.video_info.vo.VideoType;

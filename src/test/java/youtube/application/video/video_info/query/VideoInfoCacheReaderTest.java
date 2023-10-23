@@ -3,7 +3,7 @@ package youtube.application.video.video_info.query;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import youtube.application.video.video_info.implement.VideoInfoCacheReader;
+import youtube.application.video.video_info.VideoInfoCacheReader;
 import youtube.domain.video.video_info.persist.VideoInfo;
 import youtube.domain.video.video_info.vo.VideoInfoCache;
 import youtube.global.exception.NotFoundException;

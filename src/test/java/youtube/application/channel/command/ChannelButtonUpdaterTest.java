@@ -3,7 +3,7 @@ package youtube.application.channel.command;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import youtube.application.channel.implement.ChannelButtonUpdater;
+import youtube.application.channel.ChannelButtonUpdater;
 import youtube.domain.channel.persist.Channel;
 import youtube.domain.channel.vo.Button;
 import youtube.domain.member.persist.Member;

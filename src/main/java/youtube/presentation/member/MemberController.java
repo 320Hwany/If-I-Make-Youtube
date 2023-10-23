@@ -4,10 +4,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import youtube.application.jwt.RefreshTokenDeleter;
-import youtube.application.member.business.MemberSignupBusiness;
-import youtube.application.member.implement.PasswordUpdater;
-import youtube.application.member.business.MemberLoginBusiness;
-import youtube.application.member.implement.MemberReader;
+import youtube.application.member.composition.MemberSignupComposition;
+import youtube.application.member.PasswordUpdater;
+import youtube.application.member.composition.MemberLoginComposition;
+import youtube.application.member.MemberReader;
 import youtube.domain.member.persist.Member;
 import youtube.domain.member.vo.MemberSession;
 import youtube.domain.member.vo.Password;
@@ -22,17 +22,17 @@ import youtube.mapper.member.dto.MemberSignupRequest;
 @RestController
 public class MemberController {
 
-    private final MemberSignupBusiness memberSignupBusiness;
-    private final MemberLoginBusiness memberLoginBusiness;
+    private final MemberSignupComposition memberSignupComposition;
+    private final MemberLoginComposition memberLoginComposition;
     private final MemberReader memberReader;
     private final RefreshTokenDeleter refreshTokenDeleter;
     private final PasswordUpdater passwordUpdater;
 
-    public MemberController(final MemberSignupBusiness memberSignupBusiness, final MemberLoginBusiness memberLoginBusiness,
+    public MemberController(final MemberSignupComposition memberSignupComposition, final MemberLoginComposition memberLoginComposition,
                             final MemberReader memberReader, final RefreshTokenDeleter refreshTokenDeleter,
                             final PasswordUpdater passwordUpdater) {
-        this.memberSignupBusiness = memberSignupBusiness;
-        this.memberLoginBusiness = memberLoginBusiness;
+        this.memberSignupComposition = memberSignupComposition;
+        this.memberLoginComposition = memberLoginComposition;
         this.memberReader = memberReader;
         this.refreshTokenDeleter = refreshTokenDeleter;
         this.passwordUpdater = passwordUpdater;
@@ -40,13 +40,13 @@ public class MemberController {
 
     @PostMapping("/v1/signup")
     public void signup(@RequestBody @Valid final MemberSignupRequest dto) {
-        memberSignupBusiness.signup(dto);
+        memberSignupComposition.signup(dto);
     }
 
     @PostMapping("/v1/login")
     public MemberDetailedResponse login(@RequestBody @Valid final MemberLoginRequest dto,
                                         final HttpServletResponse response) {
-        Member entity = memberLoginBusiness.login(dto, response);
+        Member entity = memberLoginComposition.login(dto, response);
         return MemberMapper.toMemberDetailedResponse(entity);
     }
 

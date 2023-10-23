@@ -2,7 +2,7 @@ package youtube.application.comment;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import youtube.application.video.video_info.implement.VideoInfoCacheReader;
+import youtube.application.video.video_info.VideoInfoCacheReader;
 import youtube.domain.comment.Comment;
 import youtube.domain.member.vo.MemberSession;
 import youtube.domain.video.video_info.vo.VideoInfoCache;
