@@ -19,7 +19,7 @@ public enum MembershipLevel {
         this.minMonths = minMonths;
     }
 
-    public MembershipLevel getLevel(final LocalDateTime joinDateTime, final LocalDateTime updateDateTime) {
+    public MembershipLevel calculateLevel(final LocalDateTime joinDateTime, final LocalDateTime updateDateTime) {
         long monthsBetween = MONTHS.between(joinDateTime, updateDateTime);
 
         for (MembershipLevel level : values()) {

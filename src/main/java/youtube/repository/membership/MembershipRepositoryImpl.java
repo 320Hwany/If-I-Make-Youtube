@@ -6,6 +6,7 @@ import youtube.global.constant.ExceptionMessageConstant;
 import youtube.global.exception.NotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 import static youtube.global.constant.ExceptionMessageConstant.*;
 
@@ -30,8 +31,18 @@ public class MembershipRepositoryImpl implements MembershipRepository {
     }
 
     @Override
+    public Optional<Membership> findByMemberIdAndChannelId(final long memberId, final long channelId) {
+        return membershipJpaRepository.findByMemberIdAndChannelId(memberId, channelId);
+    }
+
+    @Override
     public List<Membership> findAll() {
         return membershipJpaRepository.findAll();
+    }
+
+    @Override
+    public void delete(final Membership membership) {
+        membershipJpaRepository.delete(membership);
     }
 
     @Override

@@ -44,6 +44,6 @@ public class Membership extends BaseTimeEntity {
     }
 
     public void updateLevel(final LocalDateTime updateDateTime) {
-        this.membershipLevel = membershipLevel.getLevel(joinDateTime, updateDateTime);
+        this.membershipLevel = membershipLevel.calculateLevel(joinDateTime, updateDateTime);
     }
 }
