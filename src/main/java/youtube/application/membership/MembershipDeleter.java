@@ -21,12 +21,17 @@ public class MembershipDeleter {
 
     @Transactional
     public void withdraw(final long memberId, final long channelId) {
-        Optional<Membership> membershipOptional = membershipRepository.findByMemberIdAndChannelId(memberId, channelId);
-        if (membershipOptional.isPresent()) {
-            Membership membership = membershipOptional.get();
-            membershipRepository.delete(membership);
+        Optional<Membership> membershipOptional = membershipRepository
+                .findByMemberIdAndChannelId(memberId, channelId);
+        Membership membership = getValidMembership(membershipOptional);
+        membershipRepository.delete(membership);
+    }
+
+    private Membership getValidMembership(final Optional<Membership> membershipOptional) {
+        if (membershipOptional.isEmpty()) {
+            throw new NotFoundException(MEMBERSHIP_NOT_FOUND.message);
         }
 
-        throw new NotFoundException(MEMBERSHIP_NOT_FOUND.message);
+        return membershipOptional.get();
     }
 }
