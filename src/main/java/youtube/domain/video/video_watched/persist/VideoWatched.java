@@ -8,6 +8,7 @@ import youtube.global.annotation.Association;
 import java.time.LocalDateTime;
 
 @Getter
+@Table(name = "video_watched")
 @Entity
 public class VideoWatched {
 

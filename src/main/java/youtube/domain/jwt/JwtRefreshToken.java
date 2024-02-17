@@ -7,6 +7,7 @@ import youtube.domain.BaseTimeEntity;
 import youtube.global.annotation.Association;
 
 @Getter
+@Table(name = "jwt_refresh_token")
 @Entity
 public class JwtRefreshToken extends BaseTimeEntity {
 

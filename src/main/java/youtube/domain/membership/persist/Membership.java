@@ -10,6 +10,7 @@ import youtube.global.annotation.Association;
 import java.time.LocalDateTime;
 
 @Getter
+@Table(name = "member_ship")
 @Entity
 public class Membership extends BaseTimeEntity {
 

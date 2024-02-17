@@ -10,6 +10,7 @@ import youtube.global.annotation.Association;
 import static youtube.global.constant.NumberConstant.*;
 
 @Getter
+@Table(name = "comment")
 @Entity
 public class Comment extends BaseTimeEntity {
 

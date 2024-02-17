@@ -12,6 +12,7 @@ import youtube.mapper.video.video_info.dto.VideoInfoCacheUpdateDto;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Getter
+@Table(name = "video_info")
 @Entity
 public class VideoInfo extends BaseTimeEntity {
 

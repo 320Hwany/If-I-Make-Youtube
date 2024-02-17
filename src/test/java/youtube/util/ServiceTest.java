@@ -1,7 +1,9 @@
 package youtube.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cache.CacheManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import youtube.application.channel.ChannelCacheReader;
@@ -23,8 +25,11 @@ import youtube.repository.video.video_watched.VideoWatchedRepository;
 
 import static youtube.util.TestConstant.*;
 
-@AcceptanceTest
-public class ServiceTest {
+@SpringBootTest
+public abstract class ServiceTest {
+
+    @Autowired
+    protected DatabaseCleaner databaseCleaner;
 
     @Autowired
     protected MemberRepository memberRepository;
@@ -70,6 +75,11 @@ public class ServiceTest {
 
     @Autowired
     protected CacheManager cacheManager;
+
+    @BeforeEach
+    void setUpDatabase() {
+        databaseCleaner.cleanUp();
+    }
 
     protected Member saveMember() {
         Password password = Password.from(TEST_PASSWORD.value);

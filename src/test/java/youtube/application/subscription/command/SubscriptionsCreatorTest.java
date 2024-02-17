@@ -11,14 +11,12 @@ import youtube.global.exception.BadRequestException;
 import youtube.mapper.channel.ChannelMapper;
 import youtube.domain.channel.vo.ChannelCache;
 import youtube.mapper.subscription.SubscriptionMapper;
-import youtube.util.AcceptanceTest;
 import youtube.util.ServiceTest;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.assertj.core.api.Assertions.*;
 
-@AcceptanceTest
 class SubscriptionsCreatorTest extends ServiceTest {
 
     @Autowired

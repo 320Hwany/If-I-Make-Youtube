@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
@@ -45,8 +46,11 @@ import static youtube.util.TestConstant.*;
 
 @AutoConfigureMockMvc
 @ExtendWith(RestDocumentationExtension.class)
-@AcceptanceTest
-public class ControllerTest {
+@SpringBootTest
+public abstract class ControllerTest {
+
+    @Autowired
+    protected DatabaseCleaner databaseCleaner;
 
     @Autowired
     protected MockMvc mockMvc;
@@ -74,6 +78,11 @@ public class ControllerTest {
 
     @Autowired
     protected PasswordEncoder passwordEncoder;
+
+    @BeforeEach
+    void setUpDatabase() {
+        databaseCleaner.cleanUp();
+    }
 
     @BeforeEach
     void setUp(WebApplicationContext webApplicationContext, RestDocumentationContextProvider restDocumentation) {

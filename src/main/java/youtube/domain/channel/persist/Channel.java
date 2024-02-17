@@ -10,6 +10,7 @@ import youtube.domain.channel.vo.ChannelName;
 import youtube.global.annotation.Association;
 
 @Getter
+@Table(name = "channel")
 @Entity
 public class Channel extends BaseTimeEntity {
 

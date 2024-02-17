@@ -7,6 +7,7 @@ import youtube.domain.BaseTimeEntity;
 import youtube.global.annotation.Association;
 
 @Getter
+@Table(name = "subscription")
 @Entity
 public class Subscription extends BaseTimeEntity {
 

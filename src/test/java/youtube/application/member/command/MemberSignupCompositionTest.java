@@ -10,7 +10,6 @@ import youtube.domain.member.vo.Nickname;
 import youtube.domain.member.vo.Password;
 import youtube.global.exception.BadRequestException;
 import youtube.mapper.member.dto.MemberSignupRequest;
-import youtube.util.AcceptanceTest;
 import youtube.util.ServiceTest;
 
 import java.time.LocalDate;
@@ -18,7 +17,6 @@ import java.time.LocalDate;
 import static org.assertj.core.api.Assertions.*;
 import static youtube.util.TestConstant.*;
 
-@AcceptanceTest
 class MemberSignupCompositionTest extends ServiceTest {
 
     @Autowired

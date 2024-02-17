@@ -9,6 +9,7 @@ import youtube.domain.member.vo.*;
 import java.time.LocalDate;
 
 @Getter
+@Table(name = "member")
 @Entity
 public class Member extends BaseTimeEntity {
 

@@ -8,6 +8,7 @@ import youtube.domain.video.video_reaction.vo.Reaction;
 import youtube.global.annotation.Association;
 
 @Getter
+@Table(name = "video_reaction")
 @Entity
 public class VideoReaction extends BaseTimeEntity {
 
